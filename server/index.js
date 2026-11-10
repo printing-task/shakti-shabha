@@ -1,25 +1,25 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
+const fs = require('fs');
 const { connectToMongoDB, disconnectFromMongoDB } = require('./db');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Dynamic CORS configuration allowing Vercel production + localhost development
+// Dynamic CORS configuration allowing localhost and production domains
 const allowedOrigins = (process.env.CLIENT_ORIGIN || 'https://shakti-shabha.vercel.app,http://localhost:5173,http://localhost:3000')
   .split(',')
   .map(o => o.trim());
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow server-to-server, curl, mobile apps, uptime monitors
     if (!origin) return callback(null, true);
     if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes('*')) {
       return callback(null, true);
     }
-    // Allow vercel preview and production deployments
-    if (origin.endsWith('.vercel.app')) {
+    if (origin.endsWith('.vercel.app') || origin.endsWith('.onrender.com')) {
       return callback(null, true);
     }
     return callback(null, true);
@@ -45,27 +45,40 @@ app.use('/api/gallery', require('./routes/gallery'));
 app.use('/api/testimonials', require('./routes/testimonials'));
 app.use('/api/stats', require('./routes/stats'));
 
-// Root endpoint: Pure API overview
-app.get('/', (req, res) => {
-  res.json({
-    service: 'Shakti Sabha Backend API',
-    status: 'online',
-    database: 'MongoDB Atlas',
-    frontendUrl: 'https://shakti-shabha.vercel.app',
-    healthCheck: '/health',
-    endpoints: {
-      health: '/health',
-      articles: '/api/articles',
-      courses: '/api/courses',
-      counselling: '/api/counselling',
-      galleryPhotos: '/api/gallery/photos',
-      galleryCategories: '/api/gallery/categories',
-      testimonials: '/api/testimonials',
-      auth: '/api/auth/login',
-      stats: '/api/stats',
-    },
+// Serve Static Frontend from dist (Full-Stack single deployment)
+const distPath = path.join(__dirname, '../dist');
+if (fs.existsSync(distPath)) {
+  console.log(`📦 Serving static frontend website from: ${distPath}`);
+  app.use(express.static(distPath));
+
+  // SPA fallback for React Router
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path.startsWith('/health')) {
+      return next();
+    }
+    res.sendFile(path.join(distPath, 'index.html'));
   });
-});
+} else {
+  // Fallback API info when dist is not built
+  app.get('/', (req, res) => {
+    res.json({
+      service: 'Shakti Sabha Full-Stack Server',
+      status: 'online',
+      database: 'MongoDB Atlas',
+      healthCheck: '/health',
+      endpoints: {
+        articles: '/api/articles',
+        courses: '/api/courses',
+        counselling: '/api/counselling',
+        galleryPhotos: '/api/gallery/photos',
+        galleryCategories: '/api/gallery/categories',
+        testimonials: '/api/testimonials',
+        auth: '/api/auth/login',
+        stats: '/api/stats',
+      },
+    });
+  });
+}
 
 // Self-ping keep alive mechanism (if RENDER_EXTERNAL_URL is configured)
 const renderUrl = process.env.RENDER_EXTERNAL_URL;
@@ -92,13 +105,13 @@ async function startServer() {
   try {
     await connectToMongoDB();
     app.listen(PORT, () => {
-      console.log(`🚀 Shakti Sabha Backend Server running on port ${PORT}`);
+      console.log(`🚀 Shakti Sabha Full-Stack Server running on port ${PORT}`);
       console.log(`🏥 5-minute Keep-Alive Health check available at http://localhost:${PORT}/health`);
     });
   } catch (err) {
-    console.error('Server failed to start due to MongoDB connection failure:', err.message);
+    console.error('Server started in degraded mode (MongoDB disconnected):', err.message);
     app.listen(PORT, () => {
-      console.warn(`⚠️ Server started on port ${PORT} in degraded mode (MongoDB disconnected). Check your credentials.`);
+      console.warn(`⚠️ Server listening on port ${PORT} with database disconnected.`);
     });
   }
 }

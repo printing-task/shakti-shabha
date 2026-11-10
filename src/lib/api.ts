@@ -1,17 +1,21 @@
 /**
  * Shakti Sabha Backend API Client
- * Connects React frontend to Express + MongoDB Atlas backend deployed on Render
+ * Connects React frontend to Express + MongoDB Atlas backend
  */
 
 import { Article, Course, CounsellingRequest, GalleryPhoto, GalleryCategory, Testimonial } from './supabase'
 
-const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, '')
+// When deployed on Render as full-stack, default to same-origin in production, localhost:5000 in dev
+const API_BASE_URL = (
+  import.meta.env.VITE_API_URL ?? (import.meta.env.DEV ? 'http://localhost:5000' : '')
+).replace(/\/$/, '')
 
 /**
  * Universal fetch wrapper with timeout and error handling
  */
 async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
-  const url = `${API_BASE_URL}${endpoint.startsWith('/') ? '' : '/'}${endpoint}`
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`
+  const url = API_BASE_URL ? `${API_BASE_URL}${cleanEndpoint}` : cleanEndpoint
   const token = localStorage.getItem('shakti_admin_token')
 
   const headers: Record<string, string> = {
