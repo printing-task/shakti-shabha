@@ -382,6 +382,27 @@ export default function HistoryPage() {
     setLoadedImages(prev => ({ ...prev, [src]: true }))
   }
 
+  // Prevent background scroll and pause Lenis while Inspect Dossier modal is open
+  useEffect(() => {
+    if (activeDossier) {
+      document.body.style.overflow = 'hidden'
+      if (typeof window !== 'undefined') {
+        ;(window as any).lenis?.stop()
+      }
+    } else {
+      document.body.style.overflow = ''
+      if (typeof window !== 'undefined') {
+        ;(window as any).lenis?.start()
+      }
+    }
+    return () => {
+      document.body.style.overflow = ''
+      if (typeof window !== 'undefined') {
+        ;(window as any).lenis?.start()
+      }
+    }
+  }, [activeDossier])
+
   const currentMilestone = useMemo(() => {
     return TIMELINE_MILESTONES.find(m => m.id === activeMilestoneId) || TIMELINE_MILESTONES[0]
   }, [activeMilestoneId])
@@ -591,8 +612,15 @@ export default function HistoryPage() {
           onClick={() => setActiveDossier(null)}
           role="dialog"
           aria-modal="true"
+          data-lenis-prevent="true"
+          onWheel={(e) => e.stopPropagation()}
         >
-          <div className={h.modalSheet} onClick={(e) => e.stopPropagation()}>
+          <div
+            className={h.modalSheet}
+            onClick={(e) => e.stopPropagation()}
+            data-lenis-prevent="true"
+            onWheel={(e) => e.stopPropagation()}
+          >
             <button
               type="button"
               className={h.modalCloseBtn}
