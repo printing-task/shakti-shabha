@@ -32,7 +32,7 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// 5-minute keep-alive health check for Render
+// 5-minute keep-alive health check for Render (Responds immediately for Render deploy probe)
 app.use('/health', require('./routes/health'));
 app.use('/api/health', require('./routes/health'));
 
@@ -100,33 +100,48 @@ if (renderUrl) {
   }, pingInterval);
 }
 
-// Start server and connect to MongoDB Atlas
-async function startServer() {
-  try {
-    await connectToMongoDB();
-    app.listen(PORT, () => {
-      console.log(`🚀 Shakti Sabha Full-Stack Server running on port ${PORT}`);
-      console.log(`🏥 5-minute Keep-Alive Health check available at http://localhost:${PORT}/health`);
+// ── CRITICAL FOR RENDER: BIND TO PORT IMMEDIATELY (Do not block on DB connection) ──
+const server = app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Shakti Sabha Server successfully listening on 0.0.0.0:${PORT}`);
+  console.log(`🏥 Health check endpoint active at http://0.0.0.0:${PORT}/health`);
+
+  // Connect to MongoDB Atlas asynchronously in the background so Render never times out
+  connectToMongoDB()
+    .then(() => {
+      console.log('✅ Background MongoDB Atlas connection established!');
+    })
+    .catch((err) => {
+      console.warn('⚠️ Initial MongoDB connection failed (server running in fallback mode):', err.message);
+      // Attempt retry after 10 seconds
+      setTimeout(() => {
+        console.log('🔄 Retrying MongoDB connection...');
+        connectToMongoDB().catch(e => console.warn('Retry failed:', e.message));
+      }, 10000);
     });
-  } catch (err) {
-    console.error('Server started in degraded mode (MongoDB disconnected):', err.message);
-    app.listen(PORT, () => {
-      console.warn(`⚠️ Server listening on port ${PORT} with database disconnected.`);
-    });
-  }
-}
+});
+
+// Prevent unhandled errors from crashing the server container
+process.on('unhandledRejection', (reason, promise) => {
+  console.warn('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+});
 
 // Graceful shutdown handling
 process.on('SIGINT', async () => {
   console.log('Received SIGINT. Shutting down gracefully...');
-  await disconnectFromMongoDB();
-  process.exit(0);
+  server.close(async () => {
+    await disconnectFromMongoDB();
+    process.exit(0);
+  });
 });
 
 process.on('SIGTERM', async () => {
   console.log('Received SIGTERM. Shutting down gracefully...');
-  await disconnectFromMongoDB();
-  process.exit(0);
+  server.close(async () => {
+    await disconnectFromMongoDB();
+    process.exit(0);
+  });
 });
-
-startServer();
