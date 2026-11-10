@@ -32,6 +32,9 @@ import ShaktiVartaPage from './pages/ShaktiVartaPage'
 import ThreeStreamsPage from './pages/ThreeStreamsPage'
 
 gsap.registerPlugin(ScrollTrigger)
+if (typeof window !== 'undefined') {
+  ScrollTrigger.clearScrollMemory('manual')
+}
 
 function ScrollToTop() {
   const { pathname } = useLocation()

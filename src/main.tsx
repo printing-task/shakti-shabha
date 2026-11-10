@@ -1,3 +1,7 @@
+if (typeof window !== 'undefined' && 'scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import 'lenis/dist/lenis.css'

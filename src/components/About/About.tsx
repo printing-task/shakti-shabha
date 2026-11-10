@@ -55,7 +55,7 @@ export default function About() {
         y: 24, 
         duration: 0.7, 
         ease: 'power3.out',
-        scrollTrigger: { trigger: secRef.current, start: 'top 75%' }
+        clearProps: 'transform,opacity', scrollTrigger: { trigger: secRef.current, start: 'top 80%', toggleActions: 'play none none none' }
       })
       gsap.from('[data-ab="pillar"]', {
         opacity: 0, 
@@ -63,7 +63,7 @@ export default function About() {
         stagger: 0.14, 
         duration: 0.7, 
         ease: 'power3.out',
-        scrollTrigger: { trigger: '[data-ab="pillars"]', start: 'top 78%' }
+        clearProps: 'transform,opacity', scrollTrigger: { trigger: secRef.current, start: 'top 80%', toggleActions: 'play none none none' }
       })
     }, secRef)
     return () => ctx.revert()

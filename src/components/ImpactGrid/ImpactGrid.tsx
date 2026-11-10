@@ -44,7 +44,7 @@ export default function ImpactGrid() {
         y: 24,
         duration: 0.65,
         ease: 'power3.out',
-        scrollTrigger: { trigger: secRef.current, start: 'top 82%' }
+        clearProps: 'transform,opacity', scrollTrigger: { trigger: secRef.current, start: 'top 85%', toggleActions: 'play none none none' }
       })
 
       // Cards stagger entrance
@@ -54,7 +54,7 @@ export default function ImpactGrid() {
         stagger: 0.1,
         duration: 0.65,
         ease: 'power3.out',
-        scrollTrigger: { trigger: secRef.current, start: 'top 78%' }
+        clearProps: 'transform,opacity', scrollTrigger: { trigger: secRef.current, start: 'top 85%', toggleActions: 'play none none none' }
       })
     }, secRef)
 
