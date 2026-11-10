@@ -2,6 +2,9 @@
   "name": "shakti-sabha",
   "version": "1.0.0",
   "type": "module",
+  "bin": {
+    "dev": "./bin/dev.cjs"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
