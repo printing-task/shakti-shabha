@@ -1,15 +1,18 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
-const DEFAULT_URI = "mongodb+srv://printingtaskweb_db_user:<db_password>@cluster0.hqaggkf.mongodb.net/shakti_sabha?retryWrites=true&w=majority&compressors=zlib";
+const DEFAULT_URI = "mongodb+srv://printingtaskweb_db_user:<db_password>@cluster0.hqaggkf.mongodb.net/shakti_sabha?retryWrites=true&w=majority";
 
 /**
- * Robust URI sanitizer that automatically fixes malformed query options
- * like truncated "retryWri" -> "retryWrites=true"
+ * Robust URI sanitizer that automatically fixes malformed query options,
+ * strips problematic compressor flags, and corrects truncated retryWri.
  */
 function sanitizeMongoUri(rawUri) {
   if (!rawUri) return DEFAULT_URI;
   let clean = rawUri.trim().replace(/^['"]|['"]$/g, '');
+
+  // Strip compressors=zlib as it can cause TLS/compression stream issues on Node 22+
+  clean = clean.replace(/([?&])compressors=[^&]*/g, '');
 
   // Fix query parameters if malformed
   const urlParts = clean.split('?');
@@ -42,7 +45,6 @@ function sanitizeMongoUri(rawUri) {
 
     clean = `${base}?${validParams.join('&')}`;
   } else {
-    // If no query string, append standard parameters
     clean = `${clean}?retryWrites=true&w=majority`;
   }
 
@@ -66,7 +68,7 @@ async function connectToMongoDB() {
 
   // Validate that user replaced <db_password> placeholder
   if (uri.includes('<db_password>')) {
-    console.warn('⚠️ Warning: MONGODB_URI still contains <db_password> placeholder. Please set your real MongoDB password in .env or Render Environment Variables.');
+    console.warn('⚠️ Warning: MONGODB_URI still contains <db_password> placeholder. Please set your real MongoDB password in Render Environment Variables.');
   }
 
   // Safely display masked URI in logs for easy debugging
@@ -75,15 +77,9 @@ async function connectToMongoDB() {
 
   try {
     client = new MongoClient(uri, {
-      serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-      },
-      maxPoolSize: 10,
-      minPoolSize: 2,
-      connectTimeoutMS: 10000,
+      connectTimeoutMS: 15000,
       socketTimeoutMS: 45000,
+      maxPoolSize: 10,
     });
 
     await client.connect();
