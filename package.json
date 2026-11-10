@@ -10,7 +10,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "start": "node server/index.js",
-    "server": "node server/index.js"
+    "server": "node server/index.js",
+    "seed": "node server/seed.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",
