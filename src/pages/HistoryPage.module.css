@@ -354,10 +354,10 @@
 
 .timelineItem {
   position: relative;
-  width: clamp(350px, 28vw, 420px);
+  width: clamp(260px, 21vw, 310px);
   height: 100%;
   flex-shrink: 0;
-  padding: 0 1em;
+  padding: 0 0.75em;
   list-style: none;
   display: flex;
   align-items: center;
@@ -371,11 +371,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   background: #FFFFFF;
   border-radius: 50% !important;
-  border: 4px solid rgb(156, 163, 175);
+  border: 3.5px solid rgb(156, 163, 175);
   z-index: 12;
   transition: all 0.25s ease;
 }
@@ -387,8 +387,8 @@
 }
 
 .itemActive .spineDot {
-  transform: translate(-50%, -50%) scale(1.45) !important;
-  box-shadow: 0 0 0 6px rgba(255, 80, 80, 0.3) !important;
+  transform: translate(-50%, -50%) scale(1.35) !important;
+  box-shadow: 0 0 0 5px rgba(255, 80, 80, 0.3) !important;
 }
 
 .spineDotUnreached {
@@ -424,7 +424,7 @@
   left: 50%;
   bottom: 50%;
   width: 2px;
-  height: 32px;
+  height: 16px;
   margin-left: -1px;
   background: #D1D5DB;
   z-index: 7;
@@ -441,7 +441,7 @@
   left: 50%;
   top: 50%;
   width: 2px;
-  height: 32px;
+  height: 16px;
   margin-left: -1px;
   background: #D1D5DB;
   z-index: 7;
@@ -455,24 +455,24 @@
 
 /* ================ Parallel Directions (Top & Bottom) ================ */
 
-/* Direction Top (Parallel above the line with 32px safe gutter) */
+/* Direction Top (Parallel above the line with compact 16px gutter) */
 .directionL {
   position: absolute;
-  bottom: calc(50% + 32px);
+  bottom: calc(50% + 16px);
   left: 50%;
   transform: translateX(-50%);
-  width: 340px;
+  width: clamp(240px, 19vw, 285px);
   text-align: center;
   transition: all 0.25s ease;
 }
 
-/* Direction Bottom (Parallel below the line with 32px safe gutter) */
+/* Direction Bottom (Parallel below the line with compact 16px gutter) */
 .directionR {
   position: absolute;
-  top: calc(50% + 32px);
+  top: calc(50% + 16px);
   left: 50%;
   transform: translateX(-50%);
-  width: 340px;
+  width: clamp(240px, 19vw, 285px);
   text-align: center;
   transition: all 0.25s ease;
 }
@@ -482,21 +482,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 6px;
+  gap: 0.35rem;
+  margin-bottom: 3px;
 }
 
 .flag {
   position: relative;
   display: inline-block;
   background: rgb(248,248,248);
-  padding: 8px 14px;
-  border-radius: 6px;
+  padding: 4px 10px;
+  border-radius: 5px;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.82rem;
   text-align: center;
   color: rgb(50,50,50);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   border: 1px solid #E5E7EB;
   transition: all 0.25s ease;
 }
@@ -516,10 +516,10 @@
   top: 100%;
   height: 0;
   width: 0;
-  margin-left: -8px;
+  margin-left: -6px;
   border: solid transparent;
   border-top-color: rgb(248,248,248);
-  border-width: 8px;
+  border-width: 6px;
   pointer-events: none;
   transition: border-top-color 0.25s ease;
 }
@@ -531,10 +531,10 @@
   bottom: 100%;
   height: 0;
   width: 0;
-  margin-left: -8px;
+  margin-left: -6px;
   border: solid transparent;
   border-bottom-color: rgb(248,248,248);
-  border-width: 8px;
+  border-width: 6px;
   pointer-events: none;
   transition: border-bottom-color 0.25s ease;
 }
@@ -551,37 +551,38 @@
 .timeWrapper {
   display: inline-block;
   line-height: 1em;
-  font-size: 0.72em;
+  font-size: 0.65rem;
   color: rgb(250,80,80);
   vertical-align: middle;
 }
 
 .time {
   display: inline-block;
-  padding: 4px 8px;
+  padding: 2px 6px;
   background: #FFF1F2;
   border: 1px solid #FECDD3;
   border-radius: 4px;
   font-weight: 800;
+  font-size: 0.65rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
 }
 
 /* ── Description Box (Stays visible once revealed; highlighted when active) ── */
 .desc {
   position: relative;
-  margin: 0.6em auto 0;
-  padding: 0.9em 1.15em;
+  margin: 0.3em auto 0;
+  padding: 0.65em 0.85em;
   background: #FFFFFF;
-  border-radius: 10px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
   border: 1.5px solid #E5E7EB;
   z-index: 15;
-  font-size: 0.82em;
-  line-height: 1.55em;
+  font-size: 0.76rem;
+  line-height: 1.45;
   color: rgb(60,60,60);
   text-align: left;
-  max-height: 34vh;
+  max-height: 28vh;
   overflow-y: auto;
   transition: all 0.25s ease;
   animation: descFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -607,13 +608,13 @@
 .descTop {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .roundThumbnail {
-  width: 46px;
-  height: 46px;
+  width: 32px;
+  height: 32px;
   border-radius: 50% !important;
   overflow: hidden;
   border: 2px solid rgb(255,80,80);
@@ -629,18 +630,18 @@
 
 .descQuote {
   font-style: italic;
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   color: rgb(75,85,99);
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
 .descText {
-  font-size: 0.82rem;
+  font-size: 0.72rem;
   color: rgb(75,85,99);
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  margin-bottom: 0.35rem;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -650,19 +651,83 @@
   color: #FFFFFF;
   border: none;
   border-radius: 4px;
-  padding: 0.35rem 0.85rem;
-  font-size: 0.74rem;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.68rem;
   font-weight: 600;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.3rem;
   transition: all 0.2s ease;
-  margin-top: 0.25rem;
+  margin-top: 0.2rem;
 }
 
 .dossierBtn:hover {
   background: rgb(255, 80, 80);
+}
+
+/* ── Responsive Desktop Height Optimization: guarantees 100% full visibility on all desktop screens ── */
+@media (max-height: 820px) {
+  .directionL {
+    bottom: calc(50% + 12px);
+    width: 255px;
+  }
+  .directionR {
+    top: calc(50% + 12px);
+    width: 255px;
+  }
+  .stemTop,
+  .stemBottom {
+    height: 12px;
+  }
+  .desc {
+    max-height: 24vh;
+    padding: 0.5em 0.7em;
+  }
+  .descText {
+    -webkit-line-clamp: 2;
+  }
+  .roundThumbnail {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-height: 700px) {
+  .directionL {
+    bottom: calc(50% + 10px);
+    width: 235px;
+  }
+  .directionR {
+    top: calc(50% + 10px);
+    width: 235px;
+  }
+  .stemTop,
+  .stemBottom {
+    height: 10px;
+  }
+  .flag {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+  }
+  .time {
+    font-size: 0.6rem;
+    padding: 1px 4px;
+  }
+  .desc {
+    max-height: 20vh;
+    padding: 0.4em 0.6em;
+  }
+  .roundThumbnail {
+    width: 24px;
+    height: 24px;
+  }
+  .descQuote {
+    display: none;
+  }
+  .timelineStatBadges {
+    display: none;
+  }
 }
 
 /* ============================================================
