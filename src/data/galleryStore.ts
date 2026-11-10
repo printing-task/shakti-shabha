@@ -347,7 +347,15 @@ export async function fetchPhotosForCategory(categoryId: string): Promise<Galler
   return list
 }
 
-export async function fetchAllPhotos(): Promise<GalleryPhotoItem[]> {
+let cachedPhotos: GalleryPhotoItem[] | null = null;
+let lastFetchTime = 0;
+const CACHE_TTL_MS = 60000;
+
+export async function fetchAllPhotos(forceRefresh = false): Promise<GalleryPhotoItem[]> {
+  const now = Date.now();
+  if (!forceRefresh && cachedPhotos && (now - lastFetchTime < CACHE_TTL_MS)) {
+    return cachedPhotos;
+  }
   const localPhotos = getStoredPhotos()
   try {
     const { data, error } = await supabase
@@ -368,7 +376,9 @@ export async function fetchAllPhotos(): Promise<GalleryPhotoItem[]> {
       localPhotos.forEach(p => {
         if (!map.has(p.id)) map.set(p.id, p)
       })
-      const merged = Array.from(map.values())
+      const merged = Array.from(map.values());
+      cachedPhotos = merged;
+      lastFetchTime = now;
       localStorage.setItem(STORAGE_KEY_ALL_PHOTOS, JSON.stringify(merged))
       return merged
     }
@@ -378,6 +388,7 @@ export async function fetchAllPhotos(): Promise<GalleryPhotoItem[]> {
   return localPhotos
 }
 
+cachedPhotos = null;
 export function saveUploadedPhotos(newPhotos: GalleryPhotoItem[], categoryId: string) {
   if (!newPhotos || newPhotos.length === 0) return
 
@@ -543,32 +554,40 @@ export function getRandomCategoryPhotos(
 /* ------------------------------------------------------------------ */
 
 export function useCategoryPhoto(keywords: string | string[], fallbackUrl: string) {
+  const kwKey = Array.isArray(keywords) ? keywords.join(',') : keywords;
   const [photo, setPhoto] = useState<{ url: string; caption: string; isFromDb: boolean }>(() =>
     getRandomCategoryPhoto(keywords, fallbackUrl)
-  )
-
-  const reload = useCallback(() => {
-    fetchAllPhotos().then(photos => {
-      const cats = getStoredCategories()
-      setPhoto(getRandomCategoryPhoto(keywords, fallbackUrl, photos, cats))
-    }).catch(() => {
-      setPhoto(getRandomCategoryPhoto(keywords, fallbackUrl))
-    })
-  }, [keywords, fallbackUrl])
+  );
 
   useEffect(() => {
-    reload()
-    const handleUpdate = () => reload()
-    window.addEventListener(GALLERY_UPDATE_EVENT, handleUpdate)
-    window.addEventListener('storage', handleUpdate)
+    let isCurrent = true;
+    fetchAllPhotos().then(photos => {
+      if (!isCurrent) return;
+      const cats = getStoredCategories();
+      setPhoto(getRandomCategoryPhoto(keywords, fallbackUrl, photos, cats));
+    }).catch(() => {
+      if (isCurrent) setPhoto(getRandomCategoryPhoto(keywords, fallbackUrl));
+    });
+
+    const handleUpdate = () => {
+      fetchAllPhotos(true).then(photos => {
+        if (!isCurrent) return;
+        const cats = getStoredCategories();
+        setPhoto(getRandomCategoryPhoto(keywords, fallbackUrl, photos, cats));
+      });
+    };
+
+    window.addEventListener(GALLERY_UPDATE_EVENT, handleUpdate);
+    window.addEventListener('storage', handleUpdate);
 
     return () => {
-      window.removeEventListener(GALLERY_UPDATE_EVENT, handleUpdate)
-      window.removeEventListener('storage', handleUpdate)
-    }
-  }, [reload])
+      isCurrent = false;
+      window.removeEventListener(GALLERY_UPDATE_EVENT, handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
+  }, [kwKey, fallbackUrl]);
 
-  return photo
+  return photo;
 }
 
 /* ------------------------------------------------------------------ */
@@ -576,30 +595,39 @@ export function useCategoryPhoto(keywords: string | string[], fallbackUrl: strin
 /* ------------------------------------------------------------------ */
 
 export function useCategoryPhotos(keywords: string | string[], count: number, fallbackUrls: string[] = []) {
+  const kwKey = Array.isArray(keywords) ? keywords.join(',') : keywords;
+  const fbKey = Array.isArray(fallbackUrls) ? fallbackUrls.join(',') : '';
   const [photos, setPhotos] = useState<{ url: string; caption: string; isFromDb: boolean }[]>(() =>
     getRandomCategoryPhotos(keywords, count, fallbackUrls)
-  )
-
-  const reload = useCallback(() => {
-    fetchAllPhotos().then(allPhotos => {
-      const cats = getStoredCategories()
-      setPhotos(getRandomCategoryPhotos(keywords, count, fallbackUrls, allPhotos, cats))
-    }).catch(() => {
-      setPhotos(getRandomCategoryPhotos(keywords, count, fallbackUrls))
-    })
-  }, [keywords, count, fallbackUrls])
+  );
 
   useEffect(() => {
-    reload()
-    const handleUpdate = () => reload()
-    window.addEventListener(GALLERY_UPDATE_EVENT, handleUpdate)
-    window.addEventListener('storage', handleUpdate)
+    let isCurrent = true;
+    fetchAllPhotos().then(allPhotos => {
+      if (!isCurrent) return;
+      const cats = getStoredCategories();
+      setPhotos(getRandomCategoryPhotos(keywords, count, fallbackUrls, allPhotos, cats));
+    }).catch(() => {
+      if (isCurrent) setPhotos(getRandomCategoryPhotos(keywords, count, fallbackUrls));
+    });
+
+    const handleUpdate = () => {
+      fetchAllPhotos(true).then(allPhotos => {
+        if (!isCurrent) return;
+        const cats = getStoredCategories();
+        setPhotos(getRandomCategoryPhotos(keywords, count, fallbackUrls, allPhotos, cats));
+      });
+    };
+
+    window.addEventListener(GALLERY_UPDATE_EVENT, handleUpdate);
+    window.addEventListener('storage', handleUpdate);
 
     return () => {
-      window.removeEventListener(GALLERY_UPDATE_EVENT, handleUpdate)
-      window.removeEventListener('storage', handleUpdate)
-    }
-  }, [reload])
+      isCurrent = false;
+      window.removeEventListener(GALLERY_UPDATE_EVENT, handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
+  }, [kwKey, count, fbKey]);
 
-  return photos
+  return photos;
 }

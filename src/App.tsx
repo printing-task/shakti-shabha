@@ -101,6 +101,7 @@ export default function App() {
             <PageTransition>
               <Routes>
                 <Route path="/"                     element={<HomePage />} />
+                <Route path="/home"                 element={<HomePage />} />
                 <Route path="/aaryaveera"           element={<AaryaveeraPage />} />
                 <Route path="/mardini"              element={<MardiniPage />} />
                 <Route path="/mission-mardini"      element={<MardiniPage />} />
@@ -126,6 +127,8 @@ export default function App() {
                 <Route path="/login"                element={<LoginPage />} />
                 <Route path="/register"             element={<RegisterPage />} />
                 <Route path="/admin"                element={<AdminDashboard />} />
+                {/* Fallback to HomePage for any unknown URL */}
+                <Route path="*"                     element={<HomePage />} />
               </Routes>
             </PageTransition>
           </LanguageProvider>

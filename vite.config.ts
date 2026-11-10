@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 
 export default defineConfig({
-  base: './',
+  base: '/',
   envPrefix: ['VITE_', 'SUPABASE_'],
   plugins: [react()],
   server: {
