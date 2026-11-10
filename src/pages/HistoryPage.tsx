@@ -1,12 +1,8 @@
-import { useEffect, useRef, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { X, BookOpen, ChevronRight, ChevronLeft, Compass } from 'lucide-react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { X, BookOpen, ChevronRight, Compass } from 'lucide-react'
 import h from './HistoryPage.module.css'
 import GoogleIcon from '../components/GoogleIcon/GoogleIcon'
-
-gsap.registerPlugin(ScrollTrigger)
 
 type Lang = 'en' | 'hi'
 
@@ -261,121 +257,35 @@ export default function HistoryPage() {
   const [lang, setLang] = useState<Lang>('en')
   const [activeDossier, setActiveDossier] = useState<Milestone | null>(null)
   const [activeMilestoneId, setActiveMilestoneId] = useState<string>('m2012')
-  const [maxReachedIndex, setMaxReachedIndex] = useState<number>(0)
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({})
-  const [scrollProgress, setScrollProgress] = useState(0)
-  const [lineLeft, setLineLeft] = useState(0)
-  const [lineWidth, setLineWidth] = useState(0)
 
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const trackRef = useRef<HTMLUListElement>(null)
-  const itemRefs = useRef<(HTMLLIElement | null)[]>([])
-  const triggerRef = useRef<ScrollTrigger | null>(null)
-
-  // Horizontal Scroll Animation: Pins the viewport and scrolls the track horizontally
+  // Update active milestone on scroll as user scrolls naturally
   useEffect(() => {
-    const section = sectionRef.current
-    const track = trackRef.current
-    if (!section || !track) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveMilestoneId(entry.target.id)
+          }
+        })
+      },
+      { rootMargin: '-20% 0px -55% 0px' }
+    )
 
-    const totalMilestones = TIMELINE_MILESTONES.length
+    TIMELINE_MILESTONES.forEach((m) => {
+      const el = document.getElementById(m.id)
+      if (el) observer.observe(el)
+    })
 
-    const updateMeasurements = () => {
-      const firstItem = itemRefs.current[0]
-      const lastItem = itemRefs.current[totalMilestones - 1]
-      if (firstItem && lastItem) {
-        const startX = firstItem.offsetLeft + firstItem.offsetWidth / 2
-        const endX = lastItem.offsetLeft + lastItem.offsetWidth / 2
-        setLineLeft(startX)
-        return { startX, endX, totalDist: Math.max(0, endX - startX) }
-      }
-      return { startX: 0, endX: track.scrollWidth, totalDist: track.scrollWidth }
-    }
-
-    const { startX, totalDist } = updateMeasurements()
-
-    const getScrollDistance = () => {
-      return Math.max(0, track.scrollWidth - window.innerWidth + 200)
-    }
-
-    const totalScroll = getScrollDistance()
-    if (totalScroll <= 0) return
-
-    const ctx = gsap.context(() => {
-      const tween = gsap.to(track, {
-        x: () => -totalScroll,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: () => `+=${Math.max(window.innerHeight * 2.2, totalScroll * 1.2)}`,
-          pin: true,
-          anticipatePin: 1,
-          scrub: 0.3,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            setScrollProgress(self.progress)
-
-            // Red line smoothly glides from dot 0 to active milestone dot and beyond
-            const currentLineWidth = totalDist * self.progress
-            setLineWidth(currentLineWidth)
-
-            // Determine active milestone based on scroll progress
-            const activeIdx = Math.min(
-              totalMilestones - 1,
-              Math.max(0, Math.floor(self.progress * totalMilestones * 0.999))
-            )
-            setActiveMilestoneId(TIMELINE_MILESTONES[activeIdx].id)
-            setMaxReachedIndex((prev) => Math.max(prev, activeIdx))
-          },
-        },
-      })
-      triggerRef.current = tween.scrollTrigger ?? null
-    }, section)
-
-    const timer = setTimeout(() => {
-      updateMeasurements()
-      ScrollTrigger.refresh()
-    }, 250)
-
-    const onResize = () => {
-      updateMeasurements()
-    }
-    window.addEventListener('resize', onResize)
-
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener('resize', onResize)
-      ctx.revert()
-      triggerRef.current = null
-    }
+    return () => observer.disconnect()
   }, [])
 
-  const scrollToMilestone = (index: number) => {
-    const st = triggerRef.current
-    if (!st) return
-    const totalMilestones = TIMELINE_MILESTONES.length
-    const targetScroll = st.start + (index / (totalMilestones - 1)) * (st.end - st.start)
-    setMaxReachedIndex((prev) => Math.max(prev, index))
-    window.scrollTo({
-      top: targetScroll,
-      behavior: 'smooth',
-    })
-  }
-
-  const activeMilestoneIndex = TIMELINE_MILESTONES.findIndex((m) => m.id === activeMilestoneId)
-
-  const handlePrev = () => {
-    const prevIdx = Math.max(0, (activeMilestoneIndex === -1 ? 0 : activeMilestoneIndex) - 1)
-    scrollToMilestone(prevIdx)
-  }
-
-  const handleNext = () => {
-    const nextIdx = Math.min(
-      TIMELINE_MILESTONES.length - 1,
-      (activeMilestoneIndex === -1 ? 0 : activeMilestoneIndex) + 1
-    )
-    scrollToMilestone(nextIdx)
+  const scrollToYear = (id: string) => {
+    setActiveMilestoneId(id)
+    const el = document.getElementById(id)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
   }
 
   const handleImageLoad = (src: string) => {
@@ -439,8 +349,8 @@ export default function HistoryPage() {
         </h1>
         <p className={h.introDesc}>
           {lang === 'en'
-            ? 'Tracing 12 years of unyielding courage from our first rural camps in 2014 to today’s pan-India movement. As you scroll, each milestone reveals its round photo, community accomplishments, and verified archival dossier.'
-            : '२०१४ के प्रथम ग्रामीण शिविरों से लेकर आज के अखिल भारतीय शक्ति आंदोलन तक १२ वर्षों की प्रेरक यात्रा। जैसे-जैसे आप स्क्रॉल करेंगे, वर्तमान वर्ष का चित्र, उपलब्धियाँ और पुरातात्विक अभिलेख स्वतः विस्तार लेंगे।'}
+            ? 'Tracing 12 years of unyielding courage from our first rural camps in 2014 to today’s pan-India movement. Read through our chronological milestones below.'
+            : '२०१४ के प्रथम ग्रामीण शिविरों से लेकर आज के अखिल भारतीय शक्ति आंदोलन तक १२ वर्षों की प्रेरक यात्रा। हमारे ऐतिहासिक कालखंडों का विवरण नीचे देखें।'}
         </p>
         <div className={h.scrollProgressPill}>
           <Compass size={14} color="#DC143C" />
@@ -451,159 +361,101 @@ export default function HistoryPage() {
         </div>
       </section>
 
-      {/* ============================================================
-          THE HORIZONTAL PARALLEL TIMELINE (EXACT CODEPEN SYSTEM)
-          ============================================================ */}
-      <section className={h.horizontalTimelineSection} ref={sectionRef}>
-        <div className={h.stickyViewport}>
-          {/* Top Controls: Quick Year Pills + Nav Arrows */}
-          <div className={h.timelineControlsBar}>
-            <div className={h.timelineQuickYears}>
-              {TIMELINE_MILESTONES.map((item, idx) => {
-                const isActive = activeMilestoneId === item.id
-                return (
-                  <button
-                    key={item.id}
-                    type="button"
-                    className={`${h.yearPill} ${isActive ? h.yearPillActive : ''}`}
-                    onClick={() => scrollToMilestone(idx)}
-                    title={lang === 'en' ? item.nameEn : item.nameHi}
-                  >
-                    {item.yearNumeric}
-                  </button>
-                )
-              })}
-            </div>
+      {/* ── VERTICAL CHRONOLOGICAL TIMELINE (NO SLIDER) ─────────── */}
+      <section className={h.verticalTimelineSection}>
+        {/* Quick Year Navigation Bar */}
+        <div className={h.timelineQuickNav}>
+          {TIMELINE_MILESTONES.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className={`${h.yearPill} ${activeMilestoneId === item.id ? h.yearPillActive : ''}`}
+              onClick={() => scrollToYear(item.id)}
+            >
+              {item.yearNumeric}
+            </button>
+          ))}
+        </div>
 
-            <div className={h.timelineNavActions}>
-              <button
-                type="button"
-                className={h.navArrowBtn}
-                onClick={handlePrev}
-                disabled={activeMilestoneIndex <= 0}
-                aria-label="Previous Milestone"
-                title="Previous Milestone"
-              >
-                <ChevronLeft size={16} />
-              </button>
-              <button
-                type="button"
-                className={h.navArrowBtn}
-                onClick={handleNext}
-                disabled={activeMilestoneIndex >= TIMELINE_MILESTONES.length - 1}
-                aria-label="Next Milestone"
-                title="Next Milestone"
-              >
-                <ChevronRight size={16} />
-              </button>
-            </div>
-          </div>
-
-          {/* Horizontal Track Viewport */}
-          <div className={h.horizontalTrackViewport}>
-            <ul className={h.timeline} ref={trackRef}>
-              {/* Dynamic Animated Active Progress Line: Starts at Dot 0 and precisely tracks each milestone */}
+        {/* Milestone Cards Stream */}
+        <div className={h.timelineStream}>
+          {TIMELINE_MILESTONES.map((item, idx) => {
+            const isLeft = idx % 2 === 0
+            return (
               <div
-                className={h.timelineActiveSpine}
-                style={{
-                  left: `${lineLeft}px`,
-                  width: `${lineWidth}px`,
-                }}
-              />
+                key={item.id}
+                id={item.id}
+                className={`${h.milestoneRow} ${isLeft ? h.milestoneRowLeft : h.milestoneRowRight}`}
+              >
+                {/* Center dot on vertical spine */}
+                <span className={h.spineCenterDot} />
 
-              {/* Exact alternating parallel items: Top (.directionL) and Bottom (.directionR) */}
-              {TIMELINE_MILESTONES.map((item, idx) => {
-                const isTop = idx % 2 === 0
-                const isActive = activeMilestoneId === item.id
-                const isReached = idx <= Math.max(maxReachedIndex, activeMilestoneIndex)
+                {/* Milestone Card */}
+                <article className={h.milestoneCard}>
+                  <div className={h.cardHeaderRow}>
+                    <div className={h.cardAvatar}>
+                      <img
+                        src={item.image}
+                        alt={lang === 'en' ? item.nameEn : item.nameHi}
+                        loading="lazy"
+                        onLoad={() => handleImageLoad(item.image)}
+                        style={{
+                          opacity: loadedImages[item.image] ? 1 : 0.8,
+                          transition: 'opacity 0.25s ease',
+                        }}
+                      />
+                    </div>
+                    <div className={h.cardMeta}>
+                      <span className={h.yearTag}>
+                        {lang === 'en' ? item.dateDisplayEn : item.dateDisplayHi}
+                      </span>
+                      <span className={h.epochTag}>
+                        {lang === 'en' ? item.epochEn : item.epochHi}
+                      </span>
+                    </div>
+                  </div>
 
-                return (
-                  <li
-                    key={item.id}
-                    ref={(el) => {
-                      itemRefs.current[idx] = el
-                    }}
-                    className={`${h.timelineItem} ${isActive ? h.itemActive : ''} ${isReached ? h.itemPassed : ''}`}
-                    onClick={() => {
-                      setActiveMilestoneId(item.id)
-                      setMaxReachedIndex((prev) => Math.max(prev, idx))
-                      scrollToMilestone(idx)
-                    }}
-                  >
-                    {/* Dedicated Spine Dot on the Central 6px Line: ZERO overlap with date */}
-                    <div className={`${h.spineDot} ${isReached ? h.spineDotReached : h.spineDotUnreached}`} />
+                  <h3 className={h.cardTitle}>
+                    {lang === 'en' ? item.nameEn : item.nameHi}
+                  </h3>
+                  <div className={h.cardYearsLoc}>
+                    {lang === 'en' ? item.yearsEn : item.yearsHi}
+                  </div>
 
-                    {/* Vertical Stem: only visible once date is reached */}
-                    {isReached && <div className={isTop ? h.stemTop : h.stemBottom} />}
+                  <blockquote className={h.cardQuote}>
+                    "{lang === 'en' ? item.quoteEn : item.quoteHi}"
+                  </blockquote>
 
-                    {/* Date, Flag & Details: Once revealed upon reach, they STAY visible as you scroll! */}
-                    {isReached && (
-                      <div className={`${isTop ? h.directionL : h.directionR} ${h.milestoneBoxRevealed}`}>
-                        <div className={h.flagWrapper}>
-                          <span className={`${h.flag} ${isActive ? h.flagActive : ''}`}>
-                            {lang === 'en' ? item.nameEn : item.nameHi}
-                          </span>
-                          <span className={h.timeWrapper}>
-                            <span className={h.time}>
-                              {lang === 'en' ? item.dateDisplayEn : item.dateDisplayHi}
-                            </span>
-                          </span>
-                        </div>
+                  <p className={h.cardDesc}>
+                    {lang === 'en' ? item.descEn : item.descHi}
+                  </p>
 
-                        {/* Detail card stays visible for all reached milestones, highlighted when active */}
-                        <div className={`${h.desc} ${isActive ? h.descActive : ''}`}>
-                          <div className={h.descTop}>
-                            <div className={h.roundThumbnail}>
-                              <img
-                                src={item.image}
-                                alt={lang === 'en' ? item.nameEn : item.nameHi}
-                                onLoad={() => handleImageLoad(item.image)}
-                                style={{
-                                  opacity: loadedImages[item.image] ? 1 : 0,
-                                  transition: 'opacity 0.25s ease',
-                                }}
-                              />
-                            </div>
-                            <div className={h.descQuote}>
-                              "{lang === 'en' ? item.quoteEn : item.quoteHi}"
-                            </div>
-                          </div>
-
-                          <p className={h.descText}>
-                            {lang === 'en' ? item.descEn : item.descHi}
-                          </p>
-
-                          {/* Year-wise stats badges */}
-                          <div className={h.timelineStatBadges}>
-                            {item.stats.map((st, sIdx) => (
-                              <span key={sIdx} className={h.timelineStatItem}>
-                                <strong>{st.value}</strong> {lang === 'en' ? st.labelEn : st.labelHi}
-                              </span>
-                            ))}
-                          </div>
-
-                          <button
-                            type="button"
-                            className={h.dossierBtn}
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              setActiveDossier(item)
-                            }}
-                          >
-                            <BookOpen size={12} />
-                            <span>
-                              {lang === 'en' ? 'Inspect Dossier' : 'दस्तावेज देखें'}
-                            </span>
-                            <ChevronRight size={12} />
-                          </button>
-                        </div>
+                  <div className={h.cardStatsGrid}>
+                    {item.stats.map((st, sIdx) => (
+                      <div key={sIdx} className={h.cardStatItem}>
+                        <span className={h.statVal}>{st.value}</span>
+                        <span className={h.statLbl}>
+                          {lang === 'en' ? st.labelEn : st.labelHi}
+                        </span>
                       </div>
-                    )}
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
+                    ))}
+                  </div>
+
+                  <div className={h.cardActionRow}>
+                    <button
+                      type="button"
+                      className={h.dossierBtn}
+                      onClick={() => setActiveDossier(item)}
+                    >
+                      <BookOpen size={14} />
+                      <span>{lang === 'en' ? 'Inspect Archival Dossier' : 'प्रमाणित दस्तावेज देखें'}</span>
+                      <ChevronRight size={14} />
+                    </button>
+                  </div>
+                </article>
+              </div>
+            )
+          })}
         </div>
       </section>
 
