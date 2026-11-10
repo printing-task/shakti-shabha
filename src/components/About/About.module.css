@@ -10,7 +10,7 @@
   padding-top: clamp(2.5rem, 3.5vw, 3.5rem);
   padding-left: clamp(1.25rem, 4vw, 3rem);
   padding-right: clamp(1.25rem, 4vw, 3rem);
-  padding-bottom: clamp(4.5rem, 7vw, 6.5rem); 
+  padding-bottom: clamp(5.5rem, 8vw, 8rem); 
   background: linear-gradient(145deg, #A80E2D 0%, #DC143C 50%, #B01030 100%); 
   color: #FFFFFF;
   overflow: hidden;
@@ -144,7 +144,7 @@
 /* 3 Streams / Categories Grid */
 .pillars { 
   display: grid;
-  margin-bottom: 0.75rem; 
+  margin-bottom: 1.5rem; 
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(0.75rem, 1.5vw, 1.25rem); 
 }
@@ -268,9 +268,9 @@
 @media (max-width: 960px) { 
   .pillars { 
     grid-template-columns: 1fr; 
-    gap: 1rem;
+    gap: 1.25rem;
   } 
   .section { 
-    padding: 2.25rem 1.25rem; 
+    padding: 3rem 1.25rem 5rem; 
   } 
 }

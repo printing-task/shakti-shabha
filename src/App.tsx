@@ -78,6 +78,26 @@ function PageTransition({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  // Prevent layout shifts on refresh by recalculating ScrollTrigger when assets settle
+  useEffect(() => {
+    const handleRefresh = () => {
+      ScrollTrigger.refresh()
+    }
+    window.addEventListener('load', handleRefresh)
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => {
+        ScrollTrigger.refresh()
+      })
+    }
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 400)
+    return () => {
+      window.removeEventListener('load', handleRefresh)
+      clearTimeout(timer)
+    }
+  }, [])
+
   // Failsafe: Ensure page scroll is never trapped by any container or modal
   useEffect(() => {
     const unlockPageScroll = () => {
