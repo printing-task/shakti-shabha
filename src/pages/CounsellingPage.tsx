@@ -1,9 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { supabase } from '../lib/supabase'
 import GoogleIcon from '../components/GoogleIcon/GoogleIcon'
 import s from './PageLayout.module.css'
 import cp from './CounsellingPage.module.css'
+
+gsap.registerPlugin(ScrollTrigger)
 
 interface ServiceWheelItem {
   icon: string
@@ -114,13 +118,17 @@ export default function CounsellingPage() {
   const [submitting, setSubmitting] = useState(false)
   const [activeDot, setActiveDot] = useState(0)
 
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const wheelWrapperRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
+  const triggerRef = useRef<ScrollTrigger | null>(null)
 
   /* ── 3D Card Wheel (Accordéon Asymétrique) Animation Logic ── */
   useEffect(() => {
-    const scrollContainer = scrollContainerRef.current
-    if (!scrollContainer) return
+    const section = sectionRef.current
+    const wrapper = wheelWrapperRef.current
+    const totalCards = WHEEL_SERVICES.length
+    if (!section || !wrapper || totalCards === 0) return
 
     const SPREAD_X = 0.16
     const SPREAD_Y = 0.28
@@ -128,16 +136,10 @@ export default function CounsellingPage() {
     const SKEW = -2
     const SCALE_MIN = 0.7
 
-    function updateScroll() {
-      if (!scrollContainer) return
-      const rect = scrollContainer.getBoundingClientRect()
-      const totalScrollable = scrollContainer.offsetHeight - window.innerHeight
-      if (totalScrollable <= 0) return
-
-      const scrolled = Math.max(0, -rect.top)
-      const progress = Math.min(1, Math.max(0, scrolled / totalScrollable))
-      const totalCards = WHEEL_SERVICES.length
+    function updateCards(progress: number) {
       const current = progress * (totalCards - 1)
+      const activeIdx = Math.min(totalCards - 1, Math.max(0, Math.round(current)))
+      setActiveDot(activeIdx)
 
       cardsRef.current.forEach((card, index) => {
         if (!card) return
@@ -165,41 +167,49 @@ export default function CounsellingPage() {
         `
         card.style.opacity = `${opacity}`
         card.style.zIndex = `${Math.round(100 - absOffset * 20)}`
-
-        if (absOffset < 0.5) {
-          setActiveDot(index)
-        }
       })
     }
 
-    let ticking = false
-    function onScroll() {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          updateScroll()
-          ticking = false
-        })
-        ticking = true
-      }
-    }
+    // Set initial card states
+    updateCards(0)
 
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', updateScroll)
-    updateScroll()
+    // Pinning distance: smooth, perfectly paced card cycle without flying away
+    const pinDistance = window.innerHeight * (totalCards - 1) * 0.85
+
+    const ctx = gsap.context(() => {
+      const st = ScrollTrigger.create({
+        trigger: section,
+        start: 'top top',
+        end: () => `+=${pinDistance}`,
+        pin: wrapper,
+        pinSpacing: true,
+        anticipatePin: 1,
+        scrub: 0.2,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          updateCards(self.progress)
+        },
+      })
+      triggerRef.current = st
+    }, section)
+
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 200)
 
     return () => {
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', updateScroll)
+      clearTimeout(timer)
+      ctx.revert()
+      triggerRef.current = null
     }
   }, [])
 
   const scrollToCard = (index: number) => {
-    if (!scrollContainerRef.current) return
-    const containerTop = scrollContainerRef.current.offsetTop
-    const totalScrollable = scrollContainerRef.current.offsetHeight - window.innerHeight
-    const targetScroll = (index / (WHEEL_SERVICES.length - 1)) * totalScrollable
+    const st = triggerRef.current
+    if (!st) return
+    const targetScroll = st.start + (index / (WHEEL_SERVICES.length - 1)) * (st.end - st.start)
     window.scrollTo({
-      top: containerTop + targetScroll,
+      top: targetScroll,
       behavior: 'smooth'
     })
   }
@@ -221,11 +231,10 @@ export default function CounsellingPage() {
 
       {/* ── 3D Card Wheel (Accordéon Asymétrique) — Clean White Background ── */}
       <section
-        ref={scrollContainerRef}
+        ref={sectionRef}
         className={cp.scrollContainer}
-        style={{ height: `${Math.max(650, WHEEL_SERVICES.length * 85)}vh` }}
       >
-        <div className={cp.wheelWrapper}>
+        <div ref={wheelWrapperRef} className={cp.wheelWrapper}>
           <div className={cp.wheelGlow} />
 
           {/* Vertical Dots Indicator */}
