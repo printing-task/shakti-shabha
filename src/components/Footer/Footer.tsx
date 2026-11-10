@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import GoogleIcon from '../GoogleIcon/GoogleIcon'
@@ -12,6 +12,7 @@ export default function Footer() {
   const [subscribed, setSubscribed] = useState(false)
   const year = new Date().getFullYear()
   const footerRef = useRef<HTMLElement>(null)
+  const location = useLocation()
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault()
@@ -23,6 +24,7 @@ export default function Footer() {
   }
 
   useEffect(() => {
+    if (!footerRef.current) return
     const ctx = gsap.context(() => {
       gsap.from('[data-ft="col"]', {
         opacity: 0,
@@ -30,11 +32,16 @@ export default function Footer() {
         stagger: 0.09,
         duration: 0.65,
         ease: 'power3.out',
+        clearProps: 'transform,opacity',
         scrollTrigger: { trigger: footerRef.current, start: 'top 90%', toggleActions: 'play none none none' }
       })
     }, footerRef)
     return () => ctx.revert()
-  }, [])
+  }, [location.pathname])
+
+  if (location.pathname.startsWith('/admin') || location.pathname === '/login' || location.pathname === '/register') {
+    return null
+  }
 
   return (
     <footer ref={footerRef} className={s.footer}>

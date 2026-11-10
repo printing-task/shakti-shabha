@@ -30,6 +30,7 @@ import MardiniPage from './pages/MardiniPage'
 import ShaktiBhavaPage from './pages/ShaktiBhavaPage'
 import ShaktiVartaPage from './pages/ShaktiVartaPage'
 import ThreeStreamsPage from './pages/ThreeStreamsPage'
+import Footer from './components/Footer/Footer'
 
 gsap.registerPlugin(ScrollTrigger)
 if (typeof window !== 'undefined') {
@@ -161,6 +162,7 @@ export default function App() {
                 <Route path="*"                     element={<HomePage />} />
               </Routes>
             </PageTransition>
+            <Footer />
           </LanguageProvider>
         </AuthProvider>
       </BrowserRouter>

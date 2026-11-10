@@ -8,7 +8,6 @@ import Events       from '../components/Events/Events'
 import Sahyog       from '../components/Sahyog/Sahyog'
 import Courses      from '../components/Courses/Courses'
 import HistoryGirls from '../components/HistoryGirls/HistoryGirls'
-import Footer       from '../components/Footer/Footer'
 
 export default function HomePage() {
   return (
@@ -23,7 +22,6 @@ export default function HomePage() {
       <Sahyog />
       <Courses />
       <HistoryGirls />
-      <Footer />
     </main>
   )
 }
