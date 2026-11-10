@@ -4,7 +4,6 @@ import { ReactLenis, useLenis } from 'lenis/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Navigation from './components/Navigation/Navigation'
-import LanguageSwitcher from './components/LanguageSwitcher/LanguageSwitcher'
 import FallingLeaves from './components/FallingLeaves/FallingLeaves'
 import { AuthProvider } from './lib/AuthContext'
 import { LanguageProvider } from './lib/LanguageContext'
@@ -128,7 +127,6 @@ export default function App() {
             {/* Global falling leaves — fixed across all pages, dynamic mouse physics, pointer-events: none */}
             <FallingLeaves />
             <Navigation />
-            <LanguageSwitcher floating />
             <PageTransition>
               <Routes>
                 <Route path="/"                     element={<HomePage />} />

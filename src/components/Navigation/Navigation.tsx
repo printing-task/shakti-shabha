@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import type { MouseEvent } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import gsap from 'gsap'
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher'
@@ -22,7 +21,6 @@ const LINKS = [
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  const ctaRef = useRef<HTMLAnchorElement>(null)
   const logoImgRef = useRef<HTMLImageElement>(null)
   const logoMainRef = useRef<HTMLSpanElement>(null)
   const logoDevRef = useRef<HTMLSpanElement>(null)
@@ -70,23 +68,6 @@ export default function Navigation() {
     }
   }, [])
 
-  const onMove = (e: MouseEvent<HTMLAnchorElement>) => {
-    const el = ctaRef.current
-    if (!el) return
-    const r = el.getBoundingClientRect()
-    gsap.to(el, {
-      x: (e.clientX - r.left - r.width / 2) * 0.28,
-      y: (e.clientY - r.top - r.height / 2) * 0.28,
-      duration: 0.35,
-      ease: 'power2.out',
-    })
-  }
-  const onLeave = () => {
-    if (ctaRef.current) {
-      gsap.to(ctaRef.current, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1,0.4)' })
-    }
-  }
-
   if (location.pathname.startsWith('/admin') || location.pathname === '/login' || location.pathname === '/register') {
     return null
   }
@@ -127,15 +108,6 @@ export default function Navigation() {
       </div>
 
       <div className={s.navActions}>
-        <Link
-          to="/sahyog"
-          ref={ctaRef}
-          className={s.cta}
-          onMouseMove={onMove}
-          onMouseLeave={onLeave}
-        >
-          Join Sabha →
-        </Link>
         <LanguageSwitcher className={s.navLangDesktop} />
       </div>
 
