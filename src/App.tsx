@@ -78,17 +78,44 @@ function PageTransition({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  // Failsafe: Ensure page scroll is never trapped by any container or modal
+  useEffect(() => {
+    const unlockPageScroll = () => {
+      if (document.body.style.overflow === 'hidden' || document.documentElement.style.overflow === 'hidden') {
+        const hasOpenModal = document.querySelector('[role="dialog"], [data-modal="true"]');
+        if (!hasOpenModal) {
+          document.body.style.overflow = '';
+          document.documentElement.style.overflow = '';
+        }
+      }
+    };
+
+    const handleKeyScroll = (e: KeyboardEvent) => {
+      if (['Space', 'PageDown', 'PageUp', 'ArrowDown', 'ArrowUp', 'End', 'Home'].includes(e.code)) {
+        unlockPageScroll();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyScroll, { passive: true });
+    window.addEventListener('resize', unlockPageScroll, { passive: true });
+    return () => {
+      window.removeEventListener('keydown', handleKeyScroll);
+      window.removeEventListener('resize', unlockPageScroll);
+    };
+  }, []);
+
   return (
-    <ReactLenis
+        <ReactLenis
       root
       options={{
-        duration: 1.2,
+        duration: 1.0,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         orientation: 'vertical',
         gestureOrientation: 'vertical',
         smoothWheel: true,
         wheelMultiplier: 1,
-        touchMultiplier: 1.5,
+        touchMultiplier: 1,
+        syncTouch: false,
         infinite: false,
       }}
     >

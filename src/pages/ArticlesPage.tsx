@@ -231,15 +231,22 @@ export default function ArticlesPage() {
     setExpandedCardIds(prev => ({ ...prev, [id]: !prev[id] }))
   }
 
-  useEffect(() => {
+    useEffect(() => {
     if (activeModalArticle) {
-      const prev = document.body.style.overflow
       document.body.style.overflow = 'hidden'
       return () => {
-        document.body.style.overflow = prev
+        document.body.style.overflow = ''
       }
+    } else {
+      document.body.style.overflow = ''
     }
   }, [activeModalArticle])
+
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [])
 
 
   useEffect(() => {

@@ -90,15 +90,22 @@ export default function CaseStudyPage() {
   const [activeModal, setActiveModal] = useState<CaseItem | null>(null)
   const [submittedStory, setSubmittedStory] = useState(false)
 
-  useEffect(() => {
+    useEffect(() => {
     if (activeModal) {
-      const prev = document.body.style.overflow
       document.body.style.overflow = "hidden"
       return () => {
-        document.body.style.overflow = prev
+        document.body.style.overflow = ""
       }
+    } else {
+      document.body.style.overflow = ""
     }
   }, [activeModal])
+
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [])
 
   const filteredStories = selectedFilter === 'ALL'
     ? CASE_STUDIES
