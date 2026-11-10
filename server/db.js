@@ -1,7 +1,56 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
 require('dotenv').config();
 
-const uri = process.env.MONGODB_URI || "mongodb+srv://printingtaskweb_db_user:<db_password>@cluster0.hqaggkf.mongodb.net/shakti_sabha?retryWrites=true&w=majority&compressors=zlib";
+const DEFAULT_URI = "mongodb+srv://printingtaskweb_db_user:<db_password>@cluster0.hqaggkf.mongodb.net/shakti_sabha?retryWrites=true&w=majority&compressors=zlib";
+
+/**
+ * Robust URI sanitizer that automatically fixes malformed query options
+ * like truncated "retryWri" -> "retryWrites=true"
+ */
+function sanitizeMongoUri(rawUri) {
+  if (!rawUri) return DEFAULT_URI;
+  let clean = rawUri.trim().replace(/^['"]|['"]$/g, '');
+
+  // Fix query parameters if malformed
+  const urlParts = clean.split('?');
+  if (urlParts.length > 1) {
+    const base = urlParts[0];
+    const query = urlParts.slice(1).join('?');
+    const validParams = [];
+
+    for (const pair of query.split('&')) {
+      if (!pair) continue;
+      if (pair.includes('=')) {
+        const [k, v] = pair.split('=');
+        if (v !== undefined && v !== '') {
+          validParams.push(`${k}=${v}`);
+        } else if (k.toLowerCase().startsWith('retrywri')) {
+          validParams.push('retryWrites=true');
+        }
+      } else {
+        // Parameter with no value (e.g. truncated "retryWri")
+        if (pair.toLowerCase().startsWith('retrywri')) {
+          validParams.push('retryWrites=true');
+        }
+      }
+    }
+
+    // Ensure retryWrites=true is included
+    if (!validParams.some(p => p.startsWith('retryWrites='))) {
+      validParams.push('retryWrites=true');
+    }
+
+    clean = `${base}?${validParams.join('&')}`;
+  } else {
+    // If no query string, append standard parameters
+    clean = `${clean}?retryWrites=true&w=majority`;
+  }
+
+  return clean;
+}
+
+const rawUri = process.env.MONGODB_URI || DEFAULT_URI;
+const uri = sanitizeMongoUri(rawUri);
 
 let client = null;
 let db = null;
@@ -19,6 +68,10 @@ async function connectToMongoDB() {
   if (uri.includes('<db_password>')) {
     console.warn('⚠️ Warning: MONGODB_URI still contains <db_password> placeholder. Please set your real MongoDB password in .env or Render Environment Variables.');
   }
+
+  // Safely display masked URI in logs for easy debugging
+  const maskedUri = uri.replace(/:([^@/]+)@/, ':****@');
+  console.log(`🔌 Attempting connection to MongoDB Atlas: ${maskedUri}`);
 
   try {
     client = new MongoClient(uri, {
@@ -92,4 +145,5 @@ module.exports = {
   getDb,
   getCollection,
   isDbConnected,
+  sanitizeMongoUri,
 };
