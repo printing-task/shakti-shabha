@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
+const fs = require('fs');
 const { connectToMongoDB, disconnectFromMongoDB } = require('./db');
 
 const app = express();
@@ -45,16 +47,31 @@ app.use('/api/gallery', require('./routes/gallery'));
 app.use('/api/testimonials', require('./routes/testimonials'));
 app.use('/api/stats', require('./routes/stats'));
 
-// Root route
-app.get('/', (req, res) => {
-  res.json({
-    name: 'Shakti Sabha Backend API',
-    status: 'running',
-    database: 'MongoDB Atlas',
-    healthCheck: '/health',
-    documentation: 'All REST endpoints available under /api/*',
+// Static frontend serving if dist folder exists (full-stack Render deployment support)
+const distPath = path.join(__dirname, '../dist');
+if (fs.existsSync(distPath)) {
+  console.log(`📦 Serving static frontend from: ${distPath}`);
+  app.use(express.static(distPath));
+
+  app.get('*', (req, res, next) => {
+    // Pass API and health routes to next handlers
+    if (req.path.startsWith('/api') || req.path.startsWith('/health')) {
+      return next();
+    }
+    res.sendFile(path.join(distPath, 'index.html'));
   });
-});
+} else {
+  // Root route fallback when dist does not exist
+  app.get('/', (req, res) => {
+    res.json({
+      name: 'Shakti Sabha Backend API',
+      status: 'running',
+      database: 'MongoDB Atlas',
+      healthCheck: '/health',
+      documentation: 'All REST endpoints available under /api/*',
+    });
+  });
+}
 
 // Self-ping keep alive mechanism (if RENDER_EXTERNAL_URL is configured)
 const renderUrl = process.env.RENDER_EXTERNAL_URL;
