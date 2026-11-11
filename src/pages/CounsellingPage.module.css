@@ -18,13 +18,17 @@
   overflow: hidden;
   background: 
     linear-gradient(to right, rgba(10, 24, 15, 0.92) 0%, rgba(10, 24, 15, 0.65) 30%, rgba(10, 24, 15, 0.22) 55%, transparent 75%),
-    url('/counceling.jpg') center center / cover no-repeat;
-  padding: calc(clamp(2.5rem, 5vw, 4rem) + 4.5rem) clamp(1.5rem, 4vw, 3rem) clamp(2.5rem, 5vw, 3.5rem);
+    url('/counceling.jpg') center 42% / cover no-repeat;
+  min-height: clamp(400px, 50vh, 550px);
+  display: flex;
+  align-items: center;
+  padding: calc(clamp(4rem, 7vw, 6rem) + 4.5rem) clamp(1.5rem, 4vw, 3rem) clamp(4rem, 7vw, 5.5rem);
   color: #FFFFFF;
   border-bottom: 1px solid rgba(61, 90, 69, 0.4);
 }
 
 .heroInner {
+  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
   position: relative;
