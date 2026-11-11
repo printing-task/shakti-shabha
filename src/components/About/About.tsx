@@ -101,9 +101,18 @@ export default function About() {
               className={s.pillar}
               style={{ '--pl-accent': p.accent, '--pl-tag-bg': p.tagBg } as React.CSSProperties}
             >
+              <span className={s.accent} style={{ background: p.accent }} />
               <div className={s.pillarHead}>
-                <span className={s.pillarNum}>{p.num}</span>
-                <span className={s.pillarTag} style={{ color: p.tagColor }}>{p.tag}</span>
+                <span 
+                  className={s.pillarTag} 
+                  style={{ 
+                    color: p.tagColor,
+                    background: p.tagBg,
+                    border: `1px solid ${p.tagColor}33`
+                  }}
+                >
+                  {p.tag}
+                </span>
               </div>
               <div className={s.pillarName}>{p.name}</div>
               <div className={s.pillarDev}>{p.dev}</div>

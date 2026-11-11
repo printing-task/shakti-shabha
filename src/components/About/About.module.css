@@ -39,6 +39,7 @@
 .header { 
   margin-bottom: 1.35rem; 
   max-width: 68ch; 
+  text-align: left;
 }
 
 .headerTopRow {
@@ -150,23 +151,25 @@
 }
 
 .pillar { 
-  padding: 1.35rem 1.4rem; 
+  padding: 1.6rem 1.6rem; 
   position: relative; 
   overflow: hidden; 
   background: #FFFFFF;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
   text-decoration: none;
-  color: inherit;
+  color: #111111;
   cursor: pointer;
 }
 
 .pillar:hover .pillarLink {
   margin-top: auto;
-  min-height: 36px; 
+  min-height: 38px; 
   background: var(--theme-primary, #DC143C);
   border-color: var(--theme-primary, #DC143C);
   color: #FFFFFF;
@@ -187,65 +190,67 @@
   height: 4px; 
 }
 
-.cardTop {
+.pillarHead {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.6rem;
-}
-
-.number { 
-  font-family: var(--font-display, 'Cinzel', serif); 
-  font-size: 1.85rem; 
-  font-weight: 900; 
-  line-height: 1; 
-  letter-spacing: -0.01em;
+  justify-content: flex-start;
+  width: 100%;
+  margin-bottom: 0.75rem;
+  text-align: left;
 }
 
 .pillarTag { 
-  font-size: 0.62rem; 
+  font-size: 0.68rem; 
   font-weight: 700; 
   letter-spacing: 0.14em; 
   text-transform: uppercase; 
   display: inline-block;
-  padding: 0.22rem 0.65rem;
+  padding: 0.28rem 0.85rem;
   border-radius: 9999px;
+  margin: 0;
+  text-align: left;
 }
 
 .pillarName { 
   font-family: var(--font-display, 'Cinzel', serif); 
-  font-size: 1.25rem; 
+  font-size: 1.35rem; 
   font-weight: 700; 
   color: #111111; 
-  margin-bottom: 0.1rem; 
+  margin-bottom: 0.15rem; 
   line-height: 1.2;
+  text-align: left;
+  width: 100%;
 }
 
 .pillarDev { 
   font-family: var(--font-devanagari, 'Noto Sans Devanagari', sans-serif); 
-  font-size: 0.8rem; 
+  font-size: 0.85rem; 
   color: #666666; 
-  margin-bottom: 0.55rem; 
+  margin-bottom: 0.85rem; 
+  text-align: left;
+  width: 100%;
 }
 
 .pillarText { 
-  font-size: 0.8rem; 
+  font-size: 0.84rem; 
   color: #444444; 
-  line-height: 1.55; 
-  margin-bottom: 1rem; 
+  line-height: 1.6; 
+  margin-bottom: 1.25rem; 
   flex-grow: 1;
+  text-align: left;
+  width: 100%;
 }
 
 .pillarLink {
   margin-top: auto;
-  min-height: 36px; 
+  min-height: 38px; 
   font-family: var(--btn-font, 'Poppins', sans-serif);
-  font-size: 0.68rem; 
+  font-size: 0.72rem; 
   font-weight: 600;
   color: var(--theme-primary, #DC143C); 
   background: rgba(220, 20, 60, 0.06);
   border: 1px solid rgba(220, 20, 60, 0.4);
-  padding: 0.42rem 1.2rem;
+  padding: 0.45rem 1.25rem;
   border-radius: 9999px;
   text-decoration: none; 
   letter-spacing: 0.04em; 
@@ -254,6 +259,7 @@
   align-items: center;
   justify-content: center;
   align-self: flex-start;
+  text-align: left;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); 
 }
 
