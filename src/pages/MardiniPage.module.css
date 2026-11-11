@@ -12,9 +12,7 @@
 
 /* ── Hero Banner ── */
 .hero {
-  background: 
-    linear-gradient(145deg, rgba(26, 10, 14, 0.88) 0%, rgba(45, 12, 21, 0.82) 50%, rgba(77, 15, 32, 0.78) 100%),
-    url('/missionmirdani.jpg') center center / cover no-repeat;
+  background: url('/missionmirdani.jpg') center center / cover no-repeat;
   padding: calc(clamp(3.5rem, 6vw, 5.5rem) + 4.5rem) clamp(1.5rem, 4vw, 3rem) clamp(3.5rem, 6vw, 5rem);
   color: #FFFFFF;
   position: relative;
@@ -53,9 +51,10 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #FFB3BA;
-  background: rgba(220, 20, 60, 0.15);
-  border: 1px solid rgba(220, 20, 60, 0.3);
+  color: #FFFFFF;
+  background: rgba(30, 8, 14, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(220, 20, 60, 0.4);
   padding: 0.35rem 1.1rem;
   border-radius: 9999px;
   margin-bottom: 1rem;
@@ -68,20 +67,23 @@
   color: #FFFFFF;
   line-height: 1.1;
   margin-bottom: 0.5rem;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95), 0 1px 4px rgba(0, 0, 0, 0.9);
 }
 
 .hindiSubtitle {
   font-family: var(--font-devanagari, 'Noto Sans Devanagari', sans-serif);
   font-size: 1.2rem;
-  color: #FFB3BA;
+  color: #FFFFFF;
   margin-bottom: 0.75rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.9);
 }
 
 .desc {
   font-size: clamp(0.95rem, 1.25vw, 1.12rem);
-  color: rgba(255, 255, 255, 0.85);
+  color: #FFFFFF;
   max-width: 68ch;
   line-height: 1.7;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.9);
 }
 
 /* ── Content Container ── */
