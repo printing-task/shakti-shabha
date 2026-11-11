@@ -8,12 +8,16 @@
   overflow: hidden;
   background: 
     linear-gradient(to right, rgba(22, 10, 14, 0.92) 0%, rgba(22, 10, 14, 0.65) 30%, rgba(22, 10, 14, 0.22) 55%, transparent 75%),
-    url('/articles.jpg') center center / cover no-repeat;
-  padding: calc(clamp(2.5rem, 5vw, 4rem) + 4.5rem) clamp(1.5rem, 4vw, 3rem) clamp(2.5rem, 5vw, 3.5rem);
+    url('/articles.jpg') center bottom / cover no-repeat;
+  min-height: clamp(420px, 52vh, 580px);
+  display: flex;
+  align-items: center;
+  padding: calc(clamp(4rem, 7vw, 6rem) + 4.5rem) clamp(1.5rem, 4vw, 3rem) clamp(4rem, 7vw, 5.5rem);
   color: #FFFFFF;
 }
 
 .heroInner {
+  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
   position: relative;
