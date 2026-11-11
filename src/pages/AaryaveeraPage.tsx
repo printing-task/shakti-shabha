@@ -220,11 +220,9 @@ export default function AaryaveeraPage() {
           <p className={p.sectionEyebrow}>Harshita Mankar</p>
           <h2 className={p.sectionTitle}>A Mind That Questions. A Spirit That Acts.</h2>
           <div className={p.philosophyGrid}>
-            <div className={p.philosophyText}>
+            <div className={p.philosophyCol}>
               <p>
-                Harshita Mankar's philosophy emerges from a central conviction: human beings must
-                learn to become conscious participants in their own lives rather than passive
-                followers of external influence.
+                Harshita Mankar's philosophy emerges from a foundational conviction: the cultivation of independent thought, psychological resilience, and sovereign self-mastery.
               </p>
               <p>
                 A person should not accept an idea merely because it is popular, traditional,
@@ -233,6 +231,8 @@ export default function AaryaveeraPage() {
                 its context. Every action must be evaluated through reason, ethics, and
                 its consequences.
               </p>
+            </div>
+            <div className={p.philosophyCol}>
               <p>
                 For Harshita, strength is not measured only through physical capability.
                 It is also reflected in the ability to remain composed under pressure,
@@ -247,13 +247,14 @@ export default function AaryaveeraPage() {
                 act honestly, and take responsibility for one's own life.
               </p>
             </div>
-            <div className={p.philosophyQuote}>
-              <blockquote className={p.pullQuote}>
-                "Human beings must learn to become conscious participants in their own lives
-                rather than passive followers of external influence."
-              </blockquote>
-              <p className={p.pullAttrib}>— Harshita Mankar</p>
-            </div>
+          </div>
+
+          {/* Concluding Central Conviction Shown in Last */}
+          <div className={p.philosophyQuoteBox}>
+            <blockquote className={p.pullQuote}>
+              "Human beings must learn to become conscious participants in their own lives rather than passive followers of external influence."
+            </blockquote>
+            <p className={p.pullAttrib}>— Harshita Mankar</p>
           </div>
         </div>
       </section>

@@ -192,39 +192,49 @@
 .philosophyGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: start;
+  gap: 2rem 3.5rem;
+  margin-bottom: 2.25rem;
 }
 
-.philosophyText p {
+.philosophyCol p {
   font-size: 0.98rem;
   color: #374151;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.25rem;
   line-height: 1.85;
 }
 
+.philosophyCol p:last-child {
+  margin-bottom: 0;
+}
+
+.philosophyQuoteBox {
+  margin-top: 1.5rem;
+}
+
 .pullQuote {
-  border-left: 3px solid #C2410C;
-  padding: 1.5rem 1.5rem 1.5rem 2rem;
-  margin: 0 0 1rem;
+  border-left: 4px solid #C2410C;
+  padding: 1.75rem 2.25rem;
+  margin: 0 0 0.85rem;
   font-family: var(--font-display, 'Cinzel', serif);
-  font-size: 1.05rem;
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
   color: #111827;
-  line-height: 1.7;
+  line-height: 1.65;
   font-style: normal;
   background: #FFF9F5;
-  border-radius: 0 12px 12px 0;
+  border-radius: 0 16px 16px 0;
   border: 1px solid #FFE4D6;
-  border-left: 3px solid #C2410C;
+  border-left: 4px solid #C2410C;
+  box-shadow: 0 4px 20px rgba(194, 65, 12, 0.05);
 }
 
 .pullAttrib {
-  font-size: 0.8rem;
+  font-size: 0.84rem;
+  font-weight: 700;
   color: #C2410C;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   margin: 0;
-  padding-left: 1.5rem;
+  padding-left: 2.25rem;
 }
 
 /* ── 4. PAURUSH ───────────────────────────────────────────────────── */
