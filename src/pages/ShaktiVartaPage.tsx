@@ -9,14 +9,12 @@ export default function ShaktiVartaPage() {
       {/* ── TOP HERO BANNER ────────────────────────────────────────── */}
       <div className={v.hero}>
         <div className={v.heroInner}>
-          <div className={v.heroCard}>
-            <span className={v.badge}>03 · Discourse · बौद्धिक विमर्श</span>
-            <h1 className={v.title}>Shakti Varta</h1>
-            <p className={v.hindiSubtitle}>शक्ति वार्ता · Intellectual Sovereignty. Critical Inquiry. Research-Based Dialogue.</p>
-            <p className={v.desc}>
-              Shakti Varta is Shakti Sabha’s intellectual research, mentorship, and public discourse initiative. It is not simply a digital library or a platform for publishing theoretical material. It is a practical learning environment where young women and youth are encouraged to develop critical thinking, research literacy, logical reasoning, and the confidence to question widely accepted narratives.
-            </p>
-          </div>
+          <span className={v.badge}>03 · Discourse · बौद्धिक विमर्श</span>
+          <h1 className={v.title}>Shakti Varta</h1>
+          <p className={v.hindiSubtitle}>शक्ति वार्ता · Intellectual Sovereignty. Critical Inquiry. Research-Based Dialogue.</p>
+          <p className={v.desc}>
+            Shakti Varta is Shakti Sabha’s intellectual research, mentorship, and public discourse initiative. It is not simply a digital library or a platform for publishing theoretical material. It is a practical learning environment where young women and youth are encouraged to develop critical thinking, research literacy, logical reasoning, and the confidence to question widely accepted narratives.
+          </p>
         </div>
       </div>
 
