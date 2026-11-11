@@ -9,25 +9,27 @@ export default function MardiniPage() {
       {/* ── TOP HERO BANNER ────────────────────────────────────────── */}
       <div className={m.hero}>
         <div className={m.heroInner}>
-          <span className={m.badge}>01 · Revolution · शारीरिक संप्रभुता</span>
-          <h1 className={m.title}>Mission Mardini</h1>
-          <p className={m.hindiSubtitle}>मर्दिनी · Physical Sovereignty. Mental Resilience. Tactical Preparedness.</p>
-          <p className={m.desc}>
-            Mission Mardini is Shakti Sabha’s tactical self-defense and physical empowerment initiative for girls and women. Led by AARYAVEERA, the programme challenges passive approaches to self-defense by integrating physical training with psychological preparedness, situational awareness, discipline, and decision-making under pressure.
-          </p>
-          <div style={{ marginTop: '1.25rem', display: 'flex', gap: '0.85rem', flexWrap: 'wrap' }}>
-            <span style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.2)', padding: '0.4rem 0.85rem', borderRadius: 999, fontSize: '0.82rem', color: '#FFFFFF' }}>
-              Karate &amp; Empty-Hand Defense
-            </span>
-            <span style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.2)', padding: '0.4rem 0.85rem', borderRadius: 999, fontSize: '0.82rem', color: '#FFFFFF' }}>
-              Lathi-Kaushal Traditional Staff
-            </span>
-            <span style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.2)', padding: '0.4rem 0.85rem', borderRadius: 999, fontSize: '0.82rem', color: '#FFFFFF' }}>
-              Cognitive Threat Recognition
-            </span>
-            <span style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.2)', padding: '0.4rem 0.85rem', borderRadius: 999, fontSize: '0.82rem', color: '#FFFFFF' }}>
-              Tribal &amp; Rural Outreach
-            </span>
+          <div className={m.heroCard}>
+            <span className={m.badge}>01 · Revolution · शारीरिक संप्रभुता</span>
+            <h1 className={m.title}>Mission Mardini</h1>
+            <p className={m.hindiSubtitle}>मर्दिनी · Physical Sovereignty. Mental Resilience. Tactical Preparedness.</p>
+            <p className={m.desc}>
+              Mission Mardini is Shakti Sabha’s tactical self-defense and physical empowerment initiative for girls and women. Led by AARYAVEERA, the programme challenges passive approaches to self-defense by integrating physical training with psychological preparedness, situational awareness, discipline, and decision-making under pressure.
+            </p>
+            <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <span style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.2)', padding: '0.25rem 0.65rem', borderRadius: 999, fontSize: '0.74rem', color: '#FFFFFF' }}>
+                Karate &amp; Empty-Hand Defense
+              </span>
+              <span style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.2)', padding: '0.25rem 0.65rem', borderRadius: 999, fontSize: '0.74rem', color: '#FFFFFF' }}>
+                Lathi-Kaushal Traditional Staff
+              </span>
+              <span style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.2)', padding: '0.25rem 0.65rem', borderRadius: 999, fontSize: '0.74rem', color: '#FFFFFF' }}>
+                Cognitive Threat Recognition
+              </span>
+              <span style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.2)', padding: '0.25rem 0.65rem', borderRadius: 999, fontSize: '0.74rem', color: '#FFFFFF' }}>
+                Tribal &amp; Rural Outreach
+              </span>
+            </div>
           </div>
         </div>
       </div>

@@ -12,12 +12,21 @@
 
 /* ── Hero Banner ── */
 .hero {
-  background: url('/shaktivarta.jpg') center bottom / cover no-repeat;
-  padding: calc(clamp(3.5rem, 6vw, 5.5rem) + 4.5rem) clamp(1.5rem, 4vw, 3rem) clamp(3.5rem, 6vw, 5rem);
-  color: #FFFFFF;
   position: relative;
   overflow: hidden;
+  padding: calc(clamp(2.5rem, 5vw, 4rem) + 4.5rem) clamp(1.5rem, 4vw, 3rem) clamp(2.5rem, 5vw, 3.5rem);
+  color: #FFFFFF;
   border-bottom: 1px solid rgba(67, 56, 202, 0.4);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  background: url('/shaktivarta.jpg') center bottom / cover no-repeat;
+  filter: blur(3px);
+  transform: scale(1.04);
+  z-index: 1;
 }
 
 .heroInner {
@@ -25,19 +34,32 @@
   margin: 0 auto;
   position: relative;
   z-index: 2;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.heroCard {
+  max-width: 650px;
+  background: rgba(14, 12, 28, 0.58);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 18px;
+  padding: clamp(1.25rem, 2.8vw, 2.25rem);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
 }
 
 .backLink {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   font-weight: 500;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
   transition: color 0.2s;
 }
 
@@ -47,43 +69,44 @@
 
 .badge {
   display: inline-block;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #FFFFFF;
-  background: rgba(17, 14, 38, 0.7);
+  background: rgba(67, 56, 202, 0.45);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(199, 210, 254, 0.4);
-  padding: 0.35rem 1.1rem;
+  border: 1px solid rgba(199, 210, 254, 0.35);
+  padding: 0.25rem 0.85rem;
   border-radius: 9999px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.65rem;
 }
 
 .title {
   font-family: var(--font-display, 'Cinzel', serif);
-  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
   font-weight: 700;
   color: #FFFFFF;
-  line-height: 1.1;
-  margin-bottom: 0.5rem;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95), 0 1px 4px rgba(0, 0, 0, 0.9);
+  line-height: 1.15;
+  margin-bottom: 0.35rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
 
 .hindiSubtitle {
   font-family: var(--font-devanagari, 'Noto Sans Devanagari', sans-serif);
-  font-size: 1.2rem;
-  color: #FFFFFF;
-  margin-bottom: 0.75rem;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.9);
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  color: #E0E7FF;
+  margin-bottom: 0.65rem;
+  line-height: 1.4;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
 }
 
 .desc {
-  font-size: clamp(0.95rem, 1.25vw, 1.12rem);
-  color: #FFFFFF;
-  max-width: 68ch;
-  line-height: 1.7;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.9);
+  font-size: clamp(0.82rem, 1.05vw, 0.92rem);
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 60ch;
+  line-height: 1.6;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
 }
 
 /* ── Content Container ── */
