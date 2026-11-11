@@ -35,7 +35,7 @@ export const DEFAULT_FOUNDER_DATA: FounderProfileData = {
   name: 'Harshita Mankar',
   title: 'Founder & Director, Shakti Sabha',
   subTitle: 'Civilizational Strategist | Tactical Combat Instructor | Non-Verbal Behaviour Profiler',
-  honorific_hi: 'श्रीमती हर्षिता मानकरी',
+  honorific_hi: 'श्रीमती हर्षिता मानकर',
   heroQuote: 'We do not build dependent victims; we forge sovereign, intellectually fortified, and tactically capable guardians of Indian civilization.',
   bio: 'Aaryaveera is a civilizational strategist, tactical combat instructor, and non-verbal behaviour profiler dedicated to cultivating independent thinking, psychological resilience, and tactical preparedness among women and youth across India.',
   heroImage: 'Gemini_Generated_Image_kdfkbukdfkbukdfk.png',
