@@ -12,7 +12,9 @@
 
 /* ── Hero Banner ── */
 .hero {
-  background: linear-gradient(145deg, #1A0A0E 0%, #2D0C15 50%, #4D0F20 100%);
+  background: 
+    linear-gradient(145deg, rgba(26, 10, 14, 0.88) 0%, rgba(45, 12, 21, 0.82) 50%, rgba(77, 15, 32, 0.78) 100%),
+    url('/missionmirdani.jpg') center center / cover no-repeat;
   padding: calc(clamp(3.5rem, 6vw, 5.5rem) + 4.5rem) clamp(1.5rem, 4vw, 3rem) clamp(3.5rem, 6vw, 5rem);
   color: #FFFFFF;
   position: relative;
@@ -23,6 +25,8 @@
 .heroInner {
   max-width: 1280px;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 .backLink {
