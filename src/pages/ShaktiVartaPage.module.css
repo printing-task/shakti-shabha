@@ -15,7 +15,7 @@
   position: relative;
   overflow: hidden;
   background: 
-    linear-gradient(to right, rgba(14, 12, 28, 0.95) 0%, rgba(14, 12, 28, 0.85) 35%, rgba(14, 12, 28, 0.4) 60%, transparent 85%),
+    linear-gradient(to right, rgba(14, 12, 28, 0.92) 0%, rgba(14, 12, 28, 0.65) 30%, rgba(14, 12, 28, 0.22) 55%, transparent 75%),
     url('/shaktivarta.jpg') center bottom / cover no-repeat;
   padding: calc(clamp(2.5rem, 5vw, 4rem) + 4.5rem) clamp(1.5rem, 4vw, 3rem) clamp(2.5rem, 5vw, 3.5rem);
   color: #FFFFFF;
