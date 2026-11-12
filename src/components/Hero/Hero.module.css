@@ -1,19 +1,17 @@
 /* ============================================================
    Hero Section — Shakti Sabha Civilizational Hero
-   Interactive Canvas Leaves + @traf Parallax Curtain Scroll
+   Clean, Compact Spacing + Interactive Canvas Leaves
    ============================================================ */
 
 .heroWrapper {
   position: relative;
   width: 100%;
-  height: 135vh;
+  min-height: 100vh;
 }
 
 .heroSection {
-  position: sticky;
-  top: 0;
+  position: relative;
   width: 100%;
-  height: 100vh;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,10 +20,10 @@
   overflow: hidden;
   background: #FFFFFF;
   font-family: var(--font-body, 'Poppins', sans-serif);
-  padding: 5.5rem 1.5rem 3.5rem;
+  padding: calc(4.25rem + 0.75rem) 1.25rem 1.25rem;
+  box-sizing: border-box;
   will-change: transform, border-radius, box-shadow;
   transform-origin: center top;
-  box-sizing: border-box;
 }
 
 /* ---------- content wrapper ---------- */
@@ -37,11 +35,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.85rem;
-  padding: 0 1rem;
+  gap: 0.55rem;
+  padding: 0 0.75rem;
   text-align: center;
   pointer-events: auto;
-  max-width: 960px;
+  max-width: 920px;
   margin: 0 auto;
 }
 
@@ -50,17 +48,17 @@
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.72rem;
+  gap: 0.45rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--theme-primary, #DC143C);
-  background: rgba(220, 20, 60, 0.06);
-  border: 1px solid rgba(220, 20, 60, 0.22);
-  padding: 0.35rem 1rem;
+  background: rgba(220, 20, 60, 0.05);
+  border: 1px solid rgba(220, 20, 60, 0.2);
+  padding: 0.28rem 0.85rem;
   border-radius: 9999px;
-  box-shadow: 0 2px 10px rgba(220, 20, 60, 0.08);
+  box-shadow: 0 2px 8px rgba(220, 20, 60, 0.06);
 }
 
 /* ---------- title ---------- */
@@ -68,11 +66,11 @@
 .title {
   font-family: var(--font-display, 'Cinzel', serif);
   font-weight: 800;
-  font-size: clamp(2.4rem, 6.5vw, 4.2rem);
-  line-height: 1.08;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.1;
   color: #111827;
   letter-spacing: -0.015em;
-  margin: 0.15rem 0 0;
+  margin: 0;
   text-align: center;
 }
 
@@ -85,18 +83,18 @@
 .mottoRow {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.55rem;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 0.1rem 0;
+  margin: 0;
 }
 
 .mottoSanskrit {
   font-family: 'Cinzel', 'Noto Sans Devanagari', serif;
   font-weight: 700;
-  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
   color: #C2410C;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
 }
 
 .mottoSep {
@@ -105,7 +103,7 @@
 }
 
 .mottoSub {
-  font-size: clamp(0.85rem, 1.8vw, 1rem);
+  font-size: clamp(0.82rem, 1.4vw, 0.95rem);
   font-weight: 500;
   color: #4B5563;
   letter-spacing: 0.02em;
@@ -114,11 +112,11 @@
 /* ---------- description ---------- */
 
 .description {
-  max-width: 720px;
-  font-size: clamp(0.88rem, 1.5vw, 1.05rem);
+  max-width: 680px;
+  font-size: clamp(0.84rem, 1.3vw, 0.96rem);
   color: #4B5563;
-  line-height: 1.68;
-  margin: 0.2rem 0 0.6rem;
+  line-height: 1.58;
+  margin: 0.1rem 0 0.35rem;
 }
 
 /* ---------- CTA Group ---------- */
@@ -127,24 +125,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.85rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
-  margin-top: 0.2rem;
+  margin-top: 0.15rem;
 }
 
 .ctaPrimary {
-  padding: 0.75rem 2rem;
+  padding: 0.6rem 1.6rem;
   font-family: var(--font-body, 'Poppins', sans-serif);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   color: #FFFFFF;
   background: var(--theme-primary, #DC143C);
   border: 1px solid var(--theme-primary, #DC143C);
   border-radius: 9999px;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 18px rgba(220, 20, 60, 0.28);
+  box-shadow: 0 4px 14px rgba(220, 20, 60, 0.25);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -154,17 +152,17 @@
 .ctaPrimary:hover {
   background: #B91C1C;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(220, 20, 60, 0.36);
+  box-shadow: 0 6px 20px rgba(220, 20, 60, 0.35);
 }
 
 .ctaSecondary {
-  padding: 0.75rem 1.8rem;
+  padding: 0.6rem 1.5rem;
   font-family: var(--font-body, 'Poppins', sans-serif);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   color: #374151;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   border: 1px solid #D1D5DB;
   border-radius: 9999px;
   cursor: pointer;
@@ -188,15 +186,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
-  margin-top: 1rem;
-  padding: 0.85rem 1.75rem;
-  background: rgba(255, 255, 255, 0.88);
+  gap: 1.25rem;
+  margin-top: 0.45rem;
+  padding: 0.6rem 1.4rem;
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(220, 20, 60, 0.16);
-  border-radius: 14px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(220, 20, 60, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
   max-width: 100%;
   flex-wrap: wrap;
 }
@@ -205,29 +203,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.1rem;
+  gap: 0.05rem;
 }
 
 .metricValue {
   font-family: var(--font-display, 'Cinzel', serif);
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: var(--theme-primary, #DC143C);
   line-height: 1;
 }
 
 .metricLabel {
-  font-size: 0.7rem;
+  font-size: 0.66rem;
   font-weight: 600;
   color: #6B7280;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   white-space: nowrap;
 }
 
 .metricDivider {
   width: 1px;
-  height: 28px;
+  height: 24px;
   background: rgba(0, 0, 0, 0.08);
 }
 
@@ -237,45 +235,45 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.85rem;
-  margin-top: 0.5rem;
+  gap: 0.65rem;
+  margin-top: 0.35rem;
   flex-wrap: wrap;
 }
 
 .pillarPill {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.45rem 1rem;
-  background: rgba(255, 255, 255, 0.85);
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(255, 255, 255, 0.9);
   border: 1px solid #E5E7EB;
   border-radius: 9999px;
   text-decoration: none;
   transition: all 0.25s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
 .pillarPill:hover {
   border-color: #DC143C;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(220, 20, 60, 0.12);
+  box-shadow: 0 4px 12px rgba(220, 20, 60, 0.12);
 }
 
 .pillarDot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   flex-shrink: 0;
 }
 
 .pillarName {
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 700;
   color: #111827;
 }
 
 .pillarTag {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: #6B7280;
 }
 
@@ -315,7 +313,7 @@
 
 .down {
   position: absolute;
-  bottom: 1.5rem;
+  bottom: 0.65rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -325,7 +323,7 @@
   z-index: 30;
   cursor: pointer;
   pointer-events: auto;
-  opacity: 0.75;
+  opacity: 0.7;
   transition: opacity 0.25s ease;
   animation: bounceDown 2s infinite ease-in-out;
 }
@@ -336,9 +334,9 @@
 
 .down svg {
   stroke: var(--theme-primary, #DC143C);
-  width: 26px;
-  height: 26px;
-  filter: drop-shadow(0 2px 6px rgba(220, 20, 60, 0.35));
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 2px 4px rgba(220, 20, 60, 0.3));
 }
 
 @keyframes bounceDown {
@@ -346,7 +344,7 @@
     transform: translate(-50%, 0);
   }
   50% {
-    transform: translate(-50%, 8px);
+    transform: translate(-50%, 6px);
   }
 }
 
@@ -356,12 +354,14 @@
 
 @media (max-width: 768px) {
   .heroSection {
-    padding: 4.5rem 1rem 3.5rem;
+    padding: calc(4rem + 0.5rem) 0.85rem 1rem;
+    min-height: auto;
+    padding-bottom: 2.5rem;
   }
 
   .metricStrip {
-    gap: 0.85rem;
-    padding: 0.75rem 1rem;
+    gap: 0.65rem;
+    padding: 0.55rem 0.85rem;
   }
 
   .metricDivider {
@@ -373,22 +373,22 @@
   }
 
   .pillarsRow {
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
 
   .pillarPill {
-    padding: 0.35rem 0.75rem;
+    padding: 0.3rem 0.65rem;
   }
 }
 
 @media (max-width: 480px) {
   .title {
-    font-size: 2.2rem;
+    font-size: 1.9rem;
   }
 
   .mottoRow {
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 0.15rem;
   }
 
   .mottoSep {
