@@ -158,6 +158,7 @@ export default function App() {
                 <Route path="/impact"               element={<ImpactPage />} />
                 <Route path="/impact-archive"       element={<ImpactPage />} />
                 <Route path="/sahyog"               element={<SahyogPage />} />
+                <Route path="/collaboration"        element={<SahyogPage />} />
                 <Route path="/courses"              element={<CoursesPage />} />
                 <Route path="/history"              element={<HistoryPage />} />
                 <Route path="/gallery"              element={<GalleryPage />} />
