@@ -51,7 +51,7 @@ export default function Footer() {
           <div className={s.logoName}>Shakti Sabha</div>
           <div className={s.logoHindi}>शक्ति सभा</div>
           <p className={s.tagline}>
-            Indian women ke liye ek aisa platform jahan roots milti hain, strength milti hai, aur ek aisi community milti hai jo tumhari taraf hai. Ancient roots. Modern strength.
+            An institutional digital platform dedicated to physical sovereignty, tactical preparedness, and trauma-informed psychological resilience for Indian women. Ancient civilizational roots. Uncompromising modern strength.
           </p>
 
           <div style={{ display: 'flex', gap: '0.65rem', marginTop: '1rem', flexWrap: 'wrap' }}>
@@ -102,10 +102,10 @@ export default function Footer() {
           <div className={s.colTitle}>Platform</div>
           <ul className={s.links}>
             <li><Link to="/about" className={s.link}>About Us</Link></li>
-            <li><Link to="/aaryaveera" className={s.link}>Aaryaveera (फाउंडर दर्शन)</Link></li>
+            <li><Link to="/aaryaveera" className={s.link}>Aaryaveera (Foundational Worldview)</Link></li>
             <li><Link to="/counselling" className={s.link}>Counselling Services</Link></li>
             <li><Link to="/sahyog" className={s.link}>Community Ecosystem</Link></li>
-            <li><Link to="/courses" className={s.link}>Online Courses &amp; LMS</Link></li>
+            <li><Link to="/courses" className={s.link}>Institutional Programs &amp; Cohorts</Link></li>
             <li><Link to="/events" className={s.link}>Events &amp; Camps</Link></li>
             <li><Link to="/brand" className={s.link}>Brand Identity</Link></li>
             <li><span className={s.infoLine}>Privacy Policy &amp; Terms of Service</span></li>
@@ -116,12 +116,12 @@ export default function Footer() {
         <div data-ft="col" className={s.col}>
           <div className={s.colTitle}>The Shakti Dispatch</div>
           <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.68)', lineHeight: 1.6, marginBottom: '0.85rem' }}>
-            Har hafte — ek naya article, ek forgotten heroine ki kahani, ek psychological insight. Seedha aapke inbox mein.
+            Curated weekly dispatches — frontline ground reports, unrecorded civilizational heroines, and trauma-informed psychological research directly to your inbox.
           </p>
 
           {subscribed ? (
             <div style={{ padding: '0.75rem', background: 'rgba(220,20,60,0.15)', border: '1px solid #DC143C', borderRadius: '8px', color: '#FFB3BA', fontSize: '0.8rem' }}>
-              ✓ Sabha mein swagat hai! Subscription confirmed.
+              ✓ Subscription confirmed. Welcome to the Shakti Sabha network.
             </div>
           ) : (
             <form onSubmit={handleSubscribe} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
@@ -130,7 +130,7 @@ export default function Footer() {
                 required
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="Aapka email address..."
+                placeholder="Enter your institutional or personal email..."
                 style={{
                   padding: '0.65rem 0.85rem',
                   borderRadius: '6px',
@@ -155,13 +155,13 @@ export default function Footer() {
                   transition: 'background 0.2s',
                 }}
               >
-                Join Sabha →
+                Subscribe to Dispatch →
               </button>
             </form>
           )}
 
           <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.5rem', lineHeight: 1.4 }}>
-            ✦ Free hai. Kabhi bhi unsubscribe kar sakte hain. No spam.
+            ✦ Complimentary publication. Unsubscribe anytime. Zero-spam commitment.
           </div>
         </div>
       </div>

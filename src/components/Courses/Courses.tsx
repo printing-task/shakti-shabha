@@ -239,9 +239,9 @@ export default function Courses() {
       <section ref={secRef} className={s.section} data-courses-section>
         <div className={s.header}>
           <div className={s.headerLeft}>
-            <span className={s.eyebrow}>Programmes &amp; Learning</span>
-            <h2 className={s.title}>Courses</h2>
-            <p className={s.subtitle}>आत्मरक्षा, विचार और चरित्र निर्माण — शक्ति सभा की प्रामाणिक कार्यशालाएं</p>
+            <span className={s.eyebrow}>Accredited Capacity Building</span>
+            <h2 className={s.title}>Institutional Programs / Cohorts</h2>
+            <p className={s.subtitle}>Tactical self-defense, psychological resilience, and civilizational character formation — delivered through accredited institutional cohorts.</p>
           </div>
 
           <div className={s.headerRight}>
@@ -266,7 +266,7 @@ export default function Courses() {
               </button>
             </div>
             <Link to="/courses" className="btn-hero">
-              All Courses →
+              All Programs &amp; Cohorts →
             </Link>
           </div>
         </div>
@@ -305,25 +305,12 @@ export default function Courses() {
               </div>
 
               <div className={s.cardFooter}>
-                <div className={s.priceWrapper}>
-                  {c.original_price && (
-                    <div className={s.discountRow}>
-                      <span className={s.originalPrice}>{c.original_price}</span>
-                      {c.discount_percent ? (
-                        <span className={s.discountBadge}>{c.discount_percent}% OFF</span>
-                      ) : null}
-                      {c.discount_tag ? (
-                        <span className={s.savingsTag}>{c.discount_tag}</span>
-                      ) : null}
-                    </div>
-                  )}
-                  <div className={s.priceRow}>
-                    <span className={s.priceText}>{c.price || '₹1,800'}</span>
-                    <span className={s.finalLabel}>Total Price</span>
-                  </div>
+                <div className={s.cohortWrapper}>
+                  <span className={s.cohortBadge}>Institutional Programs / Cohorts</span>
+                  <span className={s.cohortType}>Accredited Field Curriculum</span>
                 </div>
                 <Link to="/courses" className={s.enroll}>
-                  Enroll Now →
+                  Cohort Details →
                 </Link>
               </div>
             </div>

@@ -87,7 +87,7 @@ export default function Sahyog() {
 
           <div data-sy="text" className={s.titleBlock}>
             <h2 className={s.title}>Our Sahyog</h2>
-            <span className={s.hindi}>सहयोग — Together We Rise</span>
+            <span className={s.hindi}>सहयोग — Institutional Alliance & Collective Action</span>
           </div>
 
           <p data-sy="text" className={s.desc}>

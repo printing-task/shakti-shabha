@@ -265,7 +265,7 @@ export default function SocialWork() {
       <div data-sw="header" className={s.carouselHeader}>
         <span className={s.eyebrow}>12 Years · 3 Streams · 1 Mission</span>
         <h2 className={s.carouselTitle}>Where Shakti Sabha Has Stood</h2>
-        <p className={s.carouselSub}>जहाँ हम खड़े हैं — धरातलीय सामाजिक कार्य</p>
+        <p className={s.carouselSub}>जहाँ हम खड़े हैं — 12 Years of Grassroots Field Impact Across Maharashtra</p>
       </div>
 
       {/* 3D Carousel Stage */}

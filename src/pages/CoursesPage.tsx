@@ -243,12 +243,12 @@ export default function CoursesPage() {
       {/* Hero Banner */}
       <div className={cp.hero}>
         <div className={cp.heroInner}>
-          <span className={cp.badge}>SRS Section 11 · DRM Protected LMS</span>
-          <h1 className={cp.title}>Courses &amp; Learning</h1>
-          <p className={cp.hindiSubtitle}>पाठ्यक्रम एवं ज्ञान मंच · Self-Defense &amp; Leadership</p>
+          <span className={cp.badge}>SRS Section 11 · Institutional Academy</span>
+          <h1 className={cp.title}>Institutional Programs &amp; Cohorts</h1>
+          <p className={cp.hindiSubtitle}>संस्थागत कार्यक्रम एवं समूह प्रशिक्षण · Tactical Defense &amp; Leadership</p>
           <p className={cp.desc}>
-            Structured, high-definition online masterclasses protected by AWS CloudFront signed URLs to prevent unauthorized piracy.
-            Earn Shakti Sabha's Kshatra-Dharma Certification, rooted in the Aaryaveera philosophy, and gain lifetime access to updates and private student forums.
+            Structured, high-definition training masterclasses and intensive cohort curricula.
+            Earn Shakti Sabha's Kshatra-Dharma Certification, rooted in the Aaryaveera philosophy, delivered for academic institutions, corporate collectives, and grassroots volunteers.
           </p>
         </div>
       </div>
@@ -260,10 +260,10 @@ export default function CoursesPage() {
             <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#DC143C', fontWeight: 700, textTransform: 'uppercase' }}>
               Structured Curriculum
             </span>
-            <h2 className={s.sectionTitle} style={{ marginBottom: 0, marginTop: '0.35rem' }}>Available Video Masterclasses</h2>
+            <h2 className={s.sectionTitle} style={{ marginBottom: 0, marginTop: '0.35rem' }}>Available Institutional Programs &amp; Cohorts</h2>
           </div>
           <div style={{ fontSize: '0.88rem', color: '#6B7280' }}>
-            Showing {allCourses.length} Certified Courses
+            Showing {allCourses.length} Accredited Programs
           </div>
         </div>
 
@@ -308,27 +308,16 @@ export default function CoursesPage() {
                 </div>
 
                 <div className={cp.cardFooter}>
-                  <div className={cp.priceCol}>
-                    {course.original_price && (
-                      <div className={cp.discountRow}>
-                        <span className={cp.originalPrice}>{course.original_price}</span>
-                        {course.discount_percent && course.discount_percent > 0 ? (
-                          <span className={cp.discountTag}>{course.discount_percent}% OFF</span>
-                        ) : null}
-                        {course.discount_tag ? <span className={cp.eventTag}>{course.discount_tag}</span> : null}
-                      </div>
-                    )}
-                    <div className={cp.priceRow}>
-                      <span className={cp.priceText}>{course.price}</span>
-                      <span className={cp.payableLabel}>Customer Price</span>
-                    </div>
+                  <div className={cp.cohortCol}>
+                    <span className={cp.cohortTag}>Institutional Programs / Cohorts</span>
+                    <span className={cp.cohortSub}>Accredited Field Curriculum</span>
                   </div>
                   <button
                     type="button"
                     onClick={() => setSelectedCourse(course.title)}
                     className={cp.enrollBtn}
                   >
-                    Enroll Now →
+                    Apply for Cohort →
                   </button>
                 </div>
               </div>
@@ -384,8 +373,8 @@ export default function CoursesPage() {
                   <div style={{ fontWeight: 700, color: '#111827', fontSize: '0.95rem' }}>{detailCourse.modules}</div>
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.72rem', color: '#6B7280', textTransform: 'uppercase', fontWeight: 600 }}>Tuition</div>
-                  <div style={{ fontWeight: 700, color: '#DC143C', fontSize: '0.95rem' }}>{detailCourse.price}</div>
+                  <div style={{ fontSize: '0.72rem', color: '#6B7280', textTransform: 'uppercase', fontWeight: 600 }}>Format</div>
+                  <div style={{ fontWeight: 700, color: '#DC143C', fontSize: '0.95rem' }}>Institutional Cohort</div>
                 </div>
                 <div>
                   <div style={{ fontSize: '0.72rem', color: '#6B7280', textTransform: 'uppercase', fontWeight: 600 }}>Certificate</div>
@@ -437,7 +426,7 @@ export default function CoursesPage() {
                   className={cp.enrollBtn}
                   style={{ padding: '0.7rem 1.75rem', fontSize: '0.9rem' }}
                 >
-                  Enroll in this Course ({detailCourse.price}) →
+                  Apply for this Cohort →
                 </button>
               </div>
             </div>
@@ -466,7 +455,7 @@ export default function CoursesPage() {
 
               <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
                 <GoogleIcon name="school" size={48} style={{ color: '#DC143C', marginBottom: '0.5rem' }} />
-                <h3 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.4rem', color: '#111827' }}>Enrollment Intake</h3>
+                <h3 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.4rem', color: '#111827' }}>Cohort Intake Application</h3>
                 <p style={{ fontSize: '0.88rem', color: '#4B5563', marginTop: '0.25rem' }}>{selectedCourse}</p>
               </div>
 
@@ -479,7 +468,7 @@ export default function CoursesPage() {
                   alert('Validation Alert: Please enter a valid 10-digit mobile number (numbers only).')
                   return
                 }
-                alert('Redirecting to secure payment gateway...')
+                alert('Application Submitted: Your cohort registration request has been received. Our admissions team will contact you shortly.')
                 setSelectedCourse(null)
               }} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div>
@@ -510,7 +499,7 @@ export default function CoursesPage() {
 
                 <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
                   <button type="button" onClick={() => setSelectedCourse(null)} style={{ flex: 1, padding: '0.7rem', background: '#F3F4F6', color: '#374151', border: 'none', borderRadius: '6px', fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
-                  <button type="submit" style={{ flex: 2, padding: '0.7rem', background: '#DC143C', color: '#FFFFFF', border: 'none', borderRadius: '6px', fontWeight: 600, cursor: 'pointer' }}>Proceed to Pay →</button>
+                  <button type="submit" style={{ flex: 2, padding: '0.7rem', background: '#DC143C', color: '#FFFFFF', border: 'none', borderRadius: '6px', fontWeight: 600, cursor: 'pointer' }}>Submit Application →</button>
                 </div>
               </form>
             </div>

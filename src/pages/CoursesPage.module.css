@@ -567,6 +567,27 @@
   gap: 0.4rem;
 }
 
+.cohortCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.cohortTag {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #DC143C;
+  letter-spacing: 0.02em;
+}
+
+.cohortSub {
+  font-size: 0.68rem;
+  color: #6B7280;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 .cardFooter {
   display: flex;
   flex-direction: column;

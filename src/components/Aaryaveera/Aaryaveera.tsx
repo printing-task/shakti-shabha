@@ -200,12 +200,12 @@ export default function Aaryaveera() {
       <div className={s.inner}>
         {/* LEFT: text + identity definition + cards */}
         <div className={s.left}>
-          <span data-av="eyebrow" className={s.eyebrow}>फाउंडर दर्शन · The Founder's Ideology</span>
+          <span data-av="eyebrow" className={s.eyebrow}>FOUNDER'S PHILOSOPHY · THE AARYAVEERA WORLDVIEW</span>
           <div className={s.titleClip}>
             <span data-av="title" className={s.title}>AARYAVEERA</span>
           </div>
           <span data-av="sub" className={s.sub}>आर्यवीरा · Ideological Identity of Founder Harshita Mankar</span>
-          <span data-av="motto" className={s.motto}>&quot;Shakti Se Shanti&quot; — From Strength, Peace</span>
+          <span data-av="motto" className={s.motto}>&quot;शक्त्या शान्तिः&quot; — From Strength Alone Arises Lasting Peace</span>
 
           {/* Core Institutional & Philosophical Distinction Block */}
           <div data-av="identity" className={s.identity}>
