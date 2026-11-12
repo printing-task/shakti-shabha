@@ -14,7 +14,7 @@ const LINKS = [
   { label: 'Impact', to: '/impact' },
   { label: 'Events', to: '/events' },
   { label: 'Courses', to: '/courses' },
-  { label: 'Sahyog', to: '/sahyog' },
+  { label: 'Collaboration', to: '/sahyog' },
   { label: 'About', to: '/about' },
 ]
 
