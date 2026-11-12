@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { getFounderData, FounderProfileData, DEFAULT_FOUNDER_DATA } from '../data/founderData'
+import { getFounderData, fetchFounderData, FounderProfileData, DEFAULT_FOUNDER_DATA } from '../data/founderData'
+import { resolveImageUrl } from '../lib/api'
 import GoogleIcon from '../components/GoogleIcon/GoogleIcon'
 import s from './PageLayout.module.css'
 import p from './AboutPage.module.css'
@@ -438,6 +439,7 @@ export default function AboutPage() {
   const [activeShieldTab, setActiveShieldTab] = useState<'shield1' | 'shield2'>('shield1')
 
   useEffect(() => {
+    fetchFounderData().then(d => { if (d) setProfile(d); }).catch(() => {});
     const handleUpdate = () => setProfile(getFounderData())
     window.addEventListener('founder_data_updated', handleUpdate)
     window.addEventListener('storage', handleUpdate)
@@ -504,7 +506,7 @@ export default function AboutPage() {
     DEFAULT_FOUNDER_DATA.interventions.confidentialityNotice
 
   const heroImgSrc = profile.heroImage
-    ? (profile.heroImage.startsWith('/') || profile.heroImage.startsWith('http')
+    ? resolveImageUrl(profile.heroImage.startsWith('/') || profile.heroImage.startsWith('http')
         ? profile.heroImage
         : `/${profile.heroImage}`)
     : "/harshitama'am.jpg"

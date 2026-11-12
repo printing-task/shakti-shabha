@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase, Article, GalleryCategory, GalleryPhoto, Course, CounsellingRequest, Testimonial } from '../lib/supabase'
 import { DEFAULT_TESTIMONIALS } from '../components/Testimonials/testimonialsData'
-import { getFounderData, saveFounderData, FounderProfileData, DEFAULT_FOUNDER_DATA } from '../data/founderData'
+import { getFounderData, saveFounderData, fetchFounderData, saveFounderDataAsync, FounderProfileData, DEFAULT_FOUNDER_DATA } from '../data/founderData'
+import { resolveImageUrl } from '../lib/api'
 import { useAuth } from '../lib/AuthContext'
 import GoogleIcon from '../components/GoogleIcon/GoogleIcon'
 import s from './AdminDashboard.module.css'
@@ -1449,17 +1450,27 @@ function GallerySection() {
           }
 
           try {
-            const ext = uploadFile.name.split('.').pop()
-            const path = `gallery/${selectedCat}/${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`
-            const { error: upErr } = await supabase.storage.from('media').upload(path, uploadFile, { upsert: true })
-            if (!upErr) {
-              const { data } = supabase.storage.from('media').getPublicUrl(path)
-              if (data?.publicUrl) {
-                photoUrl = data.publicUrl
+            if (photoUrl && photoUrl.startsWith('data:')) {
+              const upRes = await api.uploadPhoto(photoUrl, file.name)
+              if (upRes && upRes.url) {
+                photoUrl = upRes.url
               }
             }
-          } catch (err) {
-            console.warn('Supabase storage upload error:', err)
+          } catch (serverUpErr) {
+            console.warn('Server upload fallback to Supabase:', serverUpErr)
+            try {
+              const ext = uploadFile.name.split('.').pop()
+              const path = `gallery/${selectedCat}/${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`
+              const { error: upErr } = await supabase.storage.from('media').upload(path, uploadFile, { upsert: true })
+              if (!upErr) {
+                const { data } = supabase.storage.from('media').getPublicUrl(path)
+                if (data?.publicUrl) {
+                  photoUrl = data.publicUrl
+                }
+              }
+            } catch (err) {
+              console.warn('Supabase storage upload error:', err)
+            }
           }
 
           if (photoUrl) {
@@ -3831,6 +3842,10 @@ function TestimonialsSection() {
    ============================================================ */
 function FounderSection() {
   const [data, setData] = useState<FounderProfileData>(getFounderData())
+
+  useEffect(() => {
+    fetchFounderData().then(d => { if (d) setData(d); }).catch(() => {});
+  }, [])
   const [showFounderCropModal, setShowFounderCropModal] = useState(false)
   const [alert, setAlert] = useState<{ type: 'error' | 'success'; msg: string } | null>(null)
   const [popupModal, setPopupModal] = useState<{ title: string; msg: string; type: 'success' | 'error' } | null>(null)
@@ -3841,30 +3856,49 @@ function FounderSection() {
     setUploading(true)
     try {
       const comp = await compressImage(file, { maxWidth: 900, maxHeight: 1100, quality: 0.85 })
-      setData(d => ({ ...d, heroImage: comp.dataUrl }))
+      let finalUrl = comp.dataUrl
 
-      const ext = comp.file.name.split('.').pop()
-      const path = `founder/${Date.now()}.${ext}`
-      const { error } = await supabase.storage.from('media').upload(path, comp.file, { upsert: true })
-      if (!error) {
-        const { data: pubData } = supabase.storage.from('media').getPublicUrl(path)
-        if (pubData?.publicUrl) {
-          setData(d => ({ ...d, heroImage: pubData.publicUrl }))
+      try {
+        const upRes = await api.uploadPhoto(comp.dataUrl, file.name)
+        if (upRes && upRes.url) {
+          finalUrl = upRes.url
+        }
+      } catch (upErr) {
+        console.warn('Server upload fallback to Supabase:', upErr)
+        try {
+          const ext = comp.file.name.split('.').pop()
+          const path = `founder/${Date.now()}.${ext}`
+          const { error } = await supabase.storage.from('media').upload(path, comp.file, { upsert: true })
+          if (!error) {
+            const { data: pubData } = supabase.storage.from('media').getPublicUrl(path)
+            if (pubData?.publicUrl) finalUrl = pubData.publicUrl
+          }
+        } catch (sbErr) {
+          console.warn('Supabase founder upload error:', sbErr)
         }
       }
-    } catch (e) {
+
+      const updated = { ...data, heroImage: finalUrl }
+      setData(updated)
+      await saveFounderDataAsync(updated)
+      setPopupModal({
+        title: 'Founder Photo Updated',
+        msg: 'Founder portrait uploaded, saved to server database, and synchronized live across Home and About pages.',
+        type: 'success'
+      })
+    } catch (e: any) {
       console.warn('Founder image upload error:', e)
     } finally {
       setUploading(false)
     }
   }
 
-  const handleSave = () => {
+  const handleSave = async () => {
     try {
-      saveFounderData(data)
+      await saveFounderDataAsync(data)
       setPopupModal({
         title: 'Changes Successfully Saved!',
-        msg: 'Founder Dossier, Core Philosophy, and institutional information have been saved and broadcast live to Home Profile, About, Mardini, Shakti Bhava, and Shakti Varta pages.',
+        msg: 'Founder Dossier, Core Philosophy, and institutional information have been saved to the server database and broadcast live to Home Profile, About, Mardini, Shakti Bhava, and Shakti Varta pages.',
         type: 'success'
       })
     } catch (err: any) {
@@ -3876,11 +3910,11 @@ function FounderSection() {
     }
   }
 
-  const handleDeletePhoto = () => {
+  const handleDeletePhoto = async () => {
     if (confirm('Are you sure you want to remove the current founder photo?')) {
       const updated = { ...data, heroImage: '' }
       setData(updated)
-      saveFounderData(updated)
+      await saveFounderDataAsync(updated)
       setPopupModal({
         title: 'Photo Removed Successfully',
         msg: 'The current portrait has been cleared and saved to the database.',
@@ -3889,10 +3923,10 @@ function FounderSection() {
     }
   }
 
-  const handleReset = () => {
+  const handleReset = async () => {
     if (confirm('Reset to standard civilizational information?')) {
       setData(DEFAULT_FOUNDER_DATA)
-      saveFounderData(DEFAULT_FOUNDER_DATA)
+      await saveFounderDataAsync(DEFAULT_FOUNDER_DATA)
       setPopupModal({
         title: 'Reset to Default Records',
         msg: 'Standard founding institutional dossier has been restored.',
@@ -3989,7 +4023,7 @@ function FounderSection() {
               {data.heroImage ? (
                 <div style={{ marginTop: '0.85rem', display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
                   <div style={{ width: 64, height: 75, borderRadius: 8, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.2)' }}>
-                    <img src={data.heroImage} alt="Portrait preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={resolveImageUrl(data.heroImage)} alt="Portrait preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
                     <span style={{ fontSize: '0.82rem', color: '#10B981' }}>✓ Portrait active</span>

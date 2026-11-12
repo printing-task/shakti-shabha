@@ -29,8 +29,15 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
 }));
 
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(express.json({ limit: '25mb' }));
+app.use(express.urlencoded({ extended: true, limit: '25mb' }));
+
+// Static uploads directory (Durable server-side storage for images & assets)
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+app.use('/uploads', express.static(uploadsDir));
 
 // 5-minute keep-alive health check for Render (Responds immediately for Render deploy probe)
 app.use('/health', require('./routes/health'));
@@ -44,6 +51,8 @@ app.use('/api/counselling', require('./routes/counselling'));
 app.use('/api/gallery', require('./routes/gallery'));
 app.use('/api/testimonials', require('./routes/testimonials'));
 app.use('/api/stats', require('./routes/stats'));
+app.use('/api/founder', require('./routes/founder'));
+app.use('/api/upload', require('./routes/upload'));
 
 // Serve Static Frontend from dist (Full-Stack single deployment)
 const distPath = path.join(__dirname, '../dist');
@@ -53,7 +62,7 @@ if (fs.existsSync(distPath)) {
 
   // SPA fallback for React Router
   app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api') || req.path.startsWith('/health')) {
+    if (req.path.startsWith('/api') || req.path.startsWith('/health') || req.path.startsWith('/uploads')) {
       return next();
     }
     res.sendFile(path.join(distPath, 'index.html'));

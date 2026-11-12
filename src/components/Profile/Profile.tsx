@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { getFounderData, FounderProfileData } from '../../data/founderData'
+import { getFounderData, fetchFounderData, FounderProfileData } from '../../data/founderData'
+import { resolveImageUrl } from '../../lib/api'
 import { useCategoryPhotos } from '../../data/galleryStore'
 import GoogleIcon from '../GoogleIcon/GoogleIcon'
 import s from './Profile.module.css'
@@ -75,6 +76,7 @@ export default function Profile() {
   const goToSlide = (idx: number) => setCurrentSlide(idx)
 
   useEffect(() => {
+    fetchFounderData().then(d => { if (d) setProfile(d); }).catch(() => {});
     const handleUpdate = () => {
       setProfile(getFounderData())
     }
@@ -112,7 +114,7 @@ export default function Profile() {
   }, [])
 
   const mainHeroImageSrc = profile.heroImage
-    ? (profile.heroImage.startsWith('/') || profile.heroImage.startsWith('http')
+    ? resolveImageUrl(profile.heroImage.startsWith('/') || profile.heroImage.startsWith('http')
         ? profile.heroImage
         : `/${profile.heroImage}`)
     : "/Gemini_Generated_Image_kdfkbukdfkbukdfk.png"

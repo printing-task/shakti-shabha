@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { supabase, GalleryPhoto, GalleryCategory } from '../lib/supabase'
-import { api } from '../lib/api'
+import { api, resolveImageUrl } from '../lib/api'
 
 /* ------------------------------------------------------------------ */
 /* Types & Interfaces                                                  */
@@ -351,7 +351,7 @@ export async function fetchPhotosForCategory(categoryId: string): Promise<Galler
         .filter(p => !deletedSet.has(p.id) && !deletedSet.has(p.url))
         .map(p => ({
           id: p.id,
-          url: p.url,
+          url: resolveImageUrl(p.url),
           caption: p.caption || '',
           category_id: p.category_id,
           created_at: p.created_at

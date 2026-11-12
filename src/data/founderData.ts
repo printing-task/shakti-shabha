@@ -1,3 +1,5 @@
+import { api } from '../lib/api'
+
 export interface FounderProfileData {
   name: string
   title: string
@@ -94,4 +96,58 @@ export function saveFounderData(data: Partial<FounderProfileData>): void {
   } catch (e) {
     console.warn('Error saving founder data to localStorage:', e)
   }
+}
+
+/**
+ * Fetches live founder profile from backend API with localStorage & default fallback
+ */
+export async function fetchFounderData(): Promise<FounderProfileData> {
+  try {
+    const res = await api.getFounder()
+    if (res && res.found && res.data) {
+      const merged: FounderProfileData = {
+        ...DEFAULT_FOUNDER_DATA,
+        ...res.data,
+        metrics: { ...DEFAULT_FOUNDER_DATA.metrics, ...(res.data.metrics || {}) },
+        interventions: { ...DEFAULT_FOUNDER_DATA.interventions, ...(res.data.interventions || {}) },
+      }
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('shakti_founder_data', JSON.stringify(merged))
+      }
+      return merged
+    }
+  } catch (err: any) {
+    console.warn('[Founder Data] API fetch fallback to local:', err?.message)
+  }
+  return getFounderData()
+}
+
+/**
+ * Saves founder profile to backend database and syncs to localStorage
+ */
+export async function saveFounderDataAsync(data: Partial<FounderProfileData>): Promise<FounderProfileData> {
+  const existing = getFounderData()
+  const updated: FounderProfileData = {
+    ...existing,
+    ...data,
+    metrics: { ...existing.metrics, ...(data.metrics || {}) },
+    interventions: { ...existing.interventions, ...(data.interventions || {}) },
+  }
+
+  // 1. Immediately update localStorage for instant UI response
+  saveFounderData(updated)
+
+  // 2. Persist to MongoDB/server database
+  try {
+    const res = await api.updateFounder(updated)
+    if (res && res.data) {
+      const synced = { ...updated, ...res.data }
+      saveFounderData(synced)
+      return synced
+    }
+  } catch (err: any) {
+    console.warn('[Founder Data] API save error:', err?.message)
+  }
+
+  return updated
 }

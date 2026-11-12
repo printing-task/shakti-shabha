@@ -5,10 +5,31 @@
 
 import { Article, Course, CounsellingRequest, GalleryPhoto, GalleryCategory, Testimonial } from './supabase'
 
-// When deployed on Render as full-stack, default to same-origin in production, localhost:5000 in dev
-const API_BASE_URL = (
-  import.meta.env.VITE_API_URL ?? (import.meta.env.DEV ? 'http://localhost:5000' : '')
-).replace(/\/$/, '')
+// Resolves backend API URL: prefers explicit env var, falls back to live Render backend in production
+export const API_BASE_URL = (() => {
+  if (import.meta.env.VITE_API_URL) return import.meta.env.VITE_API_URL.replace(/\/$/, '')
+  if (typeof window !== 'undefined') {
+    const host = window.location.hostname
+    if (host === 'localhost' || host === '127.0.0.1') {
+      return 'http://localhost:5000'
+    }
+  }
+  return 'https://shakti-shabha-1.onrender.com'
+})()
+
+/**
+ * Resolves relative uploaded media URLs to full public backend URLs
+ */
+export function resolveImageUrl(url?: string | null): string {
+  if (!url) return ''
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
+    return url
+  }
+  if (url.startsWith('/uploads/')) {
+    return `${API_BASE_URL}${url}`
+  }
+  return url
+}
 
 /**
  * Universal fetch wrapper with timeout and error handling
@@ -191,4 +212,20 @@ export const api = {
   // ── Stats (Admin Dashboard summary) ──
   getStats: () =>
     request<{ articles: number; courses: number; counselling: number; gallery: number }>('/api/stats'),
+
+  // ── Founder & Institutional Dossier ──
+  getFounder: () =>
+    request<{ found: boolean; data: any }>('/api/founder'),
+  updateFounder: (payload: any) =>
+    request<{ message: string; data: any }>('/api/founder', {
+      method: 'PUT',
+      body: JSON.stringify(payload),
+    }),
+
+  // ── File & Image Upload Engine ──
+  uploadPhoto: (image: string, filename?: string) =>
+    request<{ url: string; filename: string; size?: number }>('/api/upload', {
+      method: 'POST',
+      body: JSON.stringify({ image, filename }),
+    }),
 }
