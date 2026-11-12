@@ -309,15 +309,15 @@ export default function CoursesPage() {
 
                 <div className={cp.cardFooter}>
                   <div className={cp.cohortCol}>
-                    <span className={cp.cohortTag}>Institutional Programs / Cohorts</span>
-                    <span className={cp.cohortSub}>Accredited Field Curriculum</span>
+                    <span className={cp.cohortTag}>Institutional Cohort</span>
+                    <span className={cp.cohortSub}>Accredited Syllabus</span>
                   </div>
                   <button
                     type="button"
                     onClick={() => setSelectedCourse(course.title)}
                     className={cp.enrollBtn}
                   >
-                    Apply for Cohort →
+                    <span>Apply for Cohort</span><span className={cp.btnArrow}>→</span>
                   </button>
                 </div>
               </div>

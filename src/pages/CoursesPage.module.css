@@ -296,21 +296,24 @@
 }
 
 .enrollBtn {
-  background: var(--theme-primary, #DC143C);
-  color: #FFFFFF;
-  border: none;
-  padding: 0.6rem 1.4rem;
+  background: #FFFFFF;
+  color: #111827;
+  border: 1px solid #D1D5DB;
+  padding: 0.55rem 1.25rem;
   border-radius: 9999px;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: none;
 }
 
 .enrollBtn:hover {
-  background: #DC143C;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(220, 20, 60, 0.3);
+  background: #111827;
+  border-color: #111827;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* LMS Tech Specs */
@@ -574,15 +577,15 @@
 }
 
 .cohortTag {
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: #DC143C;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #1F2937;
   letter-spacing: 0.02em;
 }
 
 .cohortSub {
-  font-size: 0.68rem;
-  color: #6B7280;
+  font-size: 0.65rem;
+  color: #9CA3AF;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -635,30 +638,38 @@
 
 .enrollBtn {
   font-family: var(--btn-font, 'Poppins', sans-serif);
-  background: var(--theme-primary, #DC143C);
-  color: #FFFFFF;
-  border: none;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 0.65rem 1.25rem;
-  min-height: 40px;
+  background: #FFFFFF;
+  color: #111827;
+  border: 1px solid #D1D5DB;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.55rem 1.15rem;
+  min-height: 38px;
   width: 100%;
   border-radius: 9999px;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
   white-space: nowrap !important;
-  box-shadow: 0 4px 12px rgba(220, 20, 60, 0.25);
+  box-shadow: none;
 }
 .enrollBtn:hover {
-  background: #B01030;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(220, 20, 60, 0.35);
+  background: #111827;
+  border-color: #111827;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.btnArrow {
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+.enrollBtn:hover .btnArrow {
+  transform: translateX(3px);
 }
 
 .syllabusBox {

@@ -265,8 +265,9 @@ export default function Courses() {
                 →
               </button>
             </div>
-            <Link to="/courses" className="btn-hero">
-              All Programs &amp; Cohorts →
+            <Link to="/courses" className={s.allProgramsBtn}>
+              <span>All Programs &amp; Cohorts</span>
+              <span>→</span>
             </Link>
           </div>
         </div>
@@ -306,11 +307,12 @@ export default function Courses() {
 
               <div className={s.cardFooter}>
                 <div className={s.cohortWrapper}>
-                  <span className={s.cohortBadge}>Institutional Programs / Cohorts</span>
-                  <span className={s.cohortType}>Accredited Field Curriculum</span>
+                  <span className={s.cohortBadge}>Institutional Cohort</span>
+                  <span className={s.cohortType}>Accredited Syllabus</span>
                 </div>
                 <Link to="/courses" className={s.enroll}>
-                  Cohort Details →
+                  <span>Details</span>
+                  <span className={s.btnArrow}>→</span>
                 </Link>
               </div>
             </div>
