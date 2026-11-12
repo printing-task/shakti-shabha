@@ -147,20 +147,27 @@ export const api = {
     const qs = categoryId ? `?category_id=${categoryId}` : ''
     return request<GalleryPhoto[]>(`/api/gallery/photos${qs}`)
   },
-  createGalleryPhoto: (payload: { url: string; caption?: string; category_id?: string }) =>
+  createGalleryPhoto: (payload: { id?: string; url: string; caption?: string; category_id?: string }) =>
     request<GalleryPhoto>('/api/gallery/photos', {
       method: 'POST',
       body: JSON.stringify(payload),
     }),
-  deleteGalleryPhoto: (id: string) =>
-    request<{ message: string }>(`/api/gallery/photos/${id}`, {
+  deleteGalleryPhoto: (id: string, url?: string) => {
+    const cleanId = encodeURIComponent(id || 'by-url')
+    const qs = url ? `?url=${encodeURIComponent(url)}` : ''
+    return request<{ message: string; deletedCount?: number }>(`/api/gallery/photos/${cleanId}${qs}`, {
       method: 'DELETE',
-    }),
+    })
+  },
   getGalleryCategories: () => request<GalleryCategory[]>('/api/gallery/categories'),
-  createGalleryCategory: (payload: { name: string; description?: string; cover_url?: string }) =>
+  createGalleryCategory: (payload: { id?: string; name: string; description?: string; cover_url?: string }) =>
     request<GalleryCategory>('/api/gallery/categories', {
       method: 'POST',
       body: JSON.stringify(payload),
+    }),
+  deleteGalleryCategory: (id: string) =>
+    request<{ message: string }>(`/api/gallery/categories/${encodeURIComponent(id)}`, {
+      method: 'DELETE',
     }),
 
   // ── Testimonials ──

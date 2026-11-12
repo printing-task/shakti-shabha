@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { supabase, GalleryPhoto, GalleryCategory } from '../lib/supabase'
+import { api } from '../lib/api'
 
 /* ------------------------------------------------------------------ */
 /* Types & Interfaces                                                  */
@@ -60,6 +61,27 @@ const LEGACY_OLD_NAMES = new Set([
 
 const STORAGE_KEY_CATEGORIES = 'shakti_gallery_categories'
 const STORAGE_KEY_ALL_PHOTOS = 'shakti_gallery_photos'
+const STORAGE_KEY_DELETED_PHOTOS = 'shakti_deleted_photos'
+
+export function getDeletedPhotoIdentifiers(): Set<string> {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_DELETED_PHOTOS)
+    if (raw) {
+      const arr = JSON.parse(raw)
+      if (Array.isArray(arr)) return new Set(arr)
+    }
+  } catch { /* ignore */ }
+  return new Set()
+}
+
+export function recordDeletedPhoto(id?: string, url?: string) {
+  try {
+    const set = getDeletedPhotoIdentifiers()
+    if (id) set.add(id)
+    if (url) set.add(url)
+    localStorage.setItem(STORAGE_KEY_DELETED_PHOTOS, JSON.stringify(Array.from(set)))
+  } catch { /* ignore */ }
+}
 export const GALLERY_UPDATE_EVENT = 'shakti_gallery_updated'
 
 /* ------------------------------------------------------------------ */
@@ -143,7 +165,14 @@ export async function saveCategory(category: Omit<GalleryCategoryItem, 'id' | 'c
 }
 
 export async function deleteCategory(categoryId: string): Promise<void> {
-  // 1. Supabase
+  // 1. Delete from Express / MongoDB backend (Render Atlas)
+  try {
+    await api.deleteGalleryCategory(categoryId)
+  } catch (err) {
+    console.warn('API deleteCategory fallback:', err)
+  }
+
+  // 2. Delete from Supabase
   try {
     await supabase.from('gallery_photos').delete().eq('category_id', categoryId)
     await supabase.from('gallery_categories').delete().eq('id', categoryId)
@@ -151,13 +180,17 @@ export async function deleteCategory(categoryId: string): Promise<void> {
     console.warn('Supabase deleteCategory fallback:', err)
   }
 
-  // 2. Local storage
+  // 3. Local storage
   const cats = getStoredCategories().filter(c => c.id !== categoryId)
   localStorage.setItem(STORAGE_KEY_CATEGORIES, JSON.stringify(cats))
   localStorage.removeItem(`shakti_gallery_photos_${categoryId}`)
+  localStorage.removeItem(`shakti_cat_photos_${categoryId}`)
 
   const allPhotos = getStoredPhotos().filter(p => p.category_id !== categoryId)
   localStorage.setItem(STORAGE_KEY_ALL_PHOTOS, JSON.stringify(allPhotos))
+
+  cachedPhotos = null
+  lastFetchTime = 0
 
   window.dispatchEvent(new Event(GALLERY_UPDATE_EVENT))
   window.dispatchEvent(new Event('storage'))
@@ -306,9 +339,30 @@ export function getStoredPhotos(): GalleryPhotoItem[] {
 }
 
 export async function fetchPhotosForCategory(categoryId: string): Promise<GalleryPhotoItem[]> {
+  const deletedSet = getDeletedPhotoIdentifiers()
   let list: GalleryPhotoItem[] = []
+  let remoteLoaded = false
 
-  // Check Supabase first
+  // 1. Try Express / MongoDB backend (Render Atlas)
+  try {
+    const apiPhotos = await api.getGalleryPhotos(categoryId)
+    if (apiPhotos && Array.isArray(apiPhotos) && apiPhotos.length > 0) {
+      list = apiPhotos
+        .filter(p => !deletedSet.has(p.id) && !deletedSet.has(p.url))
+        .map(p => ({
+          id: p.id,
+          url: p.url,
+          caption: p.caption || '',
+          category_id: p.category_id,
+          created_at: p.created_at
+        }))
+      remoteLoaded = true
+    }
+  } catch (apiErr) {
+    // API optional/fallback
+  }
+
+  // 2. Try Supabase
   try {
     const { data, error } = await supabase
       .from('gallery_photos')
@@ -317,34 +371,52 @@ export async function fetchPhotosForCategory(categoryId: string): Promise<Galler
       .order('created_at', { ascending: false })
 
     if (!error && data && data.length > 0) {
-      list = data.map(p => ({
-        id: p.id,
-        url: p.url,
-        caption: p.caption || '',
-        category_id: p.category_id,
-        created_at: p.created_at
-      }))
+      const sbPhotos = data
+        .filter(p => !deletedSet.has(p.id) && !deletedSet.has(p.url))
+        .map(p => ({
+          id: p.id,
+          url: p.url,
+          caption: p.caption || '',
+          category_id: p.category_id,
+          created_at: p.created_at
+        }))
+      const map = new Map<string, GalleryPhotoItem>(list.map(p => [p.id, p]))
+      sbPhotos.forEach(p => {
+        if (!map.has(p.id)) map.set(p.id, p)
+      })
+      list = Array.from(map.values())
+      remoteLoaded = true
     }
   } catch (err) {
     console.warn('Supabase fetchPhotos error, checking local:', err)
   }
 
-  // Check localStorage for this category
+  // 3. Check localStorage for this category
   try {
     const catLocal = localStorage.getItem(`shakti_gallery_photos_${categoryId}`)
     if (catLocal) {
       const parsed: GalleryPhotoItem[] = JSON.parse(catLocal)
       if (Array.isArray(parsed)) {
-        const map = new Map<string, GalleryPhotoItem>(list.map(p => [p.id, p]))
-        parsed.forEach(p => {
-          if (!map.has(p.id)) map.set(p.id, p)
-        })
-        list = Array.from(map.values())
+        if (!remoteLoaded) {
+          list = parsed.filter(p => !deletedSet.has(p.id) && !deletedSet.has(p.url))
+        } else {
+          const map = new Map<string, GalleryPhotoItem>(list.map(p => [p.id, p]))
+          parsed.forEach(p => {
+            if (!map.has(p.id) && !deletedSet.has(p.id) && !deletedSet.has(p.url)) {
+              map.set(p.id, p)
+            }
+          })
+          list = Array.from(map.values())
+        }
       }
     }
   } catch { /* ignore */ }
 
-  return list
+  const filtered = list.filter(p => !deletedSet.has(p.id) && !deletedSet.has(p.url))
+  try {
+    localStorage.setItem(`shakti_gallery_photos_${categoryId}`, JSON.stringify(filtered))
+  } catch { /* ignore */ }
+  return filtered
 }
 
 let cachedPhotos: GalleryPhotoItem[] | null = null;
@@ -356,7 +428,27 @@ export async function fetchAllPhotos(forceRefresh = false): Promise<GalleryPhoto
   if (!forceRefresh && cachedPhotos && (now - lastFetchTime < CACHE_TTL_MS)) {
     return cachedPhotos;
   }
-  const localPhotos = getStoredPhotos()
+  const deletedSet = getDeletedPhotoIdentifiers()
+  const localPhotos = getStoredPhotos().filter(p => !deletedSet.has(p.id) && !deletedSet.has(p.url))
+  let remotePhotos: GalleryPhotoItem[] = []
+
+  // 1. Try Express / MongoDB backend (Render Atlas)
+  try {
+    const apiPhotos = await api.getGalleryPhotos()
+    if (apiPhotos && Array.isArray(apiPhotos) && apiPhotos.length > 0) {
+      remotePhotos = apiPhotos
+        .filter(p => !deletedSet.has(p.id) && !deletedSet.has(p.url))
+        .map(p => ({
+          id: p.id,
+          url: p.url,
+          caption: p.caption || '',
+          category_id: p.category_id,
+          created_at: p.created_at
+        }))
+    }
+  } catch { /* ignore */ }
+
+  // 2. Try Supabase
   try {
     const { data, error } = await supabase
       .from('gallery_photos')
@@ -364,28 +456,44 @@ export async function fetchAllPhotos(forceRefresh = false): Promise<GalleryPhoto
       .order('created_at', { ascending: false })
 
     if (!error && data && data.length > 0) {
-      const remotePhotos: GalleryPhotoItem[] = data.map(p => ({
-        id: p.id,
-        url: p.url,
-        caption: p.caption || '',
-        category_id: p.category_id,
-        created_at: p.created_at
-      }))
-
+      const sbPhotos: GalleryPhotoItem[] = data
+        .filter(p => !deletedSet.has(p.id) && !deletedSet.has(p.url))
+        .map(p => ({
+          id: p.id,
+          url: p.url,
+          caption: p.caption || '',
+          category_id: p.category_id,
+          created_at: p.created_at
+        }))
       const map = new Map<string, GalleryPhotoItem>(remotePhotos.map(p => [p.id, p]))
-      localPhotos.forEach(p => {
+      sbPhotos.forEach(p => {
         if (!map.has(p.id)) map.set(p.id, p)
       })
-      const merged = Array.from(map.values());
-      cachedPhotos = merged;
-      lastFetchTime = now;
-      localStorage.setItem(STORAGE_KEY_ALL_PHOTOS, JSON.stringify(merged))
-      return merged
+      remotePhotos = Array.from(map.values())
     }
   } catch (err) {
-    console.warn('Supabase fetchAllPhotos error, returning local:', err)
+    console.warn('Supabase fetchAllPhotos error:', err)
   }
-  return localPhotos
+
+  let finalPhotos: GalleryPhotoItem[]
+  if (remotePhotos.length > 0) {
+    const map = new Map<string, GalleryPhotoItem>(remotePhotos.map(p => [p.id, p]))
+    localPhotos.forEach(p => {
+      if (!map.has(p.id) && !deletedSet.has(p.id) && !deletedSet.has(p.url)) {
+        map.set(p.id, p)
+      }
+    })
+    finalPhotos = Array.from(map.values()).filter(p => !deletedSet.has(p.id) && !deletedSet.has(p.url))
+  } else {
+    finalPhotos = localPhotos
+  }
+
+  cachedPhotos = finalPhotos;
+  lastFetchTime = now;
+  try {
+    localStorage.setItem(STORAGE_KEY_ALL_PHOTOS, JSON.stringify(finalPhotos))
+  } catch { /* ignore */ }
+  return finalPhotos
 }
 
 cachedPhotos = null;
@@ -416,25 +524,70 @@ export function saveUploadedPhotos(newPhotos: GalleryPhotoItem[], categoryId: st
   window.dispatchEvent(new Event('storage'))
 }
 
-export async function deleteStoredPhoto(photoId: string, categoryId?: string): Promise<void> {
-  // 1. Supabase
+export async function deleteStoredPhoto(photoId: string, categoryId?: string, photoUrl?: string): Promise<void> {
+  // If photoUrl was not provided, look it up in local stored photos
+  if (!photoUrl) {
+    const found = getStoredPhotos().find(p => p.id === photoId)
+    if (found) photoUrl = found.url
+  }
+
+  // Record in tombstone blacklist so no cached response can resurrect it
+  recordDeletedPhoto(photoId, photoUrl)
+
+  // 1. Delete from Express / MongoDB backend (Render Atlas)
   try {
-    await supabase.from('gallery_photos').delete().eq('id', photoId)
+    await api.deleteGalleryPhoto(photoId, photoUrl)
+  } catch (err) {
+    console.warn('API deleteGalleryPhoto fallback:', err)
+  }
+
+  // 2. Delete from Supabase Database (both by id AND by url)
+  try {
+    if (photoId) {
+      await supabase.from('gallery_photos').delete().eq('id', photoId)
+    }
+    if (photoUrl) {
+      await supabase.from('gallery_photos').delete().eq('url', photoUrl)
+    }
   } catch (err) {
     console.warn('Supabase deletePhoto error:', err)
   }
 
-  // 2. Local storage
-  const all = getStoredPhotos().filter(p => p.id !== photoId)
+  // 3. Delete from Supabase Storage (media bucket) if URL points there
+  if (photoUrl && photoUrl.includes('/storage/v1/object/public/media/')) {
+    try {
+      const storagePath = photoUrl.split('/storage/v1/object/public/media/')[1]
+      if (storagePath) {
+        await supabase.storage.from('media').remove([decodeURIComponent(storagePath)])
+      }
+    } catch (storageErr) {
+      console.warn('Supabase storage remove error:', storageErr)
+    }
+  }
+
+  // 4. Clean up Local Storage across all keys
+  const isMatch = (p: { id?: string; url?: string }) =>
+    (photoId && p.id === photoId) || (photoUrl && p.url === photoUrl)
+
+  const all = getStoredPhotos().filter(p => !isMatch(p))
   localStorage.setItem(STORAGE_KEY_ALL_PHOTOS, JSON.stringify(all))
 
   if (categoryId) {
     try {
       const catKey = `shakti_gallery_photos_${categoryId}`
-      const catPhotos = JSON.parse(localStorage.getItem(catKey) || '[]').filter((p: any) => p.id !== photoId)
+      const catPhotos = JSON.parse(localStorage.getItem(catKey) || '[]').filter((p: any) => !isMatch(p))
       localStorage.setItem(catKey, JSON.stringify(catPhotos))
     } catch { /* ignore */ }
+    try {
+      const catKeyAlt = `shakti_cat_photos_${categoryId}`
+      const catPhotosAlt = JSON.parse(localStorage.getItem(catKeyAlt) || '[]').filter((p: any) => !isMatch(p))
+      localStorage.setItem(catKeyAlt, JSON.stringify(catPhotosAlt))
+    } catch { /* ignore */ }
   }
+
+  // Invalidate in-memory caches
+  cachedPhotos = null
+  lastFetchTime = 0
 
   window.dispatchEvent(new Event(GALLERY_UPDATE_EVENT))
   window.dispatchEvent(new Event('storage'))

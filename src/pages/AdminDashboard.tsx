@@ -7,8 +7,10 @@ import { useAuth } from '../lib/AuthContext'
 import GoogleIcon from '../components/GoogleIcon/GoogleIcon'
 import s from './AdminDashboard.module.css'
 import { compressImage } from '../lib/imageCompressor'
+import { api } from '../lib/api'
 import {
   fetchCategories,
+  fetchAllPhotos,
   saveCategory,
   deleteCategory as deleteGalleryCategory,
   mergeGalleryCategories,
@@ -1251,7 +1253,7 @@ function GallerySection() {
       const cats = await fetchCategories()
       setCategories(cats)
 
-      const all = getStoredPhotos()
+      const all = await fetchAllPhotos(true)
       const counts: Record<string, number> = {}
       const previews: Record<string, string[]> = {}
 
@@ -1461,18 +1463,31 @@ function GallerySection() {
           }
 
           if (photoUrl) {
+            let realId = `photo_${Date.now()}_${index}_${Math.random().toString(36).slice(2, 6)}`
             try {
-              await supabase.from('gallery_photos').insert([{
+              const { data: insertedData } = await supabase.from('gallery_photos').insert([{
                 url: photoUrl,
                 caption: file.name.replace(/\.[^/.]+$/, ''),
                 category_id: selectedCat
-              }])
+              }]).select()
+              if (insertedData?.[0]?.id) realId = insertedData[0].id
             } catch (dbErr) {
               console.warn('DB insert error:', dbErr)
             }
 
+            try {
+              await api.createGalleryPhoto({
+                id: realId,
+                url: photoUrl,
+                caption: file.name.replace(/\.[^/.]+$/, ''),
+                category_id: selectedCat,
+              })
+            } catch (apiErr) {
+              console.warn('API createGalleryPhoto fallback:', apiErr)
+            }
+
             const item: GalleryPhotoItem = {
-              id: `photo_${Date.now()}_${index}_${Math.random().toString(36).slice(2, 6)}`,
+              id: realId,
               url: photoUrl,
               caption: file.name.replace(/\.[^/.]+$/, ''),
               category_id: selectedCat,
@@ -1510,21 +1525,34 @@ function GallerySection() {
 
   const handleAddDirectUrl = async () => {
     if (!directUrl.trim() || !selectedCat) return
+    const caption = `Uploaded Photo - ${new Date().toLocaleDateString()}`
+    let realId = `photo_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`
+
+    try {
+      const { data: insertedData } = await supabase.from('gallery_photos').insert([{
+        url: directUrl.trim(),
+        caption,
+        category_id: selectedCat
+      }]).select()
+      if (insertedData?.[0]?.id) realId = insertedData[0].id
+    } catch (e) { /* ignore */ }
+
+    try {
+      await api.createGalleryPhoto({
+        id: realId,
+        url: directUrl.trim(),
+        caption,
+        category_id: selectedCat,
+      })
+    } catch (apiErr) { /* ignore */ }
+
     const item: GalleryPhotoItem = {
-      id: `photo_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+      id: realId,
       url: directUrl.trim(),
-      caption: `Uploaded Photo - ${new Date().toLocaleDateString()}`,
+      caption,
       category_id: selectedCat,
       created_at: new Date().toISOString()
     }
-
-    try {
-      await supabase.from('gallery_photos').insert([{
-        url: item.url,
-        caption: item.caption,
-        category_id: selectedCat
-      }])
-    } catch (e) { /* ignore */ }
 
     saveUploadedPhotos([item], selectedCat)
     setDirectUrl('')
@@ -1533,10 +1561,16 @@ function GallerySection() {
     await loadCats()
   }
 
-  const handleDeletePhoto = async (id: string) => {
-    if (!confirm('Remove this photo from the folder?')) return
-    await deleteStoredPhoto(id, selectedCat || undefined)
-    setAlert({ type: 'success', msg: 'Photo removed.' })
+  const handleDeletePhoto = async (id: string, url?: string) => {
+    if (!confirm('Permanently delete this photo from the database?')) return
+    // Optimistic UI update: immediately remove from current view
+    setPhotos(prev => prev.filter(p => p.id !== id && (!url || p.url !== url)))
+    try {
+      await deleteStoredPhoto(id, selectedCat || undefined, url)
+      setAlert({ type: 'success', msg: 'Photo permanently deleted from database.' })
+    } catch (err: any) {
+      setAlert({ type: 'error', msg: 'Failed to delete photo: ' + (err?.message || err) })
+    }
     if (selectedCat) await loadPhotos(selectedCat)
     await loadCats()
   }
@@ -1545,19 +1579,23 @@ function GallerySection() {
   const handleBulkDeletePhotos = async () => {
     if (selectedPhotoIds.length === 0 || !selectedCat) return
     const count = selectedPhotoIds.length
-    if (!confirm(`Are you sure you want to delete ${count} selected photo(s) from this folder?`)) return
+    if (!confirm(`Are you sure you want to permanently delete ${count} selected photo(s) from the database?`)) return
+
+    const photosToDelete = photos.filter(p => selectedPhotoIds.includes(p.id))
+    // Optimistic UI update: immediately remove from view
+    setPhotos(prev => prev.filter(p => !selectedPhotoIds.includes(p.id)))
+    setSelectedPhotoIds([])
 
     try {
-      for (const id of selectedPhotoIds) {
-        await deleteStoredPhoto(id, selectedCat)
+      for (const p of photosToDelete) {
+        await deleteStoredPhoto(p.id, selectedCat, p.url)
       }
-      setSelectedPhotoIds([])
-      setAlert({ type: 'success', msg: `Successfully deleted ${count} photo(s).` })
-      await loadPhotos(selectedCat)
-      await loadCats()
+      setAlert({ type: 'success', msg: `Successfully deleted ${count} photo(s) from database.` })
     } catch (err: any) {
       setAlert({ type: 'error', msg: 'Failed to delete selected photos' })
     }
+    await loadPhotos(selectedCat)
+    await loadCats()
   }
 
   const currentCatObj = categories.find(c => c.id === selectedCat)
@@ -2002,7 +2040,7 @@ function GallerySection() {
                       style={{ borderRadius: '50%', width: 38, height: 38, padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 14px rgba(0,0,0,0.6)' }}
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleDeletePhoto(p.id);
+                        handleDeletePhoto(p.id, p.url);
                       }}
                       title="Remove Photo"
                     >
@@ -3840,10 +3878,12 @@ function FounderSection() {
 
   const handleDeletePhoto = () => {
     if (confirm('Are you sure you want to remove the current founder photo?')) {
-      setData(d => ({ ...d, heroImage: '' }))
+      const updated = { ...data, heroImage: '' }
+      setData(updated)
+      saveFounderData(updated)
       setPopupModal({
         title: 'Photo Removed Successfully',
-        msg: 'The current portrait has been cleared. Click "Save Changes" to persist this update across the live website.',
+        msg: 'The current portrait has been cleared and saved to the database.',
         type: 'success'
       })
     }
