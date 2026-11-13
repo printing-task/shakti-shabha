@@ -7,13 +7,7 @@ import s from './Events.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const DEFAULT_EVENTS = [
-  { day:'14', month:'Nov 2026', name:'Mission Mardini 3-Day Self-Defense Camp', meta:'Wardha, Maharashtra · Limited seats · ₹1,200', badge:'Camp' },
-  { day:'22', month:'Nov 2026', name:'Shakti Varta Seminar — The Legal Collage', meta:'Online · IPC & BNS Analysis · Free for members', badge:'Webinar' },
-  { day:'05', month:'Dec 2026', name:'Vedic Parenting in Modern India Workshop', meta:'Nagpur · Full-day session · ₹800', badge:'Workshop' },
-  { day:'18', month:'Dec 2026', name:'Sponsor a Village Camp — CSR Drive', meta:'Multiple locations · Corporate & NGO collaboration', badge:'CSR' },
-  { day:'08', month:'Jan 2027', name:'Kshatra-Dharma 7-Day Leadership Retreat', meta:'Pune Outskirts · Residential · ₹4,500', badge:'Retreat' },
-]
+const DEFAULT_EVENTS: { day: string; month: string; name: string; meta: string; badge: string }[] = []
 
 const mapEventToCard = (ev: any) => {
   const d = new Date(ev.date)
@@ -121,19 +115,31 @@ export default function Events() {
         <Link to="/events" className="btn-magnetic btn-ghost">All Events →</Link>
       </div>
       <div className={s.list}>
-        {eventsList.map(ev => (
-          <div key={ev.name} data-ev="item" className={s.item}>
-            <div className={s.dateBlock}>
-              <div className={s.day}>{ev.day}</div>
-              <div className={s.month}>{ev.month}</div>
-            </div>
-            <div className={s.info}>
-              <div className={s.name}>{ev.name}</div>
-              <div className={s.meta}>{ev.meta}</div>
-            </div>
-            <span className={s.badge}>{ev.badge}</span>
+        {eventsList.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '3rem 1.5rem', background: '#FFFFFF', borderRadius: '14px', border: '1px solid #E5E7EB', color: '#6B7280' }}>
+            <p style={{ fontSize: '1rem', fontWeight: 600, color: '#111827', marginBottom: '0.5rem' }}>Upcoming Cohorts &amp; Field Deployments</p>
+            <p style={{ fontSize: '0.85rem', color: '#6B7280', maxWidth: '520px', margin: '0 auto 1.25rem' }}>
+              Institutional training camps, seminars, and assemblies are scheduled through direct partnerships and field drives. Follow Shakti Sabha or reach out via Collaboration.
+            </p>
+            <Link to="/sahyog" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem', fontWeight: 600, color: '#DC143C', textDecoration: 'none' }}>
+              Invite / Partner With Us →
+            </Link>
           </div>
-        ))}
+        ) : (
+          eventsList.map(ev => (
+            <div key={ev.name} data-ev="item" className={s.item}>
+              <div className={s.dateBlock}>
+                <div className={s.day}>{ev.day}</div>
+                <div className={s.month}>{ev.month}</div>
+              </div>
+              <div className={s.info}>
+                <div className={s.name}>{ev.name}</div>
+                <div className={s.meta}>{ev.meta}</div>
+              </div>
+              <span className={s.badge}>{ev.badge}</span>
+            </div>
+          ))
+        )}
       </div>
     </section>
   )

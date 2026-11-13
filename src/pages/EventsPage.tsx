@@ -285,58 +285,8 @@ export default function EventsPage() {
           idSet.add(key)
         }
       })
-      if (list.length === 0) {
-        list = [
-          {
-            id: 'up-001',
-            title: 'Mission Mardini 3-Day Tactical Self-Defense Camp',
-            stream: 'mardini',
-            format: 'on-ground',
-            date: '2026-11-20',
-            location: 'Wardha, Maharashtra',
-            pricing: '₹1,200',
-            is_free: false,
-            capacity: 150,
-            registered_count: 85,
-            status: 'upcoming',
-            description: 'Intensive unarmed combat, lathi-kaushal biomechanics, and threat de-escalation for young women.',
-            published: true,
-            created_at: new Date().toISOString()
-          },
-          {
-            id: 'up-002',
-            title: 'Shakti Varta Seminar — The Legal Collage',
-            stream: 'shakti-varta',
-            format: 'digital',
-            date: '2026-11-28',
-            location: 'Digital Plenary (Zoom)',
-            pricing: 'Free',
-            is_free: true,
-            capacity: 500,
-            registered_count: 320,
-            status: 'upcoming',
-            description: 'High-level legal rights, statutory provisions under BNS/IPC, and procedural safeguards.',
-            published: true,
-            created_at: new Date().toISOString()
-          },
-          {
-            id: 'up-003',
-            title: 'Vedic Parenting & Dharmic Character Workshop',
-            stream: 'shakti-bhava',
-            format: 'on-ground',
-            date: '2026-12-05',
-            location: 'Nagpur, Maharashtra',
-            pricing: '₹800',
-            is_free: false,
-            capacity: 200,
-            registered_count: 140,
-            status: 'upcoming',
-            description: 'Somatic grounding, mental fortitude, and values-rooted upbringing for modern families.',
-            published: true,
-            created_at: new Date().toISOString()
-          }
-        ]
-      }
+      // Only display verified events from database or admin
+
       setEvents(list)
     }
     fetchEvents()
