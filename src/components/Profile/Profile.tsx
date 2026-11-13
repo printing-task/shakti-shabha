@@ -64,7 +64,7 @@ export default function Profile() {
   // Calmer slide progression (6.5s)
   useEffect(() => {
     if (isPaused || slides.length <= 1) return
-    const SLIDE_DURATION = 6500
+    const SLIDE_DURATION = 1000
     const timer = setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % slides.length)
     }, SLIDE_DURATION)
