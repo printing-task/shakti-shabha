@@ -506,7 +506,7 @@ export default function AboutPage() {
     DEFAULT_FOUNDER_DATA.interventions.confidentialityNotice
 
   const heroImgSrc = profile.heroImage
-    ? resolveImageUrl(profile.heroImage.startsWith('/') || profile.heroImage.startsWith('http')
+    ? (profile.heroImage.startsWith('data:') || profile.heroImage.startsWith('blob:') || profile.heroImage.startsWith('http') || profile.heroImage.startsWith('/')
         ? profile.heroImage
         : `/${profile.heroImage}`)
     : "/harshitama'am.jpg"

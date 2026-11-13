@@ -114,7 +114,7 @@ export default function Profile() {
   }, [])
 
   const mainHeroImageSrc = profile.heroImage
-    ? resolveImageUrl(profile.heroImage.startsWith('/') || profile.heroImage.startsWith('http')
+    ? (profile.heroImage.startsWith('data:') || profile.heroImage.startsWith('blob:') || profile.heroImage.startsWith('http') || profile.heroImage.startsWith('/')
         ? profile.heroImage
         : `/${profile.heroImage}`)
     : "/Gemini_Generated_Image_kdfkbukdfkbukdfk.png"

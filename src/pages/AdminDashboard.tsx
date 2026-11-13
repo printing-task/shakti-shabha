@@ -726,18 +726,8 @@ function ArticlesSection() {
     try {
       const comp = await compressImage(file, { maxWidth: 1200, maxHeight: 800, quality: 0.8 })
       setForm(f => ({ ...f, cover_image_url: comp.dataUrl }))
-
-      const ext = comp.file.name.split('.').pop()
-      const path = `articles/${Date.now()}.${ext}`
-      const { error } = await supabase.storage.from('media').upload(path, comp.file, { upsert: true })
-      if (!error) {
-        const { data } = supabase.storage.from('media').getPublicUrl(path)
-        if (data?.publicUrl) {
-          setForm(f => ({ ...f, cover_image_url: data.publicUrl }))
-        }
-      }
     } catch (err: any) {
-      console.warn('Article image compression/upload error:', err)
+      console.warn('Article image compression error:', err)
     } finally {
       setUploading(false)
     }
@@ -2404,22 +2394,11 @@ function CoursesSection() {
   const uploadCover = async (file: File) => {
     setUploading(true)
     try {
-      // 1. Compress image down to max 900x900 (quality 0.8) for instant preview & low memory storage (< 70KB)
+      // Compress image down to max 900x900 (quality 0.8) for instant preview & low memory storage (< 70KB)
       const comp = await compressImage(file, { maxWidth: 900, maxHeight: 900, quality: 0.8 })
       setForm(f => ({ ...f, cover_image_url: comp.dataUrl }))
-
-      // 2. Upload compressed file to Supabase storage in background if configured
-      const ext = comp.file.name.split('.').pop()
-      const path = `courses/${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`
-      const { error } = await supabase.storage.from('media').upload(path, comp.file, { upsert: true })
-      if (!error) {
-        const { data } = supabase.storage.from('media').getPublicUrl(path)
-        if (data?.publicUrl) {
-          setForm(f => ({ ...f, cover_image_url: data.publicUrl }))
-        }
-      }
     } catch (e) {
-      console.warn('Supabase storage upload error, maintaining compressed local preview:', e)
+      console.warn('Course image compression error:', e)
     } finally {
       setUploading(false)
     }
@@ -3455,18 +3434,8 @@ function TestimonialsSection() {
       // Compress person's image down to 500x500 (quality 0.8) for fast loading & light footprint (~30KB)
       const comp = await compressImage(file, { maxWidth: 500, maxHeight: 500, quality: 0.8 })
       setForm(f => ({ ...f, image_url: comp.dataUrl }))
-
-      const ext = comp.file.name.split('.').pop()
-      const path = `testimonials/${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`
-      const { error } = await supabase.storage.from('media').upload(path, comp.file, { upsert: true })
-      if (!error) {
-        const { data } = supabase.storage.from('media').getPublicUrl(path)
-        if (data?.publicUrl) {
-          setForm(f => ({ ...f, image_url: data.publicUrl }))
-        }
-      }
     } catch (e) {
-      console.warn('Testimonial image upload error:', e)
+      console.warn('Testimonial image compression error:', e)
     } finally {
       setUploading(false)
     }

@@ -536,17 +536,7 @@ export async function deleteStoredPhoto(photoId: string, categoryId?: string, ph
     console.warn('Supabase deletePhoto error:', err)
   }
 
-  // 3. Delete from Supabase Storage (media bucket) if URL points there
-  if (photoUrl && photoUrl.includes('/storage/v1/object/public/media/')) {
-    try {
-      const storagePath = photoUrl.split('/storage/v1/object/public/media/')[1]
-      if (storagePath) {
-        await supabase.storage.from('media').remove([decodeURIComponent(storagePath)])
-      }
-    } catch (storageErr) {
-      console.warn('Supabase storage remove error:', storageErr)
-    }
-  }
+  // 3. Local and DB cleanup (no external bucket dependency)
 
   // 4. Clean up Local Storage across all keys
   const isMatch = (p: { id?: string; url?: string }) =>
