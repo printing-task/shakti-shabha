@@ -5,7 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { getFounderData, fetchFounderData, FounderProfileData, DEFAULT_FOUNDER_DATA } from '../data/founderData'
 import { resolveImageUrl } from '../lib/api'
 import GoogleIcon from '../components/GoogleIcon/GoogleIcon'
-import s from './PageLayout.module.css'
 import p from './AboutPage.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -512,7 +511,7 @@ export default function AboutPage() {
     : "/harshitama'am.jpg"
 
   return (
-    <main className={`${p.page} ${s.page}`} ref={pageRef}>
+    <main className={p.page} ref={pageRef}>
       {/* ── HERO BANNER ────────────────────────────── */}
       <div className={p.hero}>
         <div className={p.heroInner}>
