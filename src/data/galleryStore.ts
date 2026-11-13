@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { supabase, GalleryPhoto, GalleryCategory } from '../lib/supabase'
-import { api, resolveImageUrl } from '../lib/api'
+import { resolveImageUrl } from '../lib/api'
 
 /* ------------------------------------------------------------------ */
 /* Types & Interfaces                                                  */
@@ -28,25 +28,32 @@ export interface GalleryCategoryItem {
 
 export const DEFAULT_GALLERY_CATEGORIES: GalleryCategoryItem[] = [
   {
-    id: 'cat-mardini-camps',
-    name: 'Mission Mardini Camps',
-    description: 'Ground combat and lathi self-defense training across schools.',
+    id: '683657fb-f125-45a2-afe9-2c9c15fabd87',
+    name: 'Aaryaveera Camps',
+    description: 'Residential and rural camps for self defense and leadership',
     cover_url: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&auto=format&fit=crop&q=80',
     created_at: '2026-01-01T00:00:00.000Z'
   },
   {
-    id: 'cat-aaryaveera-leadership',
-    name: 'Aaryaveera Leadership',
-    description: 'Youth character building and civilizational seminars.',
-    cover_url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=80',
+    id: '5b0c91d0-8637-4ac8-9c32-f1fa73d66dab',
+    name: 'Lathi & Sword',
+    description: 'Traditional martial arts, staff combat, and weapon defense',
+    cover_url: 'https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=800&auto=format&fit=crop&q=80',
     created_at: '2026-01-02T00:00:00.000Z'
   },
   {
-    id: 'cat-community-sahyog',
-    name: 'Community & Sahyog',
-    description: 'On-ground rural assistance and counseling outreach.',
-    cover_url: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&auto=format&fit=crop&q=80',
+    id: '5e018055-12ec-4008-b5b6-526f472b4e44',
+    name: 'Shakti Bhava',
+    description: 'Counseling circles, psychological healing, and peer support',
+    cover_url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80',
     created_at: '2026-01-03T00:00:00.000Z'
+  },
+  {
+    id: '129889e1-0a8c-416d-92d1-341d152d8121',
+    name: 'School Outreach',
+    description: 'Campus self-defense awareness and legal rights workshops',
+    cover_url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=80',
+    created_at: '2026-01-04T00:00:00.000Z'
   }
 ]
 
@@ -94,13 +101,30 @@ export function getStoredCategories(): GalleryCategoryItem[] {
     if (raw) {
       const parsed = JSON.parse(raw)
       if (Array.isArray(parsed) && parsed.length > 0) {
+        // Automatically migrate any legacy non-UUID 'cat-' IDs to valid Supabase category UUIDs
+        const legacyMap: Record<string, string> = {
+          'cat-mardini-camps': '5b0c91d0-8637-4ac8-9c32-f1fa73d66dab',
+          'cat-aaryaveera-leadership': '683657fb-f125-45a2-afe9-2c9c15fabd87',
+          'cat-community-sahyog': '129889e1-0a8c-416d-92d1-341d152d8121'
+        }
+        let hadLegacy = false
+        const migrated = parsed.map((c: any) => {
+          if (c.id && legacyMap[c.id]) {
+            hadLegacy = true
+            return { ...c, id: legacyMap[c.id] }
+          }
+          return c
+        })
+        if (hadLegacy) {
+          localStorage.setItem(STORAGE_KEY_CATEGORIES, JSON.stringify(migrated))
+          return migrated
+        }
         return parsed
       }
     }
   } catch (err) {
     console.warn('Error reading stored gallery categories:', err)
   }
-  // Initialize storage with defaults if empty
   try {
     localStorage.setItem(STORAGE_KEY_CATEGORIES, JSON.stringify(DEFAULT_GALLERY_CATEGORIES))
   } catch { /* ignore */ }
@@ -134,29 +158,37 @@ export async function fetchCategories(): Promise<GalleryCategoryItem[]> {
 }
 
 export async function saveCategory(category: Omit<GalleryCategoryItem, 'id' | 'created_at'> & { id?: string }): Promise<GalleryCategoryItem> {
+  const catPayload: any = {
+    name: category.name.trim(),
+    description: category.description?.trim() || '',
+    cover_url: category.cover_url || ''
+  }
+
+  let assignedId: string = ''
+  try {
+    const { data, error } = await supabase
+      .from('gallery_categories')
+      .insert([catPayload])
+      .select()
+      .single()
+
+    if (!error && data?.id) {
+      assignedId = data.id
+    }
+  } catch (err) {
+    console.warn('Supabase saveCategory error:', err)
+  }
+
   const newCat: GalleryCategoryItem = {
-    id: category.id || `cat-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    id: assignedId || (typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `cat-${Date.now()}`),
     name: category.name.trim(),
     description: category.description?.trim() || '',
     cover_url: category.cover_url || '',
     created_at: new Date().toISOString()
   }
 
-  // 1. Try Supabase
-  try {
-    await supabase.from('gallery_categories').insert([{
-      id: newCat.id,
-      name: newCat.name,
-      description: newCat.description,
-      cover_url: newCat.cover_url
-    }])
-  } catch (err) {
-    console.warn('Supabase saveCategory error (using local storage fallback):', err)
-  }
-
-  // 2. Save to local storage
   const current = getStoredCategories()
-  const updated = [newCat, ...current.filter(c => c.id !== newCat.id)]
+  const updated = [newCat, ...current.filter(c => c.id !== newCat.id && c.name.toLowerCase() !== newCat.name.toLowerCase())]
   localStorage.setItem(STORAGE_KEY_CATEGORIES, JSON.stringify(updated))
   window.dispatchEvent(new Event(GALLERY_UPDATE_EVENT))
   window.dispatchEvent(new Event('storage'))
@@ -165,22 +197,15 @@ export async function saveCategory(category: Omit<GalleryCategoryItem, 'id' | 'c
 }
 
 export async function deleteCategory(categoryId: string): Promise<void> {
-  // 1. Delete from Express / MongoDB backend (Render Atlas)
-  try {
-    await api.deleteGalleryCategory(categoryId)
-  } catch (err) {
-    console.warn('API deleteCategory fallback:', err)
-  }
-
-  // 2. Delete from Supabase
+  // 1. Delete from Supabase directly
   try {
     await supabase.from('gallery_photos').delete().eq('category_id', categoryId)
     await supabase.from('gallery_categories').delete().eq('id', categoryId)
   } catch (err) {
-    console.warn('Supabase deleteCategory fallback:', err)
+    console.warn('Supabase deleteCategory error:', err)
   }
 
-  // 3. Local storage
+  // 2. Local storage
   const cats = getStoredCategories().filter(c => c.id !== categoryId)
   localStorage.setItem(STORAGE_KEY_CATEGORIES, JSON.stringify(cats))
   localStorage.removeItem(`shakti_gallery_photos_${categoryId}`)
@@ -343,32 +368,18 @@ export async function fetchPhotosForCategory(categoryId: string): Promise<Galler
   let list: GalleryPhotoItem[] = []
   let remoteLoaded = false
 
-  // 1. Try Express / MongoDB backend (Render Atlas)
+  // 1. Fetch from Supabase
   try {
-    const apiPhotos = await api.getGalleryPhotos(categoryId)
-    if (apiPhotos && Array.isArray(apiPhotos) && apiPhotos.length > 0) {
-      list = apiPhotos
-        .filter(p => !deletedSet.has(p.id) && !deletedSet.has(p.url))
-        .map(p => ({
-          id: p.id,
-          url: resolveImageUrl(p.url),
-          caption: p.caption || '',
-          category_id: p.category_id,
-          created_at: p.created_at
-        }))
-      remoteLoaded = true
-    }
-  } catch (apiErr) {
-    // API optional/fallback
-  }
-
-  // 2. Try Supabase
-  try {
-    const { data, error } = await supabase
+    let query = supabase
       .from('gallery_photos')
       .select('*')
-      .eq('category_id', categoryId)
       .order('created_at', { ascending: false })
+
+    if (categoryId && categoryId !== 'all' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(categoryId)) {
+      query = query.eq('category_id', categoryId)
+    }
+
+    const { data, error } = await query
 
     if (!error && data && data.length > 0) {
       const sbPhotos = data
@@ -432,23 +443,7 @@ export async function fetchAllPhotos(forceRefresh = false): Promise<GalleryPhoto
   const localPhotos = getStoredPhotos().filter(p => !deletedSet.has(p.id) && !deletedSet.has(p.url))
   let remotePhotos: GalleryPhotoItem[] = []
 
-  // 1. Try Express / MongoDB backend (Render Atlas)
-  try {
-    const apiPhotos = await api.getGalleryPhotos()
-    if (apiPhotos && Array.isArray(apiPhotos) && apiPhotos.length > 0) {
-      remotePhotos = apiPhotos
-        .filter(p => !deletedSet.has(p.id) && !deletedSet.has(p.url))
-        .map(p => ({
-          id: p.id,
-          url: p.url,
-          caption: p.caption || '',
-          category_id: p.category_id,
-          created_at: p.created_at
-        }))
-    }
-  } catch { /* ignore */ }
-
-  // 2. Try Supabase
+  // 1. Fetch directly from Supabase
   try {
     const { data, error } = await supabase
       .from('gallery_photos')
@@ -456,7 +451,7 @@ export async function fetchAllPhotos(forceRefresh = false): Promise<GalleryPhoto
       .order('created_at', { ascending: false })
 
     if (!error && data && data.length > 0) {
-      const sbPhotos: GalleryPhotoItem[] = data
+      remotePhotos = data
         .filter(p => !deletedSet.has(p.id) && !deletedSet.has(p.url))
         .map(p => ({
           id: p.id,
@@ -465,11 +460,6 @@ export async function fetchAllPhotos(forceRefresh = false): Promise<GalleryPhoto
           category_id: p.category_id,
           created_at: p.created_at
         }))
-      const map = new Map<string, GalleryPhotoItem>(remotePhotos.map(p => [p.id, p]))
-      sbPhotos.forEach(p => {
-        if (!map.has(p.id)) map.set(p.id, p)
-      })
-      remotePhotos = Array.from(map.values())
     }
   } catch (err) {
     console.warn('Supabase fetchAllPhotos error:', err)
@@ -534,16 +524,9 @@ export async function deleteStoredPhoto(photoId: string, categoryId?: string, ph
   // Record in tombstone blacklist so no cached response can resurrect it
   recordDeletedPhoto(photoId, photoUrl)
 
-  // 1. Delete from Express / MongoDB backend (Render Atlas)
+  // 1. Delete directly from Supabase Database (both by id AND by url)
   try {
-    await api.deleteGalleryPhoto(photoId, photoUrl)
-  } catch (err) {
-    console.warn('API deleteGalleryPhoto fallback:', err)
-  }
-
-  // 2. Delete from Supabase Database (both by id AND by url)
-  try {
-    if (photoId) {
+    if (photoId && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(photoId)) {
       await supabase.from('gallery_photos').delete().eq('id', photoId)
     }
     if (photoUrl) {

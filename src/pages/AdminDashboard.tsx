@@ -8,7 +8,6 @@ import { useAuth } from '../lib/AuthContext'
 import GoogleIcon from '../components/GoogleIcon/GoogleIcon'
 import s from './AdminDashboard.module.css'
 import { compressImage } from '../lib/imageCompressor'
-import { api } from '../lib/api'
 import {
   fetchCategories,
   fetchAllPhotos,
@@ -773,7 +772,7 @@ function ArticlesSection() {
       ;({ error } = await supabase.from('articles').insert([payload]))
     }
     if (error) { setAlert({ type: 'error', msg: error.message }) }
-    else { setAlert({ type: 'success', msg: editing ? 'Article updated and published!' : 'Article created and published!' }); setShowModal(false); load() }
+    else { setAlert({ type: 'success', msg: editing ? 'Article updated and published!' : 'Article created and published!' }); setShowModal(false); window.dispatchEvent(new Event('shakti_articles_updated')); window.dispatchEvent(new Event('storage')); load() }
   }
 
   const del = async (id: string) => {
@@ -1442,59 +1441,33 @@ function GallerySection() {
           let uploadFile = file
 
           try {
-            const comp = await compressImage(file, { maxWidth: 1200, maxHeight: 1200, quality: 0.8 })
-            uploadFile = comp.file
+            const comp = await compressImage(file, { maxWidth: 1200, maxHeight: 1200, quality: 0.85 })
             photoUrl = comp.dataUrl
           } catch (compErr) {
             console.warn('Compression fallback:', compErr)
           }
 
-          try {
-            if (photoUrl && photoUrl.startsWith('data:')) {
-              const upRes = await api.uploadPhoto(photoUrl, file.name)
-              if (upRes && upRes.url) {
-                photoUrl = upRes.url
-              }
-            }
-          } catch (serverUpErr) {
-            console.warn('Server upload fallback to Supabase:', serverUpErr)
-            try {
-              const ext = uploadFile.name.split('.').pop()
-              const path = `gallery/${selectedCat}/${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`
-              const { error: upErr } = await supabase.storage.from('media').upload(path, uploadFile, { upsert: true })
-              if (!upErr) {
-                const { data } = supabase.storage.from('media').getPublicUrl(path)
-                if (data?.publicUrl) {
-                  photoUrl = data.publicUrl
-                }
-              }
-            } catch (err) {
-              console.warn('Supabase storage upload error:', err)
-            }
-          }
-
           if (photoUrl) {
             let realId = `photo_${Date.now()}_${index}_${Math.random().toString(36).slice(2, 6)}`
             try {
-              const { data: insertedData } = await supabase.from('gallery_photos').insert([{
+              // Ensure valid category uuid
+              const validCatId = (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(selectedCat))
+                ? selectedCat
+                : '683657fb-f125-45a2-afe9-2c9c15fabd87';
+
+              const { data: insertedData, error: insErr } = await supabase.from('gallery_photos').insert([{
                 url: photoUrl,
                 caption: file.name.replace(/\.[^/.]+$/, ''),
-                category_id: selectedCat
+                category_id: validCatId
               }]).select()
-              if (insertedData?.[0]?.id) realId = insertedData[0].id
+
+              if (!insErr && insertedData && insertedData[0]?.id) {
+                realId = insertedData[0].id
+              } else if (insErr) {
+                console.warn('Supabase photo insert notice:', insErr)
+              }
             } catch (dbErr) {
               console.warn('DB insert error:', dbErr)
-            }
-
-            try {
-              await api.createGalleryPhoto({
-                id: realId,
-                url: photoUrl,
-                caption: file.name.replace(/\.[^/.]+$/, ''),
-                category_id: selectedCat,
-              })
-            } catch (apiErr) {
-              console.warn('API createGalleryPhoto fallback:', apiErr)
             }
 
             const item: GalleryPhotoItem = {
@@ -1539,23 +1512,18 @@ function GallerySection() {
     const caption = `Uploaded Photo - ${new Date().toLocaleDateString()}`
     let realId = `photo_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`
 
-    try {
-      const { data: insertedData } = await supabase.from('gallery_photos').insert([{
-        url: directUrl.trim(),
-        caption,
-        category_id: selectedCat
-      }]).select()
-      if (insertedData?.[0]?.id) realId = insertedData[0].id
-    } catch (e) { /* ignore */ }
+    const validCatId = (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(selectedCat))
+      ? selectedCat
+      : '683657fb-f125-45a2-afe9-2c9c15fabd87';
 
     try {
-      await api.createGalleryPhoto({
-        id: realId,
+      const { data: insertedData, error: insErr } = await supabase.from('gallery_photos').insert([{
         url: directUrl.trim(),
         caption,
-        category_id: selectedCat,
-      })
-    } catch (apiErr) { /* ignore */ }
+        category_id: validCatId
+      }]).select()
+      if (!insErr && insertedData?.[0]?.id) realId = insertedData[0].id
+    } catch (e) { /* ignore */ }
 
     const item: GalleryPhotoItem = {
       id: realId,
@@ -3856,34 +3824,12 @@ function FounderSection() {
     setUploading(true)
     try {
       const comp = await compressImage(file, { maxWidth: 900, maxHeight: 1100, quality: 0.85 })
-      let finalUrl = comp.dataUrl
-
-      try {
-        const upRes = await api.uploadPhoto(comp.dataUrl, file.name)
-        if (upRes && upRes.url) {
-          finalUrl = upRes.url
-        }
-      } catch (upErr) {
-        console.warn('Server upload fallback to Supabase:', upErr)
-        try {
-          const ext = comp.file.name.split('.').pop()
-          const path = `founder/${Date.now()}.${ext}`
-          const { error } = await supabase.storage.from('media').upload(path, comp.file, { upsert: true })
-          if (!error) {
-            const { data: pubData } = supabase.storage.from('media').getPublicUrl(path)
-            if (pubData?.publicUrl) finalUrl = pubData.publicUrl
-          }
-        } catch (sbErr) {
-          console.warn('Supabase founder upload error:', sbErr)
-        }
-      }
-
-      const updated = { ...data, heroImage: finalUrl }
+      const updated = { ...data, heroImage: comp.dataUrl }
       setData(updated)
       await saveFounderDataAsync(updated)
       setPopupModal({
         title: 'Founder Photo Updated',
-        msg: 'Founder portrait uploaded, saved to server database, and synchronized live across Home and About pages.',
+        msg: 'Founder portrait uploaded, saved to Supabase database, and synchronized live across Home and About pages.',
         type: 'success'
       })
     } catch (e: any) {
@@ -4043,7 +3989,10 @@ function FounderSection() {
                         onClick={async () => {
                           try {
                             const cropped = await cropImageTo1_1(data.heroImage)
-                            setData(d => ({ ...d, heroImage: cropped }))
+                            const updated = { ...data, heroImage: cropped }
+                            setData(updated)
+                            await saveFounderDataAsync(updated)
+                            setAlert({ type: 'success', msg: 'Founder portrait auto-cropped to 1:1 and saved!' })
                           } catch (e) {
                             console.error('Founder crop failed', e)
                           }
@@ -4075,7 +4024,13 @@ function FounderSection() {
                         title="Manual Crop Founder Portrait"
                         defaultRatio={4 / 5}
                         onClose={() => setShowFounderCropModal(false)}
-                        onSaveCrop={(cropped) => setData(d => ({ ...d, heroImage: cropped }))}
+                        onSaveCrop={async (cropped) => {
+                          const updated = { ...data, heroImage: cropped }
+                          setData(updated)
+                          await saveFounderDataAsync(updated)
+                          setShowFounderCropModal(false)
+                          setAlert({ type: 'success', msg: 'Manual crop applied and saved to database!' })
+                        }}
                       />
                     )}
                   </div>
@@ -4307,7 +4262,7 @@ function EventsSection() {
     setShowModal(true)
   }
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setSaving(true)
     const todayStr = getTodayDateStr()
     const isPast = Boolean(form.date && form.date < todayStr)
@@ -4316,25 +4271,69 @@ function EventsSection() {
       status: isPast ? 'completed' : form.status
     }
     const all = loadAdminEvents()
+    let savedEv: AdminEvent
+    let updated: AdminEvent[]
     if (editing) {
-      const updated = all.map(e => e.id === editing.id ? { ...editing, ...safeForm } : e)
-      saveAdminEvents(updated)
-      setEvents(updated)
+      savedEv = { ...editing, ...safeForm }
+      updated = all.map(e => e.id === editing.id ? savedEv : e)
     } else {
-      const newEv: AdminEvent = { ...safeForm, id: `ev-${Date.now()}`, created_at: new Date().toISOString() }
-      const updated = [newEv, ...all]
-      saveAdminEvents(updated)
-      setEvents(updated)
+      savedEv = { ...safeForm, id: `ev-${Date.now()}`, created_at: new Date().toISOString() }
+      updated = [savedEv, ...all]
     }
+    saveAdminEvents(updated)
+    setEvents(updated)
+
+    // Sync to Supabase articles under category: 'Event'
+    try {
+      const { data: existing } = await supabase
+        .from('articles')
+        .select('id')
+        .eq('category', 'Event')
+        .eq('title_en', savedEv.title)
+        .limit(1)
+        .maybeSingle()
+
+      const payload = {
+        category: 'Event',
+        title_en: savedEv.title,
+        content_en: JSON.stringify(savedEv),
+        cover_image_url: savedEv.cover_image_url || '',
+        published: Boolean(savedEv.published),
+        author_name: 'Shakti Sabha Events',
+        updated_at: new Date().toISOString()
+      }
+
+      if (existing?.id) {
+        await supabase.from('articles').update(payload).eq('id', existing.id)
+      } else {
+        await supabase.from('articles').insert([payload])
+      }
+    } catch (e) {
+      console.warn('Supabase event save notice:', e)
+    }
+
+    window.dispatchEvent(new Event('shakti_events_updated'))
+    window.dispatchEvent(new Event('storage'))
     setSaving(false)
     setShowModal(false)
   }
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (!confirm('Delete this event?')) return
+    const target = events.find(e => e.id === id)
     const updated = events.filter(e => e.id !== id)
     saveAdminEvents(updated)
     setEvents(updated)
+
+    if (target?.title) {
+      try {
+        await supabase.from('articles').delete().eq('category', 'Event').eq('title_en', target.title)
+      } catch (err) {
+        console.warn('Supabase event delete notice:', err)
+      }
+    }
+    window.dispatchEvent(new Event('shakti_events_updated'))
+    window.dispatchEvent(new Event('storage'))
   }
 
   const handleTogglePublish = (id: string) => {

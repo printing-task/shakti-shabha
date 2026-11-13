@@ -1,4 +1,4 @@
-import { api } from '../lib/api'
+import { supabase } from '../lib/supabase'
 
 export interface FounderProfileData {
   name: string
@@ -99,31 +99,43 @@ export function saveFounderData(data: Partial<FounderProfileData>): void {
 }
 
 /**
- * Fetches live founder profile from backend API with localStorage & default fallback
+ * Fetches live founder profile from Supabase with localStorage & default fallback
  */
 export async function fetchFounderData(): Promise<FounderProfileData> {
   try {
-    const res = await api.getFounder()
-    if (res && res.found && res.data) {
-      const merged: FounderProfileData = {
-        ...DEFAULT_FOUNDER_DATA,
-        ...res.data,
-        metrics: { ...DEFAULT_FOUNDER_DATA.metrics, ...(res.data.metrics || {}) },
-        interventions: { ...DEFAULT_FOUNDER_DATA.interventions, ...(res.data.interventions || {}) },
+    const { data, error } = await supabase
+      .from('articles')
+      .select('*')
+      .eq('category', 'FounderProfile')
+      .limit(1)
+      .maybeSingle()
+
+    if (!error && data && data.content_en) {
+      try {
+        const parsed = JSON.parse(data.content_en)
+        const merged: FounderProfileData = {
+          ...DEFAULT_FOUNDER_DATA,
+          ...parsed,
+          heroImage: data.cover_image_url || parsed.heroImage || DEFAULT_FOUNDER_DATA.heroImage,
+          metrics: { ...DEFAULT_FOUNDER_DATA.metrics, ...(parsed.metrics || {}) },
+          interventions: { ...DEFAULT_FOUNDER_DATA.interventions, ...(parsed.interventions || {}) },
+        }
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('shakti_founder_data', JSON.stringify(merged))
+        }
+        return merged
+      } catch (parseErr) {
+        console.warn('Founder JSON parse error:', parseErr)
       }
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('shakti_founder_data', JSON.stringify(merged))
-      }
-      return merged
     }
   } catch (err: any) {
-    console.warn('[Founder Data] API fetch fallback to local:', err?.message)
+    console.warn('[Founder Data] Supabase fetch fallback to local:', err?.message)
   }
   return getFounderData()
 }
 
 /**
- * Saves founder profile to backend database and syncs to localStorage
+ * Saves founder profile to Supabase database and syncs to localStorage
  */
 export async function saveFounderDataAsync(data: Partial<FounderProfileData>): Promise<FounderProfileData> {
   const existing = getFounderData()
@@ -137,16 +149,34 @@ export async function saveFounderDataAsync(data: Partial<FounderProfileData>): P
   // 1. Immediately update localStorage for instant UI response
   saveFounderData(updated)
 
-  // 2. Persist to MongoDB/server database
+  // 2. Persist directly to Supabase articles table
   try {
-    const res = await api.updateFounder(updated)
-    if (res && res.data) {
-      const synced = { ...updated, ...res.data }
-      saveFounderData(synced)
-      return synced
+    const { data: existingRecord } = await supabase
+      .from('articles')
+      .select('id')
+      .eq('category', 'FounderProfile')
+      .limit(1)
+      .maybeSingle()
+
+    const payload = {
+      category: 'FounderProfile',
+      title_en: updated.name || 'Harshita Mankar',
+      title_hi: updated.honorific_hi || 'हर्षिता मानकर',
+      content_en: JSON.stringify(updated),
+      excerpt_en: updated.heroQuote || '',
+      cover_image_url: updated.heroImage || '',
+      published: true,
+      author_name: 'Aaryaveera Harshita Mankar',
+      updated_at: new Date().toISOString()
+    }
+
+    if (existingRecord?.id) {
+      await supabase.from('articles').update(payload).eq('id', existingRecord.id)
+    } else {
+      await supabase.from('articles').insert([payload])
     }
   } catch (err: any) {
-    console.warn('[Founder Data] API save error:', err?.message)
+    console.warn('[Founder Data] Supabase save error:', err?.message)
   }
 
   return updated

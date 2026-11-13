@@ -256,6 +256,8 @@ export default function ArticlesPage() {
           .from('articles')
           .select('*')
           .eq('published', true)
+          .neq('category', 'FounderProfile')
+          .neq('category', 'Event')
           .order('created_at', { ascending: false })
 
         if (data && data.length > 0) {
@@ -283,6 +285,12 @@ export default function ArticlesPage() {
       }
     }
     loadArticles()
+    window.addEventListener('storage', loadArticles)
+    window.addEventListener('shakti_articles_updated', loadArticles)
+    return () => {
+      window.removeEventListener('storage', loadArticles)
+      window.removeEventListener('shakti_articles_updated', loadArticles)
+    }
   }, [])
 
   const allArticles = dbArticles.length > 0 ? dbArticles : ARTICLES_LIST

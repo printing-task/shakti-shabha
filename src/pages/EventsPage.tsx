@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import s from './PageLayout.module.css'
 import ep from './EventsPage.module.css'
 import GoogleIcon from '../components/GoogleIcon/GoogleIcon'
+import { supabase } from '../lib/supabase'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -258,14 +259,93 @@ export default function EventsPage() {
   }, [])
 
   useEffect(() => {
-    const adminEvents = loadEvents().filter(e => e.published)
-    setEvents(adminEvents)
-    const onStorage = () => {
-      const updated = loadEvents().filter(e => e.published)
-      setEvents(updated)
+    async function fetchEvents() {
+      let list: EventItem[] = []
+      try {
+        const { data, error } = await supabase
+          .from('articles')
+          .select('*')
+          .eq('category', 'Event')
+          .eq('published', true)
+          .order('created_at', { ascending: false })
+        if (!error && data && data.length > 0) {
+          list = data.map(d => {
+            try { return JSON.parse(d.content_en) as EventItem } catch { return null }
+          }).filter((e): e is EventItem => Boolean(e && e.published))
+        }
+      } catch (err) {
+        console.warn('EventsPage fetch error:', err)
+      }
+      const local = loadEvents().filter(e => e.published)
+      const idSet = new Set(list.map(e => e.id || e.title))
+      local.forEach(e => {
+        const key = e.id || e.title
+        if (!idSet.has(key)) {
+          list.push(e)
+          idSet.add(key)
+        }
+      })
+      if (list.length === 0) {
+        list = [
+          {
+            id: 'up-001',
+            title: 'Mission Mardini 3-Day Tactical Self-Defense Camp',
+            stream: 'mardini',
+            format: 'on-ground',
+            date: '2026-11-20',
+            location: 'Wardha, Maharashtra',
+            pricing: '₹1,200',
+            is_free: false,
+            capacity: 150,
+            registered_count: 85,
+            status: 'upcoming',
+            description: 'Intensive unarmed combat, lathi-kaushal biomechanics, and threat de-escalation for young women.',
+            published: true,
+            created_at: new Date().toISOString()
+          },
+          {
+            id: 'up-002',
+            title: 'Shakti Varta Seminar — The Legal Collage',
+            stream: 'shakti-varta',
+            format: 'digital',
+            date: '2026-11-28',
+            location: 'Digital Plenary (Zoom)',
+            pricing: 'Free',
+            is_free: true,
+            capacity: 500,
+            registered_count: 320,
+            status: 'upcoming',
+            description: 'High-level legal rights, statutory provisions under BNS/IPC, and procedural safeguards.',
+            published: true,
+            created_at: new Date().toISOString()
+          },
+          {
+            id: 'up-003',
+            title: 'Vedic Parenting & Dharmic Character Workshop',
+            stream: 'shakti-bhava',
+            format: 'on-ground',
+            date: '2026-12-05',
+            location: 'Nagpur, Maharashtra',
+            pricing: '₹800',
+            is_free: false,
+            capacity: 200,
+            registered_count: 140,
+            status: 'upcoming',
+            description: 'Somatic grounding, mental fortitude, and values-rooted upbringing for modern families.',
+            published: true,
+            created_at: new Date().toISOString()
+          }
+        ]
+      }
+      setEvents(list)
     }
-    window.addEventListener('storage', onStorage)
-    return () => window.removeEventListener('storage', onStorage)
+    fetchEvents()
+    window.addEventListener('storage', fetchEvents)
+    window.addEventListener('shakti_events_updated', fetchEvents)
+    return () => {
+      window.removeEventListener('storage', fetchEvents)
+      window.removeEventListener('shakti_events_updated', fetchEvents)
+    }
   }, [])
 
   useEffect(() => {
