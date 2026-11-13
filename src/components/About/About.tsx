@@ -82,7 +82,7 @@ export default function About() {
           </div>
           <h2>
             <Link to="/three-streams" className={s.headerTitleLink} title="Explore The Union of Peace & Revolution">
-              The Union of Peace &amp; Revolution
+            The Union of Peace &amp; Revolution
             </Link>
           </h2>
           <p>
