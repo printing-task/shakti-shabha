@@ -2295,6 +2295,7 @@ const DEFAULT_COURSES: Course[] = [
 ]
 
 function CoursesSection() {
+  const [activeTab, setActiveTab] = useState<'catalog' | 'applications'>('catalog')
   const [courses, setCourses] = useState<Course[]>([])
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
@@ -2302,6 +2303,202 @@ function CoursesSection() {
   const [alert, setAlert] = useState<{ type: 'error' | 'success'; msg: string } | null>(null)
   const [uploading, setUploading] = useState(false)
   const fileRef = useRef<HTMLInputElement>(null)
+
+  // ── Course Applications & Inquiries State ──
+  const [inquiries, setInquiries] = useState<any[]>([])
+  const [loadingInquiries, setLoadingInquiries] = useState(false)
+  const [inquiryStatusFilter, setInquiryStatusFilter] = useState<string>('all')
+  const [inquiryTypeFilter, setInquiryTypeFilter] = useState<'all' | 'cohort' | 'inquiry'>('all')
+  const [inquirySearch, setInquirySearch] = useState<string>('')
+  const [viewInquiry, setViewInquiry] = useState<any | null>(null)
+  const [showAddInquiryModal, setShowAddInquiryModal] = useState(false)
+  const [savingInquiry, setSavingInquiry] = useState(false)
+  const [inquiryForm, setInquiryForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    courseTitle: '',
+    isCohort: false,
+    city: '',
+    country: 'India',
+    message: '',
+    status: 'pending'
+  })
+
+  const parseRequestOrigin = (r: any) => {
+    let country = r.country || ''
+    let state = r.state || ''
+    let city = r.city || ''
+
+    if (!country) {
+      const msgMatch = (r.message || '').match(/\[Origin:\s*([^,]+),\s*([^,]+),\s*([^\]]+)\]/)
+      if (msgMatch) {
+        city = city || msgMatch[1].trim()
+        state = state || msgMatch[2].trim()
+        country = msgMatch[3].trim()
+      } else if (r.city && r.city.includes('(')) {
+        const match = r.city.match(/(.*?)\((.*?)\)/)
+        if (match) {
+          country = match[2].trim()
+          const parts = match[1].split(',')
+          city = parts[0]?.trim() || city
+          state = parts[1]?.trim() || state
+        }
+      }
+    }
+    country = country || 'India'
+    return { ...r, country, state, city }
+  }
+
+  const parseCourseConcern = (concern: string) => {
+    const isCohort = (concern || '').includes('[Cohort')
+    const cleanTitle = (concern || '')
+      .replace(/\[Course Inquiry\]/gi, '')
+      .replace(/\[Cohort Application\]/gi, '')
+      .trim()
+    return {
+      isCohort,
+      typeLabel: isCohort ? 'Cohort Application' : 'Admission Inquiry',
+      courseTitle: cleanTitle || 'General Course Interest'
+    }
+  }
+
+  const loadInquiries = async () => {
+    setLoadingInquiries(true)
+    let fetchedList: any[] = []
+
+    try {
+      const { data } = await supabase.from('counselling_requests').select('*').order('created_at', { ascending: false })
+      if (data && data.length > 0) fetchedList = data
+    } catch (err) {
+      console.warn('Supabase fetch course inquiries error:', err)
+    }
+
+    try {
+      const local = localStorage.getItem('shakti_counselling_requests')
+      if (local) {
+        const localList = JSON.parse(local)
+        const idMap = new Map<string, any>()
+        fetchedList.forEach(r => idMap.set(r.id, r))
+        localList.forEach((r: any) => {
+          if (!idMap.has(r.id)) {
+            idMap.set(r.id, r)
+            fetchedList.push(r)
+          }
+        })
+      }
+    } catch (err) {
+      console.warn('LocalStorage read course inquiries error:', err)
+    }
+
+    const courseList = fetchedList
+      .map(parseRequestOrigin)
+      .filter(r => {
+        const c = (r.concern || '').toLowerCase()
+        return c.includes('[course') || c.includes('[cohort') || c.includes('cohort') || c.includes('course')
+      })
+
+    setInquiries(courseList)
+    setLoadingInquiries(false)
+  }
+
+  useEffect(() => {
+    loadInquiries()
+    const handleUpdate = () => loadInquiries()
+    window.addEventListener('counselling_requests_updated', handleUpdate)
+    window.addEventListener('storage', handleUpdate)
+    return () => {
+      window.removeEventListener('counselling_requests_updated', handleUpdate)
+      window.removeEventListener('storage', handleUpdate)
+    }
+  }, [])
+
+  const updateInquiryStatus = async (id: string, status: string) => {
+    try {
+      await supabase.from('counselling_requests').update({ status }).eq('id', id)
+    } catch (e) { /* ignore */ }
+
+    try {
+      const local = localStorage.getItem('shakti_counselling_requests')
+      if (local) {
+        const list = JSON.parse(local)
+        const updated = list.map((r: any) => r.id === id ? { ...r, status } : r)
+        localStorage.setItem('shakti_counselling_requests', JSON.stringify(updated))
+      }
+    } catch (e) { /* ignore */ }
+
+    setInquiries(prev => prev.map(r => r.id === id ? { ...r, status } : r))
+    if (viewInquiry?.id === id) setViewInquiry((prev: any) => prev ? { ...prev, status } : null)
+    window.dispatchEvent(new Event('counselling_requests_updated'))
+  }
+
+  const deleteInquiry = async (id: string, name: string) => {
+    if (!window.confirm(`Delete course inquiry/application record for "${name}"?`)) return
+    try {
+      await supabase.from('counselling_requests').delete().eq('id', id)
+    } catch (e) { /* ignore */ }
+
+    try {
+      const local = localStorage.getItem('shakti_counselling_requests')
+      if (local) {
+        const list = JSON.parse(local).filter((r: any) => r.id !== id)
+        localStorage.setItem('shakti_counselling_requests', JSON.stringify(list))
+      }
+    } catch (e) { /* ignore */ }
+
+    setInquiries(prev => prev.filter(r => r.id !== id))
+    if (viewInquiry?.id === id) setViewInquiry(null)
+    window.dispatchEvent(new Event('counselling_requests_updated'))
+  }
+
+  const saveInquiry = async () => {
+    if (!inquiryForm.name.trim() || !inquiryForm.email.trim()) {
+      window.alert('Please provide student name and email.')
+      return
+    }
+    setSavingInquiry(true)
+    const tag = inquiryForm.isCohort ? '[Cohort Application]' : '[Course Inquiry]'
+    const concern = `${tag} ${inquiryForm.courseTitle || 'Self-Defense Foundations'}`
+    const payload = {
+      id: `req_${Date.now()}`,
+      name: inquiryForm.name.trim(),
+      email: inquiryForm.email.trim(),
+      phone: inquiryForm.phone.trim(),
+      city: inquiryForm.city.trim() || 'Online / Admissions Intake',
+      concern,
+      message: inquiryForm.message.trim() || `${tag} logged for ${inquiryForm.courseTitle}`,
+      status: inquiryForm.status || 'pending',
+      created_at: new Date().toISOString()
+    }
+
+    try {
+      await supabase.from('counselling_requests').insert([payload])
+    } catch (err) {
+      console.warn('Supabase add course inquiry error:', err)
+    }
+
+    try {
+      const local = localStorage.getItem('shakti_counselling_requests')
+      const list = local ? JSON.parse(local) : []
+      localStorage.setItem('shakti_counselling_requests', JSON.stringify([payload, ...list]))
+    } catch (err) { /* ignore */ }
+
+    setInquiries(prev => [payload, ...prev])
+    setSavingInquiry(false)
+    setShowAddInquiryModal(false)
+    setInquiryForm({
+      name: '',
+      email: '',
+      phone: '',
+      courseTitle: '',
+      isCohort: false,
+      city: '',
+      country: 'India',
+      message: '',
+      status: 'pending'
+    })
+    window.dispatchEvent(new Event('counselling_requests_updated'))
+  }
 
   const defaultForm = {
     title: '', description: '', price: 0, original_price: 0, discount_percent: 0, discount_tag: '', duration: '', level: 'beginner' as 'beginner' | 'intermediate' | 'advanced',
@@ -2335,7 +2532,6 @@ function CoursesSection() {
       const local = localStorage.getItem('shakti_custom_courses')
       if (local) {
         const localList: Course[] = JSON.parse(local)
-        // O(N) map-based deduplication across remote and local records
         const courseMap = new Map<string, Course>()
         for (const c of fetchedCourses) {
           courseMap.set(c.id, c)
@@ -2351,72 +2547,92 @@ function CoursesSection() {
             uniqueLocal.push(c)
           }
         }
-        fetchedCourses = [...uniqueLocal, ...fetchedCourses]
+        fetchedCourses = [...fetchedCourses, ...uniqueLocal]
       }
-    } catch (e) {
-      console.warn('LocalStorage read error:', e)
+    } catch (err) {
+      console.warn('LocalStorage fetch courses error:', err)
     }
 
-    const courseMap = new Map<string, Course>()
-    for (const c of fetchedCourses) {
-      courseMap.set(c.id, c)
-      courseMap.set(`title:${c.title.trim().toLowerCase()}`, c)
-    }
-
-    const unseededDefaults: Course[] = []
-    for (const d of DEFAULT_COURSES) {
-      const titleKey = `title:${d.title.trim().toLowerCase()}`
-      if (!courseMap.has(d.id) && !courseMap.has(titleKey)) {
-        unseededDefaults.push(d)
-      }
-    }
-    const finalCourses = [...fetchedCourses, ...unseededDefaults]
-    setCourses(finalCourses)
+    setCourses(fetchedCourses)
     setLoading(false)
   }
-  useEffect(() => { load() }, [])
 
-  const openNew = () => { setEditing(null); setForm(defaultForm); setShowModal(true) }
-  const openEdit = (c: Course) => {
-    setEditing(c)
-    setForm({
-      title: c.title, description: c.description, price: c.price,
-      original_price: c.original_price || c.price || 0,
-      discount_percent: c.discount_percent || 0,
-      discount_tag: c.discount_tag || '',
-      duration: c.duration, level: c.level, cover_image_url: c.cover_image_url,
-      instructor: c.instructor, published: c.published,
-      syllabus: c.syllabus?.length ? c.syllabus : [{ week: 'Week 1', topic: '' }]
-    })
+  useEffect(() => {
+    load()
+    const handleCoursesUpdate = () => load()
+    window.addEventListener('shakti_courses_updated', handleCoursesUpdate)
+    window.addEventListener('storage', handleCoursesUpdate)
+    return () => {
+      window.removeEventListener('shakti_courses_updated', handleCoursesUpdate)
+      window.removeEventListener('storage', handleCoursesUpdate)
+    }
+  }, [])
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setUploading(true)
+    setAlert(null)
+
+    const reader = new FileReader()
+    reader.onload = async () => {
+      const res = reader.result as string
+      setForm(f => ({ ...f, cover_image_url: res }))
+      const dims = await getImageDimensions(res)
+      setImageDim(dims)
+      setUploading(false)
+      setAlert({ type: 'success', msg: 'Course cover image uploaded successfully.' })
+    }
+    reader.onerror = () => {
+      setUploading(false)
+      setAlert({ type: 'error', msg: 'Failed to read image file.' })
+    }
+    reader.readAsDataURL(file)
+    if (fileRef.current) fileRef.current.value = ''
+  }
+
+  const openNew = () => {
+    setEditing(null)
+    setForm(defaultForm)
+    setAlert(null)
+    setImageDim(null)
     setShowModal(true)
   }
 
-  const uploadCover = async (file: File) => {
-    setUploading(true)
-    try {
-      // Compress image down to max 900x900 (quality 0.8) for instant preview & low memory storage (< 70KB)
-      const comp = await compressImage(file, { maxWidth: 900, maxHeight: 900, quality: 0.8 })
-      setForm(f => ({ ...f, cover_image_url: comp.dataUrl }))
-    } catch (e) {
-      console.warn('Course image compression error:', e)
-    } finally {
-      setUploading(false)
+  const openEdit = (c: Course) => {
+    setEditing(c)
+    setForm({
+      title: c.title,
+      description: c.description || '',
+      price: c.price,
+      original_price: c.original_price || c.price,
+      discount_percent: c.discount_percent || 0,
+      discount_tag: c.discount_tag || '',
+      duration: c.duration || '',
+      level: c.level,
+      cover_image_url: c.cover_image_url || '',
+      instructor: c.instructor || '',
+      published: c.published,
+      syllabus: Array.isArray(c.syllabus) && c.syllabus.length > 0 ? c.syllabus : [{ week: 'Week 1', topic: '' }]
+    })
+    setAlert(null)
+    if (c.cover_image_url) {
+      getImageDimensions(c.cover_image_url).then(setImageDim)
+    } else {
+      setImageDim(null)
     }
+    setShowModal(true)
   }
 
   const save = async () => {
     if (!form.title.trim()) {
-      const msg = 'Validation Alert: Please enter a course title.'
-      setAlert({ type: 'error', msg })
-      window.alert(msg)
+      setAlert({ type: 'error', msg: 'Course title is required.' })
       return
     }
-
-    const origPrice = Number(form.original_price) || Number(form.price) || 0
-    if (isNaN(origPrice) || origPrice <= 0) {
-      const msg = 'Validation Alert: Please enter a valid positive base price (e.g. 2500). Non-numeric text is not allowed.'
-      setAlert({ type: 'error', msg })
-      window.alert(msg)
+    const origPrice = Number(form.original_price) || 0
+    if (origPrice < 0) {
+      setAlert({ type: 'error', msg: 'Price cannot be negative.' })
       return
     }
     const discPct = Number(form.discount_percent) || 0
@@ -2440,7 +2656,6 @@ function CoursesSection() {
     let saved = false
     let savedId = editing ? editing.id : ''
 
-    // 1. Try Supabase
     try {
       if (editing) {
         const { error } = await supabase.from('courses').update({ ...payload, updated_at: new Date().toISOString() }).eq('id', editing.id)
@@ -2456,7 +2671,6 @@ function CoursesSection() {
       console.warn('Supabase save error:', err)
     }
 
-    // 2. Deduplicated LocalStorage Sync (prevents creating duplicate courses)
     try {
       const local = localStorage.getItem('shakti_custom_courses')
       let list: Course[] = local ? JSON.parse(local) : []
@@ -2469,7 +2683,6 @@ function CoursesSection() {
         updated_at: new Date().toISOString(),
       }
 
-      // Check if course already exists by ID or by title
       const targetTitle = payload.title.toLowerCase()
       const existingIdx = list.findIndex(c => c.id === courseId || c.title.trim().toLowerCase() === targetTitle)
 
@@ -2510,92 +2723,619 @@ function CoursesSection() {
         const updated = list.filter(c => c.id !== id && (!target || c.title.trim().toLowerCase() !== target.title.trim().toLowerCase()))
         localStorage.setItem('shakti_custom_courses', JSON.stringify(updated))
       }
-    } catch (e) {
-      console.warn(e)
+    } catch (localErr) {
+      console.warn(localErr)
     }
     window.dispatchEvent(new Event('shakti_courses_updated'))
     load()
   }
 
+  const pendingInquiriesCount = inquiries.filter(i => i.status === 'pending').length
+
+  const filteredInquiries = inquiries.filter(i => {
+    const matchesStatus = inquiryStatusFilter === 'all' || i.status === inquiryStatusFilter
+    const info = parseCourseConcern(i.concern)
+    const matchesType =
+      inquiryTypeFilter === 'all' ||
+      (inquiryTypeFilter === 'cohort' && info.isCohort) ||
+      (inquiryTypeFilter === 'inquiry' && !info.isCohort)
+    const q = inquirySearch.toLowerCase().trim()
+    const matchesSearch =
+      !q ||
+      (i.name || '').toLowerCase().includes(q) ||
+      (i.email || '').toLowerCase().includes(q) ||
+      (i.phone || '').toLowerCase().includes(q) ||
+      (i.city || '').toLowerCase().includes(q) ||
+      (info.courseTitle || '').toLowerCase().includes(q)
+    return matchesStatus && matchesType && matchesSearch
+  })
+
   return (
     <>
-      {uploading && (
-        <ShaktiLoader
-          title="Uploading Course Cover"
-          status="Processing cover image..."
-        />
-      )}
-      {alert && <div className={`${s.alert} ${alert.type === 'error' ? s.alertError : s.alertSuccess}`}>{alert.msg}</div>}
-      <div className={s.sectionHeader}>
-        <span className={s.sectionTitle}>All Courses ({courses.length})</span>
-        <button className={s.btnPrimary} onClick={openNew}>+ New Course</button>
+      {/* ── Top Tabs: Switch between Catalog & Applications ── */}
+      <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.75rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.85rem', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button
+          type="button"
+          className={`${s.tab} ${activeTab === 'catalog' ? s.tabActive : ''}`}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', padding: '0.5rem 1.15rem' }}
+          onClick={() => setActiveTab('catalog')}
+        >
+          <GoogleIcon name="school" size={18} />
+          <span>Course Catalog</span>
+          <span style={{ opacity: 0.65, fontSize: '0.8rem' }}>({courses.length})</span>
+        </button>
+
+        <button
+          type="button"
+          className={`${s.tab} ${activeTab === 'applications' ? s.tabActive : ''}`}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', padding: '0.5rem 1.15rem' }}
+          onClick={() => { setActiveTab('applications'); loadInquiries(); }}
+        >
+          <GoogleIcon name="assignment_ind" size={18} />
+          <span>Student Applications &amp; Inquiries</span>
+          <span style={{ opacity: 0.65, fontSize: '0.8rem' }}>({inquiries.length})</span>
+          {pendingInquiriesCount > 0 && (
+            <span style={{ background: '#DC143C', color: '#FFFFFF', padding: '0.12rem 0.5rem', borderRadius: 9999, fontSize: '0.72rem', fontWeight: 700 }}>
+              {pendingInquiriesCount} New
+            </span>
+          )}
+        </button>
       </div>
 
-      <div className={s.tableWrap}>
-        {loading ? (
-          <div style={{ padding: '2rem', textAlign: 'center', color: 'rgba(255,255,255,0.4)' }}>Loading...</div>
-        ) : courses.length === 0 ? (
-          <div className={s.empty}>
-            <div className={s.emptyIcon}>
-              <GoogleIcon name="school" size={44} style={{ color: 'rgba(255,255,255,0.2)' }} />
-            </div>
-            <div className={s.emptyText}>No courses yet</div>
+      {activeTab === 'catalog' && (
+        <>
+          {uploading && (
+            <ShaktiLoader
+              title="Uploading Course Cover"
+              status="Processing cover image..."
+            />
+          )}
+          {alert && <div className={`${s.alert} ${alert.type === 'error' ? s.alertError : s.alertSuccess}`}>{alert.msg}</div>}
+          <div className={s.sectionHeader}>
+            <span className={s.sectionTitle}>Course Catalog ({courses.length})</span>
+            <button className={s.btnPrimary} onClick={openNew}>+ New Course</button>
           </div>
-        ) : (
-          <table className={s.table}>
-            <thead>
-              <tr><th>Course</th><th>Price & Discount</th><th>Level</th><th>Duration</th><th>Status</th><th>Actions</th></tr>
-            </thead>
-            <tbody>
-              {courses.map(c => (
-                <tr key={c.id}>
-                  <td>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                      {c.cover_image_url ? (
-                        <img src={c.cover_image_url} alt="" style={{ width: 48, height: 32, objectFit: 'cover', borderRadius: 4, flexShrink: 0 }} />
-                      ) : (
-                        <div style={{ width: 48, height: 32, background: 'rgba(255,255,255,0.06)', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                          <GoogleIcon name="school" size={16} style={{ color: '#888' }} />
-                        </div>
-                      )}
-                      <div>
-                        <div style={{ fontWeight: 600 }}>{c.title}</div>
-                        <div style={{ fontSize: '0.75rem', color: '#888' }}>{c.instructor}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div style={{ fontWeight: 600 }}>₹{c.price.toLocaleString()}</div>
-                    {c.discount_percent && c.discount_percent > 0 ? (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.2rem', flexWrap: 'wrap' }}>
-                        <span style={{ fontSize: '0.72rem', color: '#888', textDecoration: 'line-through' }}>
-                          ₹{(c.original_price || c.price).toLocaleString()}
-                        </span>
-                        <span style={{ fontSize: '0.65rem', background: '#065F46', color: '#34D399', padding: '0.1rem 0.4rem', borderRadius: 4, fontWeight: 700 }}>
-                          {c.discount_percent}% OFF
-                        </span>
-                        {c.discount_tag && (
-                          <span style={{ fontSize: '0.65rem', color: '#F59E0B' }}>• {c.discount_tag}</span>
-                        )}
-                      </div>
-                    ) : null}
-                  </td>
-                  <td><span className={`${s.badge} ${s.badgeGray}`}>{c.level}</span></td>
-                  <td style={{ fontSize: '0.82rem' }}>{c.duration}</td>
-                  <td><span className={`${s.badge} ${c.published ? s.badgeGreen : s.badgeGray}`}>{c.published ? 'Published' : 'Draft'}</span></td>
-                  <td>
-                    <div style={{ display: 'flex', gap: '0.5rem' }}>
-                      <button className={s.btnEdit} onClick={() => openEdit(c)}>Edit</button>
-                      <button className={s.btnDanger} onClick={() => del(c.id)}>Delete</button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
 
+          <div className={s.tableWrap}>
+            {loading ? (
+              <div style={{ padding: '2rem', textAlign: 'center', color: 'rgba(255,255,255,0.4)' }}>Loading...</div>
+            ) : courses.length === 0 ? (
+              <div className={s.empty}>
+                <div className={s.emptyIcon}>
+                  <GoogleIcon name="school" size={44} style={{ color: 'rgba(255,255,255,0.2)' }} />
+                </div>
+                <div className={s.emptyText}>No courses yet</div>
+              </div>
+            ) : (
+              <table className={s.table}>
+                <thead>
+                  <tr><th>Course</th><th>Price &amp; Discount</th><th>Level</th><th>Duration</th><th>Status</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                  {courses.map(c => (
+                    <tr key={c.id}>
+                      <td>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                          {c.cover_image_url ? (
+                            <img src={c.cover_image_url} alt="" style={{ width: 48, height: 32, objectFit: 'cover', borderRadius: 4, flexShrink: 0 }} />
+                          ) : (
+                            <div style={{ width: 48, height: 32, background: 'rgba(255,255,255,0.06)', borderRadius: 4, flexShrink: 0 }} />
+                          )}
+                          <div>
+                            <div style={{ fontWeight: 600 }}>{c.title}</div>
+                            <div style={{ fontSize: '0.75rem', color: '#888' }}>{c.instructor}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div style={{ fontWeight: 600 }}>₹{c.price.toLocaleString()}</div>
+                        {c.discount_percent && c.discount_percent > 0 ? (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.2rem', flexWrap: 'wrap' }}>
+                            <span style={{ fontSize: '0.72rem', color: '#888', textDecoration: 'line-through' }}>
+                              ₹{(c.original_price || c.price).toLocaleString()}
+                            </span>
+                            <span style={{ fontSize: '0.65rem', background: '#065F46', color: '#34D399', padding: '0.1rem 0.4rem', borderRadius: 4, fontWeight: 700 }}>
+                              {c.discount_percent}% OFF
+                            </span>
+                            {c.discount_tag && (
+                              <span style={{ fontSize: '0.65rem', color: '#F59E0B' }}>• {c.discount_tag}</span>
+                            )}
+                          </div>
+                        ) : null}
+                      </td>
+                      <td><span className={`${s.badge} ${s.badgeGray}`}>{c.level}</span></td>
+                      <td style={{ fontSize: '0.82rem' }}>{c.duration}</td>
+                      <td><span className={`${s.badge} ${c.published ? s.badgeGreen : s.badgeGray}`}>{c.published ? 'Published' : 'Draft'}</span></td>
+                      <td>
+                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                          <button className={s.btnEdit} onClick={() => openEdit(c)}>Edit</button>
+                          <button className={s.btnDanger} onClick={() => del(c.id)}>Delete</button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </>
+      )}
+
+      {/* ── COURSE APPLICATIONS & INQUIRIES VIEW ── */}
+      {activeTab === 'applications' && (
+        <div>
+          {/* Key Metrics Row */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1.75rem' }}>
+            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, padding: '1rem 1.25rem' }}>
+              <div style={{ fontSize: '0.78rem', color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Total Submissions</div>
+              <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#F9FAFB', marginTop: '0.25rem' }}>{inquiries.length}</div>
+            </div>
+            <div style={{ background: 'rgba(220,20,60,0.08)', border: '1px solid rgba(220,20,60,0.25)', borderRadius: 12, padding: '1rem 1.25rem' }}>
+              <div style={{ fontSize: '0.78rem', color: '#FF8095', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Pending Review</div>
+              <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#DC143C', marginTop: '0.25rem' }}>
+                {inquiries.filter(i => i.status === 'pending').length}
+              </div>
+            </div>
+            <div style={{ background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.25)', borderRadius: 12, padding: '1rem 1.25rem' }}>
+              <div style={{ fontSize: '0.78rem', color: '#93C5FD', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Reviewed &amp; Contacted</div>
+              <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#60A5FA', marginTop: '0.25rem' }}>
+                {inquiries.filter(i => i.status === 'reviewed' || i.status === 'contacted').length}
+              </div>
+            </div>
+            <div style={{ background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.25)', borderRadius: 12, padding: '1rem 1.25rem' }}>
+              <div style={{ fontSize: '0.78rem', color: '#6EE7B7', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Enrolled / Resolved</div>
+              <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#34D399', marginTop: '0.25rem' }}>
+                {inquiries.filter(i => i.status === 'resolved').length}
+              </div>
+            </div>
+          </div>
+
+          {/* Action Bar & Filters */}
+          <div className={s.sectionHeader} style={{ flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+              <span className={s.sectionTitle} style={{ fontSize: '1.1rem' }}>
+                Course Applications ({filteredInquiries.length})
+              </span>
+              <div style={{ display: 'flex', gap: '0.35rem', marginLeft: '0.5rem' }}>
+                {[
+                  { key: 'all', label: 'All Types' },
+                  { key: 'cohort', label: 'Cohorts Only' },
+                  { key: 'inquiry', label: 'General Inquiries' }
+                ].map(t => (
+                  <button
+                    key={t.key}
+                    type="button"
+                    className={`${s.tab} ${inquiryTypeFilter === t.key ? s.tabActive : ''}`}
+                    style={{ fontSize: '0.74rem', padding: '0.2rem 0.6rem' }}
+                    onClick={() => setInquiryTypeFilter(t.key as any)}
+                  >
+                    {t.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '0.65rem', flexWrap: 'wrap', alignItems: 'center' }}>
+              <input
+                type="text"
+                className={s.input}
+                placeholder="Search applicant, phone, course..."
+                value={inquirySearch}
+                onChange={e => setInquirySearch(e.target.value)}
+                style={{ width: 220, padding: '0.38rem 0.75rem', fontSize: '0.78rem' }}
+              />
+
+              <div style={{ display: 'flex', gap: '0.3rem' }}>
+                {['all', 'pending', 'reviewed', 'contacted', 'resolved'].map(f => (
+                  <button
+                    key={f}
+                    type="button"
+                    className={`${s.tab} ${inquiryStatusFilter === f ? s.tabActive : ''}`}
+                    style={{ fontSize: '0.74rem', padding: '0.25rem 0.6rem' }}
+                    onClick={() => setInquiryStatusFilter(f)}
+                  >
+                    {f.charAt(0).toUpperCase() + f.slice(1)}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                className={s.btnPrimary}
+                style={{ fontSize: '0.78rem', padding: '0.42rem 0.9rem', display: 'inline-flex', alignItems: 'center', gap: '5px' }}
+                onClick={() => setShowAddInquiryModal(true)}
+              >
+                <GoogleIcon name="add" size={16} /> Log Application
+              </button>
+            </div>
+          </div>
+
+          {/* Inquiries Table */}
+          <div className={s.tableWrap}>
+            {loadingInquiries ? (
+              <div style={{ padding: '2.5rem', textAlign: 'center', color: 'rgba(255,255,255,0.4)' }}>
+                Loading course inquiries...
+              </div>
+            ) : filteredInquiries.length === 0 ? (
+              <div className={s.empty}>
+                <div className={s.emptyIcon}>
+                  <GoogleIcon name="assignment" size={44} style={{ color: 'rgba(255,255,255,0.2)' }} />
+                </div>
+                <div className={s.emptyText}>No course applications or inquiries match the filter</div>
+              </div>
+            ) : (
+              <table className={s.table}>
+                <thead>
+                  <tr>
+                    <th>Applicant</th>
+                    <th>Program &amp; Type</th>
+                    <th>Location</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredInquiries.map(inq => {
+                    const parsed = parseCourseConcern(inq.concern)
+                    const statusColors: Record<string, string> = {
+                      pending: '#F59E0B',
+                      reviewed: '#3B82F6',
+                      contacted: '#8B5CF6',
+                      resolved: '#10B981'
+                    }
+                    return (
+                      <tr key={inq.id}>
+                        <td>
+                          <div style={{ fontWeight: 600, color: '#F9FAFB' }}>{inq.name}</div>
+                          <div style={{ fontSize: '0.75rem', color: '#9CA3AF' }}>{inq.email}</div>
+                          {inq.phone && (
+                            <div style={{ fontSize: '0.74rem', color: '#C9A96E', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
+                              <GoogleIcon name="call" size={12} />
+                              <a href={`tel:${inq.phone}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                                {inq.phone}
+                              </a>
+                            </div>
+                          )}
+                        </td>
+                        <td>
+                          <div style={{ fontWeight: 600, fontSize: '0.85rem', color: '#F3F4F6', maxWidth: 260 }}>
+                            {parsed.courseTitle}
+                          </div>
+                          <span
+                            style={{
+                              display: 'inline-block',
+                              marginTop: '0.25rem',
+                              fontSize: '0.68rem',
+                              padding: '0.1rem 0.45rem',
+                              borderRadius: 4,
+                              fontWeight: 700,
+                              background: parsed.isCohort ? 'rgba(124,58,237,0.2)' : 'rgba(2,132,199,0.2)',
+                              color: parsed.isCohort ? '#C4B5FD' : '#7DD3FC',
+                              border: parsed.isCohort ? '1px solid rgba(124,58,237,0.4)' : '1px solid rgba(2,132,199,0.4)'
+                            }}
+                          >
+                            {parsed.typeLabel}
+                          </span>
+                        </td>
+                        <td style={{ fontSize: '0.82rem', color: '#D1D5DB' }}>
+                          <div>{inq.city || 'Online'}</div>
+                          <div style={{ fontSize: '0.72rem', color: '#9CA3AF' }}>{inq.country || 'India'}</div>
+                        </td>
+                        <td style={{ fontSize: '0.78rem', color: '#9CA3AF', whiteSpace: 'nowrap' }}>
+                          {inq.created_at ? new Date(inq.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '—'}
+                        </td>
+                        <td>
+                          <select
+                            className={s.input}
+                            style={{
+                              fontSize: '0.74rem',
+                              padding: '0.2rem 0.5rem',
+                              width: 'auto',
+                              fontWeight: 700,
+                              color: statusColors[inq.status] || '#F9FAFB',
+                              borderColor: 'rgba(255,255,255,0.15)',
+                              background: '#1F2937'
+                            }}
+                            value={inq.status}
+                            onChange={e => updateInquiryStatus(inq.id, e.target.value)}
+                          >
+                            <option value="pending">Pending</option>
+                            <option value="reviewed">Reviewed</option>
+                            <option value="contacted">Contacted</option>
+                            <option value="resolved">Enrolled / Resolved</option>
+                          </select>
+                        </td>
+                        <td>
+                          <div style={{ display: 'flex', gap: '0.4rem' }}>
+                            <button
+                              type="button"
+                              className={s.btnEdit}
+                              style={{ fontSize: '0.74rem', padding: '0.25rem 0.6rem' }}
+                              onClick={() => setViewInquiry(inq)}
+                            >
+                              Details
+                            </button>
+                            <button
+                              type="button"
+                              className={s.btnDanger}
+                              style={{ fontSize: '0.74rem', padding: '0.25rem 0.6rem' }}
+                              onClick={() => deleteInquiry(inq.id, inq.name)}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* ── VIEW COURSE INQUIRY DETAILS MODAL ── */}
+      {viewInquiry && (
+        <div className={s.overlay} data-lenis-prevent="true" onClick={e => e.target === e.currentTarget && setViewInquiry(null)}>
+          <div className={s.modal} style={{ maxWidth: 580 }} data-lenis-prevent="true">
+            <h2 className={s.modalTitle} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <GoogleIcon name="school" size={22} style={{ color: '#DC143C' }} />
+              Course Application Dossier
+            </h2>
+            <button className={s.modalClose} onClick={() => setViewInquiry(null)}>
+              <GoogleIcon name="close" size={18} />
+            </button>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+              <div style={{ background: 'rgba(255,255,255,0.03)', padding: '1rem', borderRadius: 10, border: '1px solid rgba(255,255,255,0.08)' }}>
+                <div style={{ fontSize: '0.78rem', color: '#9CA3AF' }}>Program Applied For</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#F9FAFB', marginTop: '0.2rem' }}>
+                  {parseCourseConcern(viewInquiry.concern).courseTitle}
+                </div>
+                <span
+                  style={{
+                    display: 'inline-block',
+                    marginTop: '0.35rem',
+                    fontSize: '0.72rem',
+                    padding: '0.15rem 0.5rem',
+                    borderRadius: 4,
+                    fontWeight: 700,
+                    background: parseCourseConcern(viewInquiry.concern).isCohort ? 'rgba(124,58,237,0.2)' : 'rgba(2,132,199,0.2)',
+                    color: parseCourseConcern(viewInquiry.concern).isCohort ? '#C4B5FD' : '#7DD3FC'
+                  }}
+                >
+                  {parseCourseConcern(viewInquiry.concern).typeLabel}
+                </span>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                <div>
+                  <div style={{ fontSize: '0.75rem', color: '#9CA3AF' }}>Student Name</div>
+                  <div style={{ fontWeight: 600, color: '#F9FAFB' }}>{viewInquiry.name}</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '0.75rem', color: '#9CA3AF' }}>Application Date</div>
+                  <div style={{ color: '#D1D5DB' }}>
+                    {viewInquiry.created_at ? new Date(viewInquiry.created_at).toLocaleString('en-IN') : '—'}
+                  </div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '0.75rem', color: '#9CA3AF' }}>Email Address</div>
+                  <div style={{ color: '#F9FAFB', wordBreak: 'break-all' }}>{viewInquiry.email}</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '0.75rem', color: '#9CA3AF' }}>Phone / Mobile</div>
+                  <div style={{ color: '#C9A96E', fontWeight: 600 }}>{viewInquiry.phone || 'Not provided'}</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '0.75rem', color: '#9CA3AF' }}>City &amp; Origin</div>
+                  <div style={{ color: '#F9FAFB' }}>{viewInquiry.city || 'Online'}</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '0.75rem', color: '#9CA3AF' }}>Country</div>
+                  <div style={{ color: '#F9FAFB' }}>{viewInquiry.country || 'India'}</div>
+                </div>
+              </div>
+
+              <div>
+                <div style={{ fontSize: '0.75rem', color: '#9CA3AF', marginBottom: '0.25rem' }}>Message / Application Notes</div>
+                <div style={{ background: '#0D0D11', padding: '0.85rem', borderRadius: 8, fontSize: '0.85rem', color: '#E5E7EB', lineHeight: 1.6, border: '1px solid rgba(255,255,255,0.06)' }}>
+                  {viewInquiry.message || 'No additional notes provided by applicant.'}
+                </div>
+              </div>
+
+              {/* Direct Communication Quick Buttons */}
+              <div style={{ display: 'flex', gap: '0.65rem', flexWrap: 'wrap', marginTop: '0.5rem' }}>
+                {viewInquiry.phone && (
+                  <>
+                    <a
+                      href={`https://wa.me/${viewInquiry.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Namaste ${viewInquiry.name}, regarding your application for ${parseCourseConcern(viewInquiry.concern).courseTitle} at Shakti Sabha...`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={s.btnPrimary}
+                      style={{ background: '#25D366', borderColor: '#25D366', color: '#FFFFFF', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '0.82rem' }}
+                    >
+                      <GoogleIcon name="chat" size={16} /> WhatsApp
+                    </a>
+                    <a
+                      href={`tel:${viewInquiry.phone}`}
+                      className={s.btnSecondary}
+                      style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '0.82rem' }}
+                    >
+                      <GoogleIcon name="call" size={16} /> Call
+                    </a>
+                  </>
+                )}
+                {viewInquiry.email && (
+                  <a
+                    href={`mailto:${viewInquiry.email}?subject=${encodeURIComponent(`Shakti Sabha Course Application: ${parseCourseConcern(viewInquiry.concern).courseTitle}`)}`}
+                    className={s.btnSecondary}
+                    style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '0.82rem' }}
+                  >
+                    <GoogleIcon name="mail" size={16} /> Send Email
+                  </a>
+                )}
+              </div>
+
+              <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ fontSize: '0.78rem', color: '#9CA3AF' }}>Status:</span>
+                  <select
+                    className={s.input}
+                    style={{ fontSize: '0.78rem', padding: '0.25rem 0.5rem', width: 'auto', background: '#1F2937' }}
+                    value={viewInquiry.status}
+                    onChange={e => updateInquiryStatus(viewInquiry.id, e.target.value)}
+                  >
+                    <option value="pending">Pending</option>
+                    <option value="reviewed">Reviewed</option>
+                    <option value="contacted">Contacted</option>
+                    <option value="resolved">Enrolled / Resolved</option>
+                  </select>
+                </div>
+                <button
+                  type="button"
+                  className={s.btnDanger}
+                  style={{ fontSize: '0.78rem' }}
+                  onClick={() => deleteInquiry(viewInquiry.id, viewInquiry.name)}
+                >
+                  Delete Record
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── LOG COURSE APPLICATION MODAL ── */}
+      {showAddInquiryModal && (
+        <div className={s.overlay} data-lenis-prevent="true" onClick={e => e.target === e.currentTarget && setShowAddInquiryModal(false)}>
+          <div className={s.modal} style={{ maxWidth: 540 }} data-lenis-prevent="true">
+            <h2 className={s.modalTitle}>Log Student Course Application</h2>
+            <button className={s.modalClose} onClick={() => setShowAddInquiryModal(false)}>
+              <GoogleIcon name="close" size={18} />
+            </button>
+
+            <div className={s.formGrid} style={{ marginTop: '1rem' }}>
+              <div className={`${s.field} ${s.formFull}`}>
+                <label className={s.label}>Full Name *</label>
+                <input
+                  className={s.input}
+                  value={inquiryForm.name}
+                  onChange={e => setInquiryForm(f => ({ ...f, name: e.target.value }))}
+                  placeholder="Applicant's name"
+                />
+              </div>
+
+              <div className={s.field}>
+                <label className={s.label}>Email Address *</label>
+                <input
+                  className={s.input}
+                  type="email"
+                  value={inquiryForm.email}
+                  onChange={e => setInquiryForm(f => ({ ...f, email: e.target.value }))}
+                  placeholder="student@example.com"
+                />
+              </div>
+
+              <div className={s.field}>
+                <label className={s.label}>Phone / Mobile</label>
+                <input
+                  className={s.input}
+                  value={inquiryForm.phone}
+                  onChange={e => setInquiryForm(f => ({ ...f, phone: e.target.value }))}
+                  placeholder="+91 98765 43210"
+                />
+              </div>
+
+              <div className={`${s.field} ${s.formFull}`}>
+                <label className={s.label}>Program / Course</label>
+                <select
+                  className={s.input}
+                  value={inquiryForm.courseTitle}
+                  onChange={e => setInquiryForm(f => ({ ...f, courseTitle: e.target.value }))}
+                >
+                  <option value="">Select a course from catalog...</option>
+                  {courses.map(c => (
+                    <option key={c.id} value={c.title}>{c.title}</option>
+                  ))}
+                  <option value="Self-Defense Foundations &amp; Situational Readiness">Self-Defense Foundations &amp; Situational Readiness</option>
+                  <option value="Character Building &amp; Mental Fortitude">Character Building &amp; Mental Fortitude</option>
+                  <option value="Vedic Parenting &amp; Dharmic Nurturance">Vedic Parenting &amp; Dharmic Nurturance</option>
+                </select>
+              </div>
+
+              <div className={s.field}>
+                <label className={s.label}>Intake Type</label>
+                <select
+                  className={s.input}
+                  value={inquiryForm.isCohort ? 'cohort' : 'inquiry'}
+                  onChange={e => setInquiryForm(f => ({ ...f, isCohort: e.target.value === 'cohort' }))}
+                >
+                  <option value="cohort">Cohort Application (Accredited)</option>
+                  <option value="inquiry">General Admission Inquiry</option>
+                </select>
+              </div>
+
+              <div className={s.field}>
+                <label className={s.label}>Initial Status</label>
+                <select
+                  className={s.input}
+                  value={inquiryForm.status}
+                  onChange={e => setInquiryForm(f => ({ ...f, status: e.target.value }))}
+                >
+                  <option value="pending">Pending</option>
+                  <option value="reviewed">Reviewed</option>
+                  <option value="contacted">Contacted</option>
+                  <option value="resolved">Enrolled / Resolved</option>
+                </select>
+              </div>
+
+              <div className={s.field}>
+                <label className={s.label}>City</label>
+                <input
+                  className={s.input}
+                  value={inquiryForm.city}
+                  onChange={e => setInquiryForm(f => ({ ...f, city: e.target.value }))}
+                  placeholder="e.g. Bhopal, Nagpur"
+                />
+              </div>
+
+              <div className={s.field}>
+                <label className={s.label}>Country</label>
+                <input
+                  className={s.input}
+                  value={inquiryForm.country}
+                  onChange={e => setInquiryForm(f => ({ ...f, country: e.target.value }))}
+                  placeholder="e.g. India"
+                />
+              </div>
+
+              <div className={`${s.field} ${s.formFull}`}>
+                <label className={s.label}>Notes / Background</label>
+                <textarea
+                  className={s.textarea}
+                  value={inquiryForm.message}
+                  onChange={e => setInquiryForm(f => ({ ...f, message: e.target.value }))}
+                  placeholder="Any student background or intake remarks..."
+                />
+              </div>
+            </div>
+
+            <div className={s.modalActions} style={{ marginTop: '1.25rem' }}>
+              <button type="button" className={s.btnSecondary} onClick={() => setShowAddInquiryModal(false)}>
+                Cancel
+              </button>
+              <button type="button" className={s.btnPrimary} disabled={savingInquiry} onClick={saveInquiry}>
+                {savingInquiry ? 'Saving...' : 'Save Application'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit / New Course Modal */}
       {showModal && (
         <div className={s.overlay} data-lenis-prevent="true" onClick={e => e.target === e.currentTarget && setShowModal(false)}>
           <div className={s.modal} data-lenis-prevent="true">
@@ -2619,7 +3359,7 @@ function CoursesSection() {
               </div>
               <div className={`${s.field} ${s.formFull}`} style={{ background: 'rgba(255,255,255,0.03)', padding: '1rem', borderRadius: 8, border: '1px solid rgba(255,255,255,0.08)' }}>
                 <div style={{ fontWeight: 600, color: '#C9A96E', fontSize: '0.88rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <GoogleIcon name="local_offer" size={17} /> Pricing & Special Event Discount Management
+                  <GoogleIcon name="local_offer" size={17} /> Pricing &amp; Special Event Discount Management
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: '0.85rem' }}>
                   <div>
@@ -2662,89 +3402,34 @@ function CoursesSection() {
                     />
                   </div>
                   <div>
-                    <label className={s.label}>Special Event / Offer Tag</label>
-                    <input
-                      className={s.input}
-                      value={form.discount_tag || ''}
-                      onChange={e => setForm(f => ({ ...f, discount_tag: e.target.value }))}
-                      placeholder="e.g. 20% Navratri Special"
-                    />
-                  </div>
-                  <div>
-                    <label className={s.label}>Final Payable Price (₹)</label>
+                    <label className={s.label}>Payable Price (₹)</label>
                     <input
                       className={s.input}
                       type="number"
                       min="0"
                       value={form.price || ''}
-                      onChange={e => {
-                        const finalVal = Number(e.target.value) || 0
-                        let orig = form.original_price || 0
-                        if (orig <= 0 || finalVal > orig) {
-                          orig = finalVal
-                        }
-                        const pct = orig > 0 && finalVal < orig
-                          ? Math.round(((orig - finalVal) / orig) * 100)
-                          : 0
-                        setForm(f => ({
-                          ...f,
-                          price: finalVal,
-                          original_price: orig,
-                          discount_percent: pct,
-                          discount_tag: pct > 0 ? `${pct}% Special Discount` : ''
-                        }))
-                      }}
-                      placeholder="Calculated price"
-                      style={{ fontWeight: 700, color: '#10B981' }}
+                      onChange={e => setForm(f => ({ ...f, price: Number(e.target.value) || 0 }))}
+                      placeholder="e.g. 2000"
+                    />
+                  </div>
+                  <div>
+                    <label className={s.label}>Promotional Tag / Badge</label>
+                    <input
+                      className={s.input}
+                      value={form.discount_tag}
+                      onChange={e => setForm(f => ({ ...f, discount_tag: e.target.value }))}
+                      placeholder="e.g. Diwali Special, Early Bird"
                     />
                   </div>
                 </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginTop: '0.75rem', flexWrap: 'wrap' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#888' }}>Quick Discount Presets:</span>
-                  {[0, 10, 15, 20, 25, 28, 30, 50].map(pct => (
-                    <button
-                      key={pct}
-                      type="button"
-                      onClick={() => {
-                        const base = form.original_price || form.price || 0
-                        const payable = pct > 0 ? Math.round(base * (1 - pct / 100)) : base
-                        setForm(f => ({
-                          ...f,
-                          discount_percent: pct,
-                          price: payable,
-                          discount_tag: pct > 0 ? `${pct}% Special Event Discount` : ''
-                        }))
-                      }}
-                      style={{
-                        padding: '0.2rem 0.55rem',
-                        fontSize: '0.72rem',
-                        borderRadius: 4,
-                        border: '1px solid',
-                        borderColor: form.discount_percent === pct ? '#C9A96E' : 'rgba(255,255,255,0.15)',
-                        background: form.discount_percent === pct ? 'rgba(201,169,110,0.2)' : 'rgba(255,255,255,0.04)',
-                        color: form.discount_percent === pct ? '#E8C98A' : '#bbb',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      {pct === 0 ? 'No Discount' : `${pct}% OFF`}
-                    </button>
-                  ))}
-                </div>
-                {form.discount_percent > 0 && (
-                  <div style={{ marginTop: '0.6rem', fontSize: '0.8rem', color: '#10B981', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                    <GoogleIcon name="savings" size={16} />
-                    <span>Applied {form.discount_percent}% off: Students pay ₹{form.price.toLocaleString()} (saves ₹{((form.original_price || form.price) - form.price).toLocaleString()})</span>
-                  </div>
-                )}
               </div>
               <div className={s.field}>
                 <label className={s.label}>Duration</label>
-                <input className={s.input} value={form.duration} onChange={e => setForm(f => ({ ...f, duration: e.target.value }))} placeholder="6 Weeks, 12 Hours" />
+                <input className={s.input} value={form.duration} onChange={e => setForm(f => ({ ...f, duration: e.target.value }))} placeholder="e.g. 6 Weeks" />
               </div>
               <div className={s.field}>
                 <label className={s.label}>Level</label>
-                <select className={s.select} value={form.level} onChange={e => setForm(f => ({ ...f, level: e.target.value as any }))}>
+                <select className={s.input} value={form.level} onChange={e => setForm(f => ({ ...f, level: e.target.value as any }))}>
                   <option value="beginner">Beginner</option>
                   <option value="intermediate">Intermediate</option>
                   <option value="advanced">Advanced</option>
@@ -2752,229 +3437,80 @@ function CoursesSection() {
               </div>
               <div className={s.field}>
                 <label className={s.label}>Instructor</label>
-                <input className={s.input} value={form.instructor} onChange={e => setForm(f => ({ ...f, instructor: e.target.value }))} placeholder="Instructor name" />
+                <input className={s.input} value={form.instructor} onChange={e => setForm(f => ({ ...f, instructor: e.target.value }))} placeholder="e.g. Shakti Sabha Faculty" />
               </div>
 
+              {/* Course Cover Image with Dimensions & Preview */}
               <div className={`${s.field} ${s.formFull}`}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem', flexWrap: 'wrap', gap: '0.4rem' }}>
-                  <label className={s.label} style={{ margin: 0 }}>Course Banner / Cover Image</label>
-                  <div style={{ fontSize: '0.75rem', color: '#C9A96E', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                    <GoogleIcon name="aspect_ratio" size={15} />
-                    <span>📐 Recommended: 1200 × 675 px (16:9 ratio) • Max 2MB</span>
-                  </div>
-                </div>
-
-                {/* Hidden File Input for Upload & Replace */}
-                <input
-                  ref={fileRef}
-                  type="file"
-                  accept="image/*"
-                  style={{ display: 'none' }}
-                  onChange={e => e.target.files?.[0] && uploadCover(e.target.files[0])}
-                />
-
-                {form.cover_image_url ? (
-                  /* Existing / Selected Banner Preview with Full Actions */
-                  <div style={{
-                    position: 'relative',
-                    borderRadius: 12,
-                    overflow: 'hidden',
-                    border: '1px solid rgba(255,255,255,0.15)',
-                    background: 'rgba(0,0,0,0.5)',
-                    marginBottom: '0.85rem',
-                    maxWidth: 580
-                  }}>
-                    <div style={{ position: 'relative', width: '100%', height: 210, background: '#111' }}>
-                      <img
-                        src={form.cover_image_url}
-                        alt="Course Banner Preview"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                      />
-                      {imageDim && (
-                        <div style={{
-                          position: 'absolute',
-                          top: 8,
-                          left: 8,
-                          background: 'rgba(0,0,0,0.75)',
-                          backdropFilter: 'blur(4px)',
-                          padding: '0.25rem 0.6rem',
-                          borderRadius: 6,
-                          fontSize: '0.74rem',
-                          color: '#E0E7FF',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '4px',
-                          border: '1px solid rgba(255,255,255,0.1)'
-                        }}>
-                          <GoogleIcon name="aspect_ratio" size={14} />
-                          <span>{imageDim.width} × {imageDim.height} px</span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Banner Action Bar: Crop, Replace, Delete */}
-                    <div style={{
-                      display: 'flex',
-                      gap: '0.6rem',
-                      padding: '0.75rem 1rem',
-                      background: 'rgba(20, 24, 33, 0.95)',
-                      borderTop: '1px solid rgba(255,255,255,0.1)',
-                      alignItems: 'center',
-                      flexWrap: 'wrap'
-                    }}>
-                      <button
-                        type="button"
-                        className={s.btnPrimary}
-                        style={{
-                          padding: '0.4rem 0.85rem',
-                          fontSize: '0.8rem',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '6px',
-                          background: '#D97706',
-                          borderColor: '#B45309'
-                        }}
-                        onClick={() => setShowCropModal(true)}
-                        title="Open interactive manual crop to adjust frame, zoom & position"
-                      >
-                        <GoogleIcon name="crop" size={15} />
-                        ✂️ Manual Crop
-                      </button>
-
-                      <button
-                        type="button"
-                        className={s.btnSecondary}
-                        style={{
-                          padding: '0.4rem 0.85rem',
-                          fontSize: '0.8rem',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '5px'
-                        }}
-                        disabled={cropping}
-                        onClick={async () => {
-                          if (!form.cover_image_url) return
-                          setCropping(true)
-                          try {
-                            const cropped = await cropImageTo16_9(form.cover_image_url)
-                            setForm(f => ({ ...f, cover_image_url: cropped }))
-                            setImageDim({ width: 1200, height: 675 })
-                            setAlert({ type: 'success', msg: 'Banner auto-cropped to 16:9 (1200×675)!' })
-                          } catch (e) {
-                            console.error('Auto crop failed', e)
-                          } finally {
-                            setCropping(false)
-                          }
-                        }}
-                        title="Automatically center-crop to 16:9 (1200×675)"
-                      >
-                        <GoogleIcon name="auto_fix_high" size={15} />
-                        {cropping ? 'Auto-Cropping...' : '⚡ Auto-Crop 16:9'}
-                      </button>
-
-                      <button
-                        type="button"
-                        className={s.btnSecondary}
-                        style={{
-                          padding: '0.4rem 0.9rem',
-                          fontSize: '0.8rem',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '6px'
-                        }}
-                        onClick={() => fileRef.current?.click()}
-                        disabled={uploading}
-                        title="Upload a new image file to replace this banner"
-                      >
-                        <GoogleIcon name="cached" size={16} />
-                        {uploading ? 'Uploading...' : '🔄 Replace Banner'}
-                      </button>
-
-                      <button
-                        type="button"
-                        className={s.btnDanger}
-                        style={{
-                          padding: '0.4rem 0.9rem',
-                          fontSize: '0.8rem',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '6px',
-                          marginLeft: 'auto'
-                        }}
-                        onClick={() => {
-                          if (confirm('Are you sure you want to delete this course banner?')) {
-                            setForm(f => ({ ...f, cover_image_url: '' }))
-                            setImageDim(null)
-                          }
-                        }}
-                        title="Delete current banner"
-                      >
-                        <GoogleIcon name="delete" size={16} />
-                        🗑️ Delete Banner
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  /* No Banner: Clean Dropzone */
-                  <div style={{
-                    border: '2px dashed rgba(255,255,255,0.2)',
-                    borderRadius: 12,
-                    padding: '1.75rem 1rem',
-                    textAlign: 'center',
-                    background: 'rgba(255,255,255,0.02)',
-                    marginBottom: '0.85rem',
-                    maxWidth: 580
-                  }}>
-                    <GoogleIcon name="add_photo_alternate" size={40} style={{ color: 'rgba(255,255,255,0.4)', marginBottom: '0.5rem' }} />
-                    <div style={{ fontWeight: 600, fontSize: '0.92rem', color: '#EEE', marginBottom: '0.25rem' }}>
-                      No Course Banner Selected
-                    </div>
-                    <div style={{ fontSize: '0.78rem', color: '#888', marginBottom: '1.1rem' }}>
-                      Select an image file or paste an external image link below
-                    </div>
-                    <button
-                      type="button"
-                      className={s.btnPrimary}
-                      style={{ padding: '0.45rem 1.1rem', fontSize: '0.82rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
-                      onClick={() => fileRef.current?.click()}
-                      disabled={uploading}
-                    >
-                      <GoogleIcon name="upload" size={16} />
-                      {uploading ? 'Uploading...' : '📁 Choose Image File'}
-                    </button>
-                  </div>
-                )}
-
-                {/* Direct Image URL input */}
-                <div style={{ display: 'flex', gap: '0.6rem', alignItems: 'center', maxWidth: 580 }}>
-                  <input
-                    className={s.input}
-                    style={{ flex: 1 }}
-                    value={form.cover_image_url}
-                    onChange={e => setForm(f => ({ ...f, cover_image_url: e.target.value }))}
-                    placeholder="Or paste direct image URL (https://...)"
-                  />
+                <label className={s.label}>Cover Image</label>
+                <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
+                <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', flexWrap: 'wrap' }}>
+                  <button type="button" className={s.btnSecondary} onClick={() => fileRef.current?.click()}>
+                    <GoogleIcon name="upload" size={16} /> Upload Image (Auto-Crops 16:9)
+                  </button>
                   {form.cover_image_url && (
                     <button
                       type="button"
                       className={s.btnSecondary}
-                      style={{ padding: '0.45rem 0.8rem', fontSize: '0.78rem', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '5px' }}
                       onClick={() => setShowCropModal(true)}
+                      style={{ color: '#C9A96E', borderColor: 'rgba(201,169,110,0.3)' }}
                     >
-                      <GoogleIcon name="crop" size={15} /> Crop
+                      <GoogleIcon name="crop" size={16} /> Manual Crop &amp; Adjust
                     </button>
                   )}
                 </div>
+                <input className={s.input} value={form.cover_image_url} onChange={e => setForm(f => ({ ...f, cover_image_url: e.target.value }))} placeholder="https://... or upload above" />
+                {form.cover_image_url && (
+                  <div style={{ marginTop: '0.5rem' }}>
+                    <img src={form.cover_image_url} alt="Cover preview" style={{ width: '100%', maxHeight: 180, objectFit: 'cover', borderRadius: 6, border: '1px solid rgba(255,255,255,0.1)' }} />
+                    {imageDim && (
+                      <div style={{ fontSize: '0.72rem', color: '#888', marginTop: '0.25rem' }}>
+                        Dimensions: {imageDim.width} × {imageDim.height}px (Ratio: {(imageDim.width / imageDim.height).toFixed(2)})
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
+              {/* Syllabus Builder */}
               <div className={`${s.field} ${s.formFull}`}>
-                <label className={s.label}>Syllabus</label>
-                {form.syllabus.map((item, i) => (
-                  <div key={i} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                    <input className={s.input} style={{ width: 120, flexShrink: 0 }} value={item.week} onChange={e => setForm(f => ({ ...f, syllabus: f.syllabus.map((s, j) => j === i ? { ...s, week: e.target.value } : s) }))} placeholder="Week 1" />
-                    <input className={s.input} value={item.topic} onChange={e => setForm(f => ({ ...f, syllabus: f.syllabus.map((s, j) => j === i ? { ...s, topic: e.target.value } : s) }))} placeholder="Topic / Module title" />
+                <label className={s.label}>Course Syllabus / Modules</label>
+                {form.syllabus.map((syl, idx) => (
+                  <div key={idx} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'center' }}>
+                    <input
+                      className={s.input}
+                      style={{ width: '110px', flexShrink: 0 }}
+                      value={syl.week}
+                      onChange={e => {
+                        const val = e.target.value
+                        setForm(f => ({
+                          ...f,
+                          syllabus: f.syllabus.map((item, i) => i === idx ? { ...item, week: val } : item)
+                        }))
+                      }}
+                      placeholder="Week 1"
+                    />
+                    <input
+                      className={s.input}
+                      value={syl.topic}
+                      onChange={e => {
+                        const val = e.target.value
+                        setForm(f => ({
+                          ...f,
+                          syllabus: f.syllabus.map((item, i) => i === idx ? { ...item, topic: val } : item)
+                        }))
+                      }}
+                      placeholder="Module Topic / Key Takeaway"
+                    />
                     {form.syllabus.length > 1 && (
-                      <button className={s.btnDanger} style={{ flexShrink: 0, padding: '0 0.65rem' }} onClick={() => setForm(f => ({ ...f, syllabus: f.syllabus.filter((_, j) => j !== i) }))}>✕</button>
+                      <button
+                        type="button"
+                        className={s.btnDanger}
+                        style={{ padding: '0.4rem', minWidth: 'auto' }}
+                        onClick={() => setForm(f => ({ ...f, syllabus: f.syllabus.filter((_, i) => i !== idx) }))}
+                      >
+                        <GoogleIcon name="delete" size={16} />
+                      </button>
                     )}
                   </div>
                 ))}
@@ -3224,12 +3760,10 @@ function CounsellingSection() {
   const filteredRequests = requests.filter(r => {
     const matchesStatus = filter === 'all' || r.status === filter
     const matchesCountry = countryFilter === 'all' || r.country === countryFilter
-    const isCourseInquiry = (r.concern || '').includes('[Course') || (r.concern || '').includes('[Cohort')
-    const matchesStream =
-      streamFilter === 'all' ||
-      (streamFilter === 'courses' && isCourseInquiry) ||
-      (streamFilter === 'counselling' && !isCourseInquiry)
-    return matchesStatus && matchesCountry && matchesStream
+    const isCourseInquiry = (r.concern || '').includes('[Course') || (r.concern || '').includes('[Cohort') || (r.concern || '').toLowerCase().includes('cohort')
+    // Exclude course inquiries from Counselling section - courses are managed in Courses section
+    if (isCourseInquiry) return false
+    return matchesStatus && matchesCountry
   })
 
   return (
@@ -3309,29 +3843,23 @@ function CounsellingSection() {
         </div>
       </div>
 
+      {/* ── NOTICE BANNER: COURSES SEPARATED ── */}
+      <div style={{ background: 'rgba(201, 169, 110, 0.08)', border: '1px solid rgba(201, 169, 110, 0.25)', borderRadius: 10, padding: '0.75rem 1.15rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', fontSize: '0.85rem', color: '#E5E7EB' }}>
+          <GoogleIcon name="info" size={20} style={{ color: '#C9A96E', flexShrink: 0 }} />
+          <span><strong>Course Inquiries Moved:</strong> Student cohort applications and course admissions are now managed directly under the <strong>Courses</strong> section. This section is dedicated exclusively to confidential counselling, family mediation, and personal crisis cases.</span>
+        </div>
+      </div>
+
       {/* ── REQUESTS TABLE HEADER ── */}
       <div className={s.sectionHeader} style={{ flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
         <div>
           <span className={s.sectionTitle} style={{ display: 'block' }}>
-            Admissions &amp; Counselling Intakes ({filteredRequests.length})
+            Confidential Counselling Requests ({filteredRequests.length})
           </span>
-          <div style={{ display: 'flex', gap: '0.45rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
-            {[
-              { key: 'all', label: 'All Inquiries' },
-              { key: 'courses', label: 'Course Admissions Only' },
-              { key: 'counselling', label: 'Counselling Cases Only' }
-            ].map(t => (
-              <button
-                key={t.key}
-                type="button"
-                className={`${s.tab} ${streamFilter === t.key ? s.tabActive : ''}`}
-                style={{ padding: '0.22rem 0.65rem', fontSize: '0.75rem' }}
-                onClick={() => setStreamFilter(t.key as any)}
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
+          <span style={{ fontSize: '0.8rem', color: '#888' }}>
+            Support, family mediation, and personal crisis intake cases
+          </span>
         </div>
 
         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -3348,7 +3876,7 @@ function CounsellingSection() {
             style={{ padding: '0.42rem 0.95rem', fontSize: '0.78rem', display: 'inline-flex', alignItems: 'center', gap: '5px' }}
             onClick={() => setShowAddModal(true)}
           >
-            <GoogleIcon name="add" size={16} /> Log Contact / Course Inquiry
+            <GoogleIcon name="add" size={16} /> Log Counselling Case
           </button>
         </div>
       </div>
