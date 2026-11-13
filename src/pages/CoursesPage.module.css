@@ -183,8 +183,8 @@
 .coursesGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
 }
 
 .courseCard {
@@ -196,7 +196,7 @@
   flex-direction: column;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   content-visibility: auto;
-  contain-intrinsic-size: 380px;
+  contain-intrinsic-size: auto 340px;
 }
 
 .courseCard:hover {
@@ -241,10 +241,10 @@
 }
 
 .courseBody {
-  padding: 1rem 1.25rem;
+  padding: 0.85rem 1.15rem 0.95rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.3rem;
   flex-grow: 1;
 }
 
@@ -258,10 +258,11 @@
 
 .courseTitle {
   font-family: var(--font-display, 'Cinzel', serif);
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #111827;
-  line-height: 1.3;
+  line-height: 1.35;
+  margin: 0.15rem 0 0.25rem;
 }
 
 .courseMeta {
@@ -544,10 +545,10 @@
 }
 
 .descText {
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   color: #4B5563;
-  line-height: 1.6;
-  margin: 0.35rem 0 0.75rem;
+  line-height: 1.5;
+  margin: 0.15rem 0 0.35rem;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -556,12 +557,13 @@
 
 .metaGrid {
   display: flex;
-  gap: 1.25rem;
-  margin: 0.5rem 0 1rem;
-  font-size: 0.82rem;
+  align-items: center;
+  gap: 1.15rem;
+  margin: 0.25rem 0 0.35rem;
+  font-size: 0.8rem;
   color: #6B7280;
   border-top: 1px solid #F3F4F6;
-  padding-top: 0.75rem;
+  padding-top: 0.45rem;
 }
 
 .metaItem {
@@ -594,9 +596,9 @@
 .cardFooter {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  margin-top: auto;
-  padding-top: 1rem;
+  gap: 0.45rem;
+  margin-top: 0.35rem;
+  padding-top: 0.55rem;
   border-top: 1px solid #F3F4F6;
   width: 100%;
 }
@@ -703,13 +705,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.35rem;
+  gap: 0.3rem;
   background: none;
   border: none;
-  padding: 0;
-  margin: 0.3rem auto 0.75rem;
+  padding: 0.1rem 0;
+  margin: 0.15rem auto 0.35rem;
   font-family: var(--font-primary, 'Poppins', sans-serif);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: #DC143C;
   cursor: pointer;
