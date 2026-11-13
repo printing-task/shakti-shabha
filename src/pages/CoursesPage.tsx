@@ -164,6 +164,68 @@ export default function CoursesPage() {
   const [detailCourse, setDetailCourse] = useState<CourseItem | null>(null)
   const [dbCourses, setDbCourses] = useState<CourseItem[]>([])
 
+  // Admissions & Contact Form State
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    city: '',
+    course: 'General Admissions & Guidance',
+    message: ''
+  })
+  const [submittingContact, setSubmittingContact] = useState(false)
+  const [contactSuccess, setContactSuccess] = useState(false)
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const cleanPhone = contactForm.phone.replace(/[^0-9]/g, '')
+    if (cleanPhone.length < 10) {
+      alert('Validation Alert: Please enter a valid 10-digit mobile number.')
+      return
+    }
+    setSubmittingContact(true)
+
+    const payload = {
+      name: contactForm.name.trim(),
+      email: contactForm.email.trim(),
+      phone: contactForm.phone.trim(),
+      city: contactForm.city.trim() || 'Online / Unspecified',
+      concern: `[Course Inquiry] ${contactForm.course}`,
+      message: contactForm.message.trim() || `Inquiry for program: ${contactForm.course}`,
+      status: 'pending',
+      created_at: new Date().toISOString()
+    }
+
+    try {
+      await supabase.from('counselling_requests').insert([payload])
+    } catch (err) {
+      console.warn('Supabase course inquiry insert error:', err)
+    }
+
+    try {
+      const local = localStorage.getItem('shakti_counselling_requests')
+      const list = local ? JSON.parse(local) : []
+      const newRecord = { ...payload, id: `req_${Date.now()}` }
+      localStorage.setItem('shakti_counselling_requests', JSON.stringify([newRecord, ...list]))
+    } catch (err) {
+      console.warn('LocalStorage course inquiry error:', err)
+    }
+
+    window.dispatchEvent(new Event('counselling_requests_updated'))
+    window.dispatchEvent(new Event('storage'))
+
+    setSubmittingContact(false)
+    setContactSuccess(true)
+    setContactForm({
+      name: '',
+      email: '',
+      phone: '',
+      city: '',
+      course: 'General Admissions & Guidance',
+      message: ''
+    })
+  }
+
   useEffect(() => {
     async function loadCourses() {
       let fetched: Course[] = []
@@ -459,25 +521,57 @@ export default function CoursesPage() {
                 <p style={{ fontSize: '0.88rem', color: '#4B5563', marginTop: '0.25rem' }}>{selectedCourse}</p>
               </div>
 
-              <form onSubmit={(e) => {
+              <form onSubmit={async (e) => {
                 e.preventDefault()
                 const formEl = e.currentTarget as HTMLFormElement
+                const nameInput = formEl.elements.namedItem('fullName') as HTMLInputElement
+                const emailInput = formEl.elements.namedItem('email') as HTMLInputElement
                 const phoneInput = formEl.elements.namedItem('phone') as HTMLInputElement
                 const cleanPhone = phoneInput?.value.replace(/[^0-9]/g, '') || ''
                 if (cleanPhone.length < 10) {
-                  alert('Validation Alert: Please enter a valid 10-digit mobile number (numbers only).')
+                  alert('Validation Alert: Please enter a valid 10-digit mobile number.')
                   return
                 }
-                alert('Application Submitted: Your cohort registration request has been received. Our admissions team will contact you shortly.')
+
+                const payload = {
+                  name: nameInput?.value.trim() || 'Cohort Applicant',
+                  email: emailInput?.value.trim() || '',
+                  phone: phoneInput?.value.trim() || '',
+                  city: 'Online / Admissions Intake',
+                  concern: `[Cohort Application] ${selectedCourse}`,
+                  message: `Direct cohort application submitted for: ${selectedCourse}`,
+                  status: 'pending',
+                  created_at: new Date().toISOString()
+                }
+
+                try {
+                  await supabase.from('counselling_requests').insert([payload])
+                } catch (err) {
+                  console.warn('Supabase cohort application error:', err)
+                }
+
+                try {
+                  const local = localStorage.getItem('shakti_counselling_requests')
+                  const list = local ? JSON.parse(local) : []
+                  const newRecord = { ...payload, id: `req_${Date.now()}` }
+                  localStorage.setItem('shakti_counselling_requests', JSON.stringify([newRecord, ...list]))
+                } catch (err) {
+                  console.warn('LocalStorage cohort error:', err)
+                }
+
+                window.dispatchEvent(new Event('counselling_requests_updated'))
+                window.dispatchEvent(new Event('storage'))
+
+                alert('Application Submitted: Your cohort registration request has been received. Our admissions counsel will contact you shortly.')
                 setSelectedCourse(null)
               }} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#374151', marginBottom: '0.25rem' }}>Full Name</label>
-                  <input required minLength={2} type="text" placeholder="Your name as it should appear on certificate" style={{ width: '100%', padding: '0.65rem 0.85rem', borderRadius: '6px', border: '1px solid #D1D5DB', fontSize: '0.88rem' }} />
+                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#374151', marginBottom: '0.25rem' }}>Full Name *</label>
+                  <input name="fullName" required minLength={2} type="text" placeholder="Your name as it should appear on certificate" style={{ width: '100%', padding: '0.65rem 0.85rem', borderRadius: '6px', border: '1px solid #D1D5DB', fontSize: '0.88rem' }} />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#374151', marginBottom: '0.25rem' }}>Email Address (LMS Login)</label>
-                  <input required type="email" placeholder="you@email.com" style={{ width: '100%', padding: '0.65rem 0.85rem', borderRadius: '6px', border: '1px solid #D1D5DB', fontSize: '0.88rem' }} />
+                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#374151', marginBottom: '0.25rem' }}>Email Address (LMS Login) *</label>
+                  <input name="email" required type="email" placeholder="you@email.com" style={{ width: '100%', padding: '0.65rem 0.85rem', borderRadius: '6px', border: '1px solid #D1D5DB', fontSize: '0.88rem' }} />
                 </div>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#374151', marginBottom: '0.25rem' }}>WhatsApp / Mobile</label>
@@ -584,6 +678,172 @@ export default function CoursesPage() {
             ))}
           </div>
         </div>
+
+        {/* ── COURSE INQUIRIES & ADMISSIONS CONTACT US SECTION ── */}
+        <section className={cp.contactSection} id="admissions-contact">
+          <div className={cp.contactGrid}>
+            {/* Left Info Column */}
+            <div className={cp.contactInfoCol}>
+              <span className={cp.contactEyebrow}>Academic Admissions &amp; Counsel</span>
+              <h2 className={cp.contactHeading}>Have Questions About Our Programs?</h2>
+              <p className={cp.contactSubtext}>
+                Whether you need advice choosing the right physical combat or mental fortitude curriculum, want to inquire about custom offline workshops for schools/institutions, or have questions about cohort prerequisites, our admissions team is here to support you.
+              </p>
+
+              <div className={cp.contactHighlights}>
+                <div className={cp.contactHighlightItem}>
+                  <div className={cp.highlightIcon}>
+                    <GoogleIcon name="call" size={20} style={{ color: '#DC143C' }} />
+                  </div>
+                  <div>
+                    <div className={cp.highlightTitle}>Helpline &amp; WhatsApp</div>
+                    <div className={cp.highlightDesc}>+91 98201 44321 · Mon–Sat, 9 AM – 7 PM IST</div>
+                  </div>
+                </div>
+
+                <div className={cp.contactHighlightItem}>
+                  <div className={cp.highlightIcon}>
+                    <GoogleIcon name="mail" size={20} style={{ color: '#DC143C' }} />
+                  </div>
+                  <div>
+                    <div className={cp.highlightTitle}>Admissions Email</div>
+                    <div className={cp.highlightDesc}>admissions@shaktisabha.org</div>
+                  </div>
+                </div>
+
+                <div className={cp.contactHighlightItem}>
+                  <div className={cp.highlightIcon}>
+                    <GoogleIcon name="verified_user" size={20} style={{ color: '#DC143C' }} />
+                  </div>
+                  <div>
+                    <div className={cp.highlightTitle}>Confidential &amp; Verified</div>
+                    <div className={cp.highlightDesc}>Direct guidance from certified Shakti Sabha mentors</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Form Column */}
+            <div className={cp.contactFormCard}>
+              <div style={{ marginBottom: '1.25rem' }}>
+                <h3 className={cp.formCardTitle}>Course Inquiry Form</h3>
+                <p className={cp.formCardSub}>Fill out your details to receive full syllabus &amp; enrollment counsel.</p>
+              </div>
+
+              {contactSuccess ? (
+                <div className={cp.successBox}>
+                  <GoogleIcon name="check_circle" size={40} style={{ color: '#10B981', marginBottom: '0.5rem' }} />
+                  <h4 style={{ margin: '0 0 0.35rem', color: '#111827', fontSize: '1.1rem' }}>Inquiry Submitted Successfully!</h4>
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: '#4B5563', lineHeight: 1.5 }}>
+                    Thank you. Your course inquiry has been safely logged in our admissions portal. Our mentors will reach out to you within 24 hours.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setContactSuccess(false)}
+                    style={{
+                      marginTop: '1rem',
+                      padding: '0.5rem 1.25rem',
+                      background: '#DC143C',
+                      color: '#FFFFFF',
+                      border: 'none',
+                      borderRadius: '9999px',
+                      fontSize: '0.8rem',
+                      fontWeight: 600,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Submit Another Inquiry
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleContactSubmit} className={cp.inquiryForm}>
+                  <div className={cp.formRow}>
+                    <div className={cp.formGroup}>
+                      <label className={cp.formLabel}>Full Name *</label>
+                      <input
+                        required
+                        type="text"
+                        placeholder="Enter your name"
+                        value={contactForm.name}
+                        onChange={e => setContactForm(f => ({ ...f, name: e.target.value }))}
+                        className={cp.formInput}
+                      />
+                    </div>
+                    <div className={cp.formGroup}>
+                      <label className={cp.formLabel}>WhatsApp / Mobile *</label>
+                      <input
+                        required
+                        type="tel"
+                        placeholder="10-digit mobile number"
+                        value={contactForm.phone}
+                        onChange={e => setContactForm(f => ({ ...f, phone: e.target.value }))}
+                        className={cp.formInput}
+                      />
+                    </div>
+                  </div>
+
+                  <div className={cp.formRow}>
+                    <div className={cp.formGroup}>
+                      <label className={cp.formLabel}>Email Address *</label>
+                      <input
+                        required
+                        type="email"
+                        placeholder="you@example.com"
+                        value={contactForm.email}
+                        onChange={e => setContactForm(f => ({ ...f, email: e.target.value }))}
+                        className={cp.formInput}
+                      />
+                    </div>
+                    <div className={cp.formGroup}>
+                      <label className={cp.formLabel}>City / Location</label>
+                      <input
+                        type="text"
+                        placeholder="e.g. Pune, Mumbai, Delhi"
+                        value={contactForm.city}
+                        onChange={e => setContactForm(f => ({ ...f, city: e.target.value }))}
+                        className={cp.formInput}
+                      />
+                    </div>
+                  </div>
+
+                  <div className={cp.formGroup}>
+                    <label className={cp.formLabel}>Program of Interest *</label>
+                    <select
+                      value={contactForm.course}
+                      onChange={e => setContactForm(f => ({ ...f, course: e.target.value }))}
+                      className={cp.formSelect}
+                    >
+                      <option value="General Admissions & Guidance">General Admissions &amp; Program Guidance</option>
+                      {allCourses.map(c => (
+                        <option key={c.id} value={c.title}>{c.title}</option>
+                      ))}
+                      <option value="Custom Institutional / School Workshop">Custom School / Corporate Workshop</option>
+                    </select>
+                  </div>
+
+                  <div className={cp.formGroup}>
+                    <label className={cp.formLabel}>Message or Questions (Optional)</label>
+                    <textarea
+                      rows={3}
+                      placeholder="Ask about batch timings, fee concessions, prerequisites, or personal accommodations..."
+                      value={contactForm.message}
+                      onChange={e => setContactForm(f => ({ ...f, message: e.target.value }))}
+                      className={cp.formTextarea}
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={submittingContact}
+                    className={cp.formSubmitBtn}
+                  >
+                    {submittingContact ? 'Submitting...' : 'Send Course Inquiry →'}
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+        </section>
       </div>
     </main>
   )

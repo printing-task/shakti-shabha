@@ -3023,7 +3023,22 @@ function CounsellingSection() {
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState<string>('all')
   const [countryFilter, setCountryFilter] = useState<string>('all')
+  const [streamFilter, setStreamFilter] = useState<'all' | 'courses' | 'counselling'>('all')
   const [viewItem, setViewItem] = useState<any | null>(null)
+  const [showAddModal, setShowAddModal] = useState(false)
+  const [savingInquiry, setSavingInquiry] = useState(false)
+  const [addForm, setAddForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    country: 'India',
+    state: '',
+    city: '',
+    streamType: 'course',
+    concern: '[Course Inquiry] Self-Defense Foundations',
+    message: '',
+    status: 'pending'
+  })
 
   const parseRequestOrigin = (r: any) => {
     let country = r.country || ''
@@ -3097,7 +3112,85 @@ function CounsellingSection() {
     setLoading(false)
   }
 
-  useEffect(() => { load() }, [])
+  useEffect(() => {
+    load()
+    const handleUpdate = () => load()
+    window.addEventListener('counselling_requests_updated', handleUpdate)
+    window.addEventListener('storage', handleUpdate)
+    return () => {
+      window.removeEventListener('counselling_requests_updated', handleUpdate)
+      window.removeEventListener('storage', handleUpdate)
+    }
+  }, [])
+
+  const handleAddInquiry = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!addForm.name.trim() || !addForm.email.trim()) {
+      window.alert('Validation Alert: Please provide at least applicant name and email.')
+      return
+    }
+    setSavingInquiry(true)
+    const newId = `req_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`
+    const payload = {
+      id: newId,
+      name: addForm.name.trim(),
+      email: addForm.email.trim(),
+      phone: addForm.phone.trim() || '',
+      country: addForm.country.trim() || 'India',
+      state: addForm.state.trim() || '',
+      city: addForm.city.trim() || '',
+      concern: addForm.concern.trim(),
+      message: addForm.message.trim() || 'Logged manually by administrator.',
+      status: addForm.status,
+      created_at: new Date().toISOString()
+    }
+
+    try {
+      await supabase.from('counselling_requests').insert([payload])
+    } catch (err) {
+      console.warn('Supabase add inquiry error:', err)
+    }
+
+    try {
+      const local = localStorage.getItem('shakti_counselling_requests')
+      const list = local ? JSON.parse(local) : []
+      localStorage.setItem('shakti_counselling_requests', JSON.stringify([payload, ...list]))
+    } catch (err) { /* ignore */ }
+
+    setRequests(prev => [payload, ...prev])
+    setSavingInquiry(false)
+    setShowAddModal(false)
+    setAddForm({
+      name: '',
+      email: '',
+      phone: '',
+      country: 'India',
+      state: '',
+      city: '',
+      streamType: 'course',
+      concern: '[Course Inquiry] Self-Defense Foundations',
+      message: '',
+      status: 'pending'
+    })
+  }
+
+  const handleDeleteRequest = async (id: string, name: string) => {
+    if (!window.confirm(`Are you sure you want to delete inquiry record for "${name}"?`)) return
+    try {
+      await supabase.from('counselling_requests').delete().eq('id', id)
+    } catch (err) { /* ignore */ }
+
+    try {
+      const local = localStorage.getItem('shakti_counselling_requests')
+      if (local) {
+        const list = JSON.parse(local).filter((r: any) => r.id !== id)
+        localStorage.setItem('shakti_counselling_requests', JSON.stringify(list))
+      }
+    } catch (err) { /* ignore */ }
+
+    setRequests(prev => prev.filter(r => r.id !== id))
+    if (viewItem?.id === id) setViewItem(null)
+  }
 
   const updateStatus = async (id: string, status: string) => {
     // 1. Supabase
@@ -3131,7 +3224,12 @@ function CounsellingSection() {
   const filteredRequests = requests.filter(r => {
     const matchesStatus = filter === 'all' || r.status === filter
     const matchesCountry = countryFilter === 'all' || r.country === countryFilter
-    return matchesStatus && matchesCountry
+    const isCourseInquiry = (r.concern || '').includes('[Course') || (r.concern || '').includes('[Cohort')
+    const matchesStream =
+      streamFilter === 'all' ||
+      (streamFilter === 'courses' && isCourseInquiry) ||
+      (streamFilter === 'counselling' && !isCourseInquiry)
+    return matchesStatus && matchesCountry && matchesStream
   })
 
   return (
@@ -3212,16 +3310,46 @@ function CounsellingSection() {
       </div>
 
       {/* ── REQUESTS TABLE HEADER ── */}
-      <div className={s.sectionHeader}>
-        <span className={s.sectionTitle}>
-          Counselling Intakes ({filteredRequests.length})
-        </span>
-        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-          {['all', 'pending', 'reviewed', 'contacted', 'resolved'].map(f => (
-            <button key={f} className={`${s.tab} ${filter === f ? s.tabActive : ''}`} onClick={() => setFilter(f)}>
-              {f.charAt(0).toUpperCase() + f.slice(1)}
-            </button>
-          ))}
+      <div className={s.sectionHeader} style={{ flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+        <div>
+          <span className={s.sectionTitle} style={{ display: 'block' }}>
+            Admissions &amp; Counselling Intakes ({filteredRequests.length})
+          </span>
+          <div style={{ display: 'flex', gap: '0.45rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+            {[
+              { key: 'all', label: 'All Inquiries' },
+              { key: 'courses', label: 'Course Admissions Only' },
+              { key: 'counselling', label: 'Counselling Cases Only' }
+            ].map(t => (
+              <button
+                key={t.key}
+                type="button"
+                className={`${s.tab} ${streamFilter === t.key ? s.tabActive : ''}`}
+                style={{ padding: '0.22rem 0.65rem', fontSize: '0.75rem' }}
+                onClick={() => setStreamFilter(t.key as any)}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '0.4rem' }}>
+            {['all', 'pending', 'reviewed', 'contacted', 'resolved'].map(f => (
+              <button key={f} className={`${s.tab} ${filter === f ? s.tabActive : ''}`} style={{ fontSize: '0.78rem' }} onClick={() => setFilter(f)}>
+                {f.charAt(0).toUpperCase() + f.slice(1)}
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            className={s.btnPrimary}
+            style={{ padding: '0.42rem 0.95rem', fontSize: '0.78rem', display: 'inline-flex', alignItems: 'center', gap: '5px' }}
+            onClick={() => setShowAddModal(true)}
+          >
+            <GoogleIcon name="add" size={16} /> Log Contact / Course Inquiry
+          </button>
         </div>
       </div>
 
@@ -3265,6 +3393,11 @@ function CounsellingSection() {
                     </div>
                   </td>
                   <td>
+                    {r.concern && (r.concern.includes('[Course') || r.concern.includes('[Cohort')) && (
+                      <span style={{ background: 'rgba(220, 20, 60, 0.2)', color: '#FF8A9E', border: '1px solid rgba(220, 20, 60, 0.5)', padding: '0.12rem 0.45rem', borderRadius: '4px', fontSize: '0.68rem', fontWeight: 800, marginRight: '0.35rem', letterSpacing: '0.04em' }}>
+                        COURSE
+                      </span>
+                    )}
                     <span className={`${s.badge} ${s.badgeGray}`} style={{ fontSize: '0.78rem' }}>
                       {r.concern}
                     </span>
@@ -3285,7 +3418,12 @@ function CounsellingSection() {
                     </select>
                   </td>
                   <td>
-                    <button className={s.btnEdit} onClick={() => setViewItem(r)}>View Full</button>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                      <button className={s.btnEdit} onClick={() => setViewItem(r)}>View</button>
+                      <button className={s.btnDelete} onClick={() => handleDeleteRequest(r.id, r.name)} title="Delete Inquiry">
+                        <GoogleIcon name="delete" size={14} />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -3325,10 +3463,126 @@ function CounsellingSection() {
             </div>
             <div className={s.modalActions}>
               <button className={s.btnSecondary} onClick={() => setViewItem(null)}>Close</button>
-              <a href={`mailto:${viewItem.email}?subject=Re: Confidential Counselling Intake at Shakti Sabha`} className={s.btnPrimary} style={{ textDecoration: 'none' }}>
+              <a href={`mailto:${viewItem.email}?subject=Re: Shakti Sabha Admissions & Guidance`} className={s.btnPrimary} style={{ textDecoration: 'none' }}>
                 <GoogleIcon name="mail" size={16} /> Reply via Email
               </a>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Log New Contact / Course Inquiry Modal ── */}
+      {showAddModal && (
+        <div className={s.overlay} data-lenis-prevent="true" onClick={e => e.target === e.currentTarget && setShowAddModal(false)}>
+          <div className={s.modal} data-lenis-prevent="true" style={{ maxWidth: 620 }}>
+            <h2 className={s.modalTitle}>Log Contact / Course Inquiry Record</h2>
+            <button className={s.modalClose} onClick={() => setShowAddModal(false)}><GoogleIcon name="close" size={18} /></button>
+
+            <form onSubmit={handleAddInquiry} style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem', marginTop: '0.5rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                <div>
+                  <label className={s.label}>Applicant Full Name *</label>
+                  <input
+                    required
+                    type="text"
+                    className={s.input}
+                    placeholder="e.g. Radhika Sharma"
+                    value={addForm.name}
+                    onChange={e => setAddForm(f => ({ ...f, name: e.target.value }))}
+                  />
+                </div>
+                <div>
+                  <label className={s.label}>WhatsApp / Phone *</label>
+                  <input
+                    required
+                    type="tel"
+                    className={s.input}
+                    placeholder="+91 98201 44321"
+                    value={addForm.phone}
+                    onChange={e => setAddForm(f => ({ ...f, phone: e.target.value }))}
+                  />
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                <div>
+                  <label className={s.label}>Email Address *</label>
+                  <input
+                    required
+                    type="email"
+                    className={s.input}
+                    placeholder="applicant@example.com"
+                    value={addForm.email}
+                    onChange={e => setAddForm(f => ({ ...f, email: e.target.value }))}
+                  />
+                </div>
+                <div>
+                  <label className={s.label}>City / Location</label>
+                  <input
+                    type="text"
+                    className={s.input}
+                    placeholder="e.g. Pune, Maharashtra"
+                    value={addForm.city}
+                    onChange={e => setAddForm(f => ({ ...f, city: e.target.value }))}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className={s.label}>Inquiry Type / Stream *</label>
+                <select
+                  className={s.select}
+                  value={addForm.concern}
+                  onChange={e => setAddForm(f => ({ ...f, concern: e.target.value }))}
+                >
+                  <optgroup label="Course Admissions & Inquiries">
+                    <option value="[Course Inquiry] Self-Defense Foundations & Situational Readiness">[Course Inquiry] Self-Defense Foundations</option>
+                    <option value="[Course Inquiry] Character Building & Mental Fortitude">[Course Inquiry] Character Building &amp; Mental Fortitude</option>
+                    <option value="[Course Inquiry] Vedic Parenting & Dharmic Nurturance">[Course Inquiry] Vedic Parenting &amp; Dharmic Nurturance</option>
+                    <option value="[Course Inquiry] General Course Admissions Guidance">[Course Inquiry] General Admissions Guidance</option>
+                    <option value="[Cohort Application] Institutional School / College Workshop">[Cohort Application] Institutional Workshop</option>
+                  </optgroup>
+                  <optgroup label="Mental Health & Counselling">
+                    <option value="Anxiety, Stress & Overthinking">Anxiety, Stress &amp; Overthinking</option>
+                    <option value="Trauma, Domestic Coercion & Recovery">Trauma, Domestic Coercion &amp; Recovery</option>
+                    <option value="Self-Worth, Boundaries & Career Guidance">Self-Worth, Boundaries &amp; Career Guidance</option>
+                    <option value="Depression & Loss of Motivation">Depression &amp; Loss of Motivation</option>
+                  </optgroup>
+                </select>
+              </div>
+
+              <div>
+                <label className={s.label}>Status</label>
+                <select
+                  className={s.select}
+                  value={addForm.status}
+                  onChange={e => setAddForm(f => ({ ...f, status: e.target.value }))}
+                >
+                  <option value="pending">Pending (Unreviewed)</option>
+                  <option value="reviewed">Reviewed</option>
+                  <option value="contacted">Contacted</option>
+                  <option value="resolved">Resolved</option>
+                </select>
+              </div>
+
+              <div>
+                <label className={s.label}>Inquiry Notes / Questions</label>
+                <textarea
+                  className={s.textarea}
+                  rows={3}
+                  placeholder="Applicant queries, prerequisite notes, callback request times, etc."
+                  value={addForm.message}
+                  onChange={e => setAddForm(f => ({ ...f, message: e.target.value }))}
+                />
+              </div>
+
+              <div className={s.modalActions}>
+                <button type="button" className={s.btnSecondary} onClick={() => setShowAddModal(false)}>Cancel</button>
+                <button type="submit" disabled={savingInquiry} className={s.btnPrimary}>
+                  {savingInquiry ? 'Saving...' : 'Save Inquiry Record'}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
