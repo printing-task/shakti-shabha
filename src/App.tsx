@@ -57,10 +57,10 @@ function ScrollTriggerSync() {
   return null
 }
 
-/** Page wrapper — fades in on every route change */
+/** Page wrapper — fades in on every route change with guaranteed min-height */
 function PageTransition({ children }: { children: React.ReactNode }) {
   const { pathname } = useLocation()
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLElement>(null)
 
   useEffect(() => {
     if (!ref.current) return
@@ -68,12 +68,25 @@ function PageTransition({ children }: { children: React.ReactNode }) {
     if (pathname.startsWith('/admin')) return
     gsap.fromTo(
       ref.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.38, ease: 'power2.out' }
+      { opacity: 0.92 },
+      { opacity: 1, duration: 0.25, ease: 'power2.out', clearProps: 'opacity,transform' }
     )
   }, [pathname])
 
-  return <div ref={ref}>{children}</div>
+  return (
+    <main
+      ref={ref}
+      style={{
+        flex: '1 0 auto',
+        minHeight: '85vh',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      {children}
+    </main>
+  )
 }
 
 export default function App() {

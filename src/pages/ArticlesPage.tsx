@@ -462,7 +462,7 @@ export default function ArticlesPage() {
               >
                 Full Repository
               </span>
-              <h2 className={s.sectionTitle} style={{ marginBottom: 0, marginTop: '0.35rem' }}>
+              <h2 className={ap.articlesSectionTitle}>
                 All Articles & White Papers
               </h2>
             </div>

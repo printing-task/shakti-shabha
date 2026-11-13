@@ -11,6 +11,8 @@
   color: rgba(255, 255, 255, 0.75);
   padding: 5rem clamp(1.5rem, 4vw, 3rem) 2rem;
   border-top: 1px solid rgba(220, 20, 60, 0.4);
+  min-height: 380px;
+  contain: style;
 }
 
 .grid {

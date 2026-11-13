@@ -26,15 +26,23 @@ export default function Footer() {
   useEffect(() => {
     if (!footerRef.current) return
     const ctx = gsap.context(() => {
-      gsap.from('[data-ft="col"]', {
-        opacity: 0,
-        y: 20,
-        stagger: 0.09,
-        duration: 0.65,
-        ease: 'power3.out',
-        clearProps: 'transform,opacity',
-        scrollTrigger: { trigger: footerRef.current, start: 'top 90%', toggleActions: 'play none none none' }
-      })
+      gsap.fromTo(
+        '[data-ft="col"]',
+        { opacity: 0.88, y: 15 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.08,
+          duration: 0.5,
+          ease: 'power3.out',
+          clearProps: 'all',
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: 'top 95%',
+            toggleActions: 'play none none none'
+          }
+        }
+      )
     }, footerRef)
     return () => ctx.revert()
   }, [location.pathname])

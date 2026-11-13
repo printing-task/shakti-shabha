@@ -364,3 +364,22 @@
   background: #E5E7EB;
   transform: rotate(90deg);
 }
+
+
+/* Clean heading for All Articles & White Papers without red underline */
+.articlesSectionTitle {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  color: var(--theme-text-heading, #111111);
+  margin-bottom: 0;
+  margin-top: 0.35rem;
+  position: relative;
+  padding-bottom: 0;
+}
+
+.articlesSectionTitle::after,
+.articlesSectionTitle::before {
+  display: none !important;
+  content: none !important;
+}
