@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase, Course } from '../lib/supabase'
+import { sendCourseNotificationEmail } from '../lib/emailService'
 import GoogleIcon from '../components/GoogleIcon/GoogleIcon'
 import s from './PageLayout.module.css'
 import cp from './CoursesPage.module.css'
