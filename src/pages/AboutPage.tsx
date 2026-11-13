@@ -219,10 +219,10 @@ export const SOCIAL_SHOWCASE_CATEGORIES: SocialCategoryShowcase[] = [
     subtitle: 'Video Discourses & Combat Archives',
     gradient: 'linear-gradient(45deg, #FF0000, #FF5E62)',
     images: [
-      'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=800&auto=format&fit=crop&q=80'
+      '/20260517_120756.jpg',
+      '/IMG_20260908_201306.jpg',
+      '/missionmirdani.jpg',
+      '/sahog.jpg'
     ],
     accounts: [
       {
@@ -242,10 +242,10 @@ export const SOCIAL_SHOWCASE_CATEGORIES: SocialCategoryShowcase[] = [
     subtitle: 'Visual Vanguard & Movement Stories',
     gradient: 'linear-gradient(45deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
     images: [
-      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1508873696983-2df5293cb395?w=800&auto=format&fit=crop&q=80'
+      '/20260517_120756.jpg',
+      '/IMG_20260908_201306.jpg',
+      '/missionmirdani.jpg',
+      '/socialworkk.jpg'
     ],
     accounts: [
       {
@@ -281,10 +281,10 @@ export const SOCIAL_SHOWCASE_CATEGORIES: SocialCategoryShowcase[] = [
     subtitle: 'Grassroots Community & Family Outreach',
     gradient: 'linear-gradient(45deg, #1877F2, #00C6FF)',
     images: [
-      'https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=800&auto=format&fit=crop&q=80'
+      '/shaktivarta.jpg',
+      '/shaktibhava.jpg',
+      '/20260517_120756.jpg',
+      '/sahog.jpg'
     ],
     accounts: [
       {
@@ -312,10 +312,10 @@ export const SOCIAL_SHOWCASE_CATEGORIES: SocialCategoryShowcase[] = [
     subtitle: 'Intellectual Sovereignty & Thought Leadership',
     gradient: 'linear-gradient(45deg, #E2E8F0, #94A3B8)',
     images: [
-      'https://images.unsplash.com/photo-1508873696983-2df5293cb395?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&auto=format&fit=crop&q=80'
+      '/IMG_20260908_201306.jpg',
+      '/missionmirdani.jpg',
+      '/20260517_120756.jpg',
+      '/socialworkk.jpg'
     ],
     accounts: [
       {
@@ -335,10 +335,10 @@ export const SOCIAL_SHOWCASE_CATEGORIES: SocialCategoryShowcase[] = [
     subtitle: 'Visual Archives & Posture Guides',
     gradient: 'linear-gradient(45deg, #BD081C, #FF4B2B)',
     images: [
-      'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&auto=format&fit=crop&q=80'
+      '/missionmirdani.jpg',
+      '/shaktibhava.jpg',
+      '/shaktivarta.jpg',
+      '/20260517_120756.jpg'
     ],
     accounts: [
       {
@@ -358,10 +358,10 @@ export const SOCIAL_SHOWCASE_CATEGORIES: SocialCategoryShowcase[] = [
     subtitle: 'Founder Sanctum & Civilizational Vision',
     gradient: 'linear-gradient(45deg, #D4AF37, #FF8C00)',
     images: [
-      'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=800&auto=format&fit=crop&q=80'
+      '/20260517_120756.jpg',
+      '/IMG_20260908_201306.jpg',
+      '/missionmirdani.jpg',
+      '/shaktivarta.jpg'
     ],
     accounts: [
       {

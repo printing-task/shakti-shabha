@@ -219,7 +219,7 @@ const TIMELINE_MILESTONES: Milestone[] = [
       legacy: '१ लाख से अधिक वीरांगनाओं ने आर्यवीरा की स्वाभिमानी पहचान को आत्मसात किया।',
       citation: 'राष्ट्रीय महाधिवेशन प्रस्ताव २०२२; आर्यवीरा घोषणा पत्र।'
     },
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80'
+    image: '/IMG_20260908_201306.jpg'
   },
   {
     id: 'm2024',

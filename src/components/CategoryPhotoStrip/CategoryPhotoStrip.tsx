@@ -13,22 +13,22 @@ interface CategoryPhotoStripProps {
 
 const DEFAULT_FALLBACKS: Record<string, string[]> = {
   mardini: [
-    'https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=80',
+    '/missionmirdani.jpg',
+    '/IMG_20260908_201306.jpg',
+    '/20260517_120756.jpg',
+    '/sahog.jpg',
   ],
   shaktiBhava: [
-    'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1577495508048-b635879837f1?w=800&auto=format&fit=crop&q=80',
+    '/shaktibhava.jpg',
+    '/socialworkk.jpg',
+    '/counceling.jpg',
+    '/harshitama\'am.jpg',
   ],
   shaktiVarta: [
-    'https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1526976668912-1a811878dd37?w=800&auto=format&fit=crop&q=80',
+    '/shaktivarta.jpg',
+    '/articles.jpg',
+    '/courses.jpg',
+    '/sahog.jpg',
   ]
 }
 

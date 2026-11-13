@@ -353,6 +353,7 @@ export default function CoursesPage() {
                   type="button"
                   onClick={() => setDetailCourse(course)}
                   className={cp.moreDetailsBtn}
+                  style={{ alignSelf: 'flex-start', textAlign: 'left', marginLeft: 0, marginTop: '2px', marginBottom: '4px' }}
                   title="View full syllabus and details"
                 >
                   More Details & Syllabus →
