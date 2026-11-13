@@ -12,32 +12,36 @@ gsap.registerPlugin(ScrollTrigger)
 
 const DEFAULT_FIELD_SLIDES = [
   {
-    url: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?q=80&w=1200&auto=format&fit=crop',
+    // Tactical Self-Defense Camp & Lathi-Kaushal
+    url: '/sahog.jpg',
     caption: 'Mission Mardini — Tactical Self-Defense Camp & Lathi-Kaushal',
     tag: 'Field Operations'
   },
   {
-    url: 'https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?q=80&w=1200&auto=format&fit=crop',
+    // National Symposium & Civilizational Discourse
+    url: '/shaktivarta.jpg',
     caption: 'Shakti Varta — National Symposium & Civilizational Discourse',
     tag: 'Intellectual Discourse'
   },
   {
-    url: 'https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?q=80&w=1200&auto=format&fit=crop',
+    // Traditional Weaponry & Combat Discipline
+    url: '/IMG_20260908_201306.jpg',
     caption: 'Martial Preparedness — Traditional Weaponry & Combat Discipline',
     tag: 'Kshatra-Dharma'
   },
   {
-    url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1200&auto=format&fit=crop',
+    // Survivor Healing Circle
+    url: '/shaktibhava.jpg',
     caption: 'Shakti Bhava — Emotional Resilience & Survivor Healing Circle',
     tag: 'Consciousness Space'
   },
   {
-    url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200&auto=format&fit=crop',
+    // Grassroots Leadership Drives
+    url: '/socialworkk.jpg',
     caption: 'Tribal & Rural Outreach — Grassroots Leadership Drives',
     tag: 'Community Mission'
   }
 ]
-
 export default function Profile() {
   const secRef   = useRef<HTMLElement>(null)
   const photoRef = useRef<HTMLDivElement>(null)
