@@ -88,7 +88,7 @@ export default function About() {
           <p>
             Everything Shakti Sabha builds lives within one of three streams — each distinct in method, unified in purpose: dignity, safety, and awakening for every woman who stands with us.{' '}
             <Link to="/three-streams" className={s.inlineLearnMore}>
-              View Tri-Stream Doctrine →
+            View Tri-Stream Doctrine →
             </Link>
           </p>
         </div>
