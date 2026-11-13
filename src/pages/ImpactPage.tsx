@@ -20,6 +20,121 @@ interface ArchiveRecord {
   format?: string
 }
 
+
+interface PhaseDetail {
+  id: string
+  phaseNum: string
+  years: string
+  title: string
+  subtitle: string
+  intro: string
+  leadProcess?: string
+  keyPoints: string[]
+  significance: string
+}
+
+const PHASES_DATA: PhaseDetail[] = [
+  {
+    id: 'phase-1',
+    phaseNum: 'Phase 01',
+    years: '2016–2019',
+    title: 'Early Foundations: Cultural Engagement & Grassroots Mobilization',
+    subtitle: 'Working Through Established Platforms',
+    intro: "Harshita's initial work began through established cultural, traditional, and spiritual organizations. These platforms provided opportunities to engage directly with students, educational institutions, families, and local communities. Rather than beginning with an independent organization, she worked within existing institutional networks and contributed to educational and awareness activities.",
+    keyPoints: [
+      'Bhagavad Gita Jayanti programmes and discussions on the relevance of the Gita in everyday life.',
+      'Sessions on Indian cultural values, ethical conduct, and character development.',
+      'Family bonding programmes and discussions on family relationships, gratitude, and intergenerational respect.',
+      'Personality development sessions for school and college students, based on Gita Ji.',
+      'Dedicated awareness and empowerment initiatives for young girls and women.'
+    ],
+    significance: 'This period provided direct exposure to the realities of educational institutions, community structures, youth concerns, and the practical challenges of social engagement. It also established the foundation for her later work: understanding people and institutions through direct experience rather than theoretical assumptions alone.'
+  },
+  {
+    id: 'phase-2',
+    phaseNum: 'Phase 02',
+    years: '2019–2022',
+    title: 'The Turning Point: Critical Inquiry & Independent Transition',
+    subtitle: 'From Institutional Association to Independent Thought',
+    intro: "Continued grassroots engagement brought Harshita into closer contact with the internal functioning of different institutions and their leadership structures. Over time, she encountered practices and institutional contradictions that raised serious questions about operational integrity, ethical consistency, and intellectual independence. Rather than ignoring these concerns, she chose a path of critical reflection and conscious departure.",
+    leadProcess: 'This was not a sudden rupture, but a thoughtful, principled transition. She gradually concluded her direct associations with organizations whose values or practices she could no longer endorse. During this phase, she:',
+    keyPoints: [
+      'Reassessed the frameworks of social, cultural, and spiritual work she had been part of.',
+      'Deepened her study of Indian philosophy, history, and social structures through an independent, critical lens.',
+      'Began working directly with local communities, schools, and youth groups on an individual and collaborative basis.'
+    ],
+    significance: 'This phase marked the emergence of an independent voice: one that valued authenticity over institutional comfort and intellectual honesty over organizational loyalty. It laid the moral and conceptual foundation for everything that followed.'
+  },
+  {
+    id: 'phase-3',
+    phaseNum: 'Phase 03',
+    years: '2022–2023',
+    title: "Frontline Engagement: Women's Safety & Practical Intervention",
+    subtitle: 'Aaryaveera & Tactical Self-Defense',
+    intro: "As her independent work expanded, Harshita recognized an urgent, unaddressed need in the communities she was engaging with: the physical vulnerability, hesitation, and fear that often constrained young women and girls in public and private spaces. Drawing on her martial training and grassroots network, she founded Aaryaveera — a focused initiative dedicated to self-defense, physical confidence, and situational awareness for girls.",
+    keyPoints: [
+      'Intensive self-defense camps conducted in government and private schools, colleges, and community centers.',
+      'Training in situational awareness, threat assessment, and practical response techniques tailored for young women.',
+      'Integrated sessions on mental fortitude, emotional resilience, and overcoming fear.',
+      'Engagement with student hostels, residential institutions, and community forums across Madhya Pradesh and Maharashtra.'
+    ],
+    significance: "Aaryaveera proved that women's empowerment could not remain an abstract, conversational ideal — it required concrete physical capability, psychological readiness, and real-world tools. This practical orientation became a defining characteristic of all subsequent work."
+  },
+  {
+    id: 'phase-4',
+    phaseNum: 'Phase 04',
+    years: '2023–Present',
+    title: 'Institutional Independence: The Shakti Sabha Journey',
+    subtitle: 'From an Initiative to an Institution',
+    intro: "By 2023, the scope of Harshita's work had outgrown single-issue initiatives. The challenges she was addressing — youth disillusionment, cultural disconnection, women's vulnerability, and institutional mediocrity — demanded a comprehensive, institutional response. Shakti Sabha was established to serve as that institutional home: an independent, multifaceted platform operating across education, social research, cultural engagement, and community welfare.",
+    keyPoints: [
+      'Independent Institutional Identity: Free from partisan agendas, institutional dogmas, and commercial pressures.',
+      'Broad Operational Scope: Spanning school programmes, college lectures, residential camps, research publications, counselling, and collaborative projects.',
+      'Principled Collaboration: Partnering with organizations, institutions, and individuals on the basis of shared purpose and ethical alignment.',
+      'A Complete Vision: Bringing together intellectual depth, practical capability, and social commitment into a unified institutional practice.'
+    ],
+    significance: 'Today, Shakti Sabha stands as a self-governing, intellectually rigorous, and socially anchored institution—synthesizing ground-level physical capability with high-level civilizational discourse.'
+  }
+]
+
+const EVOLUTION_MATRIX = [
+  {
+    dimension: 'Operating Mode',
+    p1: 'Institutional platforms',
+    p2: 'Independent, transitional',
+    p3: 'Initiative-based (Aaryaveera)',
+    p4: 'Comprehensive institution (Shakti Sabha)'
+  },
+  {
+    dimension: 'Primary Focus',
+    p1: 'Cultural & awareness programmes',
+    p2: 'Critical inquiry & independent study',
+    p3: 'Physical safety & self-defense',
+    p4: 'Education, research, safety & culture'
+  },
+  {
+    dimension: 'Key Audience',
+    p1: 'Schools, colleges, families',
+    p2: 'Students, youth, local communities',
+    p3: 'Young women, girls, institutions',
+    p4: 'Youth, women, scholars, communities'
+  },
+  {
+    dimension: 'Core Philosophy',
+    p1: 'Cultural engagement',
+    p2: 'Intellectual independence',
+    p3: 'Practical capability',
+    p4: 'Integrated social responsibility'
+  },
+  {
+    dimension: 'Institutional Relationship',
+    p1: 'Affiliated with established bodies',
+    p2: 'Gradual, principled departure',
+    p3: 'Independent initiative',
+    p4: 'Fully independent institution'
+  }
+]
+
 const ARCHIVE_RECORDS: ArchiveRecord[] = [
   /* ==============================================================
      VERTICAL 1: High-Stakes Public Symposia & Policy Forums
@@ -235,6 +350,7 @@ export default function ImpactPage() {
   const [activeTab, setActiveTab] = useState<'all' | 'vertical-1' | 'vertical-2' | 'vertical-3' | 'vertical-4'>('all')
   const [regionFilter, setRegionFilter] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState<string>('')
+  const [activePhase, setActivePhase] = useState<'phase-1' | 'phase-2' | 'phase-3' | 'phase-4'>('phase-1')
 
   useEffect(() => {
     document.title = 'Documented Impact & Archive | Shakti Sabha'
@@ -274,6 +390,234 @@ export default function ImpactPage() {
       </section>
 
       <div className={s.container} style={{ marginTop: '3rem' }}>
+
+        {/* ── THE CRUCIBLE OF EXPERIENCE CALLOUT ───────────────────────── */}
+        <div className={s.crucibleBox}>
+          <div className={s.crucibleTitle}>
+            <GoogleIcon name="local_fire_department" size={22} style={{ color: '#DC143C' }} />
+            The Crucible of Experience: Forged in Truth, Free from Dogma
+          </div>
+          <p className={s.crucibleText}>
+            "Harshita Mankar's work was not born in academic comfort; it was forged through raw, unvarnished field immersion beginning in 2016. Moving across schools, villages, student hostels, and community gatherings, she worked directly within traditional and cultural networks—learning firsthand how institutions function, where they succeed, and where they compromise."
+          </p>
+          <p className={s.crucibleText}>
+            "When institutional contradictions threatened intellectual independence and ethical consistency, she chose conviction over conformity: stepping away to build an uncompromised, independent platform. Today, Shakti Sabha is the culmination of that journey—rooted in reality, tempered by experience, and dedicated to authentic social change."
+          </p>
+        </div>
+
+        {/* ── THE IMPACT JOURNEY NARRATIVE ────────────────────────────── */}
+        <section className={s.journeyIntro}>
+          <span className={s.heroEyebrow} style={{ marginBottom: '0.75rem' }}>
+            <GoogleIcon name="timeline" size={15} />
+            Institutional Genesis &amp; Historical Trajectory
+          </span>
+          <h2 className={s.journeyIntroHeading}>THE IMPACT JOURNEY</h2>
+          <div className={s.journeyIntroLead}>
+            From Grassroots Engagement to Independent Institutional Work (2016–Present)
+          </div>
+          <p className={s.journeyParagraph}>
+            <strong>A Journey Shaped by Experience, Conviction, and Independent Action:</strong> Long before Shakti Sabha emerged as an independent institutional platform, Harshita Mankar had been actively engaged in educational, cultural, and community-based initiatives.
+          </p>
+          <p className={s.journeyParagraph}>
+            Beginning in 2016–17, her early work took place through established cultural, traditional, and spiritual organizations. Working under their platforms, she participated in and conducted activities across schools, colleges, student hostels, and community forums. These early engagements included Bhagavad Gita Jayanti programmes, discussions on Indian knowledge traditions, Matri-Pitri Pujan initiatives, personality development sessions, and awareness activities for young girls.
+          </p>
+          <p className={s.journeyParagraph}>
+            Over time, direct field experience also brought her face to face with the limitations, contradictions, and practices within certain institutional environments. Her growing commitment to independent inquiry, ethical consistency, and intellectual freedom led her to reconsider the structures within which she was working. She gradually moved away from institutional affiliations that no longer aligned with her principles and began developing an independent approach to social work.
+          </p>
+          <p className={s.journeyParagraph}>
+            This transition did not mean withdrawing from collaboration. She continued working with different organizations, community groups, educational institutions, and other partners wherever shared objectives and mutual understanding made meaningful cooperation possible. Today, Shakti Sabha represents the institutional expression of this evolving journey: a platform built around independent thinking, social responsibility, youth awareness, women's capability, and a thoughtful engagement with India's intellectual heritage.
+          </p>
+        </section>
+
+        {/* ── THE FOUR PHASES OF EVOLUTION (INTERACTIVE) ──────────────── */}
+        <section className={s.journeySection}>
+          <div className={s.phasesHeader}>
+            <span className={s.sectionEyebrow}>Systematic Development</span>
+            <h2 className={s.sectionTitle}>The Four Phases of Evolution</h2>
+            <p className={s.sectionSubtitle}>
+              From early cultural mobilization to independent frontline tactical intervention and comprehensive institutional governance.
+            </p>
+          </div>
+
+          <div className={s.phasesNav}>
+            {PHASES_DATA.map(p => (
+              <button
+                key={p.id}
+                type="button"
+                className={`${s.phaseNavBtn} ${activePhase === p.id ? s.phaseNavBtnActive : ''}`}
+                onClick={() => setActivePhase(p.id as any)}
+              >
+                <span>{p.phaseNum}</span>
+                <span style={{ opacity: 0.75 }}>({p.years})</span>
+              </button>
+            ))}
+          </div>
+
+          {(() => {
+            const currentPhase = PHASES_DATA.find(p => p.id === activePhase) || PHASES_DATA[0]
+            return (
+              <div className={s.phaseContentCard}>
+                <div className={s.phaseHeaderRow}>
+                  <div>
+                    <span className={s.phaseBadge}>{currentPhase.phaseNum}</span>
+                    <h3 className={s.phaseTitle}>{currentPhase.title}</h3>
+                    <div style={{ fontSize: '0.92rem', color: '#DC143C', fontWeight: 600, marginTop: '0.35rem' }}>
+                      {currentPhase.subtitle}
+                    </div>
+                  </div>
+                  <div className={s.phaseYears}>{currentPhase.years}</div>
+                </div>
+
+                <div className={s.phaseSubBlock}>
+                  <p className={s.phaseText}>{currentPhase.intro}</p>
+                  {currentPhase.leadProcess && (
+                    <p className={s.phaseText} style={{ fontWeight: 500, color: '#1F2937' }}>
+                      {currentPhase.leadProcess}
+                    </p>
+                  )}
+                </div>
+
+                <div className={s.phaseSubBlock}>
+                  <div className={s.phaseSubTitle}>
+                    <GoogleIcon name="check_circle" size={17} style={{ color: '#DC143C', verticalAlign: 'middle', marginRight: 6 }} />
+                    Key Areas of Engagement &amp; Operational Milestones
+                  </div>
+                  <ul className={s.phaseList}>
+                    {currentPhase.keyPoints.map((pt, idx) => (
+                      <li key={idx} className={s.phaseListItem}>{pt}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className={s.significanceBox}>
+                  <div className={s.significanceTitle}>
+                    <GoogleIcon name="lightbulb" size={15} style={{ verticalAlign: 'middle', marginRight: 5 }} />
+                    The Significance of This Phase
+                  </div>
+                  <p className={s.significanceText}>{currentPhase.significance}</p>
+                </div>
+              </div>
+            )
+          })()}
+        </section>
+
+        {/* ── THE EVOLUTION IN ONE VIEW MATRIX TABLE ──────────────────── */}
+        <section className={s.matrixSection}>
+          <div className={s.sectionHeader}>
+            <span className={s.sectionEyebrow}>Comparative Synthesis</span>
+            <h2 className={s.sectionTitle}>The Evolution in One View</h2>
+            <p className={s.sectionSubtitle}>
+              Comparative overview across operational mode, philosophy, target audience, and institutional governance.
+            </p>
+          </div>
+
+          <div className={s.tableWrap}>
+            <table className={s.evolutionTable}>
+              <thead>
+                <tr>
+                  <th>Dimension</th>
+                  <th>Phase 01 (2016–2019)</th>
+                  <th>Phase 02 (2019–2022)</th>
+                  <th>Phase 03 (2022–2023)</th>
+                  <th>Phase 04 (2023–Present)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {EVOLUTION_MATRIX.map((row, idx) => (
+                  <tr key={idx}>
+                    <td className={s.periodCell}>{row.dimension}</td>
+                    <td>{row.p1}</td>
+                    <td>{row.p2}</td>
+                    <td><strong style={{ color: '#DC143C' }}>{row.p3}</strong></td>
+                    <td><strong style={{ color: '#111827' }}>{row.p4}</strong></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* ── THE COLLABORATIVE FOOTPRINT & REGIONAL CLUSTERS ────────── */}
+        <section className={s.collabSection}>
+          <div className={s.sectionHeader} style={{ textAlign: 'left', marginBottom: '1.25rem' }}>
+            <span className={s.sectionEyebrow}>Ecosystem &amp; Alliances</span>
+            <h2 className={s.sectionTitle}>The Collaborative Footprint</h2>
+            <p className={s.sectionSubtitle} style={{ margin: '0 0 1rem' }}>
+              Independence does not mean isolation. Throughout every phase of her work, Harshita Mankar and Shakti Sabha have collaborated with a wide range of partners.
+            </p>
+          </div>
+
+          <div className={s.collabGrid}>
+            <div className={s.collabCard}>
+              <div className={s.collabCardTitle}>
+                <GoogleIcon name="handshake" size={20} style={{ color: '#DC143C' }} />
+                Principles of Collaboration
+              </div>
+              <ul className={s.phaseList} style={{ margin: 0 }}>
+                <li className={s.phaseListItem}>
+                  <strong>Educational Institutions:</strong> Schools, colleges, and universities hosting lectures, workshops, and intensive training camps.
+                </li>
+                <li className={s.phaseListItem}>
+                  <strong>Community Organizations:</strong> Local civic bodies and cultural organizations working on grassroot education, welfare, and social awareness.
+                </li>
+                <li className={s.phaseListItem}>
+                  <strong>Youth &amp; Student Groups:</strong> Informal and formal youth networks organizing discussion circles, reading groups, and somatic cohorts.
+                </li>
+                <li className={s.phaseListItem}>
+                  <strong>Professional &amp; Cultural Partners:</strong> Specialists contributing domain knowledge across education, martial arts, psychology, and public policy.
+                </li>
+              </ul>
+              <div style={{ marginTop: '1.25rem', padding: '0.85rem', background: '#F9FAFB', borderRadius: 8, fontSize: '0.84rem', color: '#4B5563', fontStyle: 'italic' }}>
+                <strong>Our Approach:</strong> We work with any organization, institution, or individual that shares our commitment to youth development, women's capability, and ethical social work — provided the partnership respects our institutional independence and intellectual integrity.
+              </div>
+            </div>
+
+            <div className={s.collabCard}>
+              <div className={s.collabCardTitle}>
+                <GoogleIcon name="pin_drop" size={20} style={{ color: '#C9A96E' }} />
+                Regional Clusters of Engagement
+              </div>
+              <ul className={s.phaseList} style={{ margin: 0 }}>
+                <li className={s.phaseListItem}>
+                  <strong>Central Madhya Pradesh:</strong> Betul, Multai, Prabhat Pattan, Amla, Athner, Chhindwara, Itarsi, Bhopal, Jabalpur.
+                </li>
+                <li className={s.phaseListItem}>
+                  <strong>Eastern Maharashtra &amp; Vidarbha:</strong> Nagpur, Wardha, Amravati, Chandrapur, Bhandara, Gondia, Gadchiroli.
+                </li>
+                <li className={s.phaseListItem}>
+                  <strong>Western MP &amp; Malwa:</strong> Indore, Ujjain, Dewas, Ratlam, Dhar, Khandwa, Khargone.
+                </li>
+                <li className={s.phaseListItem}>
+                  <strong>Digital &amp; Extended Outreach:</strong> Pan-India virtual sessions, research monograph distribution, and multi-state collaborative programmes.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ── NOTE ON INSTITUTIONAL TRANSITION & CLOSING STATEMENT ───── */}
+        <div className={s.closingNoteBox}>
+          <span className={s.heroEyebrow} style={{ margin: '0 auto 1rem' }}>
+            <GoogleIcon name="history_edu" size={15} />
+            Historical Clarity &amp; Public Record
+          </span>
+          <h3 className={s.journeyIntroHeading} style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>
+            Note on Institutional Transition
+          </h3>
+          <p className={s.journeyParagraph} style={{ maxWidth: 840, margin: '0 auto 1rem', textAlign: 'center' }}>
+            In the interest of transparency, intellectual honesty, and public record: Harshita Mankar's past associations with various cultural, traditional, and spiritual organizations during the period 2016–2019 reflect a phase of early learning, grassroots engagement, and exploration.
+          </p>
+          <p className={s.journeyParagraph} style={{ maxWidth: 840, margin: '0 auto 1.5rem', textAlign: 'center' }}>
+            Her subsequent departure from those platforms was a deliberate, principled decision arising from direct experience with their internal functioning, practices, and institutional cultures. Those past associations do not define, limit, or represent the current philosophy, governance, or operational direction of Shakti Sabha. Shakti Sabha operates with complete autonomy — intellectually, administratively, and programmatically. We acknowledge the experiences of every phase as essential to the clarity, conviction, and independence that define our work today.
+          </p>
+          <div className={s.closingQuote}>
+            "A genuine path in social work is rarely linear. It is shaped by what you embrace, but equally by what you choose to walk away from. Shakti Sabha exists because independent thought and principled action are worth the journey."
+          </div>
+          <div style={{ fontWeight: 700, color: '#DC143C', fontSize: '0.95rem', letterSpacing: '0.05em' }}>
+            — HARSHITA MANKAR
+          </div>
+        </div>
+
 
         {/* ── VERIFIED IMPACT DOCUMENTATION NOTE ─────────────────────── */}
         <div className={s.verifiedBanner}>

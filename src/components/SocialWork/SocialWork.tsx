@@ -263,9 +263,9 @@ export default function SocialWork() {
     <section ref={secRef} className={s.section}>
       {/* Section Header */}
       <div data-sw="header" className={s.carouselHeader}>
-        <span className={s.eyebrow}>12 Years · 3 Streams · 1 Mission</span>
+        <span className={s.eyebrow}>7 Years · 3 Streams · 1 Mission</span>
         <h2 className={s.carouselTitle}>Where Shakti Sabha Has Stood</h2>
-        <p className={s.carouselSub}>जहाँ हम खड़े हैं — 12 Years of Grassroots Field Impact Across Maharashtra</p>
+        <p className={s.carouselSub}>जहाँ हम खड़े हैं — 7 Years of Grassroots Field Impact (2019–Present)</p>
       </div>
 
       {/* 3D Carousel Stage */}

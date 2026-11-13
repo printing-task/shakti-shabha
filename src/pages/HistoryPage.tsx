@@ -12,7 +12,7 @@ type Lang = 'en' | 'hi'
 
 /* ============================================================
    Historical Milestones: 2012 to Current (2024)
-   12 Years of On-Ground Shakti Sabha Impact
+   7 Years of Independent Shakti Sabha Impact (2019–Present)
    ============================================================ */
 
 interface Milestone {
@@ -460,7 +460,7 @@ export default function HistoryPage() {
         </h1>
         <p className={h.introDesc}>
           {lang === 'en'
-            ? 'Tracing 12 years of unyielding courage from our first rural camps in 2014 to today’s pan-India movement. As you scroll, each milestone reveals its round photo, community accomplishments, and verified archival dossier.'
+            ? 'Tracing 7 years of unyielding courage and independent field action starting from 2019 to today’s pan-India movement. As you scroll, each milestone reveals its round photo, community accomplishments, and verified archival dossier.'
             : '२०१४ के प्रथम ग्रामीण शिविरों से लेकर आज के अखिल भारतीय शक्ति आंदोलन तक १२ वर्षों की प्रेरक यात्रा। जैसे-जैसे आप स्क्रॉल करेंगे, वर्तमान वर्ष का चित्र, उपलब्धियाँ और पुरातात्विक अभिलेख स्वतः विस्तार लेंगे।'}
         </p>
         <div className={h.scrollProgressPill}>

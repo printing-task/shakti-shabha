@@ -634,3 +634,344 @@
     padding: 1.25rem 1rem;
   }
 }
+
+
+/* ================================================================
+   THE IMPACT JOURNEY SECTION STYLES
+   ================================================================ */
+.journeySection {
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.crucibleBox {
+  background: linear-gradient(135deg, rgba(220, 20, 60, 0.05) 0%, rgba(201, 169, 110, 0.08) 100%);
+  border: 1px solid rgba(220, 20, 60, 0.25);
+  border-left: 4px solid #DC143C;
+  border-radius: 12px;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  margin-bottom: 2.5rem;
+}
+
+.crucibleTitle {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #DC143C;
+  margin: 0 0 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.crucibleText {
+  font-size: 0.92rem;
+  color: #374151;
+  line-height: 1.75;
+  font-style: italic;
+  margin: 0 0 0.75rem;
+}
+.crucibleText:last-child {
+  margin-bottom: 0;
+}
+
+.journeyIntro {
+  background: #F9FAFB;
+  border: 1px solid #E5E7EB;
+  border-radius: 14px;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  margin-bottom: 3rem;
+}
+
+.journeyIntroHeading {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.5rem;
+}
+
+.journeyIntroLead {
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: #DC143C;
+  margin-bottom: 1rem;
+}
+
+.journeyParagraph {
+  font-size: 0.9rem;
+  color: #4B5563;
+  line-height: 1.7;
+  margin-bottom: 0.85rem;
+}
+.journeyParagraph:last-child {
+  margin-bottom: 0;
+}
+
+/* Four Phases Interactive Timeline */
+.phasesHeader {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+
+.phasesNav {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.phaseNavBtn {
+  background: #FFFFFF;
+  border: 1px solid #D1D5DB;
+  border-radius: 9999px;
+  padding: 0.5rem 1.25rem;
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #4B5563;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.phaseNavBtn:hover {
+  border-color: #DC143C;
+  color: #DC143C;
+}
+
+.phaseNavBtnActive {
+  background: #DC143C !important;
+  color: #FFFFFF !important;
+  border-color: #DC143C !important;
+  box-shadow: 0 4px 14px rgba(220, 20, 60, 0.25);
+}
+
+.phaseContentCard {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  padding: clamp(1.75rem, 3.5vw, 2.75rem);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.phaseHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #F3F4F6;
+  padding-bottom: 1.25rem;
+}
+
+.phaseBadge {
+  background: rgba(220, 20, 60, 0.08);
+  color: #DC143C;
+  border: 1px solid rgba(220, 20, 60, 0.25);
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.phaseYears {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.phaseTitle {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+  color: #111827;
+  font-weight: 700;
+  margin: 0.35rem 0 0;
+}
+
+.phaseSubBlock {
+  margin-bottom: 1.5rem;
+}
+
+.phaseSubTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.5rem;
+}
+
+.phaseText {
+  font-size: 0.9rem;
+  color: #4B5563;
+  line-height: 1.72;
+  margin-bottom: 0.85rem;
+}
+
+.phaseList {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.phaseListItem {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: 0.88rem;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.phaseListItem::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #DC143C;
+  font-size: 0.75rem;
+}
+
+.significanceBox {
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.significanceTitle {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #B45309;
+  margin: 0 0 0.35rem;
+}
+
+.significanceText {
+  font-size: 0.88rem;
+  color: #78350F;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Evolution Table */
+.matrixSection {
+  margin-top: 3.5rem;
+}
+
+.evolutionTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #FFFFFF;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #E5E7EB;
+}
+
+.evolutionTable th {
+  background: #F9FAFB;
+  padding: 0.9rem 1.25rem;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #374151;
+  border-bottom: 1px solid #E5E7EB;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.evolutionTable td {
+  padding: 1rem 1.25rem;
+  font-size: 0.88rem;
+  color: #4B5563;
+  border-bottom: 1px solid #F3F4F6;
+  vertical-align: top;
+}
+
+.evolutionTable tr:last-child td {
+  border-bottom: none;
+}
+
+.periodCell {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-weight: 700;
+  color: #DC143C;
+  white-space: nowrap;
+}
+
+.phaseCell {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Collaborative Footprint Section */
+.collabSection {
+  margin-top: 3.5rem;
+  background: #F9FAFB;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  padding: clamp(2rem, 4vw, 3rem);
+}
+
+.collabGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 840px) {
+  .collabGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.collabCard {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.collabCardTitle {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Closing Notes */
+.closingNoteBox {
+  margin-top: 3.5rem;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF5F5 100%);
+  border: 1px solid rgba(220, 20, 60, 0.2);
+  border-radius: 16px;
+  padding: clamp(2rem, 4vw, 3.25rem);
+  text-align: center;
+}
+
+.closingQuote {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1rem;
+}

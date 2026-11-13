@@ -176,7 +176,7 @@ export default function Footer() {
 
       <div className={s.bottom}>
         <span className={s.copy}>© {year} Shakti Sabha. All rights reserved.</span>
-        <span className={s.copy}>12 years of on-ground impact — Maharashtra &amp; beyond.</span>
+        <span className={s.copy}>7 years of on-ground impact (starting from 2019) — Maharashtra &amp; beyond.</span>
         <span className={s.copy} style={{ color: '#E8C98A', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
           <GoogleIcon name="swords" size={16} /> MADE IN BHARAT
         </span>

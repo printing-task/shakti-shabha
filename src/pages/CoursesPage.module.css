@@ -708,8 +708,8 @@
   gap: 0.3rem;
   background: none;
   border: none;
-  padding: 0.1rem 0;
-  margin: 0.15rem 0 0.35rem;
+  padding: 0;
+  margin: 0.1rem auto 0.25rem 0 !important;
   font-family: var(--font-primary, 'Poppins', sans-serif);
   font-size: 0.8rem;
   font-weight: 600;
@@ -718,8 +718,9 @@
   text-decoration: underline;
   text-underline-offset: 3px;
   transition: color 0.2s ease, transform 0.2s ease;
-  align-self: flex-start;
-  text-align: left;
+  align-self: flex-start !important;
+  text-align: left !important;
+  width: fit-content !important;
 }
 
 .moreDetailsBtn:hover {

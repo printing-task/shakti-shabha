@@ -107,7 +107,7 @@ export default function ResearchPage() {
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><GoogleIcon name="tag" size={15} /> DOI: 10.5281/ss.2026.0112</span>
             </div>
             <p className={rp.featuredAbstract}>
-              Synthesizing 12 years of on-ground case data with rigorous comparative analysis of Bharatiya Nyaya Sanhita (BNS)
+              Synthesizing 7 years of on-ground case data (2019–Present) with rigorous comparative analysis of Bharatiya Nyaya Sanhita (BNS)
               and legacy IPC sections. This paper demonstrates why conventional grievance redressal mechanisms fail rural survivors
               and outlines a workable grassroots community defense model.
             </p>
@@ -142,7 +142,7 @@ export default function ResearchPage() {
               Deshmukh, M. R., Kulkarni, S., & Sabha Advisory Board
             </div>
             <div className={rp.paperExcerpt}>
-              "Abstract — Modern jurisprudence frequently conceptualizes female security as an ex-post punitive measure rather than an ex-ante deterrent. Through 12 years of empirical intervention in 400+ schools, we demonstrate that physical self-sovereignty combined with localized arbitration reduces assault frequency by 74%..."
+              "Abstract — Modern jurisprudence frequently conceptualizes female security as an ex-post punitive measure rather than an ex-ante deterrent. Through 7 years of empirical intervention in 400+ schools, we demonstrate that physical self-sovereignty combined with localized arbitration reduces assault frequency by 74%..."
             </div>
             <div style={{ marginTop: '1.5rem', textAlign: 'right', fontSize: '0.68rem', color: '#64748B' }}>
               [Verified SSRN Archival Index #98421]

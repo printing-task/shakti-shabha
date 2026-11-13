@@ -874,7 +874,7 @@ export default function AboutPage() {
       <section className={p.timelineSection} ref={timelineRef}>
         <div className={p.sectionInner}>
           <span className={p.sectionEyebrow}>Our Journey</span>
-          <h2 className={`${p.sectionTitle} ${p.animatedHeading}`}>12 Years of Impact</h2>
+          <h2 className={`${p.sectionTitle} ${p.animatedHeading}`}>7 Years of Impact</h2>
           <div className={p.timeline}>
             {TIMELINE.map((t, i) => (
               <div key={i} className={p.timelineItem}>

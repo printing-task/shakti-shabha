@@ -231,7 +231,7 @@ export default function SocialWorkPage() {
           <h2 className={sw.sectionTitle}>Our Geographic Reach</h2>
           <p className={sw.sectionSubtitle}>
             From the rural heartlands of Vidarbha and tribal settlements to universities across Maharashtra —&nbsp;
-            <strong>12 years of frontline strategic leadership and mission execution</strong>
+            <strong>7 years of independent frontline strategic leadership (starting from 2019) and mission execution</strong>
           </p>
           <div className={sw.regionGrid} ref={regionRef}>
             {REGIONS.map((r) => (
@@ -269,7 +269,7 @@ export default function SocialWorkPage() {
         <div className={sw.sectionInner}>
           <h2 className={sw.sectionTitle}>Media Vault</h2>
           <p className={sw.sectionSubtitle}>
-            Filterable documentation from 12 years of high-impact frontline camps — transforming vulnerability into sovereignty.
+            Filterable documentation from 7 years of high-impact frontline camps (2019–Present) — transforming vulnerability into sovereignty.
           </p>
           <div className={sw.mediaGrid} ref={mediaRef}>
             {MEDIA.map((m) => (

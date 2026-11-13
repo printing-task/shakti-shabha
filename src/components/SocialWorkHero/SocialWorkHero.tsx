@@ -53,7 +53,7 @@ export default function SocialWorkHero() {
       <div className={s.leftPart}>
         <div className={s.topNav}>
           <span className={s.badge}>
-            NGO Archive · 12 Years on the Ground
+            NGO Archive · 7 Years on the Ground (Starting from 2019)
           </span>
         </div>
 
