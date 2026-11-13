@@ -294,9 +294,7 @@ export default function Profile() {
                     <polyline points="9 18 15 12 9 6" />
                   </svg>
                 </button>
-                <span className={s.counterBadge}>
-                  {String(currentSlide + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
-                </span>
+             
               </div>
             </div>
           </div>
