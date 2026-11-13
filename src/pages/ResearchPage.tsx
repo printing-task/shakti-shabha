@@ -4,7 +4,7 @@ import GoogleIcon from '../components/GoogleIcon/GoogleIcon'
 import s from './PageLayout.module.css'
 import rp from './ResearchPage.module.css'
 
-interface PaperItem {
+export interface PaperItem {
   id: string
   title: string
   authors: string
@@ -15,7 +15,7 @@ interface PaperItem {
   abstract: string
 }
 
-const PAPERS_LIST: PaperItem[] = [
+export const PAPERS_LIST: PaperItem[] = [
   {
     id: 'p-1',
     title: 'Toxic Western Feminism vs. Bharatiya Nari Shakti: A Critical Epistemology',
@@ -80,6 +80,18 @@ export default function ResearchPage() {
       {/* Hero Banner */}
       <div className={rp.hero}>
         <div className={rp.heroInner}>
+          {/* Sub-Category Switcher */}
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
+            <Link to="/articles" style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 600, textDecoration: 'none', background: 'rgba(255,255,255,0.15)', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.25)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+              <GoogleIcon name="article" size={14} /> Articles
+            </Link>
+            <Link to="/case-study" style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 600, textDecoration: 'none', background: 'rgba(255,255,255,0.15)', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.25)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+              <GoogleIcon name="folder_open" size={14} /> Case Studies
+            </Link>
+            <span style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 600, background: '#DC143C', color: '#FFFFFF', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+              <GoogleIcon name="menu_book" size={14} /> Research Papers (Active)
+            </span>
+          </div>
           <span className={rp.badge}>SRS Section 12 · Thought-Lab & Citations</span>
           <h1 className={rp.title}>Research & Thought-Lab</h1>
           <p className={rp.hindiSubtitle}>विचार-प्रयोगशाला · White Papers, Archives & Legal Analysis</p>

@@ -4,7 +4,7 @@ import GoogleIcon from '../components/GoogleIcon/GoogleIcon'
 import s from './PageLayout.module.css'
 import cs from './CaseStudyPage.module.css'
 
-interface CaseItem {
+export interface CaseItem {
   id: string
   alias: string
   title: string
@@ -16,7 +16,7 @@ interface CaseItem {
   badgeColor: string
 }
 
-const CASE_STUDIES: CaseItem[] = [
+export const CASE_STUDIES: CaseItem[] = [
   {
     id: 'cs-1',
     alias: 'Case File #2024-MH-09: "Priya"',
@@ -116,6 +116,18 @@ export default function CaseStudyPage() {
       {/* Hero Banner */}
       <div className={cs.hero}>
         <div className={cs.heroInner}>
+          {/* Sub-Category Switcher */}
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
+            <Link to="/articles" style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 600, textDecoration: 'none', background: 'rgba(255,255,255,0.15)', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.25)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+              <GoogleIcon name="article" size={14} /> Articles
+            </Link>
+            <span style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 600, background: '#DC143C', color: '#FFFFFF', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+              <GoogleIcon name="folder_open" size={14} /> Case Studies (Active)
+            </span>
+            <Link to="/research" style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 600, textDecoration: 'none', background: 'rgba(255,255,255,0.15)', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.25)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+              <GoogleIcon name="menu_book" size={14} /> Research Papers
+            </Link>
+          </div>
           <span className={cs.badge}>SRS Section 8 · Secure Case Study Archive</span>
           <h1 className={cs.title}>Case Studies & Field Stories</h1>
           <p className={cs.hindiSubtitle}>केस स्टडी — असली कहानियाँ · Anonymized & Verified</p>

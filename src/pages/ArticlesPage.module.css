@@ -383,3 +383,281 @@
   display: none !important;
   content: none !important;
 }
+
+/* ── PUBLICATIONS SUB-CATEGORY SWITCHER & CARDS ──── */
+.subCategoryNav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0 2rem;
+  padding: 0.4rem;
+  background: #F9FAFB;
+  border: 1px solid #E5E7EB;
+  border-radius: 9999px;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.subCategoryTab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1.15rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #4B5563;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.subCategoryTab:hover {
+  color: #111827;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.subCategoryTabActive {
+  background: #DC143C !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(220, 20, 60, 0.25);
+}
+
+.tabCountBadge {
+  font-size: 0.68rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.08);
+  color: inherit;
+  font-weight: 700;
+}
+
+.subCategoryTabActive .tabCountBadge {
+  background: rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+}
+
+/* Dedicated Hub Callout Banner */
+.hubBanner {
+  background: linear-gradient(135deg, #111827 0%, #1F2937 100%);
+  color: #FFFFFF;
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  border: 1px solid rgba(220, 20, 60, 0.3);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.hubBannerLeft {
+  max-width: 680px;
+}
+
+.hubBannerTitle {
+  font-family: var(--font-display, "Cinzel", serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  color: #FFFFFF;
+}
+
+.hubBannerDesc {
+  font-size: 0.85rem;
+  color: #D1D5DB;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.hubBannerBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #DC143C;
+  color: #FFFFFF;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+
+.hubBannerBtn:hover {
+  background: #B01030;
+  transform: translateX(3px);
+}
+
+/* Case Study Cards on Articles Page */
+.caseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+}
+
+.caseCard {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s, box-shadow 0.25s;
+  position: relative;
+}
+
+.caseCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.caseTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.caseBadge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  color: #FFFFFF;
+}
+
+.caseAlias {
+  font-size: 0.75rem;
+  color: #6B7280;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+}
+
+.caseTitle {
+  font-family: var(--font-display, "Cinzel", serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.35;
+  margin-bottom: 0.65rem;
+}
+
+.caseExcerpt {
+  font-size: 0.85rem;
+  color: #4B5563;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.caseActionBtn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #DC143C;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.caseActionBtn:hover {
+  color: #990B2A;
+}
+
+/* Research Papers Grid on Articles Page */
+.papersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+}
+
+.paperCard {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.paperCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.paperMetaTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.75rem;
+  color: #6B7280;
+}
+
+.paperAccessTag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+  background: #ECFDF5;
+  color: #065F46;
+}
+
+.paperTitle {
+  font-family: var(--font-display, "Cinzel", serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+}
+
+.paperAuthors {
+  font-size: 0.78rem;
+  color: #6B7280;
+  margin-bottom: 0.75rem;
+  font-style: italic;
+}
+
+.paperAbstract {
+  font-size: 0.84rem;
+  color: #4B5563;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.paperFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #F3F4F6;
+  padding-top: 0.75rem;
+  margin-top: auto;
+}
+
+.paperDoi {
+  font-size: 0.72rem;
+  color: #9CA3AF;
+  font-family: monospace;
+}

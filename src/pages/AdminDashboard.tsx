@@ -1048,13 +1048,19 @@ function ArticleForm({ form, setForm, fileRef, uploadImage, uploading }: {
         <div className={s.field}>
           <label className={s.label}>Category</label>
           <select className={s.select} value={form.category} onChange={e => setForm((f: any) => ({ ...f, category: e.target.value }))}>
-            <option value="general">General</option>
-            <option value="self-defense">Self Defense</option>
-            <option value="empowerment">Empowerment</option>
-            <option value="legal">Legal Rights</option>
-            <option value="health">Health & Wellness</option>
-            <option value="success-stories">Success Stories</option>
-            <option value="research">Research</option>
+            <optgroup label="Editorial Sub-Categories (Publications Hub)">
+              <option value="Article">Article (Investigative & Thought Leadership)</option>
+              <option value="Case Study">Case Study (Ground Intervention / Survivor Dossier)</option>
+              <option value="Research Paper">Research Paper (Academic Epistemology & Legal Audit)</option>
+            </optgroup>
+            <optgroup label="Thematic Tags">
+              <option value="General">General</option>
+              <option value="Self Defense">Self Defense</option>
+              <option value="Empowerment">Empowerment</option>
+              <option value="Legal Rights">Legal Rights</option>
+              <option value="Health & Wellness">Health & Wellness</option>
+              <option value="Success Stories">Success Stories</option>
+            </optgroup>
           </select>
         </div>
 

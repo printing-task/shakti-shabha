@@ -17,8 +17,13 @@ interface DropdownItem {
   desc: string
 }
 
-const PRIMARY_LINKS_BEFORE: NavLinkItem[] = [
-  { label: 'Articles', to: '/articles' },
+const ARTICLE_SUB_ITEMS: DropdownItem[] = [
+  { label: 'Articles', to: '/articles', icon: 'article', desc: 'Investigative Journalism & Thought Leadership' },
+  { label: 'Case Studies', to: '/case-study', icon: 'folder_open', desc: 'Frontline Survivor Dossiers & Interventions' },
+  { label: 'Research Papers', to: '/research', icon: 'menu_book', desc: 'Academic Epistemology & Legal Policy' },
+]
+
+const PRIMARY_LINKS_MIDDLE: NavLinkItem[] = [
   { label: 'About', to: '/about' },
   { label: 'Gallery', to: '/gallery' },
   { label: 'Aaryaveera', to: '/aaryaveera' },
@@ -39,16 +44,24 @@ const PRIMARY_LINKS_AFTER: NavLinkItem[] = [
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  const [dropdownOpen, setDropdownOpen] = useState(false)
-  const [mobileAccordionOpen, setMobileAccordionOpen] = useState(true)
+  const [articlesDropdownOpen, setArticlesDropdownOpen] = useState(false)
+  const [whatWeDoDropdownOpen, setWhatWeDoDropdownOpen] = useState(false)
+  const [mobileArticlesOpen, setMobileArticlesOpen] = useState(true)
+  const [mobileWhatWeDoOpen, setMobileWhatWeDoOpen] = useState(false)
 
-  const dropdownRef = useRef<HTMLDivElement>(null)
-  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const articlesDropdownRef = useRef<HTMLDivElement>(null)
+  const whatWeDoDropdownRef = useRef<HTMLDivElement>(null)
+  const articlesTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const whatWeDoTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const logoImgRef = useRef<HTMLImageElement>(null)
   const logoMainRef = useRef<HTMLSpanElement>(null)
   const logoDevRef = useRef<HTMLSpanElement>(null)
   const location = useLocation()
+
+  const isArticlesActive = ARTICLE_SUB_ITEMS.some(
+    item => location.pathname === item.to || location.pathname.startsWith(item.to + '/')
+  )
 
   const isWhatWeDoActive = WHAT_WE_DO_ITEMS.some(
     item => location.pathname === item.to || location.pathname.startsWith(item.to + '/')
@@ -65,36 +78,56 @@ export default function Navigation() {
   // Close menus on route change
   useEffect(() => {
     setOpen(false)
-    setDropdownOpen(false)
+    setArticlesDropdownOpen(false)
+    setWhatWeDoDropdownOpen(false)
   }, [location.pathname])
 
-  // Click outside to close desktop dropdown
+  // Click outside to close desktop dropdowns
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setDropdownOpen(false)
+      const target = e.target as Node
+      if (articlesDropdownRef.current && !articlesDropdownRef.current.contains(target)) {
+        setArticlesDropdownOpen(false)
+      }
+      if (whatWeDoDropdownRef.current && !whatWeDoDropdownRef.current.contains(target)) {
+        setWhatWeDoDropdownOpen(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  // Desktop dropdown hover handlers with smooth delay
-  const handleMouseEnter = () => {
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current)
-      closeTimeoutRef.current = null
+  // Desktop Articles dropdown hover handlers with smooth delay
+  const handleArticlesMouseEnter = () => {
+    if (articlesTimeoutRef.current) {
+      clearTimeout(articlesTimeoutRef.current)
+      articlesTimeoutRef.current = null
     }
-    setDropdownOpen(true)
+    setArticlesDropdownOpen(true)
   }
 
-  const handleMouseLeave = () => {
-    closeTimeoutRef.current = setTimeout(() => {
-      setDropdownOpen(false)
+  const handleArticlesMouseLeave = () => {
+    articlesTimeoutRef.current = setTimeout(() => {
+      setArticlesDropdownOpen(false)
     }, 180)
   }
 
-  // Logo intro animation: flip -> writing reveal -> subtext fade
+  // Desktop What We Do dropdown hover handlers with smooth delay
+  const handleWhatWeDoMouseEnter = () => {
+    if (whatWeDoTimeoutRef.current) {
+      clearTimeout(whatWeDoTimeoutRef.current)
+      whatWeDoTimeoutRef.current = null
+    }
+    setWhatWeDoDropdownOpen(true)
+  }
+
+  const handleWhatWeDoMouseLeave = () => {
+    whatWeDoTimeoutRef.current = setTimeout(() => {
+      setWhatWeDoDropdownOpen(false)
+    }, 180)
+  }
+
+  // Logo intro animation
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
@@ -148,7 +181,46 @@ export default function Navigation() {
       {/* ---------- DESKTOP NAVIGATION (Visible on screens > 900px) ---------- */}
       <div className={s.desktopLinksBox}>
         <div className={s.desktopLinks}>
-          {PRIMARY_LINKS_BEFORE.map(l => (
+          {/* Articles & Publications Dropdown */}
+          <div
+            ref={articlesDropdownRef}
+            className={s.dropdownWrap}
+            onMouseEnter={handleArticlesMouseEnter}
+            onMouseLeave={handleArticlesMouseLeave}
+          >
+            <button
+              type="button"
+              className={`${s.dropdownTrigger} ${isArticlesActive ? s.linkActive : ''} ${articlesDropdownOpen ? s.dropdownTriggerOpen : ''}`}
+              onClick={() => setArticlesDropdownOpen(o => !o)}
+              aria-expanded={articlesDropdownOpen}
+              aria-haspopup="true"
+            >
+              <span>Articles</span>
+              <span className={`${s.chevron} ${articlesDropdownOpen ? s.chevronOpen : ''}`}>▾</span>
+            </button>
+
+            <div className={`${s.dropdownMenu} ${articlesDropdownOpen ? s.dropdownMenuOpen : ''}`}>
+              <div className={s.dropdownHeader}>Editorial &amp; Publications</div>
+              {ARTICLE_SUB_ITEMS.map(item => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  className={({ isActive }) => `${s.dropdownItem} ${isActive ? s.dropdownItemActive : ''}`}
+                  onClick={() => setArticlesDropdownOpen(false)}
+                >
+                  <div className={s.dropdownItemIcon}>
+                    <GoogleIcon name={item.icon} size={17} />
+                  </div>
+                  <div className={s.dropdownItemText}>
+                    <span className={s.dropdownItemTitle}>{item.label}</span>
+                    <span className={s.dropdownItemDesc}>{item.desc}</span>
+                  </div>
+                </NavLink>
+              ))}
+            </div>
+          </div>
+
+          {PRIMARY_LINKS_MIDDLE.map(l => (
             <NavLink
               key={l.to}
               to={l.to}
@@ -160,30 +232,30 @@ export default function Navigation() {
 
           {/* "What We Do" Dropdown Trigger & Floating Panel */}
           <div
-            ref={dropdownRef}
+            ref={whatWeDoDropdownRef}
             className={s.dropdownWrap}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            onMouseEnter={handleWhatWeDoMouseEnter}
+            onMouseLeave={handleWhatWeDoMouseLeave}
           >
             <button
               type="button"
-              className={`${s.dropdownTrigger} ${isWhatWeDoActive ? s.linkActive : ''} ${dropdownOpen ? s.dropdownTriggerOpen : ''}`}
-              onClick={() => setDropdownOpen(o => !o)}
-              aria-expanded={dropdownOpen}
+              className={`${s.dropdownTrigger} ${isWhatWeDoActive ? s.linkActive : ''} ${whatWeDoDropdownOpen ? s.dropdownTriggerOpen : ''}`}
+              onClick={() => setWhatWeDoDropdownOpen(o => !o)}
+              aria-expanded={whatWeDoDropdownOpen}
               aria-haspopup="true"
             >
               <span>What We Do</span>
-              <span className={`${s.chevron} ${dropdownOpen ? s.chevronOpen : ''}`}>▾</span>
+              <span className={`${s.chevron} ${whatWeDoDropdownOpen ? s.chevronOpen : ''}`}>▾</span>
             </button>
 
-            <div className={`${s.dropdownMenu} ${dropdownOpen ? s.dropdownMenuOpen : ''}`}>
+            <div className={`${s.dropdownMenu} ${whatWeDoDropdownOpen ? s.dropdownMenuOpen : ''}`}>
               <div className={s.dropdownHeader}>Our Programs &amp; Initiatives</div>
               {WHAT_WE_DO_ITEMS.map(item => (
                 <NavLink
                   key={item.to}
                   to={item.to}
                   className={({ isActive }) => `${s.dropdownItem} ${isActive ? s.dropdownItemActive : ''}`}
-                  onClick={() => setDropdownOpen(false)}
+                  onClick={() => setWhatWeDoDropdownOpen(false)}
                 >
                   <div className={s.dropdownItemIcon}>
                     <GoogleIcon name={item.icon} size={17} />
@@ -227,7 +299,35 @@ export default function Navigation() {
       {/* ---------- MOBILE DRAWER (Dedicated separate layout for <= 900px) ---------- */}
       <div className={`${s.mobileDrawer} ${open ? s.mobileDrawerOpen : ''}`}>
         <div className={s.mobileDrawerContent}>
-          {PRIMARY_LINKS_BEFORE.map(l => (
+          {/* Mobile Accordion for "Articles & Publications" */}
+          <div className={s.mobileAccordion}>
+            <button
+              type="button"
+              className={`${s.mobileAccordionHeader} ${isArticlesActive ? s.mobileLinkActive : ''}`}
+              onClick={() => setMobileArticlesOpen(o => !o)}
+            >
+              <span>Articles &amp; Publications</span>
+              <span className={`${s.chevron} ${mobileArticlesOpen ? s.chevronOpen : ''}`}>▾</span>
+            </button>
+
+            {mobileArticlesOpen && (
+              <div className={s.mobileSubList}>
+                {ARTICLE_SUB_ITEMS.map(item => (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    className={({ isActive }) => `${s.mobileSubLink} ${isActive ? s.mobileSubLinkActive : ''}`}
+                    onClick={() => setOpen(false)}
+                  >
+                    <GoogleIcon name={item.icon} size={18} />
+                    <span>{item.label}</span>
+                  </NavLink>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {PRIMARY_LINKS_MIDDLE.map(l => (
             <NavLink
               key={l.to}
               to={l.to}
@@ -243,13 +343,13 @@ export default function Navigation() {
             <button
               type="button"
               className={`${s.mobileAccordionHeader} ${isWhatWeDoActive ? s.mobileLinkActive : ''}`}
-              onClick={() => setMobileAccordionOpen(o => !o)}
+              onClick={() => setMobileWhatWeDoOpen(o => !o)}
             >
               <span>What We Do</span>
-              <span className={`${s.chevron} ${mobileAccordionOpen ? s.chevronOpen : ''}`}>▾</span>
+              <span className={`${s.chevron} ${mobileWhatWeDoOpen ? s.chevronOpen : ''}`}>▾</span>
             </button>
 
-            {mobileAccordionOpen && (
+            {mobileWhatWeDoOpen && (
               <div className={s.mobileSubList}>
                 {WHAT_WE_DO_ITEMS.map(item => (
                   <NavLink
