@@ -204,13 +204,13 @@ export default function Aaryaveera() {
           <div className={s.titleClip}>
             <span data-av="title" className={s.title}>AARYAVEERA</span>
           </div>
-          <span data-av="sub" className={s.sub}>आर्यवीरा · Ideological Identity of Founder Harshita Mankar</span>
-          <span data-av="motto" className={s.motto}>&quot;शक्त्या शान्तिः&quot; — From Strength Alone Arises Lasting Peace</span>
+          <span data-av="sub" className={s.sub}>Aaryaveera · Ideological Identity of Founder Harshita Mankar</span>
+          <span data-av="motto" className={s.motto}>From Strength Alone Arises Lasting Peace</span>
 
           {/* Core Institutional & Philosophical Distinction Block */}
           <div data-av="identity" className={s.identity}>
             <p className={s.identityHindi}>
-              शक्ति सभा — संस्थागत ढांचा · आर्यवीरा — मूल दर्शन
+              Shakti Sabha — Institutional Framework · Aaryaveera — Foundational Worldview
             </p>
             <p className={s.identityText}>
               Aaryaveera represents the philosophical identity and worldview of founder Harshita Mankar — providing the ideological bedrock that guides Shakti Sabha's three institutional streams: <Link to="/mardini" className={s.streamLink}>Mission Mardini</Link>, <Link to="/shakti-bhava" className={s.streamLink}>Shakti Bhava</Link>, and <Link to="/shakti-varta" className={s.streamLink}>Shakti Varta</Link>.

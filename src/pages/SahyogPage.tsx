@@ -15,7 +15,7 @@ export default function SahyogPage() {
         <div className={sh.heroInner}>
           <span className={sh.badge}>SRS Section 10 · Collaboration Ecosystem</span>
           <h1 className={sh.title}>Collaboration</h1>
-          <p className={sh.hindiSubtitle}>सहयोग — Together We Rise</p>
+          <p className={sh.hindiSubtitle}>Sahyog — Together We Rise · Institutional Alliance &amp; Collective Action</p>
           <p className={sh.desc}>
             Shakti Sabha stands with forward-thinking enterprises, grassroots NGOs, and committed student changemakers
             who believe in one foundational truth — that every woman deserves physical safety, mental dignity, and social opportunity.

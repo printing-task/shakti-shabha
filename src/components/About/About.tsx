@@ -12,8 +12,8 @@ const PILLARS = [
     tagColor: '#DC143C', 
     tagBg: 'rgba(220, 20, 60, 0.08)',
     accent: '#DC143C', 
-    name: 'Mardini', 
-    dev: 'मर्दिनी', 
+    name: 'Mission Mardini', 
+    dev: 'Physical & Tactical Sovereignty', 
     text: 'Self-defense. Lathi-Kaushal. Sword training. Village camps across Maharashtra and beyond. The revolution that begins in the body and spreads to the spirit.', 
     link: '/mardini', 
     linkLabel: 'Explore Mission Mardini' 
@@ -22,10 +22,10 @@ const PILLARS = [
     num: '02', 
     tag: 'Healing',    
     tagColor: '#166534', 
-    tagBg: 'rgba(22, 101, 52, 0.08)',
+    tagBg: 'rgba(220, 20, 60, 0.08)',
     accent: '#166534', 
     name: 'Shakti Bhava', 
-    dev: 'शक्ति भव', 
+    dev: 'Consciousness & Somatic Healing', 
     text: 'Counseling. Anonymized case studies. Breaking silence on trafficking, PTSD, puberty, and depression. The space where survivors become warriors.', 
     link: '/shakti-bhava', 
     linkLabel: 'Explore Shakti Bhava' 
@@ -37,7 +37,7 @@ const PILLARS = [
     tagBg: 'rgba(67, 56, 202, 0.08)',
     accent: '#4338CA', 
     name: 'Shakti Varta', 
-    dev: 'शक्ति वार्ता', 
+    dev: 'Epistemic & Intellectual Inquiry', 
     text: 'White papers. Research. Podcasts. Seminars. The intellectual engine that backs the revolution with verified knowledge and historical truth.', 
     link: '/shakti-varta', 
     linkLabel: 'Explore Shakti Varta' 

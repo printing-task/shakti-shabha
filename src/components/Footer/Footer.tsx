@@ -57,7 +57,7 @@ export default function Footer() {
         {/* Brand & Mission Column */}
         <div data-ft="col" className={s.brand}>
           <div className={s.logoName}>Shakti Sabha</div>
-          <div className={s.logoHindi}>शक्ति सभा</div>
+          <div className={s.logoHindi}>Union of Peace &amp; Revolution</div>
           <p className={s.tagline}>
             An institutional digital platform dedicated to physical sovereignty, tactical preparedness, and trauma-informed psychological resilience for Indian women. Ancient civilizational roots. Uncompromising modern strength.
           </p>

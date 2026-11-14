@@ -17,7 +17,8 @@ export default function GoogleIcon({
 }: GoogleIconProps) {
   return (
     <span
-      className={`material-symbols-outlined ${className}`}
+      className={`material-symbols-outlined notranslate ${className}`}
+      translate="no"
       style={{
         fontSize: size ? (typeof size === 'number' ? `${size}px` : size) : undefined,
         fontVariationSettings: filled ? "'FILL' 1" : undefined,
@@ -27,6 +28,7 @@ export default function GoogleIcon({
         justifyContent: 'center',
         lineHeight: 1,
         userSelect: 'none',
+        flexShrink: 0,
         ...style
       }}
       aria-hidden="true"

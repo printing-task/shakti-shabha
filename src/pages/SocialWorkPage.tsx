@@ -186,7 +186,7 @@ export default function SocialWorkPage() {
         <div className={sw.heroInner}>
           <span className={sw.badge}>SRS Section 8 · Grassroots Impact</span>
           <h1 className={sw.title}>Social Work & Ground Action</h1>
-          <p className={sw.hindiSubtitle}>कार्यक्रम और सामाजिक कार्य · Together On Ground</p>
+          <p className={sw.hindiSubtitle}>Ground Programs &amp; Social Initiatives · Together on the Frontline</p>
           <p className={sw.desc}>
             From high-risk frontline rescues and anti-trafficking extractions to rural self-defense camps, tribal outreach, and psychological rehabilitation across Maharashtra.
           </p>

@@ -150,7 +150,7 @@ export default function Hero() {
 
           {/* Motto Row */}
           <div data-hero="motto" className={s.mottoRow}>
-            <span className={s.mottoSanskrit}>शक्त्या शान्तिः</span>
+            <span className={s.mottoSanskrit}>Peace Through Strength</span>
             <span className={s.mottoSep}>·</span>
             <span className={s.mottoSub}>Sovereignty, Strength &amp; Psychological Resilience</span>
           </div>
@@ -177,7 +177,7 @@ export default function Hero() {
           {/* Institutional Metric Strip */}
           <div data-hero="metrics" className={s.metricStrip}>
             <div className={s.metricItem}>
-              <span className={s.metricValue}>12+ Yrs</span>
+              <span className={s.metricValue}>7+ Yrs</span>
               <span className={s.metricLabel}>On-Ground Dedication</span>
             </div>
             <div className={s.metricDivider} />

@@ -155,9 +155,9 @@ export default function AaryaveeraPage() {
             flexWrap: 'wrap',
             textAlign: 'center'
           }}>
-            <span style={{ fontWeight: 700 }}>शक्ति सभा — संस्थागत ढांचा</span>
+            <span style={{ fontWeight: 700 }}>Shakti Sabha — Institutional Framework</span>
             <span style={{ color: '#C2410C' }}>•</span>
-            <span style={{ fontWeight: 700 }}>आर्यवीरा — मूल दर्शन</span>
+            <span style={{ fontWeight: 700 }}>Aaryaveera — Foundational Worldview</span>
           </div>
 
           <p className={`${p.heroBody} avHeroIn`}>
@@ -372,7 +372,7 @@ export default function AaryaveeraPage() {
           <h2 className={p.sectionTitle}>Aaryaveera and Shakti Sabha</h2>
           <div className={p.distinctionGrid}>
             <div className={p.distinctionBlock}>
-              <h3 className={p.distinctionLabel}>आर्यवीरा (Aaryaveera) — फाउंडर दर्शन</h3>
+              <h3 className={p.distinctionLabel}>Aaryaveera — Founder Worldview</h3>
               <p>
                 Aaryaveera is the <strong>personal philosophical identity</strong> of
                 founder Harshita Mankar. It is not an organisation, a programme, an event, a camp,
@@ -386,9 +386,9 @@ export default function AaryaveeraPage() {
             </div>
             <div className={p.distinctionArrow} aria-hidden="true">→</div>
             <div className={p.distinctionBlock}>
-              <h3 className={p.distinctionLabel}>शक्ति सभा (Shakti Sabha) — संस्थागत ढांचा</h3>
+              <h3 className={p.distinctionLabel}>Shakti Sabha — Institutional Body</h3>
               <p>
-                Shakti Sabha is the <strong>institutional body (संस्थागत ढांचा)</strong> through which
+                Shakti Sabha is the <strong>institutional framework</strong> through which
                 Harshita Mankar translates her philosophy into structured, public-facing
                 programmes and community initiatives.
               </p>

@@ -94,7 +94,7 @@ export default function ResearchPage() {
           </div>
           <span className={rp.badge}>SRS Section 12 · Thought-Lab & Citations</span>
           <h1 className={rp.title}>Research & Thought-Lab</h1>
-          <p className={rp.hindiSubtitle}>विचार-प्रयोगशाला · White Papers, Archives & Legal Analysis</p>
+          <p className={rp.hindiSubtitle}>Thought-Lab · White Papers, Archival Records &amp; Policy Analysis</p>
           <p className={rp.desc}>
             Where grassroots physical revolution meets rigorous academic scholarship.
             Peer-reviewed research debunking distorted colonial narratives, analyzing judicial loopholes,

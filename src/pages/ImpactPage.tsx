@@ -189,7 +189,7 @@ const ARCHIVE_RECORDS: ArchiveRecord[] = [
   },
   {
     id: 'symp-4',
-    title: 'Ratlam State Education Dialogue (शिक्षा संवाद)',
+    title: 'Ratlam State Education Dialogue',
     vertical: 'vertical-1',
     institutionalTag: 'EDUCATIONAL POLICY DIALOGUE',
     scale: '2,000+ Academicians, Educators & Scholars',

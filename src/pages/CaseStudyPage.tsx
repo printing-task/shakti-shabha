@@ -130,7 +130,7 @@ export default function CaseStudyPage() {
           </div>
           <span className={cs.badge}>SRS Section 8 · Secure Case Study Archive</span>
           <h1 className={cs.title}>Case Studies & Field Stories</h1>
-          <p className={cs.hindiSubtitle}>केस स्टडी — असली कहानियाँ · Anonymized & Verified</p>
+          <p className={cs.hindiSubtitle}>Case Studies &amp; Verified Survivor Dossiers · Anonymized &amp; Documented</p>
           <p className={cs.desc}>
             Raw, unfiltered accounts of trauma, survival, and victory. Every detail is rigorously anonymized
             using Zero-Knowledge principles to safeguard survivor identity while preserving legal and evidentiary truths.

@@ -103,6 +103,26 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           display: none !important;
         }
 
+        /* Prevent icons from being translated or distorted */
+        .notranslate,
+        .material-symbols-outlined,
+        .material-icons,
+        span[class*="material-symbols"],
+        span[class*="material-icons"] {
+          font-family: 'Material Symbols Outlined', 'Material Icons' !important;
+          speak: none !important;
+          font-style: normal !important;
+          font-weight: normal !important;
+          text-transform: none !important;
+          line-height: 1 !important;
+          letter-spacing: normal !important;
+          word-wrap: normal !important;
+          white-space: nowrap !important;
+          direction: ltr !important;
+          -webkit-font-smoothing: antialiased !important;
+          text-rendering: optimizeLegibility !important;
+        }
+
         /* Prevent Hindi translation clipping or font transparency bugs */
         html.translated-ltr, html.translated-rtl {
           font-family: 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;

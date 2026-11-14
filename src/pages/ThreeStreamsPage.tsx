@@ -10,20 +10,20 @@ export default function ThreeStreamsPage() {
         <div className={s.heroInner}>
           <span className={s.badge}>Architecture · The Tri-Stream Doctrine</span>
           <h1 className={s.title}>OUR THREE STREAMS. ONE VISION.</h1>
-          <p className={s.hindiSubtitle}>शान्ति और क्रान्ति का संगम · त्रिवेणी दर्शन</p>
+          <p className={s.hindiSubtitle}>The Union of Peace and Revolution · The Three Streams</p>
           <p className={s.desc}>
             Together, these initiatives represent Shakti Sabha’s integrated approach to human development: strengthening the body, refining the mind, and awakening consciousness.
           </p>
 
           <div className={s.heroTags}>
             <Link to="/mardini" className={`${s.heroTag} ${s.tagMardini}`}>
-              01 Revolution · Mardini (मर्दिनी) →
+              01 Revolution · Mission Mardini →
             </Link>
             <Link to="/shakti-bhava" className={`${s.heroTag} ${s.tagBhava}`}>
-              02 Healing · Shakti Bhava (शक्ति भव) →
+              02 Healing · Shakti Bhava →
             </Link>
             <Link to="/shakti-varta" className={`${s.heroTag} ${s.tagVarta}`}>
-              03 Discourse · Shakti Varta (शक्ति वार्ता) →
+              03 Discourse · Shakti Varta →
             </Link>
           </div>
         </div>
@@ -95,7 +95,7 @@ export default function ThreeStreamsPage() {
               </span>
             </div>
             <h3 className={s.streamName}>Mardini</h3>
-            <div className={s.streamDev}>मर्दिनी · Physical Sovereignty &amp; Tactical Preparedness</div>
+            <div className={s.streamDev}>Mission Mardini · Physical Sovereignty &amp; Tactical Preparedness</div>
             <p className={s.streamSummary}>
               Challenges passive approaches to self-defense by integrating physical combat training with psychological preparedness, situational awareness, discipline, and decision-making under pressure.
             </p>
@@ -128,7 +128,7 @@ export default function ThreeStreamsPage() {
               </span>
             </div>
             <h3 className={s.streamName}>Shakti Bhava</h3>
-            <div className={s.streamDev}>शक्ति भव · Cognitive Awakening &amp; Human Consciousness</div>
+            <div className={s.streamDev}>Shakti Bhava · Cognitive Awakening &amp; Human Consciousness</div>
             <p className={s.streamSummary}>
               Youth-awareness and consciousness-building initiative cultivating independent thinkers who examine social narratives and make decisions through reason.
             </p>
@@ -161,7 +161,7 @@ export default function ThreeStreamsPage() {
               </span>
             </div>
             <h3 className={s.streamName}>Shakti Varta</h3>
-            <div className={s.streamDev}>शक्ति वार्ता · Intellectual Sovereignty &amp; Critical Inquiry</div>
+            <div className={s.streamDev}>Shakti Varta · Intellectual Sovereignty &amp; Critical Inquiry</div>
             <p className={s.streamSummary}>
               Research, mentorship, and public discourse platform equipping youth with research literacy and the confidence to question widely accepted narratives from primary sources.
             </p>

@@ -9,9 +9,9 @@ export default function MardiniPage() {
       {/* ── TOP HERO BANNER ────────────────────────────────────────── */}
       <div className={m.hero}>
         <div className={m.heroInner}>
-          <span className={m.badge}>01 · Revolution · शारीरिक संप्रभुता</span>
+          <span className={m.badge}>01 · Revolution · Physical Sovereignty</span>
           <h1 className={m.title}>Mission Mardini</h1>
-          <p className={m.hindiSubtitle}>मर्दिनी · Physical Sovereignty. Mental Resilience. Tactical Preparedness.</p>
+          <p className={m.hindiSubtitle}>Mardini · Physical Sovereignty. Mental Resilience. Tactical Preparedness.</p>
           <p className={m.desc}>
             Mission Mardini is Shakti Sabha’s tactical self-defense and physical empowerment initiative for girls and women. Led by AARYAVEERA, the programme challenges passive approaches to self-defense by integrating physical training with psychological preparedness, situational awareness, discipline, and decision-making under pressure.
           </p>

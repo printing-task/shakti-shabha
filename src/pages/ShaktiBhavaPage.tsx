@@ -9,9 +9,9 @@ export default function ShaktiBhavaPage() {
       {/* ── TOP HERO BANNER ────────────────────────────────────────── */}
       <div className={b.hero}>
         <div className={b.heroInner}>
-          <span className={b.badge}>02 · Consciousness · चेतना और संज्ञान</span>
+          <span className={b.badge}>02 · Consciousness · Cognitive Awakening</span>
           <h1 className={b.title}>Shakti Bhava</h1>
-          <p className={b.hindiSubtitle}>शक्ति भव · Cognitive Awakening. Consciousness. Civilizational Awareness.</p>
+          <p className={b.hindiSubtitle}>Shakti Bhava · Cognitive Awakening. Consciousness. Civilizational Awareness.</p>
           <p className={b.desc}>
             Shakti Bhava is Shakti Sabha’s youth-awareness and consciousness-building initiative. Its central purpose is to cultivate individuals who can think independently, examine social narratives, understand their cultural and intellectual roots, and make decisions through reason rather than social pressure or digital influence.
           </p>

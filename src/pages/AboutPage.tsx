@@ -186,10 +186,10 @@ const TIMELINE = [
 ]
 
 const VALUES = [
-  { icon: 'balance', name: 'Kshatra-Dharma', dev: 'क्षात्र धर्म', desc: 'The responsibility to protect, the courage to confront injustice, the discipline to exercise power responsibly, and the wisdom to distinguish strength from aggression.' },
-  { icon: 'psychology', name: 'Intellectual Sovereignty', dev: 'बौद्धिक संप्रभुता', desc: 'Do not accept an idea merely because it is popular, traditional, or influential. Examine its evidence, reasoning, context, and implications.' },
-  { icon: 'shield', name: 'Physical Preparedness', dev: 'शारीरिक सामर्थ्य', desc: 'Before the body can respond, the mind must overcome fear. True empowerment requires the development of both mental composure and physical capability.' },
-  { icon: 'spa', name: 'Human Consciousness', dev: 'आत्म चेतना', desc: 'Strength without hatred. Knowledge without blindness. Power with responsibility. Developing the whole human being.' },
+  { icon: 'balance', name: 'Kshatra-Dharma', dev: 'Courage, Duty & Protection', desc: 'The responsibility to protect, the courage to confront injustice, the discipline to exercise power responsibly, and the wisdom to distinguish strength from aggression.' },
+  { icon: 'psychology', name: 'Intellectual Sovereignty', dev: 'Critical Inquiry & Truth', desc: 'Do not accept an idea merely because it is popular, traditional, or influential. Examine its evidence, reasoning, context, and implications.' },
+  { icon: 'shield', name: 'Physical Preparedness', dev: 'Somatic Readiness & Defense', desc: 'Before the body can respond, the mind must overcome fear. True empowerment requires the development of both mental composure and physical capability.' },
+  { icon: 'spa', name: 'Human Consciousness', dev: 'Inner Composure & Dignity', desc: 'Strength without hatred. Knowledge without blindness. Power with responsibility. Developing the whole human being.' },
 ]
 
 export interface SocialAccountItem {
@@ -517,7 +517,7 @@ export default function AboutPage() {
         <div className={p.heroInner}>
           <span className={p.eyebrow}>Civilizational Leadership &amp; Tactical Sovereignty</span>
           <h1 className={p.heroTitle}>About Shakti Sabha</h1>
-          <p className={p.heroHindi}>शांति और क्रांति का संगम · The Soul &amp; Strategy of the Movement</p>
+          <p className={p.heroHindi}>The Soul &amp; Strategy of the Movement · Union of Peace &amp; Revolution</p>
           <p className={p.heroDesc}>
             Reviving the civilizational paradigm of Kshatra-Dharma and cognitive sovereignty.
             From high-risk frontline rescues to residential combat camps, Shakti Sabha forges young women into intellectually fortified and tactically capable guardians.
@@ -600,7 +600,7 @@ export default function AboutPage() {
             <div className={p.blueprintHeader}>
               <span className={p.blueprintEyebrow}>
                 <GoogleIcon name="architecture" size={16} />
-                STRATEGIC BLUEPRINT · रणनीतिक कार्यप्रणाली
+                STRATEGIC BLUEPRINT & METHODOLOGY
               </span>
               <h3 className={`${p.blueprintMainTitle} ${p.animatedHeading}`}>The Architecture of Sovereignty</h3>
               <p className={p.blueprintSubtitle}>
@@ -919,7 +919,7 @@ export default function AboutPage() {
           <div className={p.socialHeader}>
             <span className={p.socialEyebrow}>
               <GoogleIcon name="public" size={15} />
-              आधिकारिक सोशल मीडिया · Digital Vanguard
+              OFFICIAL PLATFORMS · Digital Vanguard
             </span>
             <h2 className={`${p.socialTitle} ${p.animatedHeading}`}>Official Movement Portals &amp; Channels</h2>
             <p className={p.socialSubtitle}>

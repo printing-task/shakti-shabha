@@ -174,7 +174,7 @@ export default function Navigation() {
         />
         <div className={s.logoText}>
           <span ref={logoMainRef} className={s.logoMain}>Shakti Sabha</span>
-          <span ref={logoDevRef} className={s.logoDev}>शक्ति सभा</span>
+          <span ref={logoDevRef} className={s.logoDev}>Union of Peace &amp; Revolution</span>
         </div>
       </Link>
 

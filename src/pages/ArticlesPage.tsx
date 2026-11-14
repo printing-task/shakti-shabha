@@ -31,128 +31,128 @@ const ARTICLES_LIST: ArticleItem[] = [
     id: 'art-1',
     tag: 'Clinical Psychology',
     rating: '9.6',
-    title: 'महिलाओं में Depression के 10 छुपे हुए लक्षण',
-    hindiTitle: 'जब दर्द बाहर नहीं दिखता पर अंदर से तोड़ता है',
-    excerpt: 'भारतीय परिवारों में महिलाओं का अवसाद अक्सर अत्यधिक काम, चिड़चिड़ापन और मौन थकावट के पीछे छिप जाता है। जानिए कैसे इस अदृश्य संघर्ष को पहचानें और पुनर्प्राप्ति की ओर बढ़ें।',
-    highlight: 'हाई-फंक्शनिंग अवसाद',
+    title: '10 Hidden Signs of High-Functioning Depression in Indian Women',
+    hindiTitle: undefined,
+    excerpt: 'In Indian households, depression among women often hides behind relentless caregiving, irritability, and silent exhaustion. Learn how to recognize and address this unseen crisis.',
+    highlight: 'Clinical Wellness',
     author: 'Dr. Shruti Kulkarni (PTSD Specialist)',
     readTime: '8 min read',
     image: '/IMG_20260908_201306.jpg',
     fullBody: {
-      context: 'भारतीय समाज में महिलाएं अक्सर परिवार की प्राथमिक देखभालकर्ता होती हैं। ऐसे में उनका स्वयं का मानसिक स्वास्थ्य द्वितीयक बन जाता है। इस क्लिनिकल अध्ययन में 500 से अधिक महिलाओं के अनुभवों का दस्तावेजीकरण किया गया है।',
+      context: 'In Indian society, women frequently function as primary emotional and practical caregivers. In this multi-year clinical documentation across 500+ women, high-functioning depression manifests uniquely.',
       keyFindings: [
-        'उदासी की जगह लगातार चिड़चिड़ापन और अत्यधिक काम में खुद को डुबोए रखना।',
-        'शारीरिक रूप से अस्पष्टीकृत दर्द — विशेषकर माइग्रेन, पीठ दर्द और पाचन संबंधी समस्याएं।',
-        'स्वयं के लिए समय निकालने या आराम करने पर अत्यधिक अपराधबोध (Caregiver Guilt)।',
-        'अपनों के बीच रहते हुए भी एक गहरी भावनात्मक शून्यता का अनुभव होना।',
-        'दैनिक पारिवारिक दायित्वों को मशीन की तरह निभाना परंतु जीवन में आनंद का समाप्त हो जाना।'
+        'Persistent irritability and throwing oneself into compulsive overwork rather than overt sadness.',
+        'Somatic and medically unexplained physical distress — recurring migraines, chronic backaches, and stress-induced digestive disorders.',
+        'Severe "Caregiver Guilt" when attempting to rest, set boundaries, or seek personal recovery.',
+        'A profound sense of internal emotional isolation and numbness while surrounded by family.',
+        'Executing domestic and professional duties with mechanical perfection while internal joy diminishes.'
       ],
-      conclusion: 'शक्ति सभा का "शक्ति भाव" प्रकल्प महिलाओं को एक गोपनीय, सहानुभूतिपूर्ण और बिना किसी पूर्वाग्रह के सुरक्षित वातावरण प्रदान करता है जहाँ वे अपनी पीड़ा साझा कर सकती हैं।'
+      conclusion: 'Shakti Sabha’s "Shakti Bhava" initiative provides women an anonymous, trauma-informed sanctuary for healing and psychological sovereignty.'
     }
   },
   {
     id: 'art-2',
     tag: 'Upanishadic Wisdom',
     rating: '9.5',
-    title: 'गार्गी वाचक्नवी — शास्त्रार्थ में याज्ञवल्क्य को चुनौती',
-    hindiTitle: 'वैदिक काल की प्रखर ब्रह्मवादिनी',
-    excerpt: 'बृहदारण्यक उपनिषद के राजा जनक के दरबार में गार्गी ने अपनी दार्शनिक प्रखरता से समकालीन विद्वत समाज को झकझोर कर रख दिया। एक ऐतिहासिक दृष्टि जो नारी स्वाभिमान को पुनः परिभाषित करती है।',
-    highlight: 'दार्शनिक स्वाभिमान',
+    title: 'Gargi Vachaknavi — Challenging Yajnavalkya in Philosophical Debate',
+    hindiTitle: undefined,
+    excerpt: 'In King Janaka’s royal court, Gargi shattered patriarchal complacency with piercing philosophical rigor. A historical reclamation of ancient Indian women’s intellectual sovereignty.',
+    highlight: 'Civilizational Heritage',
     author: 'Shakti Sabha Research Cell',
     readTime: '7 min read',
     image: '/20260517_120756.jpg',
     fullBody: {
-      context: 'राजा जनक के बहु-दक्षिणा यज्ञ में भारत भर के शीर्ष ऋषियों को आमंत्रित किया गया था। याज्ञवल्क्य के समक्ष जब बड़े-बड़े विद्वान मौन हो गए, तब गार्गी ने खड़े होकर ब्रह्मविद्या पर कठिनतम प्रश्न पूछे।',
+      context: 'At King Janaka’s grand philosophical symposium, the foremost scholars of ancient India assembled. When seasoned sages hesitated, Gargi stood fearless to challenge Sage Yajnavalkya on the ultimate nature of reality.',
       keyFindings: [
-        'गार्गी ने ब्रह्मांड के ताने-बाने पर प्रश्न उठाते हुए पूछा: "हे याज्ञवल्क्य! यह संपूर्ण दृश्य जगत किसमें ओत-प्रोत है?"',
-        'प्राचीन भारत में कन्याओं का उपनयन संस्कार, वेदाध्ययन और दार्शनिक सभाओं में नेतृत्व सामान्य अधिकार था।',
-        'रूढ़िवादी व्याख्याओं द्वारा गार्गी जैसी विदुषियों के योगदान को मुख्यधारा के विमर्श से ओझल करने का प्रयास किया गया।'
+        'Gargi probed the ontological structure of the universe: "In what, then, is all this world woven back and forth?"',
+        'Ancient Vedic traditions recognized female initiation (Upanayana), rigorous Vedic scholarship, and intellectual leadership as standard birthrights.',
+        'Later colonial and retrograde interpretations distorted the prominent intellectual stature of Vedic women scholars.'
       ],
-      conclusion: 'गार्गी का आख्यान केवल अतीत की स्मृति नहीं है, बल्कि आज की प्रत्येक भारतीय बेटी के लिए बौद्धिक निर्भीकता का प्रेरणा-पुंज है।'
+      conclusion: 'Gargi’s narrative is a living blueprint of uncompromising intellectual sovereignty and courage for modern Indian women.'
     }
   },
   {
     id: 'art-3',
     tag: 'Warrior Queens',
     rating: '9.8',
-    title: 'रानी अब्बक्का चौटा — पहली Anti-Colonial Naval Commander',
-    hindiTitle: 'उल्लाल की अपराजेय वीरांगना',
-    excerpt: 'पुर्तगाली जहाजी बेड़ों को उल्लाल (कर्नाटक) के तटीय समुद्र में लगातार चार बार धूल चटाने वाली वीरांगना रानी की रणनीति और असाधारण नौसैनिक कौशल का प्रामाणिक इतिहास।',
-    highlight: 'समुद्री रक्षा रणनीति',
+    title: 'Rani Abbakka Chowta — The First Anti-Colonial Naval Commander',
+    hindiTitle: undefined,
+    excerpt: 'How the fearless warrior queen defeated the Portuguese armada four times off the coast of Ullal, Karnataka. A masterclass in naval guerilla warfare and sovereignty.',
+    highlight: 'Naval Warfare',
     author: 'Shakti Sabha Historical Archives',
     readTime: '10 min read',
     image: '/missionmirdani.jpg',
     fullBody: {
-      context: '१६वीं शताब्दी में जब पुर्तगाली साम्राज्य हिंद महासागर पर एकछत्र राज स्थापित करना चाहता था, तब कर्नाटक के एक छोटे से राज्य उल्लाल की रानी अब्बक्का ने उनके विशाल जहाजों को अग्निबाणों से भस्म कर दिया।',
+      context: 'During the 16th century, as the Portuguese maritime empire sought absolute hegemony across the Indian Ocean, Rani Abbakka of Ullal in coastal Karnataka defended her waters with fierce naval brilliance.',
       keyFindings: [
-        'रानी अब्बक्का ने सभी जातियों, मछुआरों और स्थानीय लड़ाकों को एकजुट कर एक सशक्त तटीय रक्षा वाहिनी बनाई।',
-        'पुर्तगाली गवर्नर डॉन अल्वारो दा सिल्वेरा को युद्ध में बुरी तरह खदेड़ दिया गया।',
-        'उनकी युद्धनीति आधुनिक गुरिल्ला नौसैनिक युद्धकला का अप्रतिम प्राचीन उदाहरण है।'
+        'Rani Abbakka mobilized an egalitarian fighting force of coastal fishermen, Mogaveera seafarers, and local warriors.',
+        'Portuguese armada vessels were trapped and set ablaze using synchronized nighttime fire-arrow strikes.',
+        'Her tactical formations remain a celebrated early masterclass in maritime guerrilla defense against European colonial armadas.'
       ],
-      conclusion: 'रानी अब्बक्का का जीवन दर्शाता है कि मातृभूमि की रक्षा और स्वाभिमान के लिए शस्त्र उठाना नारी का सनातन धर्म रहा है।'
+      conclusion: 'Rani Abbakka stands as a testament that taking up arms to defend community, nation, and dignity is the eternal heritage of Indian women.'
     }
   },
   {
     id: 'art-4',
     tag: 'Caregiver Wellness',
     rating: '9.2',
-    title: 'Indian Women & Anxiety — अनकही थकान का मनोवैज्ञानिक हल',
-    hindiTitle: 'पारिवारिक अपेक्षाओं के बीच मानसिक संतुलन',
-    excerpt: 'घर, करियर और सामाजिक अपेक्षाओं के बीच पिसती सांसों का यथार्थ। जानिए कैसे सोमाटिक थेरेपी, श्वास तकनीक और स्पष्ट सीमाएं निर्धारित करके अपनी ऊर्जा को संरक्षित किया जाए।',
-    highlight: 'सोमाटिक हीलिंग',
+    title: 'Indian Women & Anxiety — Psychological Solutions for Silent Burnout',
+    hindiTitle: undefined,
+    excerpt: 'Navigating domestic obligations, career expectations, and chronic stress. Practical somatic therapy, breathwork, and boundary-setting techniques.',
+    highlight: 'Somatic Healing',
     author: 'Maitreyi Joshi (Counselor)',
     readTime: '6 min read',
     image: '/shaktibhava.jpg',
     fullBody: {
-      context: 'आधुनिक जीवनशैली में भारतीय महिलाएं दोहरे दबाव में जी रही हैं। घर का प्रबंधन और व्यावसायिक जीवन में उत्कृष्ट प्रदर्शन की दौड़ शरीर में क्रोनिक कोर्टिसोल (तनाव हार्मोन) के स्तर को बढ़ा देती है।',
+      context: 'Modern Indian women routinely carry the dual cognitive load of familial expectations and career excellence, sustaining elevated systemic cortisol levels.',
       keyFindings: [
-        'अनकही अपेक्षाओं के कारण निरंतर सतर्कता मोड (Fight-or-Flight) में रहना।',
-        'पारिवारिक टकराव से बचने के लिए अपनी भावनाओं का दमन करना, जो बाद में पैनिक अटैक बन जाता है।',
-        'प्रतिदिन 15 मिनट का प्राणायाम और सीमा-निर्धारण अभ्यास (Boundary Setting) 60% तनाव कम कर सकता है।'
+        'Living in continuous subconscious fight-or-flight mode due to unstated domestic expectations.',
+        'Emotional suppression to avert conflict, which manifests over time as panic episodes and physical burnout.',
+        'Practicing daily somatic boundary-setting and regulated breathwork significantly reduces chronic anxiety.'
       ],
-      conclusion: 'स्वास्थ्य का अर्थ केवल बीमारी की अनुपस्थिति नहीं, बल्कि मन और आत्मा की जीवंत प्रसन्नता है।'
+      conclusion: 'True wellness is not merely the absence of distress, but the active presence of inner sovereignty and joy.'
     }
   },
   {
     id: 'art-5',
     tag: 'Legal Shield',
     rating: '9.7',
-    title: 'घरेलू हिंसा एवं डिजिटल प्रताड़ना: आपके कानूनी अधिकार',
-    hindiTitle: 'न्याय के लिए कानून को ढाल बनाएं',
-    excerpt: 'DV Act 2005, IT Act Section 66E और कार्यस्थल पर POSH कानून के तहत मिलने वाले अधिकारों की स्पष्ट, बिंदुवार जानकारी। जानिए आपातकाल में पुलिस और न्यायालय से तुरंत राहत कैसे पाएं।',
-    highlight: 'कानूनी सुरक्षा कवच',
+    title: 'Domestic Abuse & Digital Harassment: Your Legal Armor',
+    hindiTitle: undefined,
+    excerpt: 'A comprehensive, actionable guide to rights under the DV Act, IT Act Section 66E, and POSH guidelines. How to secure immediate protection and legal aid.',
+    highlight: 'Legal Shield',
     author: 'Adv. M. R. Deshmukh',
     readTime: '9 min read',
     image: '/socialworkk.jpg',
     fullBody: {
-      context: 'कानून की अज्ञानता के कारण अक्सर महिलाएं लंबे समय तक अत्याचार सहती रहती हैं। भारतीय कानून महिलाओं को त्वरित अंतरिम राहत (Interim Relief) और सुरक्षा आदेश (Protection Orders) का अधिकार देता है।',
+      context: 'Lack of practical statutory awareness frequently leaves women vulnerable. Indian law equips every citizen with robust emergency injunctions, protection orders, and interim relief.',
       keyFindings: [
-        'धारा 12 DV Act: निवास का अधिकार, भरण-पोषण और बच्चों की अंतरिम कस्टडी।',
-        'साइबर स्टॉकिंग और अवांछित संदेशों के विरुद्ध Cyber Crime Portal (cybercrime.gov.in) पर 24 घंटे में शिकायत।',
-        'मुफ्त कानूनी सहायता (Legal Aid) प्राप्त करने का संवैधानिक अधिकार (NALSA/SLSA)।'
+        'Section 12 DV Act: Immediate rights of shared household residence, maintenance orders, and emergency protective injunctions.',
+        'IT Act Section 66E / Cyber Stalking: Prompt 24-hour statutory reporting via national cybercrime infrastructure.',
+        'Constitutional guarantee of free legal aid representation via state and district legal services authorities.'
       ],
-      conclusion: 'शक्ति सभा की विधिक सहायता हेल्पलाइन पीड़ित बहनों को निःशुल्क परामर्श और कोर्ट प्रतिनिधित्व उपलब्ध कराती है।'
+      conclusion: 'Shakti Sabha’s legal advisory wing connects affected women with pro-bono consultation and courtroom advocacy.'
     }
   },
   {
     id: 'art-6',
     tag: 'Self Defense Philosophy',
     rating: '9.9',
-    title: 'शस्त्र और शास्त्र: नारी का आत्मरक्षा दर्शन',
-    hindiTitle: 'कठिन समय में संकोच नहीं, प्रहार करें',
-    excerpt: 'अहिंसा कायरता का आवरण नहीं हो सकती। आत्मरक्षा में उठाया गया कदम नैतिक रूप से पवित्र और धर्मसंगत है। मिशन मर्दिनी के मूल सिद्धांतों पर आधारित एक दार्शनिक विश्लेषण।',
-    highlight: 'क्षत्र-धर्म',
+    title: 'Shastra & Shaastra: The Martial Philosophy of Women',
+    hindiTitle: undefined,
+    excerpt: 'Non-violence is not an excuse for helplessness. Armed situational defense is moral, ethical, and dharmic. Core principles behind Mission Mardini.',
+    highlight: 'Kshatra-Dharma',
     author: 'Harshita Mankar (Director)',
     readTime: '11 min read',
     image: '/IMG_20260908_201306.jpg',
     fullBody: {
-      context: 'सभ्यतागत दृष्टि से भारतीय नारी केवल कोमलता की मूर्ति नहीं, बल्कि दुर्गा और चंडी का साक्षात स्वरूप है। जब मर्यादा और जीवन पर संकट आए, तब शस्त्र उठाना ही सर्वोच्च धर्म बन जाता है।',
+      context: 'Civilizationally, Indian womanhood is not defined by passive vulnerability. When dignity and life face unprovoked assault, righteous self-defense is moral, ethical, and dharmic duty.',
       keyFindings: [
-        'मानसिक तैयारी (Situational Awareness) शारीरिक बल से 80% अधिक प्रभावी होती है।',
-        'अपराधी के सबसे कमजोर अंगों (आंख, गला, जननांग, घुटने) पर त्वरित और निर्दयी प्रहार की तकनीक।',
-        'भय को क्रोध में और क्रोध को एकाग्र शक्ति (Focused Lethality) में बदलने की मानसिक साधना।'
+        'Situational awareness and verbal assertiveness constitute 80% of personal security.',
+        'Targeting biomechanical vulnerabilities (eyes, throat, knees, joint leverage) neutralizes size disparity.',
+        'Channeling primal fear into focused somatic composure and rapid defensive execution.'
       ],
-      conclusion: 'मिशन मर्दिनी का संकल्प है — हर भारतीय बेटी अपने सम्मान की स्वयं रक्षक बने।'
+      conclusion: 'Mission Mardini ensures every young woman becomes the active guardian of her own dignity.'
     }
   }
 ]
@@ -291,7 +291,7 @@ export default function ArticlesPage() {
         <div className={ap.heroInner}>
           <span className={ap.badge}>Content Ka Dil · Editorial &amp; Publications Hub</span>
           <h1 className={ap.title}>Articles, Case Studies &amp; Research</h1>
-          <p className={ap.hindiSubtitle}>गहन शोध, जमीनी केस स्टडी एवं वीरांगना दर्शन</p>
+          <p className={ap.hindiSubtitle}>Investigative Research, Ground Case Studies &amp; Civilizational Leadership</p>
           <p className={ap.desc}>
             An uncompromising intellectual and frontline repository for Bharatiya women: investigative long-form journalism,
             real-world survivor case studies, and peer-reviewed academic white papers on civilizational sovereignty.
@@ -781,7 +781,7 @@ export default function ArticlesPage() {
                 }}
               >
                 <div style={{ fontWeight: 700, color: '#111827', marginBottom: '0.75rem', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  प्रमुख निष्कर्ष एवं अवलोकन (Key Insights):
+                  Key Analytical Insights:
                 </div>
                 <ul style={{ paddingLeft: '1.25rem', margin: 0 }}>
                   {activeModalArticle.fullBody.keyFindings.map((point, i) => (
