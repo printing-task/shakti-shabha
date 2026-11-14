@@ -19,6 +19,8 @@ export default function GoogleIcon({
     <span
       className={`material-symbols-outlined notranslate ${className}`}
       translate="no"
+      lang="en"
+      data-no-translation="true"
       style={{
         fontSize: size ? (typeof size === 'number' ? `${size}px` : size) : undefined,
         fontVariationSettings: filled ? "'FILL' 1" : undefined,

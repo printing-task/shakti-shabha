@@ -184,7 +184,7 @@ export default function GalleryPage() {
         </motion.h1>
 
         <p className={gp.hindiSubtitle}>
-          मीडिया गैलरी · 12 वर्षों का जीवंत इतिहास
+          Visual Archive · 12 Years of Living History
         </p>
 
         <p className={gp.desc}>

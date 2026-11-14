@@ -222,7 +222,7 @@ export default function CounsellingPage() {
         <div className={cp.heroInner}>
           <span className={cp.badge}>Mental Health & Confidential Intake</span>
           <h1 className={cp.title}>Counseling & Holistic Healing</h1>
-          <p className={cp.hindiSubtitle}>परामर्श एवं मानसिक सशक्तिकरण · A Safe, Sacred Space</p>
+          <p className={cp.hindiSubtitle}>Confidential Psychological Sanctuary &amp; Somatic Healing · A Safe, Sacred Space</p>
           <p className={cp.desc}>
             Indian women ke liye confidential counseling, trauma-informed clinical support, aur judgment-free community spaces.
             Explore our specialized therapeutic services below.
@@ -389,6 +389,21 @@ export default function CounsellingPage() {
                       }
 
                       await supabase.from('counselling_requests').insert([reqPayload])
+
+                      try {
+                        await sendCounsellingNotificationEmail({
+                          applicant_name: reqPayload.name,
+                          applicant_email: reqPayload.email,
+                          applicant_phone: reqPayload.phone,
+                          concern: reqPayload.concern,
+                          city: reqPayload.city,
+                          state: reqPayload.state,
+                          country: reqPayload.country,
+                          message: reqPayload.message
+                        })
+                      } catch (emailErr) {
+                        console.warn('[EmailJS] Counselling notification error:', emailErr)
+                      }
 
                       try {
                         const localKey = 'shakti_counselling_requests'

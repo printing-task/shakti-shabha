@@ -204,6 +204,19 @@ export default function CoursesPage() {
     }
 
     try {
+      await sendCourseNotificationEmail({
+        applicant_name: payload.name,
+        applicant_email: payload.email,
+        applicant_phone: payload.phone,
+        course_name: contactForm.course || 'General Admissions & Guidance',
+        city: payload.city,
+        message: payload.message
+      })
+    } catch (emailErr) {
+      console.warn('[EmailJS] Course inquiry notification error:', emailErr)
+    }
+
+    try {
       const local = localStorage.getItem('shakti_counselling_requests')
       const list = local ? JSON.parse(local) : []
       const newRecord = { ...payload, id: `req_${Date.now()}` }
@@ -308,7 +321,7 @@ export default function CoursesPage() {
         <div className={cp.heroInner}>
           <span className={cp.badge}>SRS Section 11 · Institutional Academy</span>
           <h1 className={cp.title}>Institutional Programs &amp; Cohorts</h1>
-          <p className={cp.hindiSubtitle}>संस्थागत कार्यक्रम एवं समूह प्रशिक्षण · Tactical Defense &amp; Leadership</p>
+          <p className={cp.hindiSubtitle}>Institutional Programs &amp; Group Training · Tactical Defense &amp; Leadership</p>
           <p className={cp.desc}>
             Structured, high-definition training masterclasses and intensive cohort curricula.
             Earn Shakti Sabha's Kshatra-Dharma Certification, rooted in the Aaryaveera philosophy, delivered for academic institutions, corporate collectives, and grassroots volunteers.
@@ -550,6 +563,19 @@ export default function CoursesPage() {
                   await supabase.from('counselling_requests').insert([payload])
                 } catch (err) {
                   console.warn('Supabase cohort application error:', err)
+                }
+
+                try {
+                  await sendCourseNotificationEmail({
+                    applicant_name: payload.name,
+                    applicant_email: payload.email,
+                    applicant_phone: payload.phone,
+                    course_name: selectedCourse || 'Cohort Program',
+                    city: payload.city,
+                    message: payload.message
+                  })
+                } catch (emailErr) {
+                  console.warn('[EmailJS] Cohort modal notification error:', emailErr)
                 }
 
                 try {

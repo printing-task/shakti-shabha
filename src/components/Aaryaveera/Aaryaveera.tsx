@@ -270,11 +270,7 @@ export default function Aaryaveera() {
               letterSpacing="6" fill="#E8C98A" opacity="0.9">
               AARYAVEERA
             </text>
-            <text x="300" y="570" textAnchor="middle"
-              fontFamily="Noto Sans Devanagari, sans-serif"
-              fontSize="13" fill="#C9A96E" opacity="0.7">
-              आर्यवीरा
-            </text>
+            <text x="300" y="570" textAnchor="middle" fontFamily="Cinzel, serif" fontSize="10" letterSpacing="3" fill="#C9A96E" opacity="0.8">FOUNDATIONAL WORLDVIEW</text>
           </svg>
         </div>
       </div>

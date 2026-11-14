@@ -119,7 +119,7 @@ export default function BrandPage() {
         <div className={p.heroInner}>
           <span className={p.eyebrow}>Visual Identity System</span>
           <h1 className={p.heroTitle}>Brand Identity</h1>
-          <p className={p.heroHindi}>ब्रांड पहचान</p>
+          <p className={p.heroHindi}>Visual Sovereignty &amp; Identity</p>
           <p className={p.heroDesc}>
             The visual language of Shakti Sabha — where revolution meets peace. Every colour, typeface, and pixel carries the weight of 7 years of on-ground impact (starting from 2019).
           </p>
@@ -278,7 +278,7 @@ export default function BrandPage() {
                   <div className={p.placeholderFlame}><GoogleIcon name="local_fire_department" size={48} /></div>
                   <div className={p.placeholderText}>
                     <span style={{ fontFamily: 'Cinzel, serif', fontWeight: 900, fontSize: '1.2rem', color: '#DC143C', letterSpacing: '0.1em' }}>SHAKTI SABHA</span>
-                    <span style={{ fontFamily: 'Noto Sans Devanagari, sans-serif', fontSize: '0.75rem', color: '#777777' }}>शक्ति सभा</span>
+                    <span style={{ fontFamily: 'Noto Sans, sans-serif', fontSize: '0.75rem', color: '#777777' }}>Official Brandmark</span>
                   </div>
                 </div>
               </div>
@@ -292,11 +292,11 @@ export default function BrandPage() {
         <div className={p.sectionInner}>
           <div className={p.aaryaveeraCard}>
             <div className={p.aaryaveeraLeft}>
-              <span className={p.aaryaveeraEyebrow}>फाउंडर दर्शन · Founder's Philosophical Identity</span>
+              <span className={p.aaryaveeraEyebrow}>Founder's Philosophical Identity</span>
               <h3 className={p.aaryaveeraTitle}>Aaryaveera</h3>
-              <p className={p.aaryaveeraHindi}>आर्यवीरा · The Founder's Philosophy</p>
+              <p className={p.aaryaveeraHindi}>Aaryaveera · The Founder's Philosophy</p>
               <p className={p.aaryaveeraDesc}>
-                <strong>शक्ति सभा — संस्थागत ढांचा · आर्यवीरा — मूल दर्शन।</strong>
+                <strong>Shakti Sabha — Institutional Framework · Aaryaveera — Foundational Worldview.</strong>
                 {' '}Aaryaveera is not an operational event or program, but the personal ideological identity and worldview of founder Harshita Mankar. The Warrior Emblem (flame + lotus composite) is its philosophical emblem, using a dedicated matte brass gold palette and Cinzel display typography.
               </p>
               <div className={p.aaryaveeraColors}>

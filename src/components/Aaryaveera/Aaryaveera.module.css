@@ -189,18 +189,19 @@
 
 .cardHeader {
   display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  margin-bottom: 0.3rem;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
 }
 
 .icon {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
-  min-width: 30px;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  max-width: 32px;
   border-radius: 7px;
   background: rgba(201, 169, 110, 0.15);
   border: 1px solid rgba(201, 169, 110, 0.35);
@@ -208,9 +209,12 @@
   box-shadow: 0 0 10px rgba(250, 148, 23, 0.18);
   flex-shrink: 0;
   overflow: hidden;
+  margin-top: 1px;
 }
 
 .cardTitle {
+  flex: 1;
+  min-width: 0;
   font-family: var(--font-primary, 'Poppins', sans-serif);
   font-size: 0.92rem;
   font-weight: 700;
@@ -229,7 +233,7 @@
   line-height: 1.5;
   color: rgba(240, 235, 227, 0.85);
   margin: 0;
-  padding-left: calc(28px + 0.55rem);
+  padding-left: calc(32px + 0.75rem);
 }
 
 @media (max-width: 600px) {
