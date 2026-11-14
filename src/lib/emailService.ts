@@ -29,6 +29,25 @@ export interface SahyogEmailData {
   goals?: string
 }
 
+// Built-in verified fallbacks so notifications work seamlessly even before Render cache rebuild
+const DEFAULT_FALLBACKS: Record<string, Record<string, string>> = {
+  courses: {
+    SERVICE_ID: 'service_mc22asu',
+    TEMPLATE_ID: 'template_zu1nzof',
+    PUBLIC_KEY: 'IXcooHADgdE_GP2MV',
+  },
+  counselling: {
+    SERVICE_ID: 'service_mc22asu',
+    TEMPLATE_ID: 'template_tiutw8s',
+    PUBLIC_KEY: 'IXcooHADgdE_GP2MV',
+  },
+  sahyog: {
+    SERVICE_ID: 'service_mc22asu',
+    TEMPLATE_ID: 'template_zu1nzof',
+    PUBLIC_KEY: 'IXcooHADgdE_GP2MV',
+  },
+}
+
 /**
  * Helper to retrieve environment variable with multiple fallback aliases
  */
@@ -54,6 +73,10 @@ function resolveEnv(
     const userId = env.VITE_EMAILJS_USER_ID || env.VITE_EMAILJS_PUBLIC_KEY
     if (userId && String(userId).trim()) return String(userId).trim()
   }
+
+  // 4. Built-in verified fallback
+  const fallback = DEFAULT_FALLBACKS[category]?.[key]
+  if (fallback) return fallback
 
   return ''
 }
