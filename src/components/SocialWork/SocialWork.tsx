@@ -83,28 +83,36 @@ function useTilt(active: boolean) {
 
     const el = ref.current
     let rect: DOMRect | null = null
+    let rafId: number | null = null
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!el) return
-      if (!rect) {
-        rect = el.getBoundingClientRect()
-      }
-      const px = (e.clientX - rect.left) / rect.width
-      const py = (e.clientY - rect.top) / rect.height
-      el.style.setProperty('--px', String(px))
-      el.style.setProperty('--py', String(py))
+      rect = el.getBoundingClientRect()
+      const clientX = e.clientX
+      const clientY = e.clientY
+
+      if (rafId) cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(() => {
+        if (!rect || rect.width === 0 || rect.height === 0) return
+        const px = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width))
+        const py = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height))
+        el.style.setProperty('--px', String(px))
+        el.style.setProperty('--py', String(py))
+      })
     }
 
     const handleMouseLeave = () => {
+      if (rafId) cancelAnimationFrame(rafId)
       rect = null
       el.style.setProperty('--px', '0.5')
       el.style.setProperty('--py', '0.5')
     }
 
-    el.addEventListener('mousemove', handleMouseMove)
+    el.addEventListener('mousemove', handleMouseMove, { passive: true })
     el.addEventListener('mouseleave', handleMouseLeave)
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId)
       el.removeEventListener('mousemove', handleMouseMove)
       el.removeEventListener('mouseleave', handleMouseLeave)
     }
@@ -122,7 +130,23 @@ interface SlideProps {
 
 function Slide({ slide, offset, isWrapping, onSelect }: SlideProps) {
   const active = offset === 0
+  const isVisible = Math.abs(offset) <= 2
+  // Depth-sorting: center card is 10, adjacent are 6, outer are 2
+  const zIndex = active ? 10 : Math.max(1, 10 - Math.abs(offset) * 3)
   const ref = useTilt(active)
+  const [currentSrc, setCurrentSrc] = useState(slide.image)
+
+  useEffect(() => {
+    setCurrentSrc(slide.image)
+  }, [slide.image])
+
+  // Fallback to local image if any remote URL fails to load
+  const handleImageError = () => {
+    const fallback = SLIDES.find(s => s.title === slide.title)?.image || '/socialwork/social-1.jpg'
+    if (currentSrc !== fallback) {
+      setCurrentSrc(fallback)
+    }
+  }
 
   return (
     <div
@@ -133,8 +157,9 @@ function Slide({ slide, offset, isWrapping, onSelect }: SlideProps) {
         {
           '--offset': offset,
           '--dir': offset === 0 ? 0 : offset > 0 ? 1 : -1,
-          opacity: Math.abs(offset) > 2 ? 0 : 1,
-          pointerEvents: Math.abs(offset) > 2 ? 'none' : 'auto',
+          opacity: isVisible ? 1 : 0,
+          pointerEvents: isVisible ? 'auto' : 'none',
+          zIndex,
         } as React.CSSProperties
       }
     >
@@ -142,7 +167,7 @@ function Slide({ slide, offset, isWrapping, onSelect }: SlideProps) {
         <div
           className={s.slideBackground}
           style={{
-            backgroundImage: `url('${slide.image}')`,
+            backgroundImage: `url('${currentSrc}')`,
           }}
         />
       )}
@@ -154,17 +179,20 @@ function Slide({ slide, offset, isWrapping, onSelect }: SlideProps) {
           cursor: active ? 'default' : 'pointer',
         }}
         onClick={(e) => {
+          e.stopPropagation()
           if (!active) {
-            e.stopPropagation()
             onSelect()
           }
         }}
+        title={active ? undefined : `Switch to ${slide.title}`}
       >
-        <div
-          className={s.slideImage}
-          style={{
-            backgroundImage: `url('${slide.image}')`,
-          }}
+        <img
+          src={currentSrc}
+          alt={slide.title}
+          className={s.slideImgEl}
+          loading="eager"
+          decoding="async"
+          onError={handleImageError}
         />
         <div className={s.slideGradient} />
 
@@ -180,7 +208,9 @@ function Slide({ slide, offset, isWrapping, onSelect }: SlideProps) {
 
 export default function SocialWork() {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
   const prevIndexRef = useRef(0)
+  const isAnimatingRef = useRef(false)
   const [slides, setSlides] = useState<SlideData[]>(SLIDES)
   const secRef = useRef<HTMLElement>(null)
   const touchStartX = useRef<number | null>(null)
@@ -195,26 +225,54 @@ export default function SocialWork() {
     })
   }, [])
 
+  // State Debouncing / Rapid Click Queueing (with 350ms lock)
   const handleNext = useCallback(() => {
+    if (isAnimatingRef.current) return
+    isAnimatingRef.current = true
+    setIsAnimating(true)
+
     setCurrentIndex(prev => {
       prevIndexRef.current = prev
       return (prev + 1) % total
     })
+
+    setTimeout(() => {
+      isAnimatingRef.current = false
+      setIsAnimating(false)
+    }, 350)
   }, [total])
 
   const handlePrev = useCallback(() => {
+    if (isAnimatingRef.current) return
+    isAnimatingRef.current = true
+    setIsAnimating(true)
+
     setCurrentIndex(prev => {
       prevIndexRef.current = prev
       return (prev - 1 + total) % total
     })
+
+    setTimeout(() => {
+      isAnimatingRef.current = false
+      setIsAnimating(false)
+    }, 350)
   }, [total])
 
   const handleGoto = useCallback((idx: number) => {
+    if (isAnimatingRef.current || idx === currentIndex) return
+    isAnimatingRef.current = true
+    setIsAnimating(true)
+
     setCurrentIndex(prev => {
       prevIndexRef.current = prev
       return idx
     })
-  }, [])
+
+    setTimeout(() => {
+      isAnimatingRef.current = false
+      setIsAnimating(false)
+    }, 350)
+  }, [currentIndex])
 
   // Touch Swipe for mobile/tablets
   const onTouchStart = (e: React.TouchEvent) => {
@@ -232,7 +290,7 @@ export default function SocialWork() {
     touchStartX.current = null
   }
 
-  // Load photos from DB/galleryStore if admin uploaded custom photos
+  // Load photos from DB/galleryStore if admin uploaded valid custom photos
   useEffect(() => {
     const randomizeCategoryPhotos = () => {
       const allPhotos = getStoredPhotos()
@@ -242,9 +300,14 @@ export default function SocialWork() {
         SLIDES.map((slide, idx) => {
           const kw = SLIDE_CATEGORY_KEYWORDS[idx] || ['all']
           const randomPhoto = getRandomCategoryPhoto(kw, slide.image, allPhotos, categories)
+          // Keep reliable local images unless the DB returns a valid non-empty URL
+          const validUrl = (randomPhoto.isFromDb && randomPhoto.url && randomPhoto.url.trim().length > 5)
+            ? randomPhoto.url
+            : slide.image
+
           return {
             ...slide,
-            image: randomPhoto.isFromDb ? randomPhoto.url : slide.image
+            image: validUrl
           }
         })
       )
@@ -309,28 +372,29 @@ export default function SocialWork() {
 
       {/* 3D Carousel Stage */}
       <div data-sw="stage" className={s.carouselWrap}>
+        {/* Previous Arrow Button — elevated z-index, debounced, outside 3D card collision */}
+        <button
+          type="button"
+          className={`${s.navBtn} ${s.btnPrev}`}
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            handlePrev()
+          }}
+          disabled={isAnimating}
+          aria-label="Previous Slide"
+          title="Previous Slide"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+
         <div
           className={s.slidesContainer}
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
-          {/* Previous Arrow Button — elevated and unobstructed */}
-          <button
-            type="button"
-            className={`${s.navBtn} ${s.btnPrev}`}
-            onClick={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-              handlePrev()
-            }}
-            aria-label="Previous Slide"
-            title="Previous Slide"
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </button>
-
           <div className={s.slides}>
             {slides.map((slide, i) => {
               const currentOffset = getCircularOffset(i, currentIndex, total)
@@ -348,24 +412,25 @@ export default function SocialWork() {
               )
             })}
           </div>
-
-          {/* Next Arrow Button — elevated and unobstructed */}
-          <button
-            type="button"
-            className={`${s.navBtn} ${s.btnNext}`}
-            onClick={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-              handleNext()
-            }}
-            aria-label="Next Slide"
-            title="Next Slide"
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </button>
         </div>
+
+        {/* Next Arrow Button — elevated z-index, debounced, outside 3D card collision */}
+        <button
+          type="button"
+          className={`${s.navBtn} ${s.btnNext}`}
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            handleNext()
+          }}
+          disabled={isAnimating}
+          aria-label="Next Slide"
+          title="Next Slide"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
 
         {/* Dots Navigation */}
         <div className={s.dotsRow}>
@@ -375,6 +440,7 @@ export default function SocialWork() {
               type="button"
               className={`${s.dot} ${currentIndex === idx ? s.dotActive : ''}`}
               onClick={() => handleGoto(idx)}
+              disabled={isAnimating}
               aria-label={`Go to slide ${idx + 1}`}
             />
           ))}
