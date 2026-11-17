@@ -1,246 +1,547 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import GoogleIcon from '../GoogleIcon/GoogleIcon'
 import s from './Hero.module.css'
 
-gsap.registerPlugin(ScrollTrigger)
+interface HeroSlide {
+  num: string
+  category: string
+  watermark: string
+  eyebrow: string
+  headlineHTML: string
+  title: string
+  desc: string
+  cta: string
+  ctaLink: string
+  secCta: string
+  secLink: string
+  tag: string
+  subTag: string
+  bgImage: string
+  theme: {
+    bg: string
+    text: string
+    muted: string
+    accent: string
+    border: string
+    watermark: string
+    orbitLine: string
+    btnText?: string
+    tagBg?: string
+    tagBorder?: string
+    tabsBg?: string
+    tabsActiveBg?: string
+    tabsActiveText?: string
+    bgRgb?: string
+  }
+  slots: string[]
+}
 
-/* ============================================================
-   Hero Component
-   ============================================================ */
+const HERO_SLIDES: HeroSlide[] = [
+  {
+    num: '01',
+    category: 'MISSION MARDINI',
+    watermark: 'MARDINI',
+    eyebrow: '01 · Tactical Combat & Fear-Eradication',
+    headlineHTML: 'Revive physical<br />& tactical <span class="' + s.serifItalic + '">sovereignty.</span>',
+    title: 'Fear-Eradication & Close-Quarter Combat',
+    desc: 'Unarmed combat, Lathi-Kaushal, improvised environmental weapon defense, and explosive situational awareness for women.',
+    cta: 'Explore Mission Mardini',
+    ctaLink: '/mardini',
+    secCta: 'Cohort Camps →',
+    secLink: '/courses',
+    tag: 'Mission Mardini',
+    subTag: '↳ Tactical Defense & Ground Preparedness',
+    bgImage: '/missionmirdani.jpg',
+    theme: {
+      bg: '#f7f4ee',
+      bgRgb: '247, 244, 238',
+      text: '#1a1918',
+      muted: '#75726b',
+      accent: '#dc143c',
+      border: 'rgba(30, 30, 28, 0.12)',
+      watermark: 'rgba(220, 20, 60, 0.05)',
+      orbitLine: 'rgba(220, 20, 60, 0.14)',
+      btnText: '#ffffff',
+      tagBg: 'rgba(220, 20, 60, 0.08)',
+      tagBorder: 'rgba(220, 20, 60, 0.28)',
+      tabsBg: 'rgba(255, 255, 255, 0.55)',
+      tabsActiveBg: 'rgba(255, 255, 255, 0.95)',
+      tabsActiveText: '#dc143c'
+    },
+    slots: ['center', 'top-right', 'bottom-right', 'top-left', 'bottom-left']
+  },
+  {
+    num: '02',
+    category: 'SHAKTI BHAVA',
+    watermark: 'BHAVA',
+    eyebrow: '02 · Trauma Recovery & Psychological Fortitude',
+    headlineHTML: 'Restore inner peace<br />& somatic <span class="' + s.serifItalic + '">fortitude.</span>',
+    title: 'Confidential Healing & Sanctuary Pods',
+    desc: 'Trauma-informed therapeutic circles, crisis intervention, and domestic coercion recovery in safe, sacred spaces.',
+    cta: 'Confidential Intake',
+    ctaLink: '/counselling',
+    secCta: 'Healing Circles →',
+    secLink: '/shakti-bhava',
+    tag: 'Shakti Bhava',
+    subTag: '↳ Somatic Sanctuary & Mental Health Care',
+    bgImage: '/shaktibhava.jpg',
+    theme: {
+      bg: '#eaf4ee',
+      bgRgb: '234, 244, 238',
+      text: '#112419',
+      muted: '#4f6c5a',
+      accent: '#166534',
+      border: 'rgba(22, 101, 52, 0.14)',
+      watermark: 'rgba(22, 101, 52, 0.055)',
+      orbitLine: 'rgba(22, 101, 52, 0.15)',
+      btnText: '#ffffff',
+      tagBg: 'rgba(22, 101, 52, 0.08)',
+      tagBorder: 'rgba(22, 101, 52, 0.28)',
+      tabsBg: 'rgba(255, 255, 255, 0.55)',
+      tabsActiveBg: 'rgba(255, 255, 255, 0.95)',
+      tabsActiveText: '#166534'
+    },
+    slots: ['bottom-left', 'center', 'top-right', 'bottom-right', 'top-left']
+  },
+  {
+    num: '03',
+    category: 'SHAKTI VARTA',
+    watermark: 'VARTA',
+    eyebrow: '03 · Civilizational Inquiry & Scholarship',
+    headlineHTML: 'Uncompromising truth<br />& cognitive <span class="' + s.serifItalic + '">liberty.</span>',
+    title: 'Vedic Research & Epigraphical Dialogue',
+    desc: 'Historical research on Vedic heroines, peer-reviewed monographs, and uncompromising inquiry into Dharma and civilizational sovereignty.',
+    cta: 'Read Research Papers',
+    ctaLink: '/research',
+    secCta: 'Case Studies →',
+    secLink: '/case-studies',
+    tag: 'Shakti Varta',
+    subTag: '↳ Intellectual & Epigraphical Research',
+    bgImage: '/shaktivarta.jpg',
+    theme: {
+      bg: '#eaf0fa',
+      bgRgb: '234, 240, 250',
+      text: '#141c38',
+      muted: '#525d82',
+      accent: '#3730a3',
+      border: 'rgba(55, 48, 163, 0.14)',
+      watermark: 'rgba(55, 48, 163, 0.05)',
+      orbitLine: 'rgba(55, 48, 163, 0.14)',
+      btnText: '#ffffff',
+      tagBg: 'rgba(55, 48, 163, 0.08)',
+      tagBorder: 'rgba(55, 48, 163, 0.28)',
+      tabsBg: 'rgba(255, 255, 255, 0.55)',
+      tabsActiveBg: 'rgba(255, 255, 255, 0.95)',
+      tabsActiveText: '#3730a3'
+    },
+    slots: ['top-left', 'bottom-left', 'center', 'top-right', 'bottom-right']
+  },
+  {
+    num: '04',
+    category: 'AARYAVEERA',
+    watermark: 'AARYAVEERA',
+    eyebrow: '04 · Founder Worldview & Youth Leadership',
+    headlineHTML: 'From strength alone<br />arises lasting <span class="' + s.serifItalic + '">peace.</span>',
+    title: 'Moral Autonomy, Character & Courage',
+    desc: 'The philosophical identity of Harshita Mankar. Forging young women into intellectually fortified and tactically capable guardians.',
+    cta: 'Explore Aaryaveera',
+    ctaLink: '/aaryaveera',
+    secCta: 'Founder Profile →',
+    secLink: '/about#founder',
+    tag: 'Aaryaveera',
+    subTag: '↳ Ideological Identity & Leadership Code',
+    bgImage: '/socialwork/social-1.jpg',
+    theme: {
+      bg: '#141311',
+      bgRgb: '20, 19, 17',
+      text: '#faf7f0',
+      muted: '#c4baa9',
+      accent: '#f59e0b',
+      border: 'rgba(245, 158, 11, 0.3)',
+      watermark: 'rgba(245, 158, 11, 0.07)',
+      orbitLine: 'rgba(245, 158, 11, 0.22)',
+      btnText: '#120f0a',
+      tagBg: 'rgba(245, 158, 11, 0.18)',
+      tagBorder: 'rgba(245, 158, 11, 0.45)',
+      tabsBg: 'rgba(26, 24, 20, 0.88)',
+      tabsActiveBg: 'rgba(245, 158, 11, 0.24)',
+      tabsActiveText: '#fbbf24'
+    },
+    slots: ['bottom-right', 'top-left', 'bottom-left', 'center', 'top-right']
+  },
+  {
+    num: '05',
+    category: 'INSTITUTIONAL SAHYOG',
+    watermark: 'SAHYOG',
+    eyebrow: '05 · Institutional Alliances & Grassroots Action',
+    headlineHTML: 'Collective force.<br />United for <span class="' + s.serifItalic + '">dignity.</span>',
+    title: 'University, CSR & NGO Networks',
+    desc: 'Partnering with universities, corporate CSR collectives, schools, and grassroots allies across 28 cities for systemic women empowerment.',
+    cta: 'Partner With Us',
+    ctaLink: '/sahyog',
+    secCta: 'Field Impact →',
+    secLink: '/social-work',
+    tag: 'Sahyog',
+    subTag: '↳ Grassroots Alliances & CSR Impact',
+    bgImage: '/sahog.jpg',
+    theme: {
+      bg: '#fbf3ea',
+      bgRgb: '251, 243, 234',
+      text: '#2b1b12',
+      muted: '#7a5b4a',
+      accent: '#c2410c',
+      border: 'rgba(194, 65, 12, 0.14)',
+      watermark: 'rgba(194, 65, 12, 0.05)',
+      orbitLine: 'rgba(194, 65, 12, 0.15)',
+      btnText: '#ffffff',
+      tagBg: 'rgba(194, 65, 12, 0.08)',
+      tagBorder: 'rgba(194, 65, 12, 0.28)',
+      tabsBg: 'rgba(255, 255, 255, 0.55)',
+      tabsActiveBg: 'rgba(255, 255, 255, 0.95)',
+      tabsActiveText: '#c2410c'
+    },
+    slots: ['top-right', 'bottom-right', 'top-left', 'bottom-left', 'center']
+  }
+]
 
 export default function Hero() {
-  const wrapperRef = useRef<HTMLDivElement>(null)
-  const secRef = useRef<HTMLElement>(null)
-  const downRef = useRef<HTMLDivElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isSwitching, setIsSwitching] = useState(false)
+  const heroRef = useRef<HTMLElement>(null)
+  const autoLoopTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const isScrollingRef = useRef(false)
 
-  
+  const activeSlide = HERO_SLIDES[currentIndex]
 
-  /* GSAP Entrance Animation */
-  useEffect(() => {
-    const content = contentRef.current
-    if (!content) return
+  const goToSlide = useCallback((index: number) => {
+    const nextIdx = (index + HERO_SLIDES.length) % HERO_SLIDES.length
+    setIsSwitching(true)
 
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
-
-    if (prefersReducedMotion) {
-      gsap.set(content, { opacity: 1, y: 0 })
-      return
-    }
-
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
-
-      tl.fromTo(
-        '[data-hero="badge"]',
-        { opacity: 0, y: -16 },
-        { opacity: 1, y: 0, duration: 0.6 }
-      )
-      .fromTo(
-        '[data-hero="title"]',
-        { opacity: 0, y: 24 },
-        { opacity: 1, y: 0, duration: 0.8 },
-        '-=0.3'
-      )
-      .fromTo(
-        '[data-hero="motto"]',
-        { opacity: 0, y: 14 },
-        { opacity: 1, y: 0, duration: 0.6 },
-        '-=0.4'
-      )
-      .fromTo(
-        '[data-hero="desc"]',
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.65 },
-        '-=0.3'
-      )
-      .fromTo(
-        '[data-hero="cta"]',
-        { opacity: 0, y: 18 },
-        { opacity: 1, y: 0, duration: 0.6 },
-        '-=0.3'
-      )
-      .fromTo(
-        '[data-hero="metrics"]',
-        { opacity: 0, y: 22 },
-        { opacity: 1, y: 0, duration: 0.7 },
-        '-=0.2'
-      )
-      .fromTo(
-        '[data-hero="pillars"]',
-        { opacity: 0, y: 18 },
-        { opacity: 1, y: 0, duration: 0.6 },
-        '-=0.3'
-      )
-    }, secRef)
-
-    return () => ctx.revert()
+    setTimeout(() => {
+      setCurrentIndex(nextIdx)
+      setIsSwitching(false)
+    }, 180)
   }, [])
 
-  
-
-  /* @traf shrink & scale-down parallax scroll */
+  // Apply CSS Variables on theme change
   useEffect(() => {
-    const wrap = wrapperRef.current
-    const hero = secRef.current
-    const down = downRef.current
-    if (!wrap || !hero) return
+    const el = heroRef.current
+    if (!el) return
+    const theme = activeSlide.theme
+    el.style.setProperty('--hero-bg', theme.bg)
+    el.style.setProperty('--hero-text', theme.text)
+    el.style.setProperty('--hero-muted', theme.muted)
+    el.style.setProperty('--hero-accent', theme.accent)
+    el.style.setProperty('--hero-border', theme.border)
+    el.style.setProperty('--watermark-color', theme.watermark)
+    el.style.setProperty('--orbit-line', theme.orbitLine)
+    el.style.setProperty('--hero-bg-rgb', theme.bgRgb || '247, 244, 238')
+    el.style.setProperty('--hero-btn-text', theme.btnText || '#ffffff')
+    el.style.setProperty('--hero-tag-bg', theme.tagBg || 'rgba(220, 20, 60, 0.08)')
+    el.style.setProperty('--hero-tag-border', theme.tagBorder || 'rgba(220, 20, 60, 0.28)')
+    el.style.setProperty('--hero-tabs-bg', theme.tabsBg || 'rgba(255, 255, 255, 0.55)')
+    el.style.setProperty('--hero-tabs-active-bg', theme.tabsActiveBg || 'rgba(255, 255, 255, 0.95)')
+    el.style.setProperty('--hero-tabs-active-text', theme.tabsActiveText || theme.accent)
+  }, [activeSlide])
 
-    const st = ScrollTrigger.create({
-      trigger: wrap,
-      start: 'top top',
-      end: 'bottom top',
-      scrub: 0.3,
-      onUpdate: (self) => {
-        const p = self.progress
-        const scale = 1 - p * 0.12
-        const yPercent = p * 8
-        const radius = p * 24
-        const shadowAlpha = p * 0.35
-        hero.style.transform = `translate3d(0, ${yPercent}%, 0) scale(${scale})`
-        hero.style.borderRadius = `${radius}px`
-        hero.style.boxShadow = `0 25px 70px rgba(0, 0, 0, ${shadowAlpha})`
+  // Auto-loop carousel every 4.5 seconds
+  const resetAutoLoop = useCallback(() => {
+    if (autoLoopTimer.current) {
+      clearInterval(autoLoopTimer.current)
+    }
+    autoLoopTimer.current = setInterval(() => {
+      goToSlide(currentIndex + 1)
+    }, 4500)
+  }, [currentIndex, goToSlide])
 
-        if (down) {
-          down.style.opacity = `${Math.max(0, 1 - p * 3.5)}`
-        }
-      },
-    })
-
+  useEffect(() => {
+    resetAutoLoop()
     return () => {
-      st.kill()
+      if (autoLoopTimer.current) clearInterval(autoLoopTimer.current)
     }
-  }, [])
+  }, [resetAutoLoop])
 
-  const handleExplore = () => {
-    const wrap = wrapperRef.current
-    const nextEl = wrap?.nextElementSibling ?? secRef.current?.nextElementSibling
-    if (nextEl) {
-      nextEl.scrollIntoView({ behavior: 'smooth' })
+  // Mouse wheel scroll to step through orbital pillars
+  const handleWheel = (e: React.WheelEvent) => {
+    if (isScrollingRef.current) return
+    if (Math.abs(e.deltaY) < 22) return
+
+    isScrollingRef.current = true
+    if (e.deltaY > 0) {
+      goToSlide(currentIndex + 1)
     } else {
-      window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
+      goToSlide(currentIndex - 1)
     }
+    resetAutoLoop()
+
+    setTimeout(() => {
+      isScrollingRef.current = false
+    }, 800)
   }
 
   return (
-    <div ref={wrapperRef} className={s.heroWrapper}>
-      <section
-        ref={secRef}
-        className={s.heroSection}
-        
-      >
-        
+    <main
+      ref={heroRef}
+      className={s.heroStudio}
+      onWheel={handleWheel}
+      id="heroStudio"
+    >
+      {/* Category Thematic Background Image with Smooth Crossfade */}
+      <div className={s.heroBgMedia} aria-hidden="true">
+        {HERO_SLIDES.map((slide, idx) => (
+          <div
+            key={slide.num}
+            className={`${s.heroBgLayer} ${idx === currentIndex ? s.heroBgLayerActive : ''}`}
+            style={{ backgroundImage: `url(${slide.bgImage})` }}
+          />
+        ))}
+        <div className={s.heroBgOverlay} />
+      </div>
 
-        <div ref={contentRef} className={s.heroContent}>
-          {/* Institutional Badge */}
-          <div data-hero="badge" className={s.badge}>
-            <GoogleIcon name="swords" size={15} style={{ color: '#DC143C' }} />
-            <span>THE UNION OF PEACE &amp; REVOLUTION</span>
-          </div>
-
-          {/* Main Title */}
-          <h1 data-hero="title" className={s.title}>
-            SHAKTI <span className={s.crimson}>SABHA</span>
-          </h1>
-
-          {/* Motto Row */}
-          <div data-hero="motto" className={s.mottoRow}>
-            <span className={s.mottoSanskrit}>Peace Through Strength</span>
-            <span className={s.mottoSep}>·</span>
-            <span className={s.mottoSub}>Sovereignty, Strength &amp; Psychological Resilience</span>
-          </div>
-
-          {/* Description */}
-          <p data-hero="desc" className={s.description}>
-            A sovereign institutional movement for Indian women — uniting tactical close-quarter combat, trauma-informed clinical psychological care, and uncompromising civilizational scholarship.
-          </p>
-
-          {/* Action CTAs */}
-          <div data-hero="cta" className={s.ctaGroup}>
-            <button
-              type="button"
-              onClick={handleExplore}
-              className={s.ctaPrimary}
-            >
-              Explore The Three Streams ↓
-            </button>
-            <Link to="/sahyog" className={s.ctaSecondary}>
-              Institutional Alliances →
-            </Link>
-          </div>
-
-          {/* Institutional Metric Strip */}
-          <div data-hero="metrics" className={s.metricStrip}>
-            <div className={s.metricItem}>
-              <span className={s.metricValue}>7+ Yrs</span>
-              <span className={s.metricLabel}>On-Ground Dedication</span>
-            </div>
-            <div className={s.metricDivider} />
-            <div className={s.metricItem}>
-              <span className={s.metricValue}>2,000+</span>
-              <span className={s.metricLabel}>Cadets Weaponized</span>
-            </div>
-            <div className={s.metricDivider} />
-            <div className={s.metricItem}>
-              <span className={s.metricValue}>25,000+</span>
-              <span className={s.metricLabel}>Youth Reached</span>
-            </div>
-            <div className={s.metricDivider} />
-            <div className={s.metricItem}>
-              <span className={s.metricValue}>100%</span>
-              <span className={s.metricLabel}>Confidential Care</span>
-            </div>
-          </div>
-
-          {/* The Three Pillars Preview */}
-          <div data-hero="pillars" className={s.pillarsRow}>
-            <Link to="/mardini" className={s.pillarPill} title="Mission Mardini Tactical Combat">
-              <span className={s.pillarDot} style={{ background: '#DC143C' }} />
-              <span className={s.pillarName}>01 · Combat</span>
-              <span className={s.pillarTag}>Mission Mardini</span>
-            </Link>
-            <Link to="/shakti-bhava" className={s.pillarPill} title="Shakti Bhava Clinical Healing">
-              <span className={s.pillarDot} style={{ background: '#166534' }} />
-              <span className={s.pillarName}>02 · Healing</span>
-              <span className={s.pillarTag}>Shakti Bhava</span>
-            </Link>
-            <Link to="/shakti-varta" className={s.pillarPill} title="Shakti Varta Civilizational Discourse">
-              <span className={s.pillarDot} style={{ background: '#4338CA' }} />
-              <span className={s.pillarName}>03 · Discourse</span>
-              <span className={s.pillarTag}>Shakti Varta</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* Scroll Down Chevron */}
+      <div className={s.heroInner}>
+        {/* Giant Dynamic Watermark */}
         <div
-          ref={downRef}
-          className={s.down}
-          onClick={handleExplore}
-          role="button"
-          tabIndex={0}
-          aria-label="Scroll down"
+          className={s.watermark}
+          style={{ opacity: isSwitching ? 0 : 1, transform: isSwitching ? 'translateY(16px)' : 'translateY(0)' }}
         >
-          <svg
-            viewBox="0 0 24 24"
-            width="26"
-            height="26"
-            stroke="currentColor"
-            strokeWidth="2.2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="7 13 12 18 17 13" />
-            <polyline points="7 6 12 11 17 6" />
-          </svg>
+          {activeSlide.watermark}
         </div>
-      </section>
-    </div>
+
+        {/* Top Studio Metadata */}
+        <div className={s.studioMeta}>
+          <div className={s.studioMetaLeft}>
+            <span className={s.redDot} />
+            <span>SHAKTI SABHA · CIVILIZATIONAL &amp; TACTICAL SOVEREIGNTY</span>
+          </div>
+          <div className={s.studioMetaRight}>
+            <span className={s.liveTag}>5 PILLARS ACTIVE</span>
+            <span>EST. 2012 ↗</span>
+          </div>
+        </div>
+
+        {/* Split Content Grid */}
+        <div className={s.heroGrid}>
+          {/* Left Column Copy */}
+          <div className={`${s.heroLeft} ${isSwitching ? s.heroLeftSwitching : ''}`}>
+            <p className={s.eyebrowSmall}>
+              <GoogleIcon name="military_tech" size={16} />
+              {activeSlide.eyebrow}
+            </p>
+
+            <h1
+              className={s.mainHeadline}
+              dangerouslySetInnerHTML={{ __html: activeSlide.headlineHTML }}
+            />
+
+            <p className={s.heroSubcopy}>
+              A sovereign institutional paradigm for Indian women — integrating physical combat readiness, trauma recovery, and civilizational inquiry.
+            </p>
+
+            <div className={s.slideCounter}>
+              <div><span className={s.numActive}>{activeSlide.num}</span> / 05</div>
+              <span className={s.dividerLine} />
+              <span>{activeSlide.category}</span>
+            </div>
+
+            <h2 className={s.slideTitle}>{activeSlide.title}</h2>
+            <p className={s.slideDesc}>{activeSlide.desc}</p>
+
+            <div className={s.ctaRow}>
+              <Link to={activeSlide.ctaLink} className={s.btnPrimary}>
+                <span>{activeSlide.cta}</span>
+                <span>↗</span>
+              </Link>
+              <Link to={activeSlide.secLink} className={s.btnSecondary}>
+                {activeSlide.secCta}
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Orbital Stage */}
+          <div className={s.collageStage}>
+            <div className={s.estLabel}>
+              KSHATRA-DHARMA / SOVEREIGN AWAKENING
+            </div>
+
+            {/* Orbital SVG Tracks */}
+            <svg className={s.orbitSvg} viewBox="0 0 820 465" fill="none">
+              <circle cx="410" cy="240" r="185" stroke="var(--orbit-line)" strokeWidth="1" />
+              <circle className={s.orbitRingDashed} cx="410" cy="240" r="235" stroke="var(--orbit-line)" strokeWidth="1.2" strokeDasharray="6 8" />
+              <path d="M 190 130 Q 410 35 620 130" stroke="var(--orbit-line)" strokeWidth="1" strokeDasharray="4 4" />
+              <path d="M 180 340 Q 410 420 630 330" stroke="var(--orbit-line)" strokeWidth="1" strokeDasharray="4 4" />
+            </svg>
+
+            {/* CARD 0: MISSION MARDINI */}
+            <div
+              className={s.orbitItem}
+              data-slot={activeSlide.slots[0]}
+              onClick={() => { goToSlide(0); resetAutoLoop(); }}
+            >
+              <div className={s.orbitFloat}>
+                <div className={s.cardMardini}>
+                  <div className={s.cardEyebrow}>
+                    <GoogleIcon name="swords" size={13} style={{ color: '#dc143c' }} />
+                    01 · TACTICAL SOVEREIGNTY
+                  </div>
+                  <div className={s.cardTitleBig}>
+                    Mardini<span>.</span>
+                  </div>
+                  <div className={s.cardDescShort}>
+                    2,000+ CADETS · LATHI &amp; CLOSE-QUARTER COMBAT
+                  </div>
+                  <div className={s.cardFooter}>
+                    <div className={s.colorSwatches}>
+                      <span className={s.swatch} style={{ background: '#dc143c' }} />
+                      <span className={s.swatch} style={{ background: '#1c1c1a' }} />
+                      <span className={s.swatch} style={{ background: '#e8c98a' }} />
+                      <span className={s.swatch} style={{ background: '#166534' }} />
+                    </div>
+                    <span className={s.cardNum}>01 Combat ↗</span>
+                  </div>
+                </div>
+                <div className={s.miniOrbitCaption}>01 Mardini ↗</div>
+              </div>
+            </div>
+
+            {/* CARD 1: SHAKTI BHAVA */}
+            <div
+              className={s.orbitItem}
+              data-slot={activeSlide.slots[1]}
+              onClick={() => { goToSlide(1); resetAutoLoop(); }}
+            >
+              <div className={s.orbitFloat}>
+                <div className={s.cardBhava}>
+                  <div className={s.cardEyebrow}>
+                    <GoogleIcon name="spa" size={13} style={{ color: '#166534' }} />
+                    02 · SOMATIC SANCTUARY
+                  </div>
+                  <div className={s.cardTitleBig} style={{ color: '#166534' }}>
+                    Bhava<span>.</span>
+                  </div>
+                  <div className={s.cardDescShort}>
+                    CONFIDENTIAL CRISIS INTAKE &amp; TRAUMA HEALING
+                  </div>
+                  <div className={s.cardFooter}>
+                    <div className={s.colorSwatches}>
+                      <span className={s.swatch} style={{ background: '#166534' }} />
+                      <span className={s.swatch} style={{ background: '#4ade80' }} />
+                      <span className={s.swatch} style={{ background: '#bbf7d0' }} />
+                    </div>
+                    <span className={s.cardNum}>02 Healing ↗</span>
+                  </div>
+                </div>
+                <div className={s.miniOrbitCaption}>02 Bhava ↗</div>
+              </div>
+            </div>
+
+            {/* CARD 2: SHAKTI VARTA */}
+            <div
+              className={s.orbitItem}
+              data-slot={activeSlide.slots[2]}
+              onClick={() => { goToSlide(2); resetAutoLoop(); }}
+            >
+              <div className={s.orbitFloat}>
+                <div className={s.cardVarta}>
+                  <div className={s.cardEyebrow}>
+                    <GoogleIcon name="menu_book" size={13} style={{ color: '#3730a3' }} />
+                    03 · INTELLECTUAL LIBERTY
+                  </div>
+                  <div className={s.cardTitleVarta}>
+                    Shakti Varta<span>.</span>
+                  </div>
+                  <div className={s.cardDescShort}>
+                    45+ MONOGRAPHS · VEDIC HEROINES &amp; DHARMA
+                  </div>
+                  <div className={s.cardFooter}>
+                    <div className={s.colorSwatches}>
+                      <span className={s.swatch} style={{ background: '#3730a3' }} />
+                      <span className={s.swatch} style={{ background: '#818cf8' }} />
+                      <span className={s.swatch} style={{ background: '#c7d2fe' }} />
+                    </div>
+                    <span className={s.cardNum}>03 Discourse ↗</span>
+                  </div>
+                </div>
+                <div className={s.miniOrbitCaption}>03 Shakti Varta ↗</div>
+              </div>
+            </div>
+
+            {/* CARD 3: AARYAVEERA */}
+            <div
+              className={s.orbitItem}
+              data-slot={activeSlide.slots[3]}
+              onClick={() => { goToSlide(3); resetAutoLoop(); }}
+            >
+              <div className={s.orbitFloat}>
+                <div className={s.cardAaryaveera}>
+                  <div className={s.cardEyebrow} style={{ color: '#fbbf24' }}>
+                    <GoogleIcon name="local_fire_department" size={13} style={{ color: '#fbbf24' }} />
+                    04 · FOUNDER WORLDVIEW
+                  </div>
+                  <div className={s.cardTitleAaryaveera}>
+                    Aaryaveera<span>.</span>
+                  </div>
+                  <div className={s.cardDescShort} style={{ color: '#e2d9cc' }}>
+                    MORAL AUTONOMY · HARSHITA MANKAR DOCTRINE
+                  </div>
+                  <div className={s.cardFooter} style={{ borderColor: 'rgba(251, 191, 36, 0.3)' }}>
+                    <div className={s.colorSwatches}>
+                      <span className={s.swatch} style={{ background: '#fbbf24' }} />
+                      <span className={s.swatch} style={{ background: '#f59e0b' }} />
+                      <span className={s.swatch} style={{ background: '#dc143c' }} />
+                    </div>
+                    <span className={s.cardNum} style={{ color: '#fbbf24', fontWeight: 800 }}>04 Leadership ↗</span>
+                  </div>
+                </div>
+                <div className={s.miniOrbitCaption}>04 Aaryaveera ↗</div>
+              </div>
+            </div>
+
+            {/* CARD 4: SAHYOG */}
+            <div
+              className={s.orbitItem}
+              data-slot={activeSlide.slots[4]}
+              onClick={() => { goToSlide(4); resetAutoLoop(); }}
+            >
+              <div className={s.orbitFloat}>
+                <div className={s.cardSahyog}>
+                  <div className={s.cardEyebrow}>
+                    <GoogleIcon name="handshake" size={13} style={{ color: '#c2410c' }} />
+                    05 · INSTITUTIONAL ALLIANCE
+                  </div>
+                  <div className={s.cardTitleBig} style={{ color: '#c2410c' }}>
+                    Sahyog<span>.</span>
+                  </div>
+                  <div className={s.cardDescShort}>
+                    45+ CSR ALLIES · 400+ SCHOOLS &amp; UNIVERSITIES
+                  </div>
+                  <div className={s.cardFooter}>
+                    <div className={s.colorSwatches}>
+                      <span className={s.swatch} style={{ background: '#c2410c' }} />
+                      <span className={s.swatch} style={{ background: '#fb923c' }} />
+                      <span className={s.swatch} style={{ background: '#fed7aa' }} />
+                    </div>
+                    <span className={s.cardNum}>05 Alliance ↗</span>
+                  </div>
+                </div>
+                <div className={s.miniOrbitCaption}>05 Sahyog ↗</div>
+              </div>
+            </div>
+
+            {/* Active Center Label Below Spotlight Item */}
+            <div className={s.centerSpotlightMeta}>
+              <div className={s.spotlightTag}>
+                ❖ <span>{activeSlide.tag}</span> ↗
+              </div>
+              <div className={s.spotlightSub}>{activeSlide.subTag}</div>
+            </div>
+
+            <div className={s.brandEverywhereLabel}>
+              ONE SANGAM. FIVE PILLARS.
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
   )
 }
