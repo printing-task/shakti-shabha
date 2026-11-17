@@ -102,9 +102,12 @@ export default function SocialWorkHero() {
           <div className={s.box}>
             <div className={s.bgImg}>
               <img
-                src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=900&auto=format&fit=crop&q=80"
+                src={encodeURI('/socialwork/IMG-20250128-WA0025.jpg')}
                 alt="Martial Self-Defense Camp"
                 loading="eager"
+                onError={(e) => {
+                  ;(e.currentTarget as HTMLImageElement).src = '/socialwork/social-1.jpg'
+                }}
               />
             </div>
           </div>
@@ -123,9 +126,12 @@ export default function SocialWorkHero() {
           <div className={s.box}>
             <div className={s.bgImg}>
               <img
-                src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=900&auto=format&fit=crop&q=80"
+                src={encodeURI('/socialwork/20260524_135910 (1).jpg')}
                 alt="Survivor Healing Pod"
                 loading="lazy"
+                onError={(e) => {
+                  ;(e.currentTarget as HTMLImageElement).src = '/socialwork/social-2.jpg'
+                }}
               />
             </div>
           </div>
@@ -134,9 +140,12 @@ export default function SocialWorkHero() {
           <div className={s.box}>
             <div className={s.bgImg}>
               <img
-                src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900&auto=format&fit=crop&q=80"
+                src={encodeURI('/socialwork/IMG-20250423-WA0020 (1).jpg')}
                 alt="Youth Leadership Academy"
                 loading="lazy"
+                onError={(e) => {
+                  ;(e.currentTarget as HTMLImageElement).src = '/socialwork/social-3.jpg'
+                }}
               />
             </div>
           </div>
@@ -150,9 +159,12 @@ export default function SocialWorkHero() {
           <div className={s.box}>
             <div className={s.bgImg}>
               <img
-                src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=900&auto=format&fit=crop&q=80"
+                src={encodeURI('/socialwork/IMG-20250606-WA0006 (1).jpg')}
                 alt="Rural Community Action"
                 loading="lazy"
+                onError={(e) => {
+                  ;(e.currentTarget as HTMLImageElement).src = '/socialwork/social-4.jpg'
+                }}
               />
             </div>
           </div>

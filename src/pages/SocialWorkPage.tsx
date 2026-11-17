@@ -63,12 +63,12 @@ const PILLARS = [
 ]
 
 const MEDIA = [
-  { seed: 'camp1', tag: 'LATHI-KAUSHAL', caption: 'Tactical Lathi-Kaushal perimeter defense camp, Nagpur' },
-  { seed: 'camp2', tag: 'SWORD COMBAT', caption: 'Traditional sword parries and dual-strike drills, Wardha' },
-  { seed: 'camp3', tag: 'SELF-DEFENSE', caption: 'High-impact empty-hand CQC workshop for college girls, Amravati' },
-  { seed: 'camp4', tag: 'SEMINAR', caption: 'Shakti Varta consciousness discourse reaching 800+ youth, Pune' },
-  { seed: 'camp5', tag: 'SURVIVOR CIRCLE', caption: 'Shakti Bhava confidential trauma release circle, Yavatmal' },
-  { seed: 'camp6', tag: 'CAMP', caption: '7-Day Mission Mardini residential warrior convocation 2024' },
+  { id: 'm1', image: '/socialwork/IMG-20250128-WA0029.jpg', tag: 'LATHI-KAUSHAL', caption: 'Tactical Lathi-Kaushal perimeter defense camp, Nagpur' },
+  { id: 'm2', image: '/socialwork/20251116_085108.jpg', tag: 'SWORD COMBAT', caption: 'Traditional sword parries and dual-strike drills, Wardha' },
+  { id: 'm3', image: '/socialwork/IMG-20250128-WA0025.jpg', tag: 'SELF-DEFENSE', caption: 'High-impact empty-hand CQC workshop for college girls, Amravati' },
+  { id: 'm4', image: '/socialwork/IMG-20250628-WA0012.jpg', tag: 'SEMINAR', caption: 'Shakti Varta consciousness discourse reaching 800+ youth, Pune' },
+  { id: 'm5', image: '/socialwork/IMG-20261028-WA0002 (1).jpg', tag: 'SURVIVOR CIRCLE', caption: 'Shakti Bhava confidential trauma release circle, Yavatmal' },
+  { id: 'm6', image: '/socialwork/IMG_20260906_144953_075.jpg', tag: 'CAMP', caption: '7-Day Mission Mardini residential warrior convocation 2024' },
 ]
 
 const REPORTS = [
@@ -273,13 +273,16 @@ export default function SocialWorkPage() {
           </p>
           <div className={sw.mediaGrid} ref={mediaRef}>
             {MEDIA.map((m) => (
-              <div key={m.seed} className={sw.mediaCard} data-media>
+              <div key={m.id} className={sw.mediaCard} data-media>
                 <div className={sw.mediaImgWrap}>
                   <img
-                    src={`https://picsum.photos/seed/${m.seed}/400/280`}
+                    src={encodeURI(m.image)}
                     alt={m.caption}
                     className={sw.mediaImg}
                     loading="lazy"
+                    onError={(e) => {
+                      ;(e.currentTarget as HTMLImageElement).src = '/socialwork/social-1.jpg'
+                    }}
                   />
                   <span className={sw.mediaTag}>{m.tag}</span>
                 </div>
