@@ -35,35 +35,35 @@ const SLIDES: SlideData[] = [
     subtitle: 'Nagpur, Maharashtra',
     description: '340+ women trained in Lathi-Kaushal and tactical neighborhood defense.',
     stat: '340+ Trained',
-    image: 'https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=1200&auto=format&fit=crop&q=80',
+    image: '/socialwork/social-1.jpg',
   },
   {
     title: 'Survivor Circle',
     subtitle: 'Amravati, Maharashtra',
     description: 'Breaking silence on domestic trauma with confidential psychological pods.',
     stat: '1,200+ Healed',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&auto=format&fit=crop&q=80',
+    image: '/socialwork/social-2.jpg',
   },
   {
     title: 'Shakti Varta Seminar',
     subtitle: 'Pune, Maharashtra',
     description: 'Academic research, white papers, and epigraphical discourse on Vedic heroines.',
     stat: '45+ Papers',
-    image: 'https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=1200&auto=format&fit=crop&q=80',
+    image: '/socialwork/social-3.jpg',
   },
   {
     title: 'Sword Training Camp',
     subtitle: 'Wardha, Maharashtra',
     description: 'Revival of ancient Bharatiya martial arts and mental fear-eradication.',
     stat: '600+ Warriors',
-    image: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=1200&auto=format&fit=crop&q=80',
+    image: '/socialwork/social-4.jpg',
   },
   {
     title: 'Youth Leadership',
     subtitle: 'Yavatmal, Maharashtra',
     description: 'Shakti Sabha character and leadership academy for girls 14–20, guided by the Aaryaveera worldview.',
     stat: '15,000+ Cadets',
-    image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&auto=format&fit=crop&q=80',
+    image: '/socialwork/social-5.jpg',
   },
 ]
 
@@ -205,7 +205,7 @@ export default function SocialWork() {
           const randomPhoto = getRandomCategoryPhoto(kw, slide.image, allPhotos, categories)
           return {
             ...slide,
-            image: randomPhoto.url
+            image: randomPhoto.isFromDb ? randomPhoto.url : slide.image
           }
         })
       )
