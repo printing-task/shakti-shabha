@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import GoogleIcon from '../GoogleIcon/GoogleIcon'
 import s from './Hero.module.css'
+
+gsap.registerPlugin(ScrollTrigger)
 
 interface HeroSlide {
   num: string
@@ -208,20 +212,90 @@ const HERO_SLIDES: HeroSlide[] = [
 export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isSwitching, setIsSwitching] = useState(false)
-  const heroRef = useRef<HTMLElement>(null)
-  const autoLoopTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const isScrollingRef = useRef(false)
+  const wrapperRef = useRef<HTMLElement>(null)
+  const heroRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<ScrollTrigger | null>(null)
+  const currentIndexRef = useRef(0)
 
   const activeSlide = HERO_SLIDES[currentIndex]
 
-  const goToSlide = useCallback((index: number) => {
-    const nextIdx = (index + HERO_SLIDES.length) % HERO_SLIDES.length
-    setIsSwitching(true)
+  // Pin Hero section until all 5 pillars have completed (identical to CounsellingPage pattern)
+  useEffect(() => {
+    const wrapper = wrapperRef.current
+    const hero = heroRef.current
+    const totalSlides = HERO_SLIDES.length
+    if (!wrapper || !hero || totalSlides === 0) return
 
-    setTimeout(() => {
-      setCurrentIndex(nextIdx)
-      setIsSwitching(false)
-    }, 180)
+    // Generous pinning distance: keeps the hero pinned across all 5 pillars without flying away
+    const pinDistance = window.innerHeight * (totalSlides - 1) * 1.1
+
+    const ctx = gsap.context(() => {
+      const st = ScrollTrigger.create({
+        trigger: wrapper,
+        start: 'top top',
+        end: () => `+=${pinDistance}`,
+        pin: hero,
+        pinSpacing: true,
+        anticipatePin: 1,
+        scrub: 0.2,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          // Scale progress across all 5 slides:
+          // 0.00-0.20: Slide 0 (01 Mission Mardini)
+          // 0.20-0.40: Slide 1 (02 Shakti Bhava)
+          // 0.40-0.60: Slide 2 (03 Shakti Varta)
+          // 0.60-0.80: Slide 3 (04 Aaryaveera)
+          // 0.80-1.00: Slide 4 (05 Sahyog - the 5th and last pillar!)
+          // The user stays firmly on Slide 4 until self.progress completes past 1.00!
+          const current = self.progress * (totalSlides - 0.2)
+          const targetIndex = Math.min(
+            totalSlides - 1,
+            Math.max(0, Math.floor(current))
+          )
+
+          if (targetIndex !== currentIndexRef.current) {
+            currentIndexRef.current = targetIndex
+            setIsSwitching(true)
+            setTimeout(() => {
+              setCurrentIndex(targetIndex)
+              setIsSwitching(false)
+            }, 100)
+          }
+        }
+      })
+      triggerRef.current = st
+    }, wrapper)
+
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 250)
+
+    return () => {
+      clearTimeout(timer)
+      ctx.revert()
+      triggerRef.current = null
+    }
+  }, [])
+
+  const goToSlide = useCallback((index: number) => {
+    const nextIdx = Math.max(0, Math.min(HERO_SLIDES.length - 1, index))
+    const st = triggerRef.current
+    if (st && st.end > st.start) {
+      const totalSlides = HERO_SLIDES.length
+      const targetProgress = (nextIdx + 0.45) / totalSlides
+      const targetScroll = st.start + targetProgress * (st.end - st.start)
+      if ((window as any).lenis) {
+        ;(window as any).lenis.scrollTo(targetScroll, { duration: 0.8 })
+      } else {
+        window.scrollTo({ top: targetScroll, behavior: 'smooth' })
+      }
+    } else {
+      setIsSwitching(true)
+      setTimeout(() => {
+        setCurrentIndex(nextIdx)
+        setIsSwitching(false)
+      }, 100)
+    }
   }, [])
 
   // Apply CSS Variables on theme change
@@ -245,48 +319,13 @@ export default function Hero() {
     el.style.setProperty('--hero-tabs-active-text', theme.tabsActiveText || theme.accent)
   }, [activeSlide])
 
-  // Auto-loop carousel every 4.5 seconds
-  const resetAutoLoop = useCallback(() => {
-    if (autoLoopTimer.current) {
-      clearInterval(autoLoopTimer.current)
-    }
-    autoLoopTimer.current = setInterval(() => {
-      goToSlide(currentIndex + 1)
-    }, 4500)
-  }, [currentIndex, goToSlide])
-
-  useEffect(() => {
-    resetAutoLoop()
-    return () => {
-      if (autoLoopTimer.current) clearInterval(autoLoopTimer.current)
-    }
-  }, [resetAutoLoop])
-
-  // Mouse wheel scroll to step through orbital pillars
-  const handleWheel = (e: React.WheelEvent) => {
-    if (isScrollingRef.current) return
-    if (Math.abs(e.deltaY) < 22) return
-
-    isScrollingRef.current = true
-    if (e.deltaY > 0) {
-      goToSlide(currentIndex + 1)
-    } else {
-      goToSlide(currentIndex - 1)
-    }
-    resetAutoLoop()
-
-    setTimeout(() => {
-      isScrollingRef.current = false
-    }, 800)
-  }
-
   return (
-    <main
-      ref={heroRef}
-      className={s.heroStudio}
-      onWheel={handleWheel}
-      id="heroStudio"
-    >
+    <section ref={wrapperRef} className={s.heroPinWrapper}>
+      <div
+        ref={heroRef}
+        className={s.heroStudio}
+        id="heroStudio"
+      >
       {/* Category Thematic Background Image with Smooth Crossfade */}
       <div className={s.heroBgMedia} aria-hidden="true">
         {HERO_SLIDES.map((slide, idx) => (
@@ -376,7 +415,7 @@ export default function Hero() {
             <div
               className={s.orbitItem}
               data-slot={activeSlide.slots[0]}
-              onClick={() => { goToSlide(0); resetAutoLoop(); }}
+              onClick={() => goToSlide(0)}
             >
               <div className={s.orbitFloat}>
                 <div className={s.cardMardini}>
@@ -408,7 +447,7 @@ export default function Hero() {
             <div
               className={s.orbitItem}
               data-slot={activeSlide.slots[1]}
-              onClick={() => { goToSlide(1); resetAutoLoop(); }}
+              onClick={() => goToSlide(1)}
             >
               <div className={s.orbitFloat}>
                 <div className={s.cardBhava}>
@@ -439,7 +478,7 @@ export default function Hero() {
             <div
               className={s.orbitItem}
               data-slot={activeSlide.slots[2]}
-              onClick={() => { goToSlide(2); resetAutoLoop(); }}
+              onClick={() => goToSlide(2)}
             >
               <div className={s.orbitFloat}>
                 <div className={s.cardVarta}>
@@ -470,7 +509,7 @@ export default function Hero() {
             <div
               className={s.orbitItem}
               data-slot={activeSlide.slots[3]}
-              onClick={() => { goToSlide(3); resetAutoLoop(); }}
+              onClick={() => goToSlide(3)}
             >
               <div className={s.orbitFloat}>
                 <div className={s.cardAaryaveera}>
@@ -501,7 +540,7 @@ export default function Hero() {
             <div
               className={s.orbitItem}
               data-slot={activeSlide.slots[4]}
-              onClick={() => { goToSlide(4); resetAutoLoop(); }}
+              onClick={() => goToSlide(4)}
             >
               <div className={s.orbitFloat}>
                 <div className={s.cardSahyog}>
@@ -542,6 +581,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
+  </section>
   )
 }
