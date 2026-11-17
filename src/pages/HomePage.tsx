@@ -4,7 +4,7 @@ import About        from '../components/About/About'
 import ImpactGrid   from '../components/ImpactGrid/ImpactGrid'
 import Aaryaveera   from '../components/Aaryaveera/Aaryaveera'
 import SocialWork   from '../components/SocialWork/SocialWork'
-import Events       from '../components/Events/Events'
+import Articles     from '../components/Articles/Articles'
 import Sahyog       from '../components/Sahyog/Sahyog'
 import Courses      from '../components/Courses/Courses'
 import HistoryGirls from '../components/HistoryGirls/HistoryGirls'
@@ -18,7 +18,7 @@ export default function HomePage() {
       <ImpactGrid />
       <Aaryaveera />
       <SocialWork />
-      <Events />
+      <Articles />
       <Sahyog />
       <Courses />
       <HistoryGirls />

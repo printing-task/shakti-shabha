@@ -26,7 +26,7 @@ export interface ArticleItem {
   }
 }
 
-const ARTICLES_LIST: ArticleItem[] = [
+export const ARTICLES_LIST: ArticleItem[] = [
   {
     id: 'art-1',
     tag: 'Clinical Psychology',
