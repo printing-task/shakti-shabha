@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import {
   getStoredPhotos,
   getStoredCategories,
@@ -133,23 +133,31 @@ function Slide({ slide, offset, isWrapping, onSelect }: SlideProps) {
         {
           '--offset': offset,
           '--dir': offset === 0 ? 0 : offset > 0 ? 1 : -1,
-          opacity: Math.abs(offset) > 2 ? 0 : undefined,
-          pointerEvents: Math.abs(offset) > 2 ? 'none' : undefined,
+          opacity: Math.abs(offset) > 2 ? 0 : 1,
+          pointerEvents: Math.abs(offset) > 2 ? 'none' : 'auto',
         } as React.CSSProperties
       }
-      onClick={!active ? onSelect : undefined}
     >
-      <div
-        className={s.slideBackground}
-        style={{
-          backgroundImage: `url('${slide.image}')`,
-        }}
-      />
+      {active && (
+        <div
+          className={s.slideBackground}
+          style={{
+            backgroundImage: `url('${slide.image}')`,
+          }}
+        />
+      )}
 
       <div
         className={s.slideContent}
         style={{
           transition: isWrapping ? 'none' : undefined,
+          cursor: active ? 'default' : 'pointer',
+        }}
+        onClick={(e) => {
+          if (!active) {
+            e.stopPropagation()
+            onSelect()
+          }
         }}
       >
         <div
@@ -175,25 +183,56 @@ export default function SocialWork() {
   const prevIndexRef = useRef(0)
   const [slides, setSlides] = useState<SlideData[]>(SLIDES)
   const secRef = useRef<HTMLElement>(null)
+  const touchStartX = useRef<number | null>(null)
 
   const total = slides.length
 
-  const handleNext = () => {
-    prevIndexRef.current = currentIndex
-    setCurrentIndex(prev => (prev + 1) % total)
+  // Preload all slide images into browser cache immediately for instantaneous rendering
+  useEffect(() => {
+    SLIDES.forEach(item => {
+      const img = new Image()
+      img.src = item.image
+    })
+  }, [])
+
+  const handleNext = useCallback(() => {
+    setCurrentIndex(prev => {
+      prevIndexRef.current = prev
+      return (prev + 1) % total
+    })
+  }, [total])
+
+  const handlePrev = useCallback(() => {
+    setCurrentIndex(prev => {
+      prevIndexRef.current = prev
+      return (prev - 1 + total) % total
+    })
+  }, [total])
+
+  const handleGoto = useCallback((idx: number) => {
+    setCurrentIndex(prev => {
+      prevIndexRef.current = prev
+      return idx
+    })
+  }, [])
+
+  // Touch Swipe for mobile/tablets
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
   }
 
-  const handlePrev = () => {
-    prevIndexRef.current = currentIndex
-    setCurrentIndex(prev => (prev - 1 + total) % total)
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return
+    const diff = e.changedTouches[0].clientX - touchStartX.current
+    if (diff > 45) {
+      handlePrev()
+    } else if (diff < -45) {
+      handleNext()
+    }
+    touchStartX.current = null
   }
 
-  const handleGoto = (idx: number) => {
-    prevIndexRef.current = currentIndex
-    setCurrentIndex(idx)
-  }
-
-  // Load photos from DB/galleryStore
+  // Load photos from DB/galleryStore if admin uploaded custom photos
   useEffect(() => {
     const randomizeCategoryPhotos = () => {
       const allPhotos = getStoredPhotos()
@@ -257,7 +296,7 @@ export default function SocialWork() {
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [currentIndex])
+  }, [handleNext, handlePrev])
 
   return (
     <section ref={secRef} className={s.section}>
@@ -270,24 +309,32 @@ export default function SocialWork() {
 
       {/* 3D Carousel Stage */}
       <div data-sw="stage" className={s.carouselWrap}>
-        <div className={s.slidesContainer}>
-          <div className={s.slides}>
-            <button
-              type="button"
-              className={`${s.navBtn} ${s.btnPrev}`}
-              onClick={handlePrev}
-              aria-label="Previous Slide"
-              title="Previous Slide"
-            >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="15 18 9 12 15 6" />
-              </svg>
-            </button>
+        <div
+          className={s.slidesContainer}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
+          {/* Previous Arrow Button — elevated and unobstructed */}
+          <button
+            type="button"
+            className={`${s.navBtn} ${s.btnPrev}`}
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              handlePrev()
+            }}
+            aria-label="Previous Slide"
+            title="Previous Slide"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
 
+          <div className={s.slides}>
             {slides.map((slide, i) => {
               const currentOffset = getCircularOffset(i, currentIndex, total)
               const previousOffset = getCircularOffset(i, prevIndexRef.current, total)
-              // If a slide is wrapping from -2 to +2 or vice-versa behind the scenes, disable transition
               const isWrapping = Math.abs(currentOffset - previousOffset) > 2
 
               return (
@@ -300,19 +347,24 @@ export default function SocialWork() {
                 />
               )
             })}
-
-            <button
-              type="button"
-              className={`${s.navBtn} ${s.btnNext}`}
-              onClick={handleNext}
-              aria-label="Next Slide"
-              title="Next Slide"
-            >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="9 18 15 12 9 6" />
-              </svg>
-            </button>
           </div>
+
+          {/* Next Arrow Button — elevated and unobstructed */}
+          <button
+            type="button"
+            className={`${s.navBtn} ${s.btnNext}`}
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              handleNext()
+            }}
+            aria-label="Next Slide"
+            title="Next Slide"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
         </div>
 
         {/* Dots Navigation */}
