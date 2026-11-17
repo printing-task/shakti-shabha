@@ -28,7 +28,7 @@ const WHEEL_SERVICES: ServiceWheelItem[] = [
     actionText: 'Book Session →',
     actionLink: '#book-session',
     tags: ['Mental Health', 'Empowerment', 'Shakti Bhava'],
-    image: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?q=80&w=800',
+    image: '/socialwork/IMG-20250609-WA0019 (3).jpg',
   },
   {
     icon: 'chat',
@@ -37,7 +37,7 @@ const WHEEL_SERVICES: ServiceWheelItem[] = [
     actionText: 'Book Session →',
     actionLink: '#book-session',
     tags: ['Safe Space', '100% Confidential', 'Tele-Counseling'],
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800',
+    image: '/socialwork/IMG-20250628-WA0025.jpg',
   },
   {
     icon: 'school',
@@ -46,7 +46,7 @@ const WHEEL_SERVICES: ServiceWheelItem[] = [
     actionText: 'Explore Events →',
     actionLink: '/events',
     tags: ['Workshops', 'PTSD Recovery', 'Interactive'],
-    image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800',
+    image: '/socialwork/IMG-20250423-WA0020 (1).jpg',
   },
   {
     icon: 'groups',
@@ -55,7 +55,7 @@ const WHEEL_SERVICES: ServiceWheelItem[] = [
     actionText: 'Join Community →',
     actionLink: '/sahyog',
     tags: ['Sisterhood', 'Solidarity', 'Sahyog'],
-    image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800',
+    image: '/socialwork/IMG-20250606-WA0006 (1).jpg',
   },
   {
     icon: 'menu_book',
@@ -64,7 +64,7 @@ const WHEEL_SERVICES: ServiceWheelItem[] = [
     actionText: 'Explore Courses →',
     actionLink: '/courses',
     tags: ['LMS', 'Self-Paced', 'Wellness'],
-    image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=800',
+    image: '/socialwork/IMG-20250628-WA0012.jpg',
   },
   {
     icon: 'spa',
@@ -73,7 +73,7 @@ const WHEEL_SERVICES: ServiceWheelItem[] = [
     actionText: 'Start Recovery →',
     actionLink: '#book-session',
     tags: ['Holistic', 'Mindfulness', 'Somatic'],
-    image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800',
+    image: '/socialwork/20260524_135910 (1).jpg',
   },
   {
     icon: 'swords',
@@ -82,7 +82,7 @@ const WHEEL_SERVICES: ServiceWheelItem[] = [
     actionText: 'Emergency Help →',
     actionLink: '#book-session',
     tags: ['Crisis Rescue', 'Frontline', 'Legal Armor'],
-    image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800',
+    image: '/socialwork/IMG-20250128-WA0025.jpg',
   },
   {
     icon: 'podcasts',
@@ -91,7 +91,7 @@ const WHEEL_SERVICES: ServiceWheelItem[] = [
     actionText: 'Listen Now →',
     actionLink: '/aaryaveera',
     tags: ['Shakti Varta', 'Audio Series', 'Resilience'],
-    image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=800',
+    image: '/socialwork/IMG_20260906_144953_075.jpg',
   },
   {
     icon: 'star',
@@ -100,7 +100,7 @@ const WHEEL_SERVICES: ServiceWheelItem[] = [
     actionText: 'Read Stories →',
     actionLink: '/about',
     tags: ['Real Stories', 'Transformation', 'About'],
-    image: 'https://images.unsplash.com/photo-1577495508048-b635879837f1?q=80&w=800',
+    image: '/socialwork/VID20250618181015(1).jpg',
   },
 ]
 
@@ -265,7 +265,7 @@ export default function CounsellingPage() {
                 <div className={cp.cardImage}>
                   <div className={cp.phoneMockup}>
                     <div className={cp.phoneScreen}>
-                      <img src={item.image} alt={item.title} loading="lazy" />
+                      <img src={encodeURI(item.image)} alt={item.title} loading="lazy" onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/socialwork/social-1.jpg" }} />
                     </div>
                   </div>
                 </div>
