@@ -59,7 +59,7 @@ export default function SocialWorkHero() {
 
         <h1 className={s.heroTitle}>
           <span className={s.headingPrefix}>WE WORK</span>
-          <span className={s.crimsonLine}>FOR WOMEN</span>
+          <span className={s.crimsonLine}>FOR YOUTH</span>
         </h1>
 
         <div className={s.missionRotator}>
