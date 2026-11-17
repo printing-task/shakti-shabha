@@ -18,6 +18,7 @@ interface ArchiveRecord {
   region: 'Maharashtra' | 'Madhya Pradesh' | 'Rajasthan'
   cluster: string
   format?: string
+  image?: string
 }
 
 
@@ -153,7 +154,8 @@ const ARCHIVE_RECORDS: ArchiveRecord[] = [
     ],
     region: 'Maharashtra',
     cluster: 'Vidarbha & Western Maharashtra',
-    format: 'On-Ground Plenary Forum'
+    format: 'On-Ground Plenary Forum',
+    image: '/socialwork/IMG-20250628-WA0025.jpg'
   },
   {
     id: 'symp-2',
@@ -169,7 +171,8 @@ const ARCHIVE_RECORDS: ArchiveRecord[] = [
     ],
     region: 'Maharashtra',
     cluster: 'Vidarbha & Western Maharashtra',
-    format: 'Academic Conclave'
+    format: 'Academic Conclave',
+    image: '/socialwork/IMG-20250628-WA0012.jpg'
   },
   {
     id: 'symp-3',
@@ -185,7 +188,8 @@ const ARCHIVE_RECORDS: ArchiveRecord[] = [
     ],
     region: 'Maharashtra',
     cluster: 'Vidarbha & Western Maharashtra',
-    format: 'Policy & Legal Forum'
+    format: 'Policy & Legal Forum',
+    image: '/socialwork/20260524_135910 (1).jpg'
   },
   {
     id: 'symp-4',
@@ -201,7 +205,8 @@ const ARCHIVE_RECORDS: ArchiveRecord[] = [
     ],
     region: 'Madhya Pradesh',
     cluster: 'Malwa & Western Belt',
-    format: 'State Pedagogical Summit'
+    format: 'State Pedagogical Summit',
+    image: '/socialwork/IMG-20250606-WA0006 (1).jpg'
   },
   {
     id: 'symp-5',
@@ -217,7 +222,8 @@ const ARCHIVE_RECORDS: ArchiveRecord[] = [
     ],
     region: 'Rajasthan',
     cluster: 'Malwa & Western Belt',
-    format: 'Philosophical Colloquium'
+    format: 'Philosophical Colloquium',
+    image: '/socialwork/IMG-20250609-WA0019 (3).jpg'
   },
 
   /* ==============================================================
@@ -238,7 +244,8 @@ const ARCHIVE_RECORDS: ArchiveRecord[] = [
     ],
     region: 'Madhya Pradesh',
     cluster: 'Central MP / Satpura Basin',
-    format: '7-Day Residential Immersion'
+    format: '7-Day Residential Immersion',
+    image: '/socialwork/IMG-20250128-WA0025.jpg'
   },
   {
     id: 'camp-2',
@@ -254,7 +261,8 @@ const ARCHIVE_RECORDS: ArchiveRecord[] = [
     ],
     region: 'Maharashtra',
     cluster: 'Vidarbha & Western Maharashtra',
-    format: 'Multi-Camp Regional Circuit'
+    format: 'Multi-Camp Regional Circuit',
+    image: '/socialwork/IMG-20250128-WA0029.jpg'
   },
   {
     id: 'camp-3',
@@ -270,7 +278,8 @@ const ARCHIVE_RECORDS: ArchiveRecord[] = [
     ],
     region: 'Madhya Pradesh',
     cluster: 'Central MP / Satpura Basin',
-    format: 'Campus Tactical Clinic'
+    format: 'Campus Tactical Clinic',
+    image: '/socialwork/20251116_085108.jpg'
   },
 
   /* ==============================================================
@@ -290,7 +299,8 @@ const ARCHIVE_RECORDS: ArchiveRecord[] = [
     ],
     region: 'Maharashtra',
     cluster: 'Vidarbha & Western Maharashtra',
-    format: 'Regional Academic Conclave'
+    format: 'Regional Academic Conclave',
+    image: '/socialwork/IMG-20250423-WA0020 (1).jpg'
   },
   {
     id: 'acad-2',
@@ -306,7 +316,8 @@ const ARCHIVE_RECORDS: ArchiveRecord[] = [
     ],
     region: 'Maharashtra',
     cluster: 'Vidarbha & Western Maharashtra',
-    format: 'Multi-School Series'
+    format: 'Multi-School Series',
+    image: '/socialwork/IMG-20250425-WA0004 (2).jpg'
   },
 
   /* ==============================================================
@@ -326,7 +337,8 @@ const ARCHIVE_RECORDS: ArchiveRecord[] = [
     ],
     region: 'Maharashtra',
     cluster: 'Vidarbha & Western Maharashtra',
-    format: 'Civic Guilds Assembly'
+    format: 'Civic Guilds Assembly',
+    image: '/socialwork/IMG-20261028-WA0002 (1).jpg'
   },
   {
     id: 'comm-2',
@@ -342,7 +354,8 @@ const ARCHIVE_RECORDS: ArchiveRecord[] = [
     ],
     region: 'Madhya Pradesh',
     cluster: 'Central MP / Satpura Basin',
-    format: 'Civic Plenary Series'
+    format: 'Civic Plenary Series',
+    image: '/socialwork/IMG_20260906_144953_075.jpg'
   }
 ]
 
@@ -351,6 +364,7 @@ export default function ImpactPage() {
   const [regionFilter, setRegionFilter] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [activePhase, setActivePhase] = useState<'phase-1' | 'phase-2' | 'phase-3' | 'phase-4'>('phase-1')
+  const [previewImage, setPreviewImage] = useState<{ url: string; title: string } | null>(null)
 
   useEffect(() => {
     document.title = 'Documented Impact & Archive | Shakti Sabha'
@@ -872,24 +886,54 @@ export default function ImpactPage() {
           <div className={s.cardsList}>
             {filteredRecords.map(rec => (
               <div key={rec.id} className={s.archiveCard}>
-                <div className={s.cardTopRow}>
-                  <span className={s.cardTag}>
-                    <GoogleIcon name="verified_user" size={14} />
-                    {rec.institutionalTag}
-                  </span>
-                  <span className={s.cardScale}>{rec.scale}</span>
-                </div>
-                <h3 className={s.cardTitle}>{rec.title}</h3>
-                <p className={s.cardTheme}><strong>Theme:</strong> {rec.theme}</p>
-                <ul className={s.cardBullets}>
-                  {rec.keyPoints.map((pt, idx) => (
-                    <li key={idx}>{pt}</li>
-                  ))}
-                </ul>
-                <div className={s.cardFooterMeta}>
-                  <span><strong>Region:</strong> {rec.region} ({rec.cluster})</span>
-                  {rec.format && <span><strong>Format:</strong> {rec.format}</span>}
-                  <span><strong>Verification:</strong> Institutional Dossier Confirmed</span>
+                {rec.image && (
+                  <div className={s.cardMediaCol}>
+                    <div
+                      className={s.cardImageWrapper}
+                      onClick={() => setPreviewImage({ url: rec.image!, title: rec.title })}
+                      title="Click to view full image"
+                    >
+                      <img
+                        src={encodeURI(rec.image)}
+                        alt={rec.title}
+                        className={s.cardImg}
+                        loading="lazy"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).src = '/socialwork/social-1.jpg'
+                        }}
+                      />
+                      <div className={s.cardImageOverlay}>
+                        <span className={s.cardImageBadge}>
+                          <GoogleIcon name="photo_camera" size={13} />
+                          Ground Deployment
+                        </span>
+                        <span className={s.cardZoomBadge}>
+                          <GoogleIcon name="zoom_in" size={15} />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div className={s.cardBodyCol}>
+                  <div className={s.cardTopRow}>
+                    <span className={s.cardTag}>
+                      <GoogleIcon name="verified_user" size={14} />
+                      {rec.institutionalTag}
+                    </span>
+                    <span className={s.cardScale}>{rec.scale}</span>
+                  </div>
+                  <h3 className={s.cardTitle}>{rec.title}</h3>
+                  <p className={s.cardTheme}><strong>Theme:</strong> {rec.theme}</p>
+                  <ul className={s.cardBullets}>
+                    {rec.keyPoints.map((pt, idx) => (
+                      <li key={idx}>{pt}</li>
+                    ))}
+                  </ul>
+                  <div className={s.cardFooterMeta}>
+                    <span><strong>Region:</strong> {rec.region} ({rec.cluster})</span>
+                    {rec.format && <span><strong>Format:</strong> {rec.format}</span>}
+                    <span><strong>Verification:</strong> Institutional Dossier Confirmed</span>
+                  </div>
                 </div>
               </div>
             ))}
@@ -971,6 +1015,27 @@ export default function ImpactPage() {
         </div>
 
       </div>
+
+      {/* Lightbox Modal */}
+      {previewImage && (
+        <div className={s.lightboxModal} onClick={() => setPreviewImage(null)}>
+          <div className={s.lightboxContent} onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              className={s.lightboxCloseBtn}
+              onClick={() => setPreviewImage(null)}
+              aria-label="Close photo"
+            >
+              <GoogleIcon name="close" size={22} />
+            </button>
+            <img src={encodeURI(previewImage.url)} alt={previewImage.title} className={s.lightboxImg} />
+            <div className={s.lightboxCaption}>
+              <GoogleIcon name="verified" size={16} />
+              <span>{previewImage.title}</span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
