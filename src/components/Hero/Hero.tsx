@@ -319,12 +319,38 @@ export default function Hero() {
     el.style.setProperty('--hero-tabs-active-text', theme.tabsActiveText || theme.accent)
   }, [activeSlide])
 
+  // Mobile horizontal swipe handlers
+  const touchStartX = useRef<number | null>(null)
+  const touchStartY = useRef<number | null>(null)
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+    touchStartY.current = e.touches[0].clientY
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return
+    const diffX = e.changedTouches[0].clientX - touchStartX.current
+    const diffY = e.changedTouches[0].clientY - touchStartY.current
+    if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+      if (diffX < 0) {
+        goToSlide((currentIndex + 1) % HERO_SLIDES.length)
+      } else {
+        goToSlide((currentIndex - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)
+      }
+    }
+    touchStartX.current = null
+    touchStartY.current = null
+  }
+
   return (
     <section ref={wrapperRef} className={s.heroPinWrapper}>
       <div
         ref={heroRef}
         className={s.heroStudio}
         id="heroStudio"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
       {/* Category Thematic Background Image with Smooth Crossfade */}
       <div className={s.heroBgMedia} aria-hidden="true">
@@ -351,7 +377,8 @@ export default function Hero() {
         <div className={s.studioMeta}>
           <div className={s.studioMetaLeft}>
             <span className={s.redDot} />
-            <span>SHAKTI SABHA · CIVILIZATIONAL &amp; TACTICAL SOVEREIGNTY</span>
+            <span className={s.studioMetaDesktop}>SHAKTI SABHA · CIVILIZATIONAL &amp; TACTICAL SOVEREIGNTY</span>
+            <span className={s.studioMetaMobile}>SHAKTI SABHA</span>
           </div>
           <div className={s.studioMetaRight}>
             <span className={s.liveTag}>5 PILLARS ACTIVE</span>
@@ -579,6 +606,22 @@ export default function Hero() {
               ONE SANGAM. FIVE PILLARS.
             </div>
           </div>
+        </div>
+
+        {/* Mobile Interactive 5-Pillars Quick Switcher */}
+        <div className={s.mobilePillarsBar}>
+          {HERO_SLIDES.map((slide, idx) => (
+            <button
+              key={slide.num}
+              type="button"
+              className={`${s.mobilePillarBtn} ${idx === currentIndex ? s.mobilePillarBtnActive : ''}`}
+              onClick={() => goToSlide(idx)}
+              aria-label={`Pillar ${slide.num}: ${slide.category}`}
+            >
+              <span className={s.mobilePillarNum}>{slide.num}</span>
+              <span className={s.mobilePillarTitle}>{slide.category.split(' ')[0]}</span>
+            </button>
+          ))}
         </div>
       </div>
     </div>
