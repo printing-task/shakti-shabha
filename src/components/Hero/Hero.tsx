@@ -303,7 +303,6 @@ export default function Hero() {
       }, 100)
     }
 
-    // Center active pill in mobile horizontal bar
     if (window.innerWidth <= 900 && mobileBarRef.current) {
       const btn = mobileBarRef.current.children[nextIdx] as HTMLElement | undefined
       btn?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
@@ -400,7 +399,7 @@ export default function Hero() {
           <div className={s.heroGrid}>
             {/* Left Column Copy */}
             <div className={`${s.heroLeft} ${isSwitching ? s.heroLeftSwitching : ''}`}>
-              {/* Top Headline Block (Order 1 on mobile, before collage) */}
+              {/* Top Headline Block */}
               <div className={s.heroHeadBlock}>
                 <p className={s.eyebrowSmall}>
                   <GoogleIcon name="military_tech" size={16} />
@@ -422,7 +421,7 @@ export default function Hero() {
                 </p>
               </div>
 
-              {/* Slide Details Block (Order 3 on mobile, below collage) */}
+              {/* Slide Details Block */}
               <div className={s.heroSlideBlock}>
                 <div className={s.slideCounter}>
                   <div><span className={s.numActive}>{activeSlide.num}</span> / 05</div>
@@ -646,34 +645,6 @@ export default function Hero() {
                   <span className={s.mobilePillarTitle}>{slide.tabShort}</span>
                 </button>
               ))}
-            </div>
-          </div>
-
-          {/* Desktop Bottom 5-Tab Bar */}
-          <div className={s.heroBottom}>
-            <div className={s.tabsBar}>
-              {HERO_SLIDES.map((slide, idx) => (
-                <button
-                  key={slide.num}
-                  type="button"
-                  className={`${s.tabBtn} ${idx === currentIndex ? s.tabBtnActive : ''}`}
-                  onClick={() => goToSlide(idx)}
-                >
-                  <div className={s.tabTopRow}>
-                    <span className={s.tabIdx}>{slide.num}</span>
-                    <span className={s.tabArrow}>↗</span>
-                  </div>
-                  <span className={s.tabLabel}>{slide.category}</span>
-                </button>
-              ))}
-            </div>
-
-            <div className={s.scrollFooter}>
-              <div className={s.mouseHint}>
-                <div className={s.mouseIcon} />
-                <span>Scroll to traverse the 5 pillars of Shakti Sabha</span>
-              </div>
-              <div>Explore the Sangam &nbsp;↓</div>
             </div>
           </div>
         </div>
