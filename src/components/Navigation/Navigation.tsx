@@ -23,8 +23,12 @@ const ARTICLE_SUB_ITEMS: DropdownItem[] = [
   { label: 'Research Papers', to: '/research', icon: 'menu_book', desc: 'Academic Epistemology & Legal Policy' },
 ]
 
+const ABOUT_SUB_ITEMS: DropdownItem[] = [
+  { label: 'About', to: '/about', icon: 'info', desc: 'Mission, Vision & Leadership' },
+  { label: 'History', to: '/history', icon: 'history_edu', desc: 'Chronological Milestones (2019–2026)' },
+]
+
 const PRIMARY_LINKS_MIDDLE: NavLinkItem[] = [
-  { label: 'About', to: '/about' },
   { label: 'Gallery', to: '/gallery' },
   { label: 'Aaryaveera', to: '/aaryaveera' },
 ]
@@ -45,13 +49,17 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [articlesDropdownOpen, setArticlesDropdownOpen] = useState(false)
+  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
   const [whatWeDoDropdownOpen, setWhatWeDoDropdownOpen] = useState(false)
-  const [mobileArticlesOpen, setMobileArticlesOpen] = useState(true)
+  const [mobileArticlesOpen, setMobileArticlesOpen] = useState(false)
+  const [mobileAboutOpen, setMobileAboutOpen] = useState(false)
   const [mobileWhatWeDoOpen, setMobileWhatWeDoOpen] = useState(false)
 
   const articlesDropdownRef = useRef<HTMLDivElement>(null)
+  const aboutDropdownRef = useRef<HTMLDivElement>(null)
   const whatWeDoDropdownRef = useRef<HTMLDivElement>(null)
   const articlesTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const aboutTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const whatWeDoTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const logoImgRef = useRef<HTMLImageElement>(null)
@@ -60,6 +68,10 @@ export default function Navigation() {
   const location = useLocation()
 
   const isArticlesActive = ARTICLE_SUB_ITEMS.some(
+    item => location.pathname === item.to || location.pathname.startsWith(item.to + '/')
+  )
+
+  const isAboutActive = ABOUT_SUB_ITEMS.some(
     item => location.pathname === item.to || location.pathname.startsWith(item.to + '/')
   )
 
@@ -79,6 +91,7 @@ export default function Navigation() {
   useEffect(() => {
     setOpen(false)
     setArticlesDropdownOpen(false)
+    setAboutDropdownOpen(false)
     setWhatWeDoDropdownOpen(false)
   }, [location.pathname])
 
@@ -88,6 +101,9 @@ export default function Navigation() {
       const target = e.target as Node
       if (articlesDropdownRef.current && !articlesDropdownRef.current.contains(target)) {
         setArticlesDropdownOpen(false)
+      }
+      if (aboutDropdownRef.current && !aboutDropdownRef.current.contains(target)) {
+        setAboutDropdownOpen(false)
       }
       if (whatWeDoDropdownRef.current && !whatWeDoDropdownRef.current.contains(target)) {
         setWhatWeDoDropdownOpen(false)
@@ -109,6 +125,21 @@ export default function Navigation() {
   const handleArticlesMouseLeave = () => {
     articlesTimeoutRef.current = setTimeout(() => {
       setArticlesDropdownOpen(false)
+    }, 180)
+  }
+
+  // Desktop About dropdown hover handlers with smooth delay
+  const handleAboutMouseEnter = () => {
+    if (aboutTimeoutRef.current) {
+      clearTimeout(aboutTimeoutRef.current)
+      aboutTimeoutRef.current = null
+    }
+    setAboutDropdownOpen(true)
+  }
+
+  const handleAboutMouseLeave = () => {
+    aboutTimeoutRef.current = setTimeout(() => {
+      setAboutDropdownOpen(false)
     }, 180)
   }
 
@@ -220,6 +251,45 @@ export default function Navigation() {
             </div>
           </div>
 
+          {/* About & History Dropdown */}
+          <div
+            ref={aboutDropdownRef}
+            className={s.dropdownWrap}
+            onMouseEnter={handleAboutMouseEnter}
+            onMouseLeave={handleAboutMouseLeave}
+          >
+            <button
+              type="button"
+              className={`${s.dropdownTrigger} ${isAboutActive ? s.linkActive : ''} ${aboutDropdownOpen ? s.dropdownTriggerOpen : ''}`}
+              onClick={() => setAboutDropdownOpen(o => !o)}
+              aria-expanded={aboutDropdownOpen}
+              aria-haspopup="true"
+            >
+              <span>About</span>
+              <span className={`${s.chevron} ${aboutDropdownOpen ? s.chevronOpen : ''}`}>▾</span>
+            </button>
+
+            <div className={`${s.dropdownMenu} ${aboutDropdownOpen ? s.dropdownMenuOpen : ''}`}>
+              <div className={s.dropdownHeader}>Organization &amp; History</div>
+              {ABOUT_SUB_ITEMS.map(item => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  className={({ isActive }) => `${s.dropdownItem} ${isActive ? s.dropdownItemActive : ''}`}
+                  onClick={() => setAboutDropdownOpen(false)}
+                >
+                  <div className={s.dropdownItemIcon}>
+                    <GoogleIcon name={item.icon} size={17} />
+                  </div>
+                  <div className={s.dropdownItemText}>
+                    <span className={s.dropdownItemTitle}>{item.label}</span>
+                    <span className={s.dropdownItemDesc}>{item.desc}</span>
+                  </div>
+                </NavLink>
+              ))}
+            </div>
+          </div>
+
           {PRIMARY_LINKS_MIDDLE.map(l => (
             <NavLink
               key={l.to}
@@ -313,6 +383,34 @@ export default function Navigation() {
             {mobileArticlesOpen && (
               <div className={s.mobileSubList}>
                 {ARTICLE_SUB_ITEMS.map(item => (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    className={({ isActive }) => `${s.mobileSubLink} ${isActive ? s.mobileSubLinkActive : ''}`}
+                    onClick={() => setOpen(false)}
+                  >
+                    <GoogleIcon name={item.icon} size={18} />
+                    <span>{item.label}</span>
+                  </NavLink>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Mobile Accordion for "About" */}
+          <div className={s.mobileAccordion}>
+            <button
+              type="button"
+              className={`${s.mobileAccordionHeader} ${isAboutActive ? s.mobileLinkActive : ''}`}
+              onClick={() => setMobileAboutOpen(o => !o)}
+            >
+              <span>About</span>
+              <span className={`${s.chevron} ${mobileAboutOpen ? s.chevronOpen : ''}`}>▾</span>
+            </button>
+
+            {mobileAboutOpen && (
+              <div className={s.mobileSubList}>
+                {ABOUT_SUB_ITEMS.map(item => (
                   <NavLink
                     key={item.to}
                     to={item.to}

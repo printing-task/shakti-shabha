@@ -184,12 +184,12 @@ export default function GalleryPage() {
         </motion.h1>
 
         <p className={gp.hindiSubtitle}>
-          Visual Archive · 12 Years of Living History
+          Visual Archive · 7 Years of Living History (2019–2026)
         </p>
 
         <p className={gp.desc}>
-          Explore our interactive 3D media sphere archiving twelve years of on-ground camps,
-          traditional Lathi-Kaushal combat, survivor circles, and village self-defense across Maharashtra.
+          Explore our interactive 3D media sphere archiving seven years of on-ground camps (2019–2026),
+          traditional Lathi-Kaushal combat, survivor circles, and village self-defense across India.
         </p>
 
         {/* Compact Category Filter: Show 2-3 + Dropdown for remaining */}

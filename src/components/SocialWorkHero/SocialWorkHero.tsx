@@ -71,7 +71,7 @@ export default function SocialWorkHero() {
         </div>
 
         <p className={s.desc}>
-          Twelve years of fearless grassroots empowerment — organizing martial self-defense
+          Seven years of fearless grassroots empowerment (2019–2026) — organizing martial self-defense
           camps, survivor healing pods, legal literacy circles, and rural leadership across 200+ villages.
         </p>
 

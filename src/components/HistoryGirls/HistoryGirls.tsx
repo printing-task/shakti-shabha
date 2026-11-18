@@ -22,10 +22,10 @@ const SUCCESS = [
 ]
 
 const TIMELINE = [
-  { year:'2012', text:'First self-defense camp, Wardha. 12 girls. One mat. One instructor.', big: false },
-  { year:'2015', text:'Expanded to 50 schools across Vidarbha. Media archive begins.',       big: false },
-  { year:'2018', text:'Shakti Varta launches — podcast, white papers, legal collage.',        big: true  },
-  { year:'2022', text:'Aaryaveera philosophy codified by founder. Shakti Sabha leadership batches inaugurated.', big: false },
+  { year:'2019', text:'First self-defense camp, Wardha. 12 girls. One mat. One instructor.', big: false },
+  { year:'2021', text:'Expanded to 50 schools across Vidarbha. Media archive begins.',       big: false },
+  { year:'2023', text:'Shakti Varta launches — podcast, white papers, legal collage.',        big: true  },
+  { year:'2025', text:'Aaryaveera philosophy codified by founder. Shakti Sabha leadership batches inaugurated.', big: false },
   { year:'2026', text:'400+ schools. Platform launch. Digital chapter begins.',               big: true  },
 ]
 

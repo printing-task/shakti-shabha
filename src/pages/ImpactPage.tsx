@@ -38,10 +38,10 @@ const PHASES_DATA: PhaseDetail[] = [
   {
     id: 'phase-1',
     phaseNum: 'Phase 01',
-    years: '2016–2019',
+    years: '2019–2021',
     title: 'Early Foundations: Cultural Engagement & Grassroots Mobilization',
     subtitle: 'Working Through Established Platforms',
-    intro: "Harshita's initial work began through established cultural, traditional, and spiritual organizations. These platforms provided opportunities to engage directly with students, educational institutions, families, and local communities. Rather than beginning with an independent organization, she worked within existing institutional networks and contributed to educational and awareness activities.",
+    intro: "Harshita's initial work began through grassroots cultural and educational platforms. These platforms provided opportunities to engage directly with students, educational institutions, families, and local communities. Rather than beginning with an independent organization, she worked within existing institutional networks and contributed to educational and awareness activities.",
     keyPoints: [
       'Bhagavad Gita Jayanti programmes and discussions on the relevance of the Gita in everyday life.',
       'Sessions on Indian cultural values, ethical conduct, and character development.',
@@ -54,7 +54,7 @@ const PHASES_DATA: PhaseDetail[] = [
   {
     id: 'phase-2',
     phaseNum: 'Phase 02',
-    years: '2019–2022',
+    years: '2021–2023',
     title: 'The Turning Point: Critical Inquiry & Independent Transition',
     subtitle: 'From Institutional Association to Independent Thought',
     intro: "Continued grassroots engagement brought Harshita into closer contact with the internal functioning of different institutions and their leadership structures. Over time, she encountered practices and institutional contradictions that raised serious questions about operational integrity, ethical consistency, and intellectual independence. Rather than ignoring these concerns, she chose a path of critical reflection and conscious departure.",
@@ -69,7 +69,7 @@ const PHASES_DATA: PhaseDetail[] = [
   {
     id: 'phase-3',
     phaseNum: 'Phase 03',
-    years: '2022–2023',
+    years: '2023–2024',
     title: "Frontline Engagement: Women's Safety & Practical Intervention",
     subtitle: 'Aaryaveera & Tactical Self-Defense',
     intro: "As her independent work expanded, Harshita recognized an urgent, unaddressed need in the communities she was engaging with: the physical vulnerability, hesitation, and fear that often constrained young women and girls in public and private spaces. Drawing on her martial training and grassroots network, she founded Aaryaveera — a focused initiative dedicated to self-defense, physical confidence, and situational awareness for girls.",
@@ -84,10 +84,10 @@ const PHASES_DATA: PhaseDetail[] = [
   {
     id: 'phase-4',
     phaseNum: 'Phase 04',
-    years: '2023–Present',
+    years: '2024–2026',
     title: 'Institutional Independence: The Shakti Sabha Journey',
     subtitle: 'From an Initiative to an Institution',
-    intro: "By 2023, the scope of Harshita's work had outgrown single-issue initiatives. The challenges she was addressing — youth disillusionment, cultural disconnection, women's vulnerability, and institutional mediocrity — demanded a comprehensive, institutional response. Shakti Sabha was established to serve as that institutional home: an independent, multifaceted platform operating across education, social research, cultural engagement, and community welfare.",
+    intro: "By 2024, the scope of Harshita's work had outgrown single-issue initiatives. The challenges she was addressing — youth disillusionment, cultural disconnection, women's vulnerability, and institutional mediocrity — demanded a comprehensive, institutional response. Shakti Sabha was established to serve as that institutional home: an independent, multifaceted platform operating across education, social research, cultural engagement, and community welfare.",
     keyPoints: [
       'Independent Institutional Identity: Free from partisan agendas, institutional dogmas, and commercial pressures.',
       'Broad Operational Scope: Spanning school programmes, college lectures, residential camps, research publications, counselling, and collaborative projects.',
@@ -412,7 +412,7 @@ export default function ImpactPage() {
             The Crucible of Experience: Forged in Truth, Free from Dogma
           </div>
           <p className={s.crucibleText}>
-            "Harshita Mankar's work was not born in academic comfort; it was forged through raw, unvarnished field immersion beginning in 2016. Moving across schools, villages, student hostels, and community gatherings, she worked directly within traditional and cultural networks—learning firsthand how institutions function, where they succeed, and where they compromise."
+            "Harshita Mankar's work was not born in academic comfort; it was forged through raw, unvarnished field immersion beginning in 2019. Moving across schools, villages, student hostels, and community gatherings, she worked directly within traditional and cultural networks—learning firsthand how institutions function, where they succeed, and where they compromise."
           </p>
           <p className={s.crucibleText}>
             "When institutional contradictions threatened intellectual independence and ethical consistency, she chose conviction over conformity: stepping away to build an uncompromised, independent platform. Today, Shakti Sabha is the culmination of that journey—rooted in reality, tempered by experience, and dedicated to authentic social change."
@@ -427,13 +427,13 @@ export default function ImpactPage() {
           </span>
           <h2 className={s.journeyIntroHeading}>THE IMPACT JOURNEY</h2>
           <div className={s.journeyIntroLead}>
-            From Grassroots Engagement to Independent Institutional Work (2016–Present)
+            From Grassroots Engagement to Independent Institutional Work (2019–2026)
           </div>
           <p className={s.journeyParagraph}>
-            <strong>A Journey Shaped by Experience, Conviction, and Independent Action:</strong> Long before Shakti Sabha emerged as an independent institutional platform, Harshita Mankar had been actively engaged in educational, cultural, and community-based initiatives.
+            <strong>A Journey Shaped by Experience, Conviction, and Independent Action:</strong> Long before Shakti Sabha expanded nationwide, Harshita Mankar had been actively engaged in educational, cultural, and community-based initiatives.
           </p>
           <p className={s.journeyParagraph}>
-            Beginning in 2016–17, her early work took place through established cultural, traditional, and spiritual organizations. Working under their platforms, she participated in and conducted activities across schools, colleges, student hostels, and community forums. These early engagements included Bhagavad Gita Jayanti programmes, discussions on Indian knowledge traditions, Matri-Pitri Pujan initiatives, personality development sessions, and awareness activities for young girls.
+            Beginning in 2019, her early work took place through established cultural and educational platforms. Working under their platforms, she participated in and conducted activities across schools, colleges, student hostels, and community forums. These early engagements included Bhagavad Gita Jayanti programmes, discussions on Indian knowledge traditions, Matri-Pitri Pujan initiatives, personality development sessions, and awareness activities for young girls.
           </p>
           <p className={s.journeyParagraph}>
             Over time, direct field experience also brought her face to face with the limitations, contradictions, and practices within certain institutional environments. Her growing commitment to independent inquiry, ethical consistency, and intellectual freedom led her to reconsider the structures within which she was working. She gradually moved away from institutional affiliations that no longer aligned with her principles and began developing an independent approach to social work.
@@ -530,10 +530,10 @@ export default function ImpactPage() {
               <thead>
                 <tr>
                   <th>Dimension</th>
-                  <th>Phase 01 (2016–2019)</th>
-                  <th>Phase 02 (2019–2022)</th>
-                  <th>Phase 03 (2022–2023)</th>
-                  <th>Phase 04 (2023–Present)</th>
+                  <th>Phase 01 (2019–2021)</th>
+                  <th>Phase 02 (2021–2023)</th>
+                  <th>Phase 03 (2023–2024)</th>
+                  <th>Phase 04 (2024–2026)</th>
                 </tr>
               </thead>
               <tbody>
@@ -619,7 +619,7 @@ export default function ImpactPage() {
             Note on Institutional Transition
           </h3>
           <p className={s.journeyParagraph} style={{ maxWidth: 840, margin: '0 auto 1rem', textAlign: 'center' }}>
-            In the interest of transparency, intellectual honesty, and public record: Harshita Mankar's past associations with various cultural, traditional, and spiritual organizations during the period 2016–2019 reflect a phase of early learning, grassroots engagement, and exploration.
+            In the interest of transparency, intellectual honesty, and public record: Harshita Mankar's past associations with various cultural, traditional, and spiritual organizations during the period 2019–2021 reflect a phase of early learning, grassroots engagement, and exploration.
           </p>
           <p className={s.journeyParagraph} style={{ maxWidth: 840, margin: '0 auto 1.5rem', textAlign: 'center' }}>
             Her subsequent departure from those platforms was a deliberate, principled decision arising from direct experience with their internal functioning, practices, and institutional cultures. Those past associations do not define, limit, or represent the current philosophy, governance, or operational direction of Shakti Sabha. Shakti Sabha operates with complete autonomy — intellectually, administratively, and programmatically. We acknowledge the experiences of every phase as essential to the clarity, conviction, and independence that define our work today.

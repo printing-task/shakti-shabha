@@ -11,8 +11,8 @@ gsap.registerPlugin(ScrollTrigger)
 type Lang = 'en' | 'hi'
 
 /* ============================================================
-   Historical Milestones: 2012 to Current (2024)
-   7 Years of Independent Shakti Sabha Impact (2019–Present)
+   Historical Milestones: 2019 to Current (2026)
+   7 Years of Independent Shakti Sabha Impact (2019–2026)
    ============================================================ */
 
 interface Milestone {
@@ -52,172 +52,104 @@ interface Milestone {
 
 const TIMELINE_MILESTONES: Milestone[] = [
   {
-    id: 'm2012',
-    yearNumeric: 2012,
-    dateDisplayEn: '2012 CE',
-    dateDisplayHi: '२०१२ ईस्वी',
-    epochEn: 'Genesis & Vision',
-    epochHi: 'स्थापना एवं संकल्प',
+    id: 'm2019',
+    yearNumeric: 2019,
+    dateDisplayEn: '2019 CE',
+    dateDisplayHi: '२०१९ ईस्वी',
+    epochEn: 'Genesis & Sovereign Foundation',
+    epochHi: 'स्थापना एवं पावन संकल्प',
     nameEn: 'Shakti Sabha Founded',
     nameHi: 'शक्ति सभा की स्थापना',
-    yearsEn: '2012 · Pune, Maharashtra',
-    yearsHi: '२०१२ · पुणे, महाराष्ट्र',
-    quoteEn: 'Born in Pune, Maharashtra — with a vision to unite the strength of women across India.',
-    quoteHi: 'पुणे, महाराष्ट्र में जन्म — भारत भर में नारी शक्ति को एकजुट करने के पावन संकल्प के साथ।',
-    descEn: 'Born in Pune, Maharashtra — with a vision to unite the strength of women across India. Grounded in timeless civilizational roots and modern psychological support.',
-    descHi: 'पुणे, महाराष्ट्र में जन्म — भारत भर में नारी शक्ति को एकजुट करने के पावन संकल्प के साथ। प्राचीन गौरव एवं आधुनिक मनोवैज्ञानिक संबल की नींव रखी गई।',
+    yearsEn: '2019 · Pune & Wardha, Maharashtra',
+    yearsHi: '२०१९ · पुणे एवं वर्धा, महाराष्ट्र',
+    quoteEn: 'Born in Maharashtra — with a sovereign vision to unite the strength and tactical capability of women across India.',
+    quoteHi: 'महाराष्ट्र में जन्म — भारत भर में नारी शक्ति को एकजुट एवं सामरिक रूप से सक्षम बनाने के संकल्प के साथ।',
+    descEn: 'Born in Maharashtra — with a vision to unite the strength of women across India. Grounded in timeless Kshatra-Dharma roots, tactical martial defense, and modern psychological support.',
+    descHi: 'महाराष्ट्र में जन्म — भारत भर में नारी शक्ति को एकजुट करने के पावन संकल्प के साथ। प्राचीन क्षात्र-धर्म, व्यावहारिक आत्मरक्षा और मनोवैज्ञानिक संबल की सुदृढ़ नींव रखी गई।',
     stats: [
-      { value: '1st', labelEn: 'Center (Pune)', labelHi: 'प्रथम केंद्र (पुणे)' },
-      { value: '12', labelEn: 'Founders', labelHi: 'संस्थापक' },
-      { value: '1', labelEn: 'Charter', labelHi: 'मूल संकल्प' }
+      { value: '1st', labelEn: 'Center (Wardha)', labelHi: 'प्रथम केंद्र (वर्धा)' },
+      { value: '200+', labelEn: 'Inaugural Cadets', labelHi: 'प्रथम शिविरार्थी' },
+      { value: '1', labelEn: 'Founding Charter', labelHi: 'मूल संकल्प पत्र' }
     ],
     dossierEn: {
-      context: 'Founded in Pune by dedicated social visionaries to create a pan-India platform for women’s psychological, physical, and historical empowerment.',
+      context: 'Founded by dedicated social visionaries to create a pan-India platform for women’s psychological, physical, and historical empowerment.',
       tactics: 'Community-led grassroots circles, cultural awakening lectures, and safe neighborhood support pods.',
-      legacy: 'Established the core foundational philosophy that powered a nationwide movement across 12+ years.',
-      citation: 'Shakti Sabha Founding Charter (Pune, 2012); Registration Deed #SS-2012/MH.'
+      legacy: 'Established the core foundational philosophy that powered a nationwide movement across 7+ years.',
+      citation: 'Shakti Sabha Founding Charter (Pune, 2019); Registration Deed #SS-2019/MH.'
     },
     dossierHi: {
-      context: 'पुणे में समर्पित समाजसेवियों द्वारा महिलाओं के मानसिक, शारीरिक एवं ऐतिहासिक सशक्तिकरण हेतु अखिल भारतीय मंच की स्थापना की गई।',
+      context: 'समर्पित समाजसेवियों द्वारा महिलाओं के मानसिक, शारीरिक एवं ऐतिहासिक सशक्तिकरण हेतु अखिल भारतीय मंच की स्थापना की गई।',
       tactics: 'सामुदायिक बैठकें, सांस्कृतिक जागरण व्याख्यान तथा मोहल्ला-स्तर पर सुरक्षा संवाद।',
       legacy: 'उस मूल वैचारिक दर्शन की स्थापना हुई जिसने आगे चलकर देशव्यापी शक्ति आंदोलन का रूप लिया।',
-      citation: 'शक्ति सभा स्थापना विलेख (पुणे, २०१२); पंजीयन सं. SS-2012/MH।'
+      citation: 'शक्ति सभा स्थापना विलेख (पुणे, २०१९); पंजीयन सं. SS-2019/MH।'
     },
     image: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&auto=format&fit=crop&q=80'
   },
   {
-    id: 'm2014',
-    yearNumeric: 2014,
-    dateDisplayEn: '2014 CE',
-    dateDisplayHi: '२०१४ ईस्वी',
-    epochEn: 'Warrior Awakening',
-    epochHi: 'वीरांगना आत्मरक्षा शिविर',
-    nameEn: 'First Warrior Camp',
-    nameHi: 'प्रथम वीरांगना आत्मरक्षा शिविर',
-    yearsEn: '2014 · Rural Pune District',
-    yearsHi: '२०१४ · ग्रामीण पुणे जिला',
-    quoteEn: 'The inaugural self-defense camp reached 200 women across rural Pune district.',
-    quoteHi: 'ग्रामीण पुणे जिले में प्रथम आत्मरक्षा शिविर का आयोजन, जिसमें २०० महिलाओं व बालिकाओं ने भाग लिया।',
-    descEn: 'The inaugural self-defense camp reached 200 women across rural Pune district — laying down practical martial arts, lathi training, and psychological fearlessness.',
-    descHi: 'ग्रामीण पुणे जिले में प्रथम आत्मरक्षा शिविर का आयोजन, जिसमें २०० महिलाओं व बालिकाओं ने भाग लिया — पारंपरिक लाठी कौशल एवं भयमुक्त मानसिक दृढ़ता का प्रशिक्षण।',
+    id: 'm2021',
+    yearNumeric: 2021,
+    dateDisplayEn: '2021 CE',
+    dateDisplayHi: '२०२१ ईस्वी',
+    epochEn: 'Warrior Awakening & Healing',
+    epochHi: 'वीरांगना आत्मरक्षा एवं संबल',
+    nameEn: 'Mission Mardini & Shakti Bhava',
+    nameHi: 'मिशन मर्दिनी एवं शक्ति भाव का शुभारंभ',
+    yearsEn: '2021 · Grassroots Corridors',
+    yearsHi: '२०२१ · ग्रामीण अंचल एवं संबल केंद्र',
+    quoteEn: 'Inaugural martial self-defense camps and confidential psychological trauma recovery pods formalized.',
+    quoteHi: 'पारंपरिक लाठी आत्मरक्षा शिविरों एवं गोपनीय मानसिक स्वास्थ्य संबल की औपचारिक शुरुआत।',
+    descEn: 'Inaugural Mission Mardini martial camps reached thousands of young women — combining empty-hand karate, traditional Lathi-Kaushal staff defense, and 24/7 confidential trauma recovery pods.',
+    descHi: 'मिशन मर्दिनी एवं शक्ति भाव का शुभारंभ — पारंपरिक लाठी कौशल, निःशस्त्र आत्मरक्षा और संकटग्रस्त बहनों के लिए गोपनीय मनोवैज्ञानिक परामर्श मंच स्थापित किया गया।',
     stats: [
-      { value: '200+', labelEn: 'Girls Trained', labelHi: 'बालिकाएं प्रशिक्षित' },
-      { value: '1st', labelEn: 'Rural Camp', labelHi: 'ग्रामीण शिविर' },
-      { value: '100%', labelEn: 'Lathi Prepared', labelHi: 'लट्ठ-कौशल' }
+      { value: '1,200+', labelEn: 'Girls Trained', labelHi: 'बालिकाएं प्रशिक्षित' },
+      { value: '50+', labelEn: 'Rural Camps', labelHi: 'ग्रामीण शिविर' },
+      { value: '100%', labelEn: 'Confidential Pods', labelHi: 'गोपनीय संबल' }
     ],
     dossierEn: {
-      context: 'Launched in rural outskirts of Pune to equip young girls with physical courage for daily travel.',
-      tactics: 'Traditional Bharatiya martial defense combined with rapid situational awareness drills.',
-      legacy: 'Proved the scalability of self-defense training for rural school and college students.',
-      citation: 'Warrior Camp Field Log 2014; Pune District Panchayat Commendation.'
+      context: 'Launched across rural outskirts to equip young girls with physical courage for daily travel, paired with trauma-informed emotional healing.',
+      tactics: 'Traditional Bharatiya martial defense, environmental situational drills, and clinical psychological recovery circles.',
+      legacy: 'Proved the scalability of self-defense training for rural school and college students while breaking silence on gender-based trauma.',
+      citation: 'Mission Mardini Field Log 2021; Shakti Bhava Care Protocols #SB-2021.'
     },
     dossierHi: {
-      context: 'दैनिक आवागमन में छात्राओं के मन से भय समाप्त करने हेतु पुणे के ग्रामीण अंचल में शुभारंभ किया गया।',
-      tactics: 'पारंपरिक भारतीय आत्मरक्षा तकनीक, त्वरित सजगता एवं मनोवैज्ञानिक आत्मविश्वास।',
-      legacy: 'ग्रामीण छात्राओं हेतु आत्मरक्षा प्रशिक्षण की ऐतिहासिक सफलता सिद्ध हुई।',
-      citation: 'शिविर दैनंदिनी २०१४; पुणे जिला पंचायत प्रशंसा पत्र।'
+      context: 'दैनिक आवागमन में छात्राओं के मन से भय समाप्त करने और घरेलू तनाव से पीड़ित बहनों को संबल देने हेतु प्रारंभ।',
+      tactics: 'पारंपरिक भारतीय आत्मरक्षा तकनीक, त्वरित सजगता, और प्रमाणित महिला मनोवैज्ञानिकों द्वारा परामर्श।',
+      legacy: 'ग्रामीण छात्राओं हेतु व्यावहारिक सुरक्षा और मानसिक आघात से मुक्ति का ऐतिहासिक मॉडल सिद्ध हुआ।',
+      citation: 'शिविर दैनंदिनी २०२१; शक्ति भाव परामर्श संलेख #SB-2021।'
     },
     image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80'
   },
   {
-    id: 'm2016',
-    yearNumeric: 2016,
-    dateDisplayEn: '2016 CE',
-    dateDisplayHi: '२०१६ ईस्वी',
-    epochEn: 'Institutional Reach',
-    epochHi: 'शैक्षणिक संस्थानों में विस्तार',
-    nameEn: '100 Schools Reached',
-    nameHi: '१०० विद्यालयों तक विस्तार',
-    yearsEn: '2016 · State-wide Schools',
-    yearsHi: '२०१६ · राज्य स्तरीय विद्यालय',
-    quoteEn: 'Mardini expanded to 100 schools — bringing self-defense and character education to young girls.',
-    quoteHi: 'मिशन मर्दिनी १०० विद्यालयों तक विस्तृत — युवा छात्राओं को आत्मरक्षा एवं चारित्रिक शिक्षण प्रदान किया।',
-    descEn: 'Mardini expanded to 100 schools — bringing self-defense and character education to young girls. Building resilience, self-worth, and proactive safety instincts.',
-    descHi: 'मिशन मर्दिनी १०० विद्यालयों तक विस्तृत — युवा छात्राओं को आत्मरक्षा एवं चारित्रिक शिक्षण प्रदान किया। आत्मसम्मान और सजगता को दैनिक जीवन का हिस्सा बनाया।',
+    id: 'm2023',
+    yearNumeric: 2023,
+    dateDisplayEn: '2023 CE',
+    dateDisplayHi: '२०२३ ईस्वी',
+    epochEn: 'Unified Identity & Scholarship',
+    epochHi: 'आर्यवीरा एवं वैचारिक शोध',
+    nameEn: 'Aaryaveera Doctrine & Research',
+    nameHi: 'आर्यवीरा आंदोलन एवं शक्ति वार्ता',
+    yearsEn: '2023 · Pan-India Awakening',
+    yearsHi: '२०२३ · राष्ट्रीय वैचारिक जागरण',
+    quoteEn: 'The flagship warrior brand — Aaryaveera — codified alongside Vedic historical research papers.',
+    quoteHi: 'प्रमुख वीरांगना ब्रांड \u2018आर्यवीरा\u2019 का उद्घोष और वैदिक विदुषियों पर प्रामाणिक शोधमाला का शुभारंभ।',
+    descEn: 'The flagship warrior brand — Aaryaveera — born as a unified identity for the whole movement. Combining ancient Kshatra heritage with modern intellectual sovereignty and Shakti Varta peer-reviewed research.',
+    descHi: 'संपूर्ण शक्ति आंदोलन की पहचान के रूप में प्रमुख वीरांगना ब्रांड \u2018आर्यवीरा\u2019 का प्राकट्य। प्राचीन शौर्य परंपरा, आधुनिक बौद्धिक स्वाभिमान और शक्ति वार्ता ऐतिहासिक शोध का अप्रतिम समन्वय।',
     stats: [
-      { value: '100', labelEn: 'Schools Covered', labelHi: 'विद्यालय सहभागिता' },
-      { value: '35,000+', labelEn: 'Students', labelHi: 'छात्राएं' },
-      { value: '5', labelEn: 'Districts', labelHi: 'जिले सम्मिलित' }
-    ],
-    dossierEn: {
-      context: 'Institutionalized in school curriculums across primary and secondary schools.',
-      tactics: 'Weekly martial arts periods, anti-bullying workshops, and physical fitness certification.',
-      legacy: 'Directly empowered over 35,000 young girls across Maharashtra schools.',
-      citation: 'State Education Board Partnership Report 2016; School Survey Vol. IV.'
-    },
-    dossierHi: {
-      context: 'प्राथमिक एवं माध्यमिक विद्यालयों के पाठ्यक्रम में आत्मरक्षा सत्रों को समाहित किया गया।',
-      tactics: 'साप्ताहिक शारीरिक प्रशिक्षण, चरित्र निर्माण कक्षाएं एवं फिटनेस प्रमाणन।',
-      legacy: 'महाराष्ट्र के १०० विद्यालयों में ३५,००० से अधिक छात्राओं को सीधे सशक्त बनाया गया।',
-      citation: 'शिक्षा बोर्ड सहभागिता प्रतिवेदन २०१६; विद्यालय सर्वेक्षण खंड ४।'
-    },
-    image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&auto=format&fit=crop&q=80'
-  },
-  {
-    id: 'm2018',
-    yearNumeric: 2018,
-    dateDisplayEn: '2018 CE',
-    dateDisplayHi: '२०१८ ईस्वी',
-    epochEn: 'Healing & Support',
-    epochHi: 'मानसिक संबल एवं परामर्श',
-    nameEn: 'Shakti Bhava Launched',
-    nameHi: 'शक्ति भाव का शुभारंभ',
-    yearsEn: '2018 · Pan-India Helpline',
-    yearsHi: '२०१८ · अखिल भारतीय संबल प्रकोष्ठ',
-    quoteEn: 'Survivor support and counseling programs formalized — breaking the silence on gender-based trauma.',
-    quoteHi: 'संबल एवं परामर्श कार्यक्रमों की औपचारिक शुरुआत — हिंसा व मानसिक आघात पर मौन तोड़ा।',
-    descEn: 'Survivor support and counseling programs formalized — breaking the silence on gender-based trauma. Offering unconditional empathy and confidential psychological care.',
-    descHi: 'संबल एवं परामर्श कार्यक्रमों की औपचारिक शुरुआत — हिंसा व मानसिक आघात पर मौन तोड़ा। महिलाओं के लिए सुरक्षित, गोपनीय एवं निःशुल्क परामर्श मंच स्थापित।',
-    stats: [
-      { value: '1,200+', labelEn: 'Counseling Pods', labelHi: 'परामर्श सत्र' },
-      { value: '24/7', labelEn: 'Crisis Helpline', labelHi: 'संबल प्रकोष्ठ' },
-      { value: '100%', labelEn: 'Confidential', labelHi: 'पूर्ण गोपनीयता' }
-    ],
-    dossierEn: {
-      context: 'Created to provide safe, stigma-free counseling for women confronting domestic distress, grief, and societal pressure.',
-      tactics: 'Certified female clinical psychologists, toll-free discreet helpline, and peer support recovery circles.',
-      legacy: 'Handled thousands of counseling sessions with 100% confidentiality and emotional healing.',
-      citation: 'Shakti Bhava Clinical Protocols (2018); Annual Care Summary.'
-    },
-    dossierHi: {
-      context: 'घरेलू हिंसा, सामाजिक दबाव एवं अवसाद से पीड़ित बहनों को बिना किसी लोकलाज के परामर्श उपलब्ध कराने हेतु प्रारंभ।',
-      tactics: 'प्रमाणित महिला मनोवैज्ञानिक, पूर्णतः गोपनीय परामर्श प्रणाली तथा आत्मीय संबल समूह।',
-      legacy: 'हजारों महिलाओं को मानसिक तनाव से मुक्त कर पुनः आत्मविश्वासी जीवन प्रदान किया।',
-      citation: 'शक्ति भाव परामर्श नियमावली (२०१८); वार्षिक सेवा प्रतिवेदन।'
-    },
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80'
-  },
-  {
-    id: 'm2022',
-    yearNumeric: 2022,
-    dateDisplayEn: '2022 CE',
-    dateDisplayHi: '२०२२ ईस्वी',
-    epochEn: 'Unified Identity',
-    epochHi: 'आर्यवीरा का उद्घोष',
-    nameEn: 'Aaryaveera Launched',
-    nameHi: 'आर्यवीरा आंदोलन का उद्घोष',
-    yearsEn: '2022 · National Identity',
-    yearsHi: '२०२२ · राष्ट्रीय पहचान',
-    quoteEn: 'The flagship warrior brand — Aaryaveera — born as a unified identity for the whole movement.',
-    quoteHi: 'संपूर्ण शक्ति आंदोलन की पहचान के रूप में प्रमुख वीरांगना ब्रांड \u2018आर्यवीरा\u2019 का प्राकट्य।',
-    descEn: 'The flagship warrior brand — Aaryaveera — born as a unified identity for the whole movement. Combining ancient warrior heritage with modern discipline.',
-    descHi: 'संपूर्ण शक्ति आंदोलन की पहचान के रूप में प्रमुख वीरांगना ब्रांड \u2018आर्यवीरा\u2019 का प्राकट्य। प्राचीन शौर्य परंपरा और आधुनिक अनुशासन का अप्रतिम समन्वय।',
-    stats: [
-      { value: '100K+', labelEn: 'Aaryaveera Cadre', labelHi: 'आर्यवीरा वीरांगनाएं' },
+      { value: '10,000+', labelEn: 'Aaryaveera Cadre', labelHi: 'आर्यवीरा वीरांगनाएं' },
       { value: '15+', labelEn: 'Regional Wings', labelHi: 'प्रांतीय प्रभाग' },
-      { value: 'Dharma', labelEn: 'Worldview', labelHi: 'क्षात्र-धर्म' }
+      { value: '45+', labelEn: 'Monographs', labelHi: 'शोध मोनोग्राफ' }
     ],
     dossierEn: {
-      context: 'Unifying disparate martial and community chapters under one proud, evocative national banner.',
-      tactics: 'Uniform warrior curriculum, state leadership councils, and regional martial demonstrations.',
-      legacy: 'Mobilized over 100,000 active members proudly wearing the Aaryaveera identity.',
-      citation: 'National Convention Proceedings 2022; Aaryaveera Manifesto.'
+      context: 'Unifying disparate martial and community chapters under one proud, evocative national banner, supported by rigorous epigraphical research on Vedic heroines.',
+      tactics: 'Standardized warrior curriculum, regional martial demonstrations, and thought-leadership white papers.',
+      legacy: 'Mobilized over 10,000 active young women wearing the Aaryaveera badge with pride.',
+      citation: 'Aaryaveera National Manifesto (2023); Shakti Varta Epigraphical Series Vol. I.'
     },
     dossierHi: {
-      context: 'देशभर में चल रहे विभिन्न शिविरों व अध्यायों को एक राष्ट्रीय प्रेरणादायी मंच से जोड़ा गया।',
-      tactics: 'एकीकृत प्रशिक्षण पाठ्यक्रम, प्रांतीय नेतृत्व परिषदें एवं भव्य शौर्य प्रदर्शन।',
-      legacy: '१ लाख से अधिक वीरांगनाओं ने आर्यवीरा की स्वाभिमानी पहचान को आत्मसात किया।',
-      citation: 'राष्ट्रीय महाधिवेशन प्रस्ताव २०२२; आर्यवीरा घोषणा पत्र।'
+      context: 'देशभर में चल रहे विभिन्न शिविरों व अध्यायों को एक राष्ट्रीय प्रेरणादायी मंच से जोड़ा गया, साथ ही इतिहास के अनछुए नारी चरित्रों पर शोध प्रकाशित किया गया।',
+      tactics: 'एकीकृत प्रशिक्षण पाठ्यक्रम, प्रांतीय नेतृत्व परिषदें, एवं वैचारिक शोध सम्मेलन।',
+      legacy: 'हजारों वीरांगनाओं ने आर्यवीरा की स्वाभिमानी पहचान को आत्मसात किया।',
+      citation: 'राष्ट्रीय महाधिवेशन प्रस्ताव २०२३; शक्ति वार्ता शोध शृंखला खंड १।'
     },
     image: '/IMG_20260908_201306.jpg'
   },
@@ -226,32 +158,100 @@ const TIMELINE_MILESTONES: Milestone[] = [
     yearNumeric: 2024,
     dateDisplayEn: '2024 CE',
     dateDisplayHi: '२०२४ ईस्वी',
-    epochEn: 'National Stage',
-    epochHi: 'राष्ट्रीय पहचान एवं विस्तार',
-    nameEn: '400+ Schools & National Stage',
-    nameHi: '४००+ विद्यालय एवं राष्ट्रीय मंच',
-    yearsEn: '2024 · Pan-India Impact',
-    yearsHi: '२०२४ · अखिल भारतीय प्रभाव',
-    quoteEn: 'From village camps to national recognition — Shakti Sabha stands at the heart of India\'s women\'s movement.',
-    quoteHi: 'ग्रामीण शिविरों से लेकर राष्ट्रीय पहचान तक — शक्ति सभा भारत के महिला सशक्तिकरण के केंद्र में।',
-    descEn: 'From village camps to national recognition — Shakti Sabha stands at the heart of India\'s women\'s movement. Operating in 400+ schools and impacting lakhs of lives nationwide.',
-    descHi: 'ग्रामीण शिविरों से लेकर राष्ट्रीय पहचान तक — शक्ति सभा भारत के महिला सशक्तिकरण के केंद्र में। ४०० से अधिक विद्यालयों में सक्रिय और लाखों बहनों के जीवन में सकारात्मक परिवर्तन।',
+    epochEn: 'Institutional Sahyog',
+    epochHi: 'संस्थागत सहयोग एवं शैक्षणिक प्रसार',
+    nameEn: '150+ Schools & University Networks',
+    nameHi: '१५०+ शैक्षणिक संस्थान एवं सहभागिता',
+    yearsEn: '2024 · 18 Cities Across India',
+    yearsHi: '२०२४ · १८ भारतीय नगर',
+    quoteEn: 'Institutional alliances across colleges, schools, and corporate CSR collectives.',
+    quoteHi: 'विश्वविद्यालयों, विद्यालयों और कॉर्पोरेट सीएसआर नेटवर्क्स के साथ औपचारिक सहभागिता।',
+    descEn: 'Standardizing self-defense curriculums, crisis intervention workshops, and leadership certifications across 150+ schools and universities in 18 cities.',
+    descHi: '१८ नगरों के १५० से अधिक विद्यालयों और विश्वविद्यालयों में आत्मरक्षा पाठ्यक्रम, संकट निवारण कार्यशालाएं और नेतृत्व प्रमाणन का मानकीकरण।',
+    stats: [
+      { value: '150+', labelEn: 'Schools Covered', labelHi: 'संबद्ध विद्यालय' },
+      { value: '25,000+', labelEn: 'Students Impacted', labelHi: 'छात्राएं लाभान्वित' },
+      { value: '18', labelEn: 'Cities in India', labelHi: 'भारतीय नगर' }
+    ],
+    dossierEn: {
+      context: 'Institutionalizing martial arts and psychological safety modules directly into school and university calendars.',
+      tactics: 'Weekly self-defense periods, anti-bullying workshops, and certified female trainer cohorts.',
+      legacy: 'Directly reached 150+ institutions with 25,000+ students fortified with tangible life skills.',
+      citation: 'State Education Board Partnership Report 2024; Sahyog Institutional Roster.'
+    },
+    dossierHi: {
+      context: 'शैक्षणिक संस्थानों के वार्षिक कैलेंडर में आत्मरक्षा और मानसिक संबल को औपचारिक रूप से सम्मिलित किया गया।',
+      tactics: 'साप्ताहिक शारीरिक प्रशिक्षण, चरित्र निर्माण कक्षाएं एवं महिला प्रशिक्षक प्रमाणन।',
+      legacy: '१५०+ संस्थानों में २५,००० से अधिक छात्राओं को व्यावहारिक जीवन सुरक्षा कौशल से लैस किया गया।',
+      citation: 'शिक्षा विभाग सहभागिता प्रतिवेदन २०२४; सहयोग संस्थागत अभिलेख।'
+    },
+    image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&auto=format&fit=crop&q=80'
+  },
+  {
+    id: 'm2025',
+    yearNumeric: 2025,
+    dateDisplayEn: '2025 CE',
+    dateDisplayHi: '२०२५ ईस्वी',
+    epochEn: 'Frontline Expansion & Tribal Outreach',
+    epochHi: 'जनजातीय प्रसार एवं ग्राम्य सुरक्षा संबल',
+    nameEn: 'Tribal Outreach & Sanctuary Pods',
+    nameHi: 'जनजातीय अंचल एवं सुरक्षा संबल विस्तार',
+    yearsEn: '2025 · 200+ Villages',
+    yearsHi: '२०२५ · २००+ सुदूर ग्राम',
+    quoteEn: 'Deep rural mobilization, tribal corridor safety networks, and rapid survivor assistance.',
+    quoteHi: 'सुदूर जनजातीय अंचलों में सुरक्षा नेटवर्क, विधिक साक्षरता और पीड़ितों का सुरक्षित पुनर्वास।',
+    descEn: 'Expanding deep into rural corridors and tribal districts; establishing localized community support cells, legal literacy circles, and safely reintegrating 13 minors into education.',
+    descHi: 'सुदूर ग्रामीण और जनजातीय अंचलों तक विस्तार; स्थानीय सामुदायिक सुरक्षा प्रकोष्ठ, विधिक जागरूकता और बालिकाओं की शिक्षा में सुरक्षित पुनर्स्थापना।',
+    stats: [
+      { value: '200+', labelEn: 'Villages Active', labelHi: 'सक्रिय ग्राम' },
+      { value: '35,000+', labelEn: 'Cadets Prepared', labelHi: 'तैयार वीरांगनाएं' },
+      { value: '13', labelEn: 'Minors Reintegrated', labelHi: 'बालिकाएं पुनर्स्थापित' }
+    ],
+    dossierEn: {
+      context: 'Created dedicated rural and tribal task forces to provide physical safeguarding and counter coercion in under-resourced areas.',
+      tactics: 'Mobile training squads, panchayat partnerships, and coordinated child-protection interventions.',
+      legacy: 'Secured 200+ villages with active community watch pods and survivor reintegration networks.',
+      citation: 'Frontline Field Audit 2025; District Panchayat Commendation Archives.'
+    },
+    dossierHi: {
+      context: 'संसाधन-विहीन क्षेत्रों में बालिकाओं की शारीरिक सुरक्षा और शोषण निवारण हेतु समर्पित ग्रामीण कार्यदल की स्थापना।',
+      tactics: 'चल-प्रशिक्षण दल, पंचायत सहभागिता और बाल-संरक्षण समितियों के साथ समन्वय।',
+      legacy: '२००+ गांवों में सक्रिय वीरांगना सुरक्षा प्रकोष्ठ और सुरक्षित पुनर्वास तंत्र की स्थापना।',
+      citation: 'धरातलीय निरीक्षण प्रतिवेदन २०२५; जिला पंचायत सम्मान अभिलेख।'
+    },
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80'
+  },
+  {
+    id: 'm2026',
+    yearNumeric: 2026,
+    dateDisplayEn: '2026 CE',
+    dateDisplayHi: '२०२६ ईस्वी',
+    epochEn: 'National Sovereign Movement',
+    epochHi: 'अखिल भारतीय संप्रभु मंच (वर्तमान)',
+    nameEn: '400+ Schools & National Vanguard (Current)',
+    nameHi: '४००+ विद्यालय एवं राष्ट्रीय मंच (वर्तमान)',
+    yearsEn: '2026 · 28 Cities Across India',
+    yearsHi: '२०२६ · २८ भारतीय नगर',
+    quoteEn: 'From village mats to national sovereign power — Shakti Sabha stands at the heart of India\'s women\'s empowerment.',
+    quoteHi: 'ग्रामीण शिविरों से लेकर राष्ट्रीय पहचान तक — शक्ति सभा भारत के नारी सशक्तीकरण के केंद्र में।',
+    descEn: 'From village camps to national recognition — Shakti Sabha stands at the vanguard of women\'s sovereign dignity. Operating across 400+ schools, 28 cities, and impacting lakhs of lives nationwide in 2026.',
+    descHi: 'ग्रामीण शिविरों से लेकर राष्ट्रीय पहचान तक — शक्ति सभा भारत के महिला सशक्तिकरण के केंद्र में। २०२६ में ४०० से अधिक विद्यालयों, २८ नगरों में सक्रिय और लाखों बहनों के जीवन में स्वाभिमान की पुनर्स्थापना।',
     stats: [
       { value: '400+', labelEn: 'Schools Active', labelHi: 'सक्रिय विद्यालय' },
       { value: '50,000+', labelEn: 'Trained Girls', labelHi: 'प्रशिक्षित वीरांगनाएं' },
       { value: '28', labelEn: 'Cities in India', labelHi: 'भारतीय नगर' }
     ],
     dossierEn: {
-      context: 'Expanding the model across hundreds of institutions with formal accredited training modules.',
-      tactics: 'Standardized martial arts syllabus, self-defense masterclasses, and certified female trainers.',
-      legacy: 'Directly reached 400+ schools with 50,000+ girls equipped with tangible defense competencies.',
-      citation: 'Annual Report 2024; State Education Ministry commendation archives.'
+      context: 'Full-spectrum institutional scaling across hundreds of institutions with accredited warrior modules and 3D digital archival ecosystem.',
+      tactics: 'Standardized martial arts syllabus, self-defense masterclasses, peer counseling, and certified female trainers.',
+      legacy: 'Directly reached 400+ schools with 50,000+ girls equipped with tangible defense competencies and cognitive fortitude.',
+      citation: 'Annual Report 2026; Ministry of Women & Youth Affairs Recognition Archive.'
     },
     dossierHi: {
-      context: 'मान्यता प्राप्त प्रशिक्षण मॉड्यूल के साथ सैकड़ों शैक्षणिक संस्थानों तक इस अभियान का प्रसार।',
-      tactics: 'मानकीकृत आत्मरक्षा पाठ्यक्रम, मास्टरक्लास एवं महिला प्रशिक्षिकाओं का प्रमाणीकरण।',
+      context: 'मान्यता प्राप्त प्रशिक्षण मॉड्यूल, डिजिटल आर्काइव और व्यापक सहभागिता के साथ राष्ट्रीय स्तर पर प्रसार।',
+      tactics: 'मानकीकृत आत्मरक्षा पाठ्यक्रम, मास्टरक्लास, गोपनीय काउंसलिंग एवं महिला प्रशिक्षिकाओं का प्रमाणीकरण।',
       legacy: '४०० से अधिक विद्यालयों तक सीधी पहुंच और ५०,००० से अधिक बेटियों को व्यावहारिक सुरक्षा कौशल।',
-      citation: 'वार्षिक प्रतिवेदन २०२४; शिक्षा मंत्रालय सहभागिता अभिलेख।'
+      citation: 'वार्षिक प्रतिवेदन २०२६; महिला एवं युवा कल्याण सहभागिता अभिलेख।'
     },
     image: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&auto=format&fit=crop&q=80'
   }
@@ -260,7 +260,7 @@ const TIMELINE_MILESTONES: Milestone[] = [
 export default function HistoryPage() {
   const [lang, setLang] = useState<Lang>('en')
   const [activeDossier, setActiveDossier] = useState<Milestone | null>(null)
-  const [activeMilestoneId, setActiveMilestoneId] = useState<string>('m2012')
+  const [activeMilestoneId, setActiveMilestoneId] = useState<string>('m2019')
   const [maxReachedIndex, setMaxReachedIndex] = useState<number>(0)
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({})
   const [scrollProgress, setScrollProgress] = useState(0)
@@ -414,7 +414,7 @@ export default function HistoryPage() {
         <div className={h.headerInner}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <span className={h.brandPill}>
-              {lang === 'en' ? 'Historic Journey (2012–2024)' : 'ऐतिहासिक यात्रा (२०१२–२०२४)'}
+              {lang === 'en' ? 'Historic Journey (2019–2026)' : 'ऐतिहासिक यात्रा (२०१९–२०२६)'}
             </span>
           </div>
 
@@ -450,7 +450,7 @@ export default function HistoryPage() {
       {/* ── INTRO BANNER ─────────────────────────────────────────── */}
       <section className={h.introSection}>
         <span className={h.introBadge}>
-          {lang === 'en' ? 'Chronological Spine · 2012 to 2024' : 'ऐतिहासिक कालक्रम · २०१२ से २०२४ तक'}
+          {lang === 'en' ? 'Chronological Spine · 2019 to 2026' : 'ऐतिहासिक कालक्रम · २०१९ से २०२६ तक'}
         </span>
         <h1 className={h.introTitle}>
           {lang === 'en' ? 'Historical Journey of ' : 'शक्ति सभा का ऐतिहासिक '}
@@ -460,8 +460,8 @@ export default function HistoryPage() {
         </h1>
         <p className={h.introDesc}>
           {lang === 'en'
-            ? 'Tracing 7 years of unyielding courage and independent field action starting from 2019 to today’s pan-India movement. As you scroll, each milestone reveals its round photo, community accomplishments, and verified archival dossier.'
-            : '२०१४ के प्रथम ग्रामीण शिविरों से लेकर आज के अखिल भारतीय शक्ति आंदोलन तक १२ वर्षों की प्रेरक यात्रा। जैसे-जैसे आप स्क्रॉल करेंगे, वर्तमान वर्ष का चित्र, उपलब्धियाँ और पुरातात्विक अभिलेख स्वतः विस्तार लेंगे।'}
+            ? 'Tracing 7 years of unyielding courage and independent field action starting from 2019 to 2026. As you scroll, each milestone reveals its round photo, community accomplishments, and verified archival dossier.'
+            : '२०१९ के प्रथम शिविरों से लेकर आज के २०२६ के अखिल भारतीय शक्ति आंदोलन तक ७ वर्षों की प्रेरक यात्रा। जैसे-जैसे आप स्क्रॉल करेंगे, वर्तमान वर्ष का चित्र, उपलब्धियाँ और पुरातात्विक अभिलेख स्वतः विस्तार लेंगे।'}
         </p>
         <div className={h.scrollProgressPill}>
           <Compass size={14} color="#DC143C" />

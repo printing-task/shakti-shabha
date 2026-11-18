@@ -177,12 +177,12 @@ const PILLARS_IN_ACTION = [
 ]
 
 const TIMELINE = [
-  { year: '2012', title: 'Shakti Sabha Founded', desc: 'Born with a vision to revive the civilizational paradigm of Kshatra-Dharma, tactical preparedness, and cognitive sovereignty.' },
-  { year: '2014', title: 'First Mission Mardini Camp', desc: 'Inaugural residential camp blending Karate empty-hand combat with Lathi-Kaushal staff defense and freeze-response elimination.' },
-  { year: '2016', title: '100+ Schools Reached', desc: 'Expanded across rural corridors, residential hostels, and colleges for situational awareness and boundary management.' },
-  { year: '2018', title: 'Frontline Interventions Formalized', desc: 'Somatic trauma de-escalation, non-verbal behavioral observation, and statutory child-protection coordination.' },
-  { year: '2022', title: 'Aaryaveera Philosophy Codified', desc: 'The founder’s personal worldview (Aaryaveera) formally codified as the ideological foundation guiding all Shakti Sabha initiatives.' },
-  { year: '2024', title: '25,000+ Students Awakened', desc: 'Over 500 seminars, 2,000+ girls trained in self-defense, 13 minors safely reintegrated, and active tribal outreach operations.' },
+  { year: '2019', title: 'Shakti Sabha Founded', desc: 'Born with a sovereign vision to revive the civilizational paradigm of Kshatra-Dharma, tactical preparedness, and cognitive sovereignty.' },
+  { year: '2021', title: 'Mission Mardini & Shakti Bhava Launched', desc: 'Inaugural residential camp blending Karate empty-hand combat with Lathi-Kaushal staff defense and trauma recovery circles.' },
+  { year: '2023', title: 'Aaryaveera Philosophy Codified', desc: 'The founder’s personal worldview (Aaryaveera) formally codified as the ideological foundation guiding all Shakti Sabha initiatives.' },
+  { year: '2024', title: '150+ Schools Reached', desc: 'Expanded across rural corridors, residential hostels, and colleges for situational awareness and boundary management.' },
+  { year: '2025', title: 'Tribal Outreach & Frontline Pods', desc: 'Somatic trauma de-escalation, non-verbal behavioral observation, and statutory child-protection across 200+ villages.' },
+  { year: '2026', title: '50,000+ Girls & 400+ Schools (Current)', desc: 'Over 500 seminars, 2,000+ martial cadets, 13 minors safely reintegrated, and active youth leadership cohorts across 28 cities.' },
 ]
 
 const VALUES = [
@@ -668,16 +668,16 @@ export default function AboutPage() {
 
                     <div className={p.genesisMilestonesMini}>
                       <div className={p.miniMilestoneItem}>
-                        <span className={p.miniMilestoneBadge}>2012</span>
-                        <span>Shakti Sabha Founded in Pune</span>
+                        <span className={p.miniMilestoneBadge}>2019</span>
+                        <span>Shakti Sabha Founded · Independent Genesis</span>
                       </div>
                       <div className={p.miniMilestoneItem}>
-                        <span className={p.miniMilestoneBadge}>2014</span>
-                        <span>First Mission Mardini Residential Camp</span>
-                      </div>
-                      <div className={p.miniMilestoneItem}>
-                        <span className={p.miniMilestoneBadge}>2022</span>
+                        <span className={p.miniMilestoneBadge}>2023</span>
                         <span>Aaryaveera Movement Codified Pan-India</span>
+                      </div>
+                      <div className={p.miniMilestoneItem}>
+                        <span className={p.miniMilestoneBadge}>2026</span>
+                        <span>400+ Schools &amp; Sovereign Movement (Current)</span>
                       </div>
                     </div>
                   </div>

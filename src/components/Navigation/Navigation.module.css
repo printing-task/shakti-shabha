@@ -168,7 +168,8 @@
   opacity: 1;
 }
 
-.dropdownTriggerOpen {
+.dropdownTriggerOpen,
+.dropdownWrap:hover .dropdownTrigger {
   opacity: 1;
 }
 
@@ -179,7 +180,8 @@
   line-height: 1;
 }
 
-.chevronOpen {
+.chevronOpen,
+.dropdownWrap:hover .chevron {
   transform: rotate(180deg);
 }
 
@@ -222,7 +224,8 @@
   border-top: 1.2px solid rgba(255, 255, 255, 0.4);
 }
 
-.dropdownMenuOpen {
+.dropdownMenuOpen,
+.dropdownWrap:hover .dropdownMenu {
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
