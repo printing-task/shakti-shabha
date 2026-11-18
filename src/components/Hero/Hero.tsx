@@ -303,9 +303,18 @@ export default function Hero() {
       }, 100)
     }
 
+    // Scroll ONLY the horizontal pill container (never the outer window/viewport)
     if (window.innerWidth <= 900 && mobileBarRef.current) {
-      const btn = mobileBarRef.current.children[nextIdx] as HTMLElement | undefined
-      btn?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
+      const container = mobileBarRef.current
+      const btn = container.children[nextIdx] as HTMLElement | undefined
+      if (btn) {
+        const targetLeft =
+          btn.offsetLeft - container.clientWidth / 2 + btn.clientWidth / 2
+        container.scrollTo({
+          left: Math.max(0, targetLeft),
+          behavior: 'smooth'
+        })
+      }
     }
   }, [])
 
