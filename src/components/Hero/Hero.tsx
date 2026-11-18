@@ -390,37 +390,48 @@ export default function Hero() {
         <div className={s.heroGrid}>
           {/* Left Column Copy */}
           <div className={`${s.heroLeft} ${isSwitching ? s.heroLeftSwitching : ''}`}>
-            <p className={s.eyebrowSmall}>
-              <GoogleIcon name="military_tech" size={16} />
-              {activeSlide.eyebrow}
-            </p>
+            {/* Top Headline Block (Order 1 on mobile, before collage) */}
+            <div className={s.heroHeadBlock}>
+              <p className={s.eyebrowSmall}>
+                <GoogleIcon name="military_tech" size={16} />
+                {activeSlide.eyebrow}
+              </p>
 
-            <h1
-              className={s.mainHeadline}
-              dangerouslySetInnerHTML={{ __html: activeSlide.headlineHTML }}
-            />
+              <p className={s.heroIntroQuote}>
+                One sangam. A world of fearlessness and dignity.
+              </p>
 
-            <p className={s.heroSubcopy}>
-              A sovereign institutional paradigm for Indian women — integrating physical combat readiness, trauma recovery, and civilizational inquiry.
-            </p>
+              <h1
+                className={s.mainHeadline}
+                dangerouslySetInnerHTML={{ __html: activeSlide.headlineHTML }}
+              />
 
-            <div className={s.slideCounter}>
-              <div><span className={s.numActive}>{activeSlide.num}</span> / 05</div>
-              <span className={s.dividerLine} />
-              <span>{activeSlide.category}</span>
+              <p className={s.heroSubcopy}>
+                In your hands. On the ground.<br />
+                Across 200+ villages. Awakening the Kshatra spirit.
+              </p>
             </div>
 
-            <h2 className={s.slideTitle}>{activeSlide.title}</h2>
-            <p className={s.slideDesc}>{activeSlide.desc}</p>
+            {/* Slide Details Block (Order 3 on mobile, below collage) */}
+            <div className={s.heroSlideBlock}>
+              <div className={s.slideCounter}>
+                <div><span className={s.numActive}>{activeSlide.num}</span> / 05</div>
+                <span className={s.dividerLine} />
+                <span>{activeSlide.category}</span>
+              </div>
 
-            <div className={s.ctaRow}>
-              <Link to={activeSlide.ctaLink} className={s.btnPrimary}>
-                <span>{activeSlide.cta}</span>
-                <span>↗</span>
-              </Link>
-              <Link to={activeSlide.secLink} className={s.btnSecondary}>
-                {activeSlide.secCta}
-              </Link>
+              <h2 className={s.slideTitle}>{activeSlide.title}</h2>
+              <p className={s.slideDesc}>{activeSlide.desc}</p>
+
+              <div className={s.ctaRow}>
+                <Link to={activeSlide.ctaLink} className={s.btnPrimary}>
+                  <span>{activeSlide.cta}</span>
+                  <span>↗</span>
+                </Link>
+                <Link to={activeSlide.secLink} className={s.btnSecondary}>
+                  {activeSlide.secCta}
+                </Link>
+              </div>
             </div>
           </div>
 

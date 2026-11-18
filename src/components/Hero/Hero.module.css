@@ -200,6 +200,17 @@
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* Mobile sub-groups inside heroLeft (desktop: no effect, just display normally) */
+.heroHeadBlock,
+.heroSlideBlock {
+  display: contents; /* On desktop, flatten — these are invisible wrappers */
+}
+
+/* Mobile intro quote — hidden on desktop */
+.heroIntroQuote {
+  display: none;
+}
+
 .heroLeftSwitching {
   opacity: 0;
   transform: translateY(12px);
@@ -1011,33 +1022,74 @@
     opacity: 0.03;
   }
 
-  /* 3. Hero Content Grid & Proportionate Compact Typography */
+  /* 3. Hero Content Grid — mobile: flat flex column with ordered sub-blocks */
+  /* heroLeft becomes display:contents so its children participate in heroGrid flex flow */
   .heroGrid {
-    grid-template-columns: 1fr;
-    gap: 4px;
-    margin: 0;
-    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: 0;
+    margin: 0;
+    flex: 1;
+  }
+
+  .heroLeft {
+    display: contents; /* Flatten: children become direct flex children of heroGrid */
+  }
+
+  /* Order 1 — headline / eyebrow / subcopy (before the collage) */
+  .heroHeadBlock {
+    display: flex;
+    flex-direction: column;
+    order: 1;
+  }
+
+  /* Order 2 — card collage stage (between head and slide info) */
+  .collageStage {
+    order: 2;
+  }
+
+  /* Order 3 — slide counter, title, desc, CTAs (below the collage) */
+  .heroSlideBlock {
+    display: flex;
+    flex-direction: column;
+    order: 3;
+  }
+
+  /* Order 4 — 5-pillars switcher bar */
+  .mobilePillarsBar {
+    order: 4;
+  }
+
+  /* ---- Typography compact sizing ---- */
+  .heroIntroQuote {
+    display: block;
+    font-size: 10px;
+    line-height: 1.5;
+    color: var(--hero-muted, #6b6b6a);
+    margin-bottom: 4px;
+    font-weight: 500;
+    font-style: normal;
   }
 
   .eyebrowSmall {
     font-size: 8px;
     padding: 2px 8px;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     gap: 4px;
   }
 
   .mainHeadline {
-    font-size: clamp(17px, 4.6vw, 21px);
-    line-height: 1.15;
-    letter-spacing: -0.2px;
-    margin-bottom: 2px;
+    font-size: clamp(22px, 6vw, 28px);
+    line-height: 1.1;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
   }
 
   .heroSubcopy {
-    display: none; /* Hide duplicate subcopy on small mobile screens to prevent overflow */
+    font-size: 10.5px;
+    line-height: 1.55;
+    margin-bottom: 0;
+    display: block;
   }
 
   .slideCounter {
@@ -1045,6 +1097,7 @@
     letter-spacing: 1px;
     margin-bottom: 2px;
     gap: 6px;
+    margin-top: 6px;
   }
 
   .dividerLine {
@@ -1053,7 +1106,7 @@
   }
 
   .slideTitle {
-    font-size: clamp(13px, 3.5vw, 15px);
+    font-size: clamp(14px, 3.8vw, 17px);
     line-height: 1.2;
     margin-bottom: 2px;
   }
@@ -1062,7 +1115,7 @@
     font-size: 10px;
     line-height: 1.38;
     max-width: 100%;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     color: var(--hero-muted, #4b5563);
   }
 
@@ -1073,7 +1126,7 @@
     gap: 6px;
     align-items: center;
     width: 100%;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
   }
 
   .btnPrimary {
@@ -1102,12 +1155,12 @@
     justify-content: center;
   }
 
-  /* 5. Scaled-Down Spotlight Card (Centered, Perfectly Sized) */
+  /* 5. Collage Stage — wide, prominent, centered between headline and slide info */
   .collageStage {
-    height: 135px;
+    height: 165px;
     width: 100%;
-    max-width: 270px;
-    margin: 2px auto 0;
+    max-width: 340px;
+    margin: 6px auto;
     position: relative;
     transform: none;
     overflow: visible;
@@ -1122,32 +1175,67 @@
     display: none;
   }
 
-  /* Scale spotlight card down so it feels elegant and balanced */
+  /* CENTER: bigger, tilted — the "hello." card prominent in the stage */
   .orbitItem[data-slot="center"] {
     position: absolute;
     left: 50% !important;
     top: 50% !important;
-    transform: translate(-50%, -50%) scale(0.68) !important;
+    transform: translate(-50%, -55%) scale(0.72) rotate(-4deg) !important;
     z-index: 10;
     opacity: 1 !important;
-    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.14));
+    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.2));
   }
 
-  /* Hide inactive cards on mobile to keep interface focused and clear */
-  .orbitItem[data-slot="bottom-left"],
-  .orbitItem[data-slot="top-left"],
-  .orbitItem[data-slot="top-right"],
+  /* Show orbital cards as small floating items around the center card */
+  .orbitItem[data-slot="bottom-left"] {
+    position: absolute !important;
+    left: 2% !important;
+    top: 60% !important;
+    transform: translate(0, 0) scale(0.38) rotate(-10deg) !important;
+    z-index: 5;
+    opacity: 0.88 !important;
+    pointer-events: auto !important;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12));
+  }
+
+  .orbitItem[data-slot="top-left"] {
+    position: absolute !important;
+    left: 0% !important;
+    top: 2% !important;
+    transform: translate(0, 0) scale(0.38) rotate(-8deg) !important;
+    z-index: 4;
+    opacity: 0.85 !important;
+    pointer-events: auto !important;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  }
+
+  .orbitItem[data-slot="top-right"] {
+    position: absolute !important;
+    right: 0% !important;
+    left: auto !important;
+    top: 4% !important;
+    transform: translate(0, 0) scale(0.38) rotate(10deg) !important;
+    z-index: 4;
+    opacity: 0.85 !important;
+    pointer-events: auto !important;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  }
+
   .orbitItem[data-slot="bottom-right"] {
-    opacity: 0 !important;
-    pointer-events: none !important;
-    transform: translate(-50%, -50%) scale(0.3) !important;
-    left: 50% !important;
-    top: 50% !important;
+    position: absolute !important;
+    right: 0% !important;
+    left: auto !important;
+    top: 60% !important;
+    transform: translate(0, 0) scale(0.38) rotate(-8deg) !important;
+    z-index: 5;
+    opacity: 0.88 !important;
+    pointer-events: auto !important;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12));
   }
 
   .centerSpotlightMeta {
     top: auto;
-    bottom: -4px;
+    bottom: 2px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 8px;
