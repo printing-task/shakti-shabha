@@ -6,6 +6,8 @@
 .heroPinWrapper {
   position: relative;
   width: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
   background-color: var(--hero-bg, #f5f2eb);
 }
 
@@ -741,10 +743,16 @@
 }
 
 @media (max-width: 900px) {
+  .heroStudio,
+  .heroInner {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: clip;
+  }
+
   .heroStudio {
     height: auto;
     min-height: auto;
-    overflow-x: hidden;
     overflow-y: visible;
   }
 
