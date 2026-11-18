@@ -59,7 +59,6 @@
   opacity: 0.22;
 }
 
-/* Transparent atmospheric overlay with subtle edge blending */
 .heroBgOverlay {
   position: absolute;
   inset: 0;
@@ -200,13 +199,11 @@
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Mobile sub-groups inside heroLeft (desktop: no effect, just display normally) */
 .heroHeadBlock,
 .heroSlideBlock {
-  display: contents; /* On desktop, flatten — these are invisible wrappers */
+  display: contents;
 }
 
-/* Mobile intro quote — hidden on desktop */
 .heroIntroQuote {
   display: none;
 }
@@ -466,7 +463,6 @@
   will-change: transform;
 }
 
-/* Continuous subtle float inside each item */
 .orbitFloat {
   animation: floatZigZag 4.5s ease-in-out infinite alternate;
 }
@@ -482,7 +478,7 @@
   100% { transform: translate(-5px, 5px) rotate(-1.5deg); }
 }
 
-/* Slot 0: ACTIVE CENTER SPOTLIGHT */
+/* Desktop Slots */
 .orbitItem[data-slot="center"] {
   transform: translate(280px, 85px) scale(1.05) rotate(-5deg);
   z-index: 10;
@@ -490,7 +486,6 @@
   filter: drop-shadow(0 24px 38px rgba(0, 0, 0, 0.22));
 }
 
-/* Slot 1: BOTTOM LEFT */
 .orbitItem[data-slot="bottom-left"] {
   transform: translate(60px, 280px) scale(0.60) rotate(-11deg);
   z-index: 5;
@@ -498,7 +493,6 @@
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.14));
 }
 
-/* Slot 2: TOP LEFT */
 .orbitItem[data-slot="top-left"] {
   transform: translate(110px, 20px) scale(0.58) rotate(-8deg);
   z-index: 4;
@@ -506,7 +500,6 @@
   filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.12));
 }
 
-/* Slot 3: TOP RIGHT */
 .orbitItem[data-slot="top-right"] {
   transform: translate(550px, 16px) scale(0.60) rotate(10deg);
   z-index: 4;
@@ -514,7 +507,6 @@
   filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.12));
 }
 
-/* Slot 4: BOTTOM RIGHT */
 .orbitItem[data-slot="bottom-right"] {
   transform: translate(550px, 275px) scale(0.60) rotate(-7deg);
   z-index: 5;
@@ -522,7 +514,6 @@
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.14));
 }
 
-/* Caption under non-center orbiting cards */
 .miniOrbitCaption {
   text-align: center;
   margin-top: 10px;
@@ -538,8 +529,6 @@
 }
 
 /* ==================== THE 5 SHAKTI SABHA CARDS ==================== */
-
-/* CARD 0: MISSION MARDINI (Tactical Combat) */
 .cardMardini {
   width: 250px;
   background: #fdfaf6;
@@ -621,7 +610,6 @@
   font-weight: 700;
 }
 
-/* CARD 1: SHAKTI BHAVA (Confidential Psychological Sanctuary) */
 .cardBhava {
   width: 250px;
   background: #f4faf6;
@@ -643,20 +631,6 @@
   z-index: -1;
 }
 
-.bhavaLotusBadge {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #166534;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 12px;
-  box-shadow: 0 6px 16px rgba(22, 101, 52, 0.35);
-}
-
-/* CARD 2: SHAKTI VARTA (Civilizational Research & Dialogue) */
 .cardVarta {
   width: 250px;
   background: #f5f7fe;
@@ -692,7 +666,6 @@
   color: var(--hero-accent, #3730a3);
 }
 
-/* CARD 3: AARYAVEERA (Founder Philosophy & Leadership) */
 .cardAaryaveera {
   width: 250px;
   background: #181714;
@@ -728,11 +701,6 @@
   color: #dc143c;
 }
 
-.aaryaveeraGoldTitle {
-  color: #fbbf24 !important;
-}
-
-/* CARD 4: SAHYOG (Institutional Alliances & Grassroots Action) */
 .cardSahyog {
   width: 250px;
   background: #fbf5ee;
@@ -874,7 +842,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 12px;
+  padding-top: 10px;
   font-size: 11px;
   color: var(--hero-muted, #78756e);
   font-weight: 600;
@@ -931,42 +899,35 @@
 }
 
 @media (max-width: 900px) {
-  .heroInner {
-    padding: calc(54px + 16px) 24px 16px;
-    min-height: calc(100svh - 54px);
-  }
-}
-
-@media (max-width: 768px) {
+  /* Allow natural vertical scrolling on mobile without clipping or cramping */
   .heroStudio {
-    height: 100svh;
-    min-height: 100svh;
+    height: auto;
+    min-height: auto;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
 
   .heroInner {
-    padding: calc(54px + 8px) 14px 8px;
-    min-height: calc(100svh - 54px);
-    justify-content: space-between;
+    padding: 74px 18px 28px;
+    min-height: auto;
+    justify-content: flex-start;
   }
 
-  /* 1. Top Metadata Bar Clearance & Compact Sizing */
+  /* 1. Top Metadata Bar */
   .studioMeta {
-    font-size: 8.5px;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
+    font-size: 9.5px;
+    letter-spacing: 1.4px;
+    margin-bottom: 14px;
     width: 100%;
   }
 
   .studioMetaLeft {
-    gap: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    gap: 7px;
   }
 
   .redDot {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
   }
 
   .studioMetaDesktop {
@@ -975,32 +936,31 @@
 
   .studioMetaMobile {
     display: inline;
-    font-size: 8.5px;
+    font-size: 9.5px;
     font-weight: 800;
   }
 
   .studioMetaRight {
-    gap: 6px;
-    font-size: 8px;
-    white-space: nowrap;
+    gap: 8px;
+    font-size: 9px;
   }
 
   .liveTag {
-    padding: 2px 7px;
-    font-size: 7.5px;
+    padding: 2.5px 8px;
+    font-size: 8px;
   }
 
-  /* 2. Background Contrast: high opacity overlay for dark, crisp typography */
+  /* 2. Background Contrast */
   .heroBgLayerActive {
-    opacity: 0.12 !important;
+    opacity: 0.14 !important;
   }
 
   .heroBgOverlay {
     background: 
       radial-gradient(
         ellipse 100% 100% at 50% 50%,
-        rgba(var(--hero-bg-rgb, 247, 244, 238), 0.92) 0%,
-        rgba(var(--hero-bg-rgb, 247, 244, 238), 0.97) 80%,
+        rgba(var(--hero-bg-rgb, 247, 244, 238), 0.90) 0%,
+        rgba(var(--hero-bg-rgb, 247, 244, 238), 0.96) 80%,
         var(--hero-bg, #f7f4ee) 100%
       ) !important;
   }
@@ -1009,165 +969,103 @@
     background: 
       radial-gradient(
         ellipse 100% 100% at 50% 50%,
-        rgba(20, 19, 17, 0.92) 0%,
-        rgba(20, 19, 17, 0.97) 80%,
+        rgba(20, 19, 17, 0.90) 0%,
+        rgba(20, 19, 17, 0.96) 80%,
         #141311 100%
       ) !important;
   }
 
   .watermark {
-    font-size: clamp(32px, 10vw, 48px);
-    bottom: 4px;
-    left: 4px;
-    opacity: 0.03;
+    font-size: clamp(64px, 18vw, 96px);
+    bottom: 90px;
+    left: 10px;
+    opacity: 0.04;
   }
 
-  /* 3. Hero Content Grid — mobile: flat flex column with ordered sub-blocks */
-  /* heroLeft becomes display:contents so its children participate in heroGrid flex flow */
+  /* 3. Vertical Flow Order (Headline -> Orbital Stage -> Slide Details -> Pillar Switcher) */
   .heroGrid {
     display: flex;
     flex-direction: column;
     gap: 0;
     margin: 0;
-    flex: 1;
   }
 
   .heroLeft {
-    display: contents; /* Flatten: children become direct flex children of heroGrid */
+    display: contents;
   }
 
-  /* Order 1 — headline / eyebrow / subcopy (before the collage) */
   .heroHeadBlock {
     display: flex;
     flex-direction: column;
     order: 1;
   }
 
-  /* Order 2 — card collage stage (between head and slide info) */
   .collageStage {
     order: 2;
   }
 
-  /* Order 3 — slide counter, title, desc, CTAs (below the collage) */
   .heroSlideBlock {
     display: flex;
     flex-direction: column;
     order: 3;
   }
 
-  /* Order 4 — 5-pillars switcher bar */
   .mobilePillarsBar {
     order: 4;
   }
 
-  /* ---- Typography compact sizing ---- */
-  .heroIntroQuote {
-    display: block;
-    font-size: 10px;
-    line-height: 1.5;
-    color: var(--hero-muted, #6b6b6a);
-    margin-bottom: 4px;
-    font-weight: 500;
-    font-style: normal;
+  /* Hide Desktop Bottom Tab Bar on Mobile */
+  .heroBottom {
+    display: none;
   }
 
+  /* ---- Generous, Readable Mobile Typography ---- */
   .eyebrowSmall {
-    font-size: 8px;
-    padding: 2px 8px;
-    margin-bottom: 3px;
-    gap: 4px;
+    font-size: 9.5px;
+    padding: 4px 10px;
+    margin-bottom: 10px;
+    gap: 6px;
+  }
+
+  .heroIntroQuote {
+    display: block;
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--hero-muted, #6b6b6a);
+    margin-bottom: 8px;
+    font-weight: 500;
   }
 
   .mainHeadline {
-    font-size: clamp(22px, 6vw, 28px);
-    line-height: 1.1;
-    letter-spacing: -0.3px;
-    margin-bottom: 4px;
+    font-size: clamp(32px, 8.8vw, 42px);
+    line-height: 1.08;
+    letter-spacing: -0.6px;
+    margin-bottom: 12px;
   }
 
   .heroSubcopy {
-    font-size: 10.5px;
-    line-height: 1.55;
-    margin-bottom: 0;
+    font-size: 12.5px;
+    line-height: 1.6;
+    margin-bottom: 10px;
     display: block;
   }
 
-  .slideCounter {
-    font-size: 8px;
-    letter-spacing: 1px;
-    margin-bottom: 2px;
-    gap: 6px;
-    margin-top: 6px;
-  }
-
-  .dividerLine {
-    width: 14px;
-    height: 1px;
-  }
-
-  .slideTitle {
-    font-size: clamp(14px, 3.8vw, 17px);
-    line-height: 1.2;
-    margin-bottom: 2px;
-  }
-
-  .slideDesc {
-    font-size: 10px;
-    line-height: 1.38;
-    max-width: 100%;
-    margin-bottom: 6px;
-    color: var(--hero-muted, #4b5563);
-  }
-
-  /* 4. Compact, Proportionate CTA Buttons */
-  .ctaRow {
-    display: flex;
-    flex-direction: row;
-    gap: 6px;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 4px;
-  }
-
-  .btnPrimary {
-    flex: 1;
-    min-width: 0;
-    padding: 7px 12px;
-    font-size: 10.5px;
-    justify-content: center;
-    white-space: nowrap;
-    border-radius: 999px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    gap: 5px;
-  }
-
-  .btnSecondary {
-    padding: 6.5px 10px;
-    font-size: 10px;
-    white-space: nowrap;
-    border: 1px solid var(--hero-border, rgba(0, 0, 0, 0.15));
-    background: var(--hero-tabs-bg, rgba(255, 255, 255, 0.7));
-    border-radius: 999px;
-    font-weight: 700;
-    color: var(--hero-text, #1c1c1a);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* 5. Collage Stage — wide, prominent, centered between headline and slide info */
+  /* 4. Spacious, Prominent Orbital Stage (Matching Reference Proportions) */
   .collageStage {
-    height: 165px;
-    width: 100%;
-    max-width: 340px;
-    margin: 6px auto;
+    height: 310px;
+    width: 340px;
+    max-width: 100%;
+    margin: 8px auto 12px;
     position: relative;
     transform: none;
     overflow: visible;
   }
 
   .orbitSvg {
-    display: none; /* Hide desktop orbital track rings */
+    display: block;
+    transform: scale(0.74);
+    transform-origin: center center;
+    opacity: 0.65;
   }
 
   .estLabel,
@@ -1175,107 +1073,165 @@
     display: none;
   }
 
-  /* CENTER: bigger, tilted — the "hello." card prominent in the stage */
+  /* Center Active Card: Large, tilted, prominent in center */
   .orbitItem[data-slot="center"] {
-    position: absolute;
+    position: absolute !important;
     left: 50% !important;
-    top: 50% !important;
-    transform: translate(-50%, -55%) scale(0.72) rotate(-4deg) !important;
+    top: 46% !important;
+    transform: translate(-50%, -50%) scale(0.88) rotate(-5deg) !important;
     z-index: 10;
     opacity: 1 !important;
-    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.2));
   }
 
-  /* Show orbital cards as small floating items around the center card */
-  .orbitItem[data-slot="bottom-left"] {
-    position: absolute !important;
-    left: 2% !important;
-    top: 60% !important;
-    transform: translate(0, 0) scale(0.38) rotate(-10deg) !important;
-    z-index: 5;
-    opacity: 0.88 !important;
-    pointer-events: auto !important;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12));
-  }
-
+  /* 4 Orbiting Satellite Cards Positioned Cleanly Around Center */
   .orbitItem[data-slot="top-left"] {
     position: absolute !important;
-    left: 0% !important;
-    top: 2% !important;
-    transform: translate(0, 0) scale(0.38) rotate(-8deg) !important;
+    left: -34px !important;
+    top: 4px !important;
+    transform: translate(0, 0) scale(0.45) rotate(-9deg) !important;
     z-index: 4;
-    opacity: 0.85 !important;
-    pointer-events: auto !important;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+    opacity: 0.88 !important;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.12));
   }
 
   .orbitItem[data-slot="top-right"] {
     position: absolute !important;
-    right: 0% !important;
+    right: -34px !important;
     left: auto !important;
-    top: 4% !important;
-    transform: translate(0, 0) scale(0.38) rotate(10deg) !important;
+    top: 6px !important;
+    transform: translate(0, 0) scale(0.45) rotate(10deg) !important;
     z-index: 4;
-    opacity: 0.85 !important;
-    pointer-events: auto !important;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+    opacity: 0.88 !important;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.12));
+  }
+
+  .orbitItem[data-slot="bottom-left"] {
+    position: absolute !important;
+    left: -30px !important;
+    top: 168px !important;
+    transform: translate(0, 0) scale(0.46) rotate(-12deg) !important;
+    z-index: 5;
+    opacity: 0.9 !important;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.14));
   }
 
   .orbitItem[data-slot="bottom-right"] {
     position: absolute !important;
-    right: 0% !important;
+    right: -30px !important;
     left: auto !important;
-    top: 60% !important;
-    transform: translate(0, 0) scale(0.38) rotate(-8deg) !important;
+    top: 168px !important;
+    transform: translate(0, 0) scale(0.46) rotate(-8deg) !important;
     z-index: 5;
-    opacity: 0.88 !important;
-    pointer-events: auto !important;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12));
+    opacity: 0.9 !important;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.14));
   }
 
   .centerSpotlightMeta {
     top: auto;
-    bottom: 2px;
+    bottom: 6px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 8px;
-    padding: 2px 8px;
-    white-space: nowrap;
+    padding: 5px 14px;
   }
 
   .spotlightTag {
-    font-size: 8.5px;
-    gap: 3px;
+    font-size: 11px;
+    gap: 5px;
   }
 
   .spotlightSub {
+    display: block;
+    font-size: 9.5px;
+  }
+
+  /* 5. Slide Details Below Collage */
+  .slideCounter {
+    font-size: 10px;
+    letter-spacing: 1.4px;
+    margin-top: 6px;
+    margin-bottom: 8px;
+    gap: 8px;
+  }
+
+  .dividerLine {
+    width: 22px;
+    height: 1.5px;
+  }
+
+  .slideTitle {
+    font-size: 20px;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+
+  .slideDesc {
+    font-size: 12.5px;
+    line-height: 1.6;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  /* 6. Touch-Friendly CTA Row */
+  .ctaRow {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .btnPrimary {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 18px;
+    font-size: 12.5px;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+  .btnSecondary {
+    padding: 11px 16px;
+    font-size: 12px;
+    white-space: nowrap;
+    border: 1px solid var(--hero-border, rgba(0, 0, 0, 0.15));
+    background: var(--hero-tabs-bg, rgba(255, 255, 255, 0.75));
+    border-radius: 999px;
+    font-weight: 700;
+    color: var(--hero-text, #1c1c1a);
+  }
+
+  /* 7. Mobile 5-Pillars Quick Switcher Bar */
+  .mobilePillarsBar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 0 4px;
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    z-index: 15;
+  }
+
+  .mobilePillarsBar::-webkit-scrollbar {
     display: none;
   }
 
-  /* 6. Compact Mobile 5-Pillars Quick Switcher */
-  .mobilePillarsBar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    margin-top: 4px;
-    padding: 2px 0;
-    width: 100%;
-    z-index: 15;
-    flex-wrap: nowrap;
-  }
-
   .mobilePillarBtn {
-    background: var(--hero-tabs-bg, rgba(255, 255, 255, 0.65));
-    border: 1px solid var(--hero-border, rgba(0, 0, 0, 0.1));
+    flex: 0 0 auto;
+    background: var(--hero-tabs-bg, rgba(255, 255, 255, 0.7));
+    border: 1px solid var(--hero-border, rgba(0, 0, 0, 0.12));
     border-radius: 999px;
-    padding: 3px 7px;
-    font-size: 8px;
+    padding: 7px 12px;
+    font-size: 11px;
     font-weight: 700;
     color: var(--hero-muted, #555);
     display: inline-flex;
     align-items: center;
-    gap: 3px;
+    gap: 5px;
     cursor: pointer;
     transition: all 0.25s ease;
     white-space: nowrap;
@@ -1285,48 +1241,32 @@
     background: var(--hero-accent, #dc143c) !important;
     color: var(--hero-btn-text, #ffffff) !important;
     border-color: var(--hero-accent, #dc143c) !important;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14);
-    transform: scale(1.04);
-  }
-
-  .mobilePillarDot {
-    width: 3.5px;
-    height: 3.5px;
-    border-radius: 50%;
-    background: currentColor;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
   }
 
   .mobilePillarNum {
-    font-size: 7.5px;
-    opacity: 0.9;
+    font-size: 10px;
+    opacity: 0.85;
     font-weight: 800;
   }
 
   .mobilePillarTitle {
-    font-size: 8px;
+    font-size: 11px;
   }
 }
 
-@media (max-width: 400px) {
-  .studioMetaRight span:last-child {
-    display: none;
+@media (max-width: 380px) {
+  .collageStage {
+    transform: scale(0.92);
+    transform-origin: top center;
+    margin-bottom: 0;
   }
-  .mainHeadline {
-    font-size: 17px;
+  .ctaRow {
+    flex-wrap: wrap;
   }
-  .mobilePillarsBar {
-    gap: 3px;
-  }
-  .mobilePillarBtn {
-    padding: 2.5px 5px;
-    font-size: 7.5px;
-  }
-  .mobilePillarTitle {
-    display: none; /* Only show '01', '02', '03', '04', '05' on screens < 400px */
-  }
-  .mobilePillarNum {
-    font-size: 8px;
-    opacity: 1;
-    font-weight: 800;
+  .btnPrimary,
+  .btnSecondary {
+    width: 100%;
+    justify-content: center;
   }
 }
