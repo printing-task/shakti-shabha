@@ -343,9 +343,11 @@
   color: #FFFFFF;
 }
 .streamBtnMardini:hover {
-  background: #B01030;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: #0f0e0c !important;
+  font-weight: 700;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(220, 20, 60, 0.35);
+  box-shadow: 0 8px 22px rgba(245, 158, 11, 0.42);
 }
 
 .streamBtnBhava {
@@ -353,9 +355,11 @@
   color: #FFFFFF;
 }
 .streamBtnBhava:hover {
-  background: #14532D;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: #0f0e0c !important;
+  font-weight: 700;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(22, 101, 52, 0.35);
+  box-shadow: 0 8px 22px rgba(245, 158, 11, 0.42);
 }
 
 .streamBtnVarta {
@@ -363,9 +367,11 @@
   color: #FFFFFF;
 }
 .streamBtnVarta:hover {
-  background: #3730A3;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: #0f0e0c !important;
+  font-weight: 700;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(67, 56, 202, 0.35);
+  box-shadow: 0 8px 22px rgba(245, 158, 11, 0.42);
 }
 
 /* ── CONVERGENCE SECTION ────────────────────────────────── */
