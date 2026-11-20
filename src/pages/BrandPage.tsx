@@ -172,13 +172,13 @@ export default function BrandPage() {
             </div>
 
             <div className={p.typeBlock}>
-              <div className={p.typeLabel}>Body — Outfit</div>
+              <div className={p.typeLabel}>Body — DM Sans</div>
               <div className={p.typeUsage}>Body copy, descriptions, UI labels, navigation</div>
-              <div className={p.typeSample} style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(0.9rem, 1.2vw, 1.05rem)', fontWeight: 400, color: '#444444', lineHeight: 1.8 }}>
+              <div className={p.typeSample} style={{ fontFamily: "var(--sans, 'DM Sans', Arial, sans-serif)", fontSize: 'clamp(0.9rem, 1.2vw, 1.05rem)', fontWeight: 400, color: '#444444', lineHeight: 1.8 }}>
                 Shakti Sabha is a movement rooted in 7 years of on-ground transformation (starting from 2019). Every word we publish is backed by real stories, real training, and real change — from the villages of Maharashtra to the national stage.
               </div>
               <div className={p.typeMeta}>
-                <span>Weights: 300, 400, 500, 600, 700</span>
+                <span>Weights: 400, 500, 600, 700</span>
                 <span>Use case: All body and UI text</span>
               </div>
             </div>

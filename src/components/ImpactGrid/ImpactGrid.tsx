@@ -111,7 +111,7 @@ export default function ImpactGrid() {
             style={{
               color: '#bd1834',
               textDecoration: 'none',
-              fontFamily: "var(--btn-font, 'Poppins', sans-serif)",
+              fontFamily: "var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif))",
               fontSize: '0.82rem',
               display: 'inline-flex',
               alignItems: 'center',

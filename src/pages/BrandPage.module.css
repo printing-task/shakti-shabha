@@ -6,7 +6,7 @@
   min-height: 100vh;
   background: #FFFFFF;
   color: #111111;
-  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-family: var(--font-body, var(--sans, 'DM Sans', Arial, sans-serif));
   padding-top: 0;
 }
 
@@ -336,7 +336,7 @@
   color: #FFFFFF;
   border: none;
   border-radius: 9999px;
-  font-family: var(--btn-font, 'Poppins', sans-serif);
+  font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -357,7 +357,7 @@
   color: #bd1834;
   border: 1.5px solid #bd1834;
   border-radius: 9999px;
-  font-family: var(--btn-font, 'Poppins', sans-serif);
+  font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -377,7 +377,7 @@
   color: #555555;
   border: none;
   border-radius: 9999px;
-  font-family: var(--btn-font, 'Poppins', sans-serif);
+  font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -398,7 +398,7 @@
   color: #0A0A0B;
   border: none;
   border-radius: 9999px;
-  font-family: var(--btn-font, 'Poppins', sans-serif);
+  font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;

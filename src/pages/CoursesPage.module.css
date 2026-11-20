@@ -24,7 +24,7 @@
   color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
   margin-bottom: 1rem;
-  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-family: var(--font-body, var(--sans, 'DM Sans', Arial, sans-serif));
   font-weight: 500;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -620,7 +620,7 @@
   background: #F9FAFB;
   border: 1px solid #D1D5DB;
   color: #374151;
-  font-family: var(--btn-font, 'Poppins', sans-serif);
+  font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.78rem;
   font-weight: 600;
   padding: 0.55rem 1.25rem;
@@ -639,7 +639,7 @@
 }
 
 .enrollBtn {
-  font-family: var(--btn-font, 'Poppins', sans-serif);
+  font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
   background: #FFFFFF;
   color: #111827;
   border: 1px solid #D1D5DB;
@@ -710,7 +710,7 @@
   border: none;
   padding: 0;
   margin: 0.1rem auto 0.25rem 0 !important;
-  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-family: var(--font-primary, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.8rem;
   font-weight: 600;
   color: #bd1834;
@@ -934,7 +934,7 @@
   border: 1px solid #D1D5DB;
   background: #FFFFFF;
   color: #111827;
-  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-family: var(--font-primary, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.84rem;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -959,7 +959,7 @@
   color: #FFFFFF;
   border: none;
   border-radius: 8px;
-  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-family: var(--font-primary, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.84rem;
   font-weight: 600;
   cursor: pointer;

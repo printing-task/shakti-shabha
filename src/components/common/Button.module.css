@@ -7,7 +7,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--btn-font, 'Poppins', sans-serif);
+  font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: var(--btn-font-size, 0.78rem);
   font-weight: 600;
   text-transform: uppercase;

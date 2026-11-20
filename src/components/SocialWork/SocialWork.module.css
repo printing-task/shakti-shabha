@@ -57,7 +57,7 @@
 }
 
 .statLabel {
-  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-family: var(--font-body, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: clamp(0.6rem, 0.75vw, 0.68rem);
   color: #4B5563;
   text-transform: uppercase;
@@ -285,7 +285,7 @@
 }
 
 .slideSubtitle {
-  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-family: var(--font-body, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: clamp(0.72rem, 0.95vw, 0.84rem);
   font-weight: 600;
   letter-spacing: 0.12ch;
@@ -469,7 +469,7 @@
   background: #bd1834;
   color: #FFFFFF;
   border-radius: 9999px;
-  font-family: var(--btn-font, 'Poppins', sans-serif);
+  font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
   font-weight: 600;
   font-size: 0.78rem;
   letter-spacing: 0.04em;

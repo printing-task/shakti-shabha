@@ -281,7 +281,7 @@
   align-items: center;
   justify-content: center;
   padding: 0.8rem 2.5rem;
-  font-family: var(--btn-font, 'Poppins', sans-serif);
+  font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.82rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -307,7 +307,7 @@
   align-items: center;
   justify-content: center;
   padding: 0.8rem 2.5rem;
-  font-family: var(--btn-font, 'Poppins', sans-serif);
+  font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.82rem;
   font-weight: 600;
   text-transform: uppercase;

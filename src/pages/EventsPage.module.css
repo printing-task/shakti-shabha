@@ -229,7 +229,7 @@
   padding: 0.5rem 1.2rem;
   min-height: 38px;
   border-radius: 9999px;
-  font-family: var(--btn-font, 'Poppins', sans-serif);
+  font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.76rem;
   font-weight: 600;
   letter-spacing: 0.03em;
@@ -449,7 +449,7 @@
   background: var(--theme-primary, #bd1834);
   border: 1px solid var(--theme-primary, #bd1834);
   color: #FFFFFF !important;
-  font-family: var(--btn-font, 'Poppins', sans-serif);
+  font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.8rem;
   font-weight: 600;
   text-decoration: none;

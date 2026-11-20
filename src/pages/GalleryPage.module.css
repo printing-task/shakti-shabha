@@ -13,7 +13,7 @@
   padding-top: 5.5rem;
   position: relative;
   overflow-x: hidden;
-  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-family: var(--font-body, var(--sans, 'DM Sans', Arial, sans-serif));
 }
 
 .headerSection {

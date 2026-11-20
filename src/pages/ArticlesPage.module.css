@@ -184,7 +184,7 @@
 }
 
 .cardTitle {
-  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-family: var(--font-primary, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 1.05rem;
   font-weight: 700;
   color: #111827;
@@ -228,7 +228,7 @@
   background: none;
   border: none;
   color: #bd1834;
-  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-family: var(--font-primary, var(--sans, 'DM Sans', Arial, sans-serif));
   font-weight: 700;
   font-size: 0.82rem;
   cursor: pointer;

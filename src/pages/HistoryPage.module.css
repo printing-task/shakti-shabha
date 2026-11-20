@@ -12,7 +12,7 @@
   min-height: 100vh;
   background: #FFFFFF;
   color: #111827;
-  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-family: var(--font-body, var(--sans, 'DM Sans', Arial, sans-serif));
   overflow-x: hidden;
   padding-bottom: 5rem;
 }
@@ -227,7 +227,7 @@
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.2s ease;
-  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-family: var(--font-body, var(--sans, 'DM Sans', Arial, sans-serif));
 }
 
 .yearPill:hover {
@@ -297,7 +297,7 @@
   margin: 0;
   padding: 0 clamp(6rem, 10vw, 16rem);
   list-style-type: none;
-  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-family: var(--font-body, var(--sans, 'DM Sans', Arial, sans-serif));
   will-change: transform;
 }
 

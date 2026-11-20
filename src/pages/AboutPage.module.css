@@ -499,7 +499,7 @@
   display: inline-flex;
   align-items: center;
   padding: 0.9rem 2.5rem;
-  font-family: var(--btn-font, 'Poppins', sans-serif);
+  font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -523,7 +523,7 @@
   display: inline-flex;
   align-items: center;
   padding: 0.9rem 2.5rem;
-  font-family: var(--btn-font, 'Poppins', sans-serif);
+  font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -801,7 +801,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -853,7 +853,7 @@
   border-radius: 9999px;
   border: none;
   background: transparent;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-size: 0.74rem;
   font-weight: 600;
   color: #4B5563;
@@ -1165,7 +1165,7 @@
 }
 
 .shieldSwitchBtn {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-size: 0.82rem;
   font-weight: 700;
   padding: 0.6rem 1.35rem;
@@ -1432,7 +1432,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -1470,7 +1470,7 @@
 }
 
 .showcaseDesc {
-  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-family: var(--font-body, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.92rem;
   color: rgba(255, 255, 255, 0.65);
   line-height: 1.6;
@@ -1507,7 +1507,7 @@
   gap: 0.85rem;
   text-align: center;
   padding: 0.25rem 0.75rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-size: clamp(2rem, 5.2vh, 3.8rem);
   font-weight: 800;
   line-height: 1.15;
@@ -1661,7 +1661,7 @@
   display: block;
   opacity: 0;
   font-size: clamp(14vw, 24vw, 28vw);
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-weight: 900;
   line-height: 1;
   color: transparent;
@@ -1690,7 +1690,7 @@
   letter-spacing: 2px;
   text-align: center;
   font-size: 13px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-weight: 600;
   color: #FFFFFF;
   z-index: 6;
@@ -1717,7 +1717,7 @@
   text-align: center;
   letter-spacing: 2px;
   font-size: 13px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.6);
   z-index: 6;
@@ -1766,7 +1766,7 @@
   backdrop-filter: blur(14px);
   color: #FFFFFF;
   text-decoration: none;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-size: 0.84rem;
   font-weight: 600;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1820,7 +1820,7 @@
 }
 
 .showcaseSwitchLabel {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -1926,7 +1926,7 @@
   gap: 0.35rem;
   padding: 0.4rem 0.85rem;
   border-radius: 8px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-size: 0.76rem;
   font-weight: 600;
   background: #FFFFFF;

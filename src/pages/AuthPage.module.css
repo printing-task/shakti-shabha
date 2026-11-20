@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 1.25rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   position: relative;
   overflow: hidden;
 }
@@ -125,7 +125,7 @@
   padding: 0.75rem 1rem;
   color: #FFFFFF;
   font-size: 0.95rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   transition: border-color 0.2s, background 0.2s;
   outline: none;
   width: 100%;
@@ -148,7 +148,7 @@
   color: #FFFFFF;
   border: none;
   border-radius: 10px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.04em;

@@ -9,7 +9,7 @@
   color: #111827;
   min-height: 100vh;
   padding-bottom: 6rem;
-  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-family: var(--font-body, var(--sans, 'DM Sans', Arial, sans-serif));
 }
 
 .container {
@@ -812,7 +812,7 @@
   border: 1px solid #D1D5DB;
   border-radius: 9999px;
   padding: 0.5rem 1.25rem;
-  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-family: var(--font-primary, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.82rem;
   font-weight: 600;
   color: #4B5563;

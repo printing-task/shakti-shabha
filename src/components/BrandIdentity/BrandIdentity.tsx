@@ -26,12 +26,16 @@ export default function BrandIdentity() {
         <div data-br className={s.panel}>
           <p className={s.panelTitle}>Typography</p>
           <div className={s.typeRow}>
-            <div className={s.typeSample} style={{ fontFamily: 'Cinzel, serif', fontSize: '2.5rem', fontWeight: 900 }}>Cinzel</div>
-            <div className={s.typeMeta}>Display · Headings · Cinzel 900 — Classical power, Sanskrit-adjacent</div>
+            <div className={s.typeSample} style={{ fontFamily: 'var(--serif, "Playfair Display", Georgia, serif)', fontSize: '2.2rem', fontWeight: 600 }}>Playfair Display</div>
+            <div className={s.typeMeta}>Serif · Editorial Headings · Quotes · Kicker</div>
           </div>
           <div className={s.typeRow}>
-            <div className={s.typeSample} style={{ fontFamily: 'Poppins, sans-serif', fontSize: '1.5rem', fontWeight: 400 }}>Poppins</div>
-            <div className={s.typeMeta}>Body · UI · Outfit 300–600 — Clean, modern, legible</div>
+            <div className={s.typeSample} style={{ fontFamily: 'var(--display, "Cinzel", Georgia, serif)', fontSize: '2.2rem', fontWeight: 700 }}>Cinzel</div>
+            <div className={s.typeMeta}>Display · Brand Identity · Emblems · Roman Numerals</div>
+          </div>
+          <div className={s.typeRow}>
+            <div className={s.typeSample} style={{ fontFamily: 'var(--sans, "DM Sans", Arial, sans-serif)', fontSize: '1.5rem', fontWeight: 500 }}>DM Sans</div>
+            <div className={s.typeMeta}>Body · UI · Navigation · Buttons · Clean &amp; Legible</div>
           </div>
           <div className={s.typeRow}>
             <div className={s.typeSample} style={{ fontFamily: 'Noto Sans Devanagari, sans-serif', fontSize: '1.5rem' }}>देवनागरी</div>

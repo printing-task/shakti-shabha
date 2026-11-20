@@ -125,8 +125,11 @@ h3, h4 {
   color: var(--theme-text-heading, #191817);
 }
 
+p, span, li, a, button, input, textarea, select {
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
+}
+
 p {
-  font-family: var(--font-body, 'DM Sans', sans-serif);
   font-size: 0.94rem;
   line-height: 1.75;
   color: var(--theme-text-body, #2b2825);
@@ -280,7 +283,7 @@ p {
 }
 
 .section-paragraph {
-  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-family: var(--font-body, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: clamp(0.86rem, 1.1vw, 0.95rem);
   line-height: 1.68;
   color: var(--theme-text-muted, #555555);
@@ -401,7 +404,7 @@ a[class*="btn"]:not([data-no-press]):active,
   align-items: center !important;
   justify-content: center !important;
   padding: 0.62rem 1.75rem !important;
-  font-family: var(--btn-font, 'Poppins', sans-serif) !important;
+  font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif)) !important;
   font-size: 0.76rem !important;
   font-weight: 600 !important;
   text-transform: uppercase !important;

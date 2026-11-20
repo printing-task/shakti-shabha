@@ -8,7 +8,7 @@
   display: flex;
   min-height: 100vh;
   background: #0D0D0F;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   color: #F3F4F6;
 }
 
@@ -280,7 +280,7 @@
   color: #FFFFFF;
   border: none;
   border-radius: 8px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
@@ -301,7 +301,7 @@
   color: rgba(255,255,255,0.8);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 8px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
@@ -322,7 +322,7 @@
   color: #FF6B80;
   border: 1px solid rgba(189,24,52,0.25);
   border-radius: 6px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
@@ -342,7 +342,7 @@
   color: #93C5FD;
   border: 1px solid rgba(59,130,246,0.25);
   border-radius: 6px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
@@ -428,7 +428,7 @@
   padding: 0.7rem 1rem;
   color: #FFFFFF !important;
   font-size: 0.9rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   transition: all 0.2s ease;
   outline: none;
   width: 100%;
@@ -714,7 +714,7 @@ select option:checked,
   padding: 0.3rem 0.6rem;
   border-radius: 6px;
   transition: all 0.2s;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-size: 0.86rem;
 }
 
@@ -1019,7 +1019,7 @@ select option:checked,
   padding: 0.3rem 0.6rem;
   color: #F3F4F6;
   font-size: 0.8rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   cursor: pointer;
   outline: none;
 }
