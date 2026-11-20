@@ -124,7 +124,7 @@ export default function Profile() {
     : "/Gemini_Generated_Image_kdfkbukdfkbukdfk.png"
 
   return (
-    <section ref={secRef} className={s.section}>
+    <section ref={secRef} id="profile" className={s.section}>
       <div className={s.inner}>
         
         {/* ========================================

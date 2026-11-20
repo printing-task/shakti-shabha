@@ -1,11 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import GoogleIcon from '../GoogleIcon/GoogleIcon'
 import s from './Hero.module.css'
-
-gsap.registerPlugin(ScrollTrigger)
 
 interface HeroSlide {
   num: string
@@ -214,89 +210,256 @@ export default function Hero() {
   const [isSwitching, setIsSwitching] = useState(false)
   const wrapperRef = useRef<HTMLElement>(null)
   const heroRef = useRef<HTMLDivElement>(null)
-  const triggerRef = useRef<ScrollTrigger | null>(null)
+  const mobileBarRef = useRef<HTMLDivElement>(null)
   const currentIndexRef = useRef(0)
+  const isTransitioningRef = useRef(false)
 
   const activeSlide = HERO_SLIDES[currentIndex]
 
-  // Pin Hero section until all 5 pillars have completed (identical to CounsellingPage pattern)
-  useEffect(() => {
-    const wrapper = wrapperRef.current
-    const hero = heroRef.current
-    const totalSlides = HERO_SLIDES.length
-    if (!wrapper || !hero || totalSlides === 0) return
-
-    // Generous pinning distance: keeps the hero pinned across all 5 pillars without flying away
-    const pinDistance = window.innerHeight * (totalSlides - 1) * 1.1
-
-    const ctx = gsap.context(() => {
-      const st = ScrollTrigger.create({
-        trigger: wrapper,
-        start: 'top top',
-        end: () => `+=${pinDistance}`,
-        pin: hero,
-        pinSpacing: true,
-        anticipatePin: 1,
-        scrub: 0.2,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          // Scale progress across all 5 slides:
-          // 0.00-0.20: Slide 0 (01 Mission Mardini)
-          // 0.20-0.40: Slide 1 (02 Shakti Bhava)
-          // 0.40-0.60: Slide 2 (03 Shakti Varta)
-          // 0.60-0.80: Slide 3 (04 Aaryaveera)
-          // 0.80-1.00: Slide 4 (05 Sahyog - the 5th and last pillar!)
-          // The user stays firmly on Slide 4 until self.progress completes past 1.00!
-          const current = self.progress * (totalSlides - 0.2)
-          const targetIndex = Math.min(
-            totalSlides - 1,
-            Math.max(0, Math.floor(current))
-          )
-
-          if (targetIndex !== currentIndexRef.current) {
-            currentIndexRef.current = targetIndex
-            setIsSwitching(true)
-            setTimeout(() => {
-              setCurrentIndex(targetIndex)
-              setIsSwitching(false)
-            }, 100)
-          }
-        }
-      })
-      triggerRef.current = st
-    }, wrapper)
-
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh()
-    }, 250)
-
-    return () => {
-      clearTimeout(timer)
-      ctx.revert()
-      triggerRef.current = null
+  // Smoothly center the mobile horizontal pill button for the active slide
+  const syncMobileBar = useCallback((idx: number) => {
+    if (window.innerWidth <= 900 && mobileBarRef.current) {
+      const container = mobileBarRef.current
+      const btn = container.children[idx] as HTMLElement | undefined
+      if (btn) {
+        const targetLeft =
+          btn.offsetLeft - container.clientWidth / 2 + btn.clientWidth / 2
+        container.scrollTo({
+          left: Math.max(0, targetLeft),
+          behavior: 'smooth'
+        })
+      }
     }
   }, [])
 
+  // Smoothly scroll down past the Hero section to the next section (#profile)
+  const scrollToNextSection = useCallback(() => {
+    const profileEl = document.getElementById('profile')
+    const target = profileEl
+      ? profileEl.getBoundingClientRect().top + window.scrollY - 10
+      : window.innerHeight
+
+    if ((window as any).lenis) {
+      ;(window as any).lenis.scrollTo(target, { duration: 0.85 })
+    } else {
+      window.scrollTo({ top: target, behavior: 'smooth' })
+    }
+  }, [])
+
+  // Navigate directly to a specific slide
   const goToSlide = useCallback((index: number) => {
     const nextIdx = Math.max(0, Math.min(HERO_SLIDES.length - 1, index))
-    const st = triggerRef.current
-    if (st && st.end > st.start) {
-      const totalSlides = HERO_SLIDES.length
-      const targetProgress = (nextIdx + 0.45) / totalSlides
-      const targetScroll = st.start + targetProgress * (st.end - st.start)
-      if ((window as any).lenis) {
-        ;(window as any).lenis.scrollTo(targetScroll, { duration: 0.8 })
-      } else {
-        window.scrollTo({ top: targetScroll, behavior: 'smooth' })
+    currentIndexRef.current = nextIdx
+
+    setIsSwitching(true)
+    setTimeout(() => {
+      setCurrentIndex(nextIdx)
+      setIsSwitching(false)
+    }, 120)
+
+    syncMobileBar(nextIdx)
+  }, [syncMobileBar])
+
+  // Stepped Scroll on Desktop (wheel / trackpad):
+  // 1 scroll = 1 category advance (0 -> 1 -> 2 -> 3 -> 4)
+  // On 5th category (Sahyog), next scroll down moves to another section (#profile)
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      const scrollY = window.scrollY
+      // If at top of page (hero in view)
+      if (scrollY <= 25) {
+        if (Math.abs(e.deltaY) < 14) return
+
+        if (e.deltaY > 0) {
+          // Scrolling DOWN
+          if (currentIndexRef.current < HERO_SLIDES.length - 1) {
+            e.preventDefault()
+            e.stopImmediatePropagation()
+            if (isTransitioningRef.current) return
+            isTransitioningRef.current = true
+
+            const next = currentIndexRef.current + 1
+            goToSlide(next)
+            setTimeout(() => {
+              isTransitioningRef.current = false
+            }, 550)
+          } else if (currentIndexRef.current === HERO_SLIDES.length - 1) {
+            // Already on 5th category -> next scroll moves to another section
+            e.preventDefault()
+            e.stopImmediatePropagation()
+            if (isTransitioningRef.current) return
+            isTransitioningRef.current = true
+
+            scrollToNextSection()
+            setTimeout(() => {
+              isTransitioningRef.current = false
+            }, 750)
+          }
+        } else if (e.deltaY < 0) {
+          // Scrolling UP
+          if (currentIndexRef.current > 0) {
+            e.preventDefault()
+            e.stopImmediatePropagation()
+            if (isTransitioningRef.current) return
+            isTransitioningRef.current = true
+
+            const prev = currentIndexRef.current - 1
+            goToSlide(prev)
+            setTimeout(() => {
+              isTransitioningRef.current = false
+            }, 550)
+          }
+        }
       }
-    } else {
-      setIsSwitching(true)
-      setTimeout(() => {
-        setCurrentIndex(nextIdx)
-        setIsSwitching(false)
-      }, 100)
     }
-  }, [])
+
+    window.addEventListener('wheel', handleWheel, { passive: false, capture: true })
+    return () => {
+      window.removeEventListener('wheel', handleWheel, { capture: true })
+    }
+  }, [goToSlide, scrollToNextSection])
+
+  // Stepped Keyboard Navigation (ArrowDown / ArrowUp)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const scrollY = window.scrollY
+      if (scrollY > 25) return
+
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+        if (currentIndexRef.current < HERO_SLIDES.length - 1) {
+          e.preventDefault()
+          if (isTransitioningRef.current) return
+          isTransitioningRef.current = true
+          goToSlide(currentIndexRef.current + 1)
+          setTimeout(() => {
+            isTransitioningRef.current = false
+          }, 550)
+        } else if (currentIndexRef.current === HERO_SLIDES.length - 1) {
+          e.preventDefault()
+          scrollToNextSection()
+        }
+      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        if (currentIndexRef.current > 0) {
+          e.preventDefault()
+          if (isTransitioningRef.current) return
+          isTransitioningRef.current = true
+          goToSlide(currentIndexRef.current - 1)
+          setTimeout(() => {
+            isTransitioningRef.current = false
+          }, 550)
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [goToSlide, scrollToNextSection])
+
+  // Mobile Touch Gestures:
+  // 1 vertical swipe UP = advance 1 category (0 -> 1 -> 2 -> 3 -> 4)
+  // On 5th category (Sahyog), next swipe UP moves to another section (#profile)
+  // 1 vertical swipe DOWN = retreat 1 category (4 -> 3 -> 2 -> 1 -> 0)
+  // Horizontal swipe left/right also navigates categories
+  useEffect(() => {
+    const hero = heroRef.current
+    if (!hero) return
+
+    let startX: number | null = null
+    let startY: number | null = null
+
+    const onTouchStart = (e: TouchEvent) => {
+      startX = e.touches[0].clientX
+      startY = e.touches[0].clientY
+    }
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (startY === null || startX === null) return
+      // Allow unrestricted horizontal touch inside pill container
+      if (mobileBarRef.current && mobileBarRef.current.contains(e.target as Node)) {
+        return
+      }
+
+      if (window.scrollY <= 25 && currentIndexRef.current < HERO_SLIDES.length - 1) {
+        const deltaY = e.touches[0].clientY - startY
+        const deltaX = e.touches[0].clientX - startX
+        if (Math.abs(deltaY) > Math.abs(deltaX) && e.cancelable) {
+          e.preventDefault()
+        }
+      }
+    }
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (startY === null || startX === null) return
+      const diffX = e.changedTouches[0].clientX - startX
+      const diffY = e.changedTouches[0].clientY - startY
+
+      startX = null
+      startY = null
+
+      if (window.scrollY > 25) return
+      if (isTransitioningRef.current) return
+
+      // Horizontal swipe on hero stage:
+      if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+        isTransitioningRef.current = true
+        if (diffX < 0) {
+          if (currentIndexRef.current < HERO_SLIDES.length - 1) {
+            goToSlide(currentIndexRef.current + 1)
+          } else {
+            scrollToNextSection()
+          }
+        } else {
+          if (currentIndexRef.current > 0) {
+            goToSlide(currentIndexRef.current - 1)
+          }
+        }
+        setTimeout(() => {
+          isTransitioningRef.current = false
+        }, 500)
+        return
+      }
+
+      // Vertical swipe on mobile:
+      if (Math.abs(diffY) > 30) {
+        if (diffY < 0) {
+          // Swipe UP -> user scrolling DOWN
+          if (currentIndexRef.current < HERO_SLIDES.length - 1) {
+            isTransitioningRef.current = true
+            goToSlide(currentIndexRef.current + 1)
+            setTimeout(() => {
+              isTransitioningRef.current = false
+            }, 550)
+          } else if (currentIndexRef.current === HERO_SLIDES.length - 1) {
+            // 5th category -> next scroll moves to another section
+            isTransitioningRef.current = true
+            scrollToNextSection()
+            setTimeout(() => {
+              isTransitioningRef.current = false
+            }, 750)
+          }
+        } else if (diffY > 0) {
+          // Swipe DOWN -> user scrolling UP
+          if (currentIndexRef.current > 0) {
+            isTransitioningRef.current = true
+            goToSlide(currentIndexRef.current - 1)
+            setTimeout(() => {
+              isTransitioningRef.current = false
+            }, 550)
+          }
+        }
+      }
+    }
+
+    hero.addEventListener('touchstart', onTouchStart, { passive: true })
+    hero.addEventListener('touchmove', onTouchMove, { passive: false })
+    hero.addEventListener('touchend', onTouchEnd, { passive: true })
+
+    return () => {
+      hero.removeEventListener('touchstart', onTouchStart)
+      hero.removeEventListener('touchmove', onTouchMove)
+      hero.removeEventListener('touchend', onTouchEnd)
+    }
+  }, [goToSlide, scrollToNextSection])
 
   // Apply CSS Variables on theme change
   useEffect(() => {
@@ -319,38 +482,12 @@ export default function Hero() {
     el.style.setProperty('--hero-tabs-active-text', theme.tabsActiveText || theme.accent)
   }, [activeSlide])
 
-  // Mobile horizontal swipe handlers
-  const touchStartX = useRef<number | null>(null)
-  const touchStartY = useRef<number | null>(null)
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX
-    touchStartY.current = e.touches[0].clientY
-  }
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null || touchStartY.current === null) return
-    const diffX = e.changedTouches[0].clientX - touchStartX.current
-    const diffY = e.changedTouches[0].clientY - touchStartY.current
-    if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
-      if (diffX < 0) {
-        goToSlide((currentIndex + 1) % HERO_SLIDES.length)
-      } else {
-        goToSlide((currentIndex - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)
-      }
-    }
-    touchStartX.current = null
-    touchStartY.current = null
-  }
-
   return (
     <section ref={wrapperRef} className={s.heroPinWrapper}>
       <div
         ref={heroRef}
         className={s.heroStudio}
         id="heroStudio"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
       >
       {/* Category Thematic Background Image with Smooth Crossfade */}
       <div className={s.heroBgMedia} aria-hidden="true">
@@ -620,7 +757,7 @@ export default function Hero() {
         </div>
 
         {/* Mobile Interactive 5-Pillars Quick Switcher */}
-        <div className={s.mobilePillarsBar}>
+        <div ref={mobileBarRef} className={s.mobilePillarsBar}>
           {HERO_SLIDES.map((slide, idx) => (
             <button
               key={slide.num}
