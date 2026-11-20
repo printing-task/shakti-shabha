@@ -88,7 +88,7 @@ export default function ResearchPage() {
             <Link to="/case-study" style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 600, textDecoration: 'none', background: 'rgba(255,255,255,0.15)', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.25)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
               <GoogleIcon name="folder_open" size={14} /> Case Studies
             </Link>
-            <span style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 600, background: '#DC143C', color: '#FFFFFF', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+            <span style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 600, background: '#bd1834', color: '#FFFFFF', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
               <GoogleIcon name="menu_book" size={14} /> Research Papers (Active)
             </span>
           </div>
@@ -249,7 +249,7 @@ export default function ResearchPage() {
 
         {/* Historical Archives with Interactive Footnotes Showcase */}
         <div style={{ marginTop: '5rem', background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '16px', padding: 'clamp(2rem, 4vw, 3.5rem)' }}>
-          <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#DC143C', fontWeight: 700, textTransform: 'uppercase' }}>
+          <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#bd1834', fontWeight: 700, textTransform: 'uppercase' }}>
             Archival Verification
           </span>
           <h2 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.75rem', color: '#0F172A', marginTop: '0.35rem' }}>
@@ -260,11 +260,11 @@ export default function ResearchPage() {
             Click any footnote marker to inspect the provenance and archival depository details.
           </p>
 
-          <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#F8FAFC', borderLeft: '4px solid #DC143C', borderRadius: '4px', fontSize: '0.92rem', color: '#1E293B', lineHeight: 1.8 }}>
+          <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#F8FAFC', borderLeft: '4px solid #bd1834', borderRadius: '4px', fontSize: '0.92rem', color: '#1E293B', lineHeight: 1.8 }}>
             "The narrative that ancient Indian women lacked martial training is thoroughly refuted by the Fort Badami epigraphical edicts
-            <sup onClick={() => setActiveFootnote(1)} style={{ color: '#DC143C', fontWeight: 'bold', cursor: 'pointer', padding: '0 3px' }}>[1]</sup>
+            <sup onClick={() => setActiveFootnote(1)} style={{ color: '#bd1834', fontWeight: 'bold', cursor: 'pointer', padding: '0 3px' }}>[1]</sup>
             demonstrating dedicated female lathi and dagger battalions guarding treasury vaults. Subsequent Peshwa military payrolls
-            <sup onClick={() => setActiveFootnote(2)} style={{ color: '#DC143C', fontWeight: 'bold', cursor: 'pointer', padding: '0 3px' }}>[2]</sup>
+            <sup onClick={() => setActiveFootnote(2)} style={{ color: '#bd1834', fontWeight: 'bold', cursor: 'pointer', padding: '0 3px' }}>[2]</sup>
             record identical rations and gold coin salaries for female cavalry scouts during the third Panipat mobilization."
           </div>
 

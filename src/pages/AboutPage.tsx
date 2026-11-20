@@ -135,7 +135,7 @@ const PILLARS_IN_ACTION = [
     icon: 'swords',
     name: 'Mission Mardini',
     sub: 'Self-Defence & Physical Preparedness',
-    color: '#DC143C',
+    color: '#bd1834',
     dedicatedLink: '/mardini',
     dedicatedLabel: 'Explore Mission Mardini Page →',
     desc: 'Practical self-defence, situational awareness and confidence-building programmes for girls and women, integrating physical preparedness with responsible action.',
@@ -324,7 +324,7 @@ export const SOCIAL_SHOWCASE_CATEGORIES: SocialCategoryShowcase[] = [
         url: 'https://www.instagram.com/shaktisabha?exln=MWhtaWwwZDZmamI5',
         tag: 'Institutional Body',
         iconType: 'instagram',
-        color: '#DC143C'
+        color: '#bd1834'
       }
     ]
   },
@@ -632,7 +632,7 @@ export default function AboutPage() {
                 {FOUNDER_METRICS.slice(0, 6).map((m, idx) => (
                   <div key={idx} className={p.metricBadgeCard}>
                     <div className={p.metricBadgeHeader}>
-                      <GoogleIcon name={m.icon} size={18} className={p.metricBadgeIcon} style={{ color: '#DC143C' }} />
+                      <GoogleIcon name={m.icon} size={18} className={p.metricBadgeIcon} style={{ color: '#bd1834' }} />
                       <span className={p.metricBadgeTitle}>{m.title}</span>
                     </div>
                     <p className={p.metricBadgeDesc}>{m.desc}</p>
@@ -774,7 +774,7 @@ export default function AboutPage() {
                         onClick={() => setActiveInterventionIdx(idx)}
                       >
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                          <GoogleIcon name={item.icon} size={22} style={{ color: activeInterventionIdx === idx ? '#DC143C' : '#6B7280' }} />
+                          <GoogleIcon name={item.icon} size={22} style={{ color: activeInterventionIdx === idx ? '#bd1834' : '#6B7280' }} />
                           <span className={p.interventionCardPill}>
                             {idx === 0 ? 'Child Protection' : idx === 1 ? 'Family Mediation' : 'Psychosocial Support'}
                           </span>
@@ -814,7 +814,7 @@ export default function AboutPage() {
                   {/* Statutory & Confidentiality Seal */}
                   <div className={p.confidentialityBanner}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem', color: '#111827', fontWeight: 700, fontSize: '0.84rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                      <GoogleIcon name="gavel" size={17} style={{ color: '#DC143C' }} />
+                      <GoogleIcon name="gavel" size={17} style={{ color: '#bd1834' }} />
                       Institutional Note on Confidentiality &amp; Statutory Compliance
                     </div>
                     <p style={{ margin: 0, fontSize: '0.84rem', color: '#4B5563', lineHeight: 1.6 }}>
@@ -856,7 +856,7 @@ export default function AboutPage() {
                     {(activeShieldTab === 'shield1' ? CURRICULUM_TIERS[0] : CURRICULUM_TIERS[1]).items.map((item, iIdx) => (
                       <div key={iIdx} className={p.shieldItemCard}>
                         <h5 className={p.shieldItemHead}>
-                          <GoogleIcon name="verified" size={16} style={{ color: '#DC143C' }} />
+                          <GoogleIcon name="verified" size={16} style={{ color: '#bd1834' }} />
                           {item.head}
                         </h5>
                         <p className={p.shieldItemBody}>{item.body}</p>
@@ -876,7 +876,7 @@ export default function AboutPage() {
                     </div>
                     <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                       <div style={{ flex: '1 1 120px', background: '#FFFFFF', border: '1px solid #FECDD3', padding: '0.75rem', borderRadius: 8 }}>
-                        <div style={{ color: '#DC143C', fontWeight: 800, fontSize: '1.1rem' }}>2,000+</div>
+                        <div style={{ color: '#bd1834', fontWeight: 800, fontSize: '1.1rem' }}>2,000+</div>
                         <div style={{ color: '#6B7280', fontSize: '0.72rem' }}>Girls Engaged</div>
                       </div>
                       <div style={{ flex: '1 1 120px', background: '#FFFFFF', border: '1px solid #DCFCE7', padding: '0.75rem', borderRadius: 8 }}>
@@ -929,7 +929,7 @@ export default function AboutPage() {
       {/* ── 08. THE SHAKTI SABHA PHILOSOPHY ──────────── */}
       <div className={p.quoteSection}>
         <div className={p.quoteInner} style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-          <span style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#DC143C', display: 'block', marginBottom: '1rem' }}>
+          <span style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#bd1834', display: 'block', marginBottom: '1rem' }}>
             THE SHAKTI SABHA PHILOSOPHY
           </span>
 
@@ -959,7 +959,7 @@ export default function AboutPage() {
             We encourage women and young people to recognise their capabilities without cultivating hostility, to question ideas without losing intellectual discipline, and to engage with tradition without abandoning inquiry.
           </p>
 
-          <blockquote style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.15rem', lineHeight: 1.6, color: '#DC143C', fontStyle: 'italic', margin: '0 0 1rem' }}>
+          <blockquote style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.15rem', lineHeight: 1.6, color: '#bd1834', fontStyle: 'italic', margin: '0 0 1rem' }}>
             “We believe in strength without hostility, knowledge without dogma, and freedom with responsibility.”
           </blockquote>
         </div>
@@ -974,7 +974,7 @@ export default function AboutPage() {
             {CORE_VALUES.map((v) => (
               <div key={v.name} className={p.valueCard}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: '0.5rem' }}>
-                  <GoogleIcon name={v.icon} size={28} style={{ color: '#DC143C' }} />
+                  <GoogleIcon name={v.icon} size={28} style={{ color: '#bd1834' }} />
                   <span style={{ fontFamily: "'Cinzel', serif", fontWeight: 700, fontSize: '0.85rem', color: '#9CA3AF' }}>VALUE {v.num}</span>
                 </div>
                 <h3 className={p.valueName}>{v.name}</h3>
@@ -1020,7 +1020,7 @@ export default function AboutPage() {
         textAlign: 'center'
       }}>
         <div style={{ maxWidth: '820px', margin: '0 auto' }}>
-          <span style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#DC143C', display: 'block', marginBottom: '0.75rem' }}>
+          <span style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#bd1834', display: 'block', marginBottom: '0.75rem' }}>
             FORWARD HORIZON
           </span>
           <h3 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', color: '#111827', marginBottom: '1rem', fontWeight: 700 }}>

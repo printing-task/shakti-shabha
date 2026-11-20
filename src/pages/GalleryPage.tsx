@@ -345,7 +345,7 @@ export default function GalleryPage() {
               style={{
                 padding: '0.65rem 1.75rem',
                 borderRadius: '9999px',
-                background: '#DC143C',
+                background: '#bd1834',
                 color: '#FFFFFF',
                 border: 'none',
                 fontWeight: 600,

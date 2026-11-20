@@ -364,7 +364,7 @@ export default function ArticlesPage() {
                     style={{
                       fontSize: '0.72rem',
                       letterSpacing: '0.15em',
-                      color: '#DC143C',
+                      color: '#bd1834',
                       fontWeight: 700,
                       textTransform: 'uppercase',
                     }}
@@ -379,7 +379,7 @@ export default function ArticlesPage() {
                   <button
                     type="button"
                     onClick={() => handleTabChange('articles')}
-                    style={{ fontSize: '0.85rem', color: '#DC143C', fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                    style={{ fontSize: '0.85rem', color: '#bd1834', fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
                   >
                     View Only Articles ({allArticles.length}) →
                   </button>
@@ -458,7 +458,7 @@ export default function ArticlesPage() {
                     style={{
                       fontSize: '0.72rem',
                       letterSpacing: '0.15em',
-                      color: '#DC143C',
+                      color: '#bd1834',
                       fontWeight: 700,
                       textTransform: 'uppercase',
                     }}
@@ -469,7 +469,7 @@ export default function ArticlesPage() {
                     {activeTab === 'all' ? 'Featured Case Studies' : 'Real-World Survivor Case Studies'}
                   </h2>
                 </div>
-                <Link to="/case-study" style={{ fontSize: '0.85rem', color: '#DC143C', fontWeight: 600 }}>
+                <Link to="/case-study" style={{ fontSize: '0.85rem', color: '#bd1834', fontWeight: 600 }}>
                   Open Dedicated Case Studies Hub →
                 </Link>
               </div>
@@ -556,7 +556,7 @@ export default function ArticlesPage() {
                     style={{
                       fontSize: '0.72rem',
                       letterSpacing: '0.15em',
-                      color: '#DC143C',
+                      color: '#bd1834',
                       fontWeight: 700,
                       textTransform: 'uppercase',
                     }}
@@ -567,7 +567,7 @@ export default function ArticlesPage() {
                     {activeTab === 'all' ? 'Academic White Papers &amp; Research' : 'Peer-Reviewed Research Papers'}
                   </h2>
                 </div>
-                <Link to="/research" style={{ fontSize: '0.85rem', color: '#DC143C', fontWeight: 600 }}>
+                <Link to="/research" style={{ fontSize: '0.85rem', color: '#bd1834', fontWeight: 600 }}>
                   Open Dedicated Research Lab →
                 </Link>
               </div>
@@ -706,7 +706,7 @@ export default function ArticlesPage() {
             <div
               style={{
                 fontSize: '0.75rem',
-                color: '#DC143C',
+                color: '#bd1834',
                 fontWeight: 700,
                 textTransform: 'uppercase',
                 letterSpacing: '0.12em',
@@ -733,7 +733,7 @@ export default function ArticlesPage() {
                 style={{
                   fontFamily: 'var(--font-devanagari, "Noto Sans Devanagari", sans-serif)',
                   fontSize: '1.1rem',
-                  color: '#DC143C',
+                  color: '#bd1834',
                   marginBottom: '1rem',
                   fontWeight: 600,
                 }}
@@ -774,7 +774,7 @@ export default function ArticlesPage() {
               <div
                 style={{
                   background: '#F9FAFB',
-                  borderLeft: '4px solid #DC143C',
+                  borderLeft: '4px solid #bd1834',
                   padding: '1.25rem 1.5rem',
                   borderRadius: '0 12px 12px 0',
                   margin: '1.5rem 0',
@@ -832,7 +832,7 @@ export default function ArticlesPage() {
               {activeModalCase.title}
             </h2>
 
-            <div style={{ background: '#F9FAFB', borderLeft: '4px solid #DC143C', padding: '1rem 1.25rem', borderRadius: '0 8px 8px 0', marginBottom: '1.25rem', fontSize: '0.88rem', color: '#4B5563' }}>
+            <div style={{ background: '#F9FAFB', borderLeft: '4px solid #bd1834', padding: '1rem 1.25rem', borderRadius: '0 8px 8px 0', marginBottom: '1.25rem', fontSize: '0.88rem', color: '#4B5563' }}>
               {activeModalCase.excerpt}
             </div>
 
@@ -842,7 +842,7 @@ export default function ArticlesPage() {
 
             <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid #E5E7EB', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontSize: '0.75rem', color: '#9CA3AF' }}>SRS Verified Case Narrative</span>
-              <Link to="/case-study" style={{ fontSize: '0.82rem', color: '#DC143C', fontWeight: 600 }}>
+              <Link to="/case-study" style={{ fontSize: '0.82rem', color: '#bd1834', fontWeight: 600 }}>
                 View All Case Studies →
               </Link>
             </div>
@@ -909,7 +909,7 @@ export default function ArticlesPage() {
                         fontSize: '0.7rem',
                         fontWeight: 600,
                         border: 'none',
-                        background: citationFormat === fmt ? '#DC143C' : '#E5E7EB',
+                        background: citationFormat === fmt ? '#bd1834' : '#E5E7EB',
                         color: citationFormat === fmt ? '#FFFFFF' : '#4B5563',
                         cursor: 'pointer',
                       }}
@@ -949,7 +949,7 @@ export default function ArticlesPage() {
             </div>
 
             <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'flex-end' }}>
-              <Link to="/research" style={{ fontSize: '0.82rem', color: '#DC143C', fontWeight: 600 }}>
+              <Link to="/research" style={{ fontSize: '0.82rem', color: '#bd1834', fontWeight: 600 }}>
                 Explore Research Think-Tank Hub →
               </Link>
             </div>

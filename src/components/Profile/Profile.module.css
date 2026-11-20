@@ -78,7 +78,7 @@
 }
 
 .aaryaveeraHighlight {
-  color: #DC143C !important;
+  color: #bd1834 !important;
   font-weight: 800 !important;
   letter-spacing: 0.02em;
   display: inline;
@@ -87,7 +87,7 @@
 .bio .aaryaveeraHighlight {
   font-size: 1.15em;
   font-weight: 800 !important;
-  color: #DC143C !important;
+  color: #bd1834 !important;
   display: inline;
 }
 
@@ -202,9 +202,9 @@
 
 .ctaBtn {
   color: #FFFFFF !important;
-  background: var(--theme-primary, #DC143C) !important;
-  border: 1px solid var(--theme-primary, #DC143C) !important;
-  box-shadow: 0 4px 14px rgba(220, 20, 60, 0.25);
+  background: var(--theme-primary, #bd1834) !important;
+  border: 1px solid var(--theme-primary, #bd1834) !important;
+  box-shadow: 0 4px 14px rgba(189, 24, 52, 0.25);
 }
 
 .ctaBtn:hover {
@@ -212,7 +212,7 @@
   border-color: var(--theme-primary-dark, #B01030) !important;
   color: #FFFFFF !important;
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(220, 20, 60, 0.38);
+  box-shadow: 0 10px 25px rgba(189, 24, 52, 0.38);
 }
 
 .ctaBtnGhost {
@@ -304,7 +304,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #DC143C;
+  color: #bd1834;
   background: #FFFFFF;
   padding: 0.2rem 0.6rem;
   border-radius: 9999px;
@@ -364,8 +364,8 @@
 }
 
 .navBtn:hover {
-  background: #DC143C;
-  border-color: #DC143C;
+  background: #bd1834;
+  border-color: #bd1834;
   transform: scale(1.08);
 }
 
@@ -390,7 +390,7 @@
 .dot.activeDot {
   width: 18px;
   border-radius: 9999px;
-  background: #DC143C;
+  background: #bd1834;
 }
 
 .counterBadge {
@@ -421,7 +421,7 @@
 
 .progressBarFill {
   height: 100%;
-  background: #DC143C;
+  background: #bd1834;
   animation: slideProgress 6.5s linear infinite;
   transform-origin: left;
 }

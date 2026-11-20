@@ -1,6 +1,6 @@
 /* ============================================================
    MardiniPage.module.css — Mission Mardini Dedicated Page
-   Clean White Theme with Crimson Red (#DC143C) Accents
+   Clean White Theme with Crimson Red (#bd1834) Accents
    ============================================================ */
 
 .page {
@@ -19,7 +19,7 @@
     url('/missionmirdani.jpg') center center / cover no-repeat;
   padding: calc(clamp(2.5rem, 5vw, 4rem) + 4.5rem) clamp(1.5rem, 4vw, 3rem) clamp(2.5rem, 5vw, 3.5rem);
   color: #FFFFFF;
-  border-bottom: 1px solid rgba(220, 20, 60, 0.3);
+  border-bottom: 1px solid rgba(189, 24, 52, 0.3);
 }
 
 .heroInner {
@@ -54,7 +54,7 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #FFFFFF;
-  background: rgba(220, 20, 60, 0.45);
+  background: rgba(189, 24, 52, 0.45);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 179, 186, 0.35);
   padding: 0.25rem 0.85rem;
@@ -106,7 +106,7 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #DC143C;
+  color: #bd1834;
   margin-bottom: 0.4rem;
 }
 
@@ -136,7 +136,7 @@
 
 .statCard {
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   border-radius: 16px;
   padding: 1.6rem 1.5rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
@@ -156,7 +156,7 @@
   font-family: var(--font-display, 'Cinzel', serif);
   font-size: clamp(1.35rem, 2.2vw, 1.75rem);
   font-weight: 700;
-  color: #DC143C;
+  color: #bd1834;
   line-height: 1.2;
   margin-bottom: 0.45rem;
   min-height: 2.4em;
@@ -213,7 +213,7 @@
 
 .tierCard {
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   border-radius: 20px;
   padding: 2.25rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
@@ -236,9 +236,9 @@
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.15em;
-  color: #DC143C;
-  background: rgba(220, 20, 60, 0.08);
-  border: 1px solid rgba(220, 20, 60, 0.2);
+  color: #bd1834;
+  background: rgba(189, 24, 52, 0.08);
+  border: 1px solid rgba(189, 24, 52, 0.2);
   padding: 0.3rem 0.8rem;
   border-radius: 9999px;
   margin-bottom: 1rem;
@@ -283,7 +283,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 2.5rem;
   background: #F9FAFB;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   border-radius: 20px;
   padding: clamp(2rem, 3.5vw, 3rem);
   margin-bottom: 4.5rem;
@@ -325,7 +325,7 @@
 }
 
 .scheduleItem span {
-  color: #DC143C;
+  color: #bd1834;
   font-weight: 700;
   font-family: monospace;
 }
@@ -373,7 +373,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: #DC143C;
+  background: #bd1834;
   color: #FFFFFF;
   font-weight: 700;
   font-size: 0.92rem;
@@ -381,13 +381,13 @@
   border-radius: 9999px;
   text-decoration: none;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 14px rgba(220, 20, 60, 0.25);
+  box-shadow: 0 4px 14px rgba(189, 24, 52, 0.25);
 }
 
 .btnPrimary:hover {
   background: #B01030;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(220, 20, 60, 0.35);
+  box-shadow: 0 8px 24px rgba(189, 24, 52, 0.35);
   color: #FFFFFF;
 }
 
@@ -411,7 +411,7 @@
 .btnOutline:hover,
 .btnSecondary:hover {
   background: #FFF5F5;
-  border-color: #DC143C;
-  color: #DC143C;
+  border-color: #bd1834;
+  color: #bd1834;
   transform: translateY(-2px);
 }

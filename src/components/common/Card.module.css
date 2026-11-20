@@ -1,6 +1,6 @@
 .card {
   background: var(--theme-surface-card, #FFFFFF);
-  border: 1px solid var(--theme-border-light, #E5E7EB);
+  border: 1px solid var(--theme-border-light, #e8e4df);
   border-radius: 16px;
   position: relative;
   overflow: hidden;

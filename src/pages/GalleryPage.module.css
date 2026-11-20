@@ -41,7 +41,7 @@
 }
 
 .backLink:hover {
-  color: #DC143C;
+  color: #bd1834;
 }
 
 .badge {
@@ -50,9 +50,9 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #DC143C;
-  background: rgba(220, 20, 60, 0.08);
-  border: 1px solid rgba(220, 20, 60, 0.25);
+  color: #bd1834;
+  background: rgba(189, 24, 52, 0.08);
+  border: 1px solid rgba(189, 24, 52, 0.25);
   padding: 0.35rem 1.1rem;
   border-radius: 9999px;
   margin-bottom: 0.85rem;
@@ -68,7 +68,7 @@
 }
 
 .titleHighlight {
-  color: #DC143C;
+  color: #bd1834;
 }
 
 .hindiSubtitle {
@@ -102,7 +102,7 @@
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.05em;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   background: #F9FAFB;
   color: #4B5563;
   cursor: pointer;
@@ -113,16 +113,16 @@
 }
 
 .filterBtn:hover {
-  border-color: #DC143C;
-  color: #DC143C;
-  background: rgba(220, 20, 60, 0.05);
+  border-color: #bd1834;
+  color: #bd1834;
+  background: rgba(189, 24, 52, 0.05);
 }
 
 .filterBtnActive {
-  background: #DC143C !important;
+  background: #bd1834 !important;
   color: #FFFFFF !important;
-  border-color: #DC143C !important;
-  box-shadow: 0 4px 15px rgba(220, 20, 60, 0.25) !important;
+  border-color: #bd1834 !important;
+  box-shadow: 0 4px 15px rgba(189, 24, 52, 0.25) !important;
 }
 
 .countPill {
@@ -151,9 +151,9 @@
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.05em;
-  border: 1px dashed rgba(220, 20, 60, 0.45);
-  background: rgba(220, 20, 60, 0.06);
-  color: #DC143C;
+  border: 1px dashed rgba(189, 24, 52, 0.45);
+  background: rgba(189, 24, 52, 0.06);
+  color: #bd1834;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -162,16 +162,16 @@
 }
 
 .dropdownToggle:hover {
-  background: rgba(220, 20, 60, 0.12);
-  border-color: #DC143C;
+  background: rgba(189, 24, 52, 0.12);
+  border-color: #bd1834;
   color: #991B1B;
 }
 
 .dropdownToggleActive {
-  background: #DC143C;
+  background: #bd1834;
   color: #FFFFFF;
   border-style: solid;
-  border-color: #DC143C;
+  border-color: #bd1834;
 }
 
 .arrowIcon {
@@ -189,9 +189,9 @@
   left: 50%;
   transform: translateX(-50%);
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   border-radius: 14px;
-  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12), 0 0 15px rgba(220, 20, 60, 0.06);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12), 0 0 15px rgba(189, 24, 52, 0.06);
   min-width: 260px;
   max-width: 340px;
   max-height: 320px;
@@ -221,13 +221,13 @@
 }
 
 .dropdownItem:hover {
-  background: rgba(220, 20, 60, 0.08);
-  color: #DC143C;
+  background: rgba(189, 24, 52, 0.08);
+  color: #bd1834;
 }
 
 .dropdownItemActive {
-  background: rgba(220, 20, 60, 0.12);
-  color: #DC143C;
+  background: rgba(189, 24, 52, 0.12);
+  color: #bd1834;
   font-weight: 700;
 }
 
@@ -248,7 +248,7 @@
   transform: translateX(-50%);
   z-index: 15;
   background: rgba(255, 255, 255, 0.95);
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   backdrop-filter: blur(8px);
   padding: 0.45rem 1.25rem;
   border-radius: 9999px;
@@ -276,9 +276,9 @@
   gap: 0.5rem;
   padding: 0.65rem 1.6rem;
   border-radius: 9999px;
-  background: rgba(220, 20, 60, 0.08);
-  border: 1px solid rgba(220, 20, 60, 0.3);
-  color: #DC143C;
+  background: rgba(189, 24, 52, 0.08);
+  border: 1px solid rgba(189, 24, 52, 0.3);
+  color: #bd1834;
   font-weight: 700;
   font-size: 0.82rem;
   letter-spacing: 0.04em;
@@ -288,16 +288,16 @@
 }
 
 .loadMoreBtn:hover {
-  background: #DC143C;
+  background: #bd1834;
   color: #FFFFFF;
-  border-color: #DC143C;
-  box-shadow: 0 6px 20px rgba(220, 20, 60, 0.25);
+  border-color: #bd1834;
+  box-shadow: 0 6px 20px rgba(189, 24, 52, 0.25);
   transform: translateY(-2px);
 }
 
 /* ── Bottom Stats / Footer in Gallery ────────────────────────────── */
 .galleryFooter {
-  border-top: 1px solid #E5E7EB;
+  border-top: 1px solid #e8e4df;
   background: #F9FAFB;
   padding: 2.5rem clamp(1.5rem, 4vw, 3rem);
 }
@@ -321,7 +321,7 @@
   font-family: var(--font-display, 'Cinzel', serif);
   font-size: 1.85rem;
   font-weight: 700;
-  color: #DC143C;
+  color: #bd1834;
 }
 
 .statText {

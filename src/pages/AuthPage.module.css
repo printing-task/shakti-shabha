@@ -21,7 +21,7 @@
   left: -20%;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(220, 20, 60, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(189, 24, 52, 0.15) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -32,7 +32,7 @@
   right: -20%;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(220, 20, 60, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(189, 24, 52, 0.1) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -60,7 +60,7 @@
 .logoIcon {
   width: 44px;
   height: 44px;
-  background: #DC143C;
+  background: #bd1834;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -133,8 +133,8 @@
 }
 
 .input:focus {
-  border-color: #DC143C;
-  background: rgba(220, 20, 60, 0.06);
+  border-color: #bd1834;
+  background: rgba(189, 24, 52, 0.06);
 }
 
 .input::placeholder {
@@ -144,7 +144,7 @@
 .btn {
   margin-top: 0.5rem;
   padding: 0.85rem;
-  background: #DC143C;
+  background: #bd1834;
   color: #FFFFFF;
   border: none;
   border-radius: 10px;
@@ -159,7 +159,7 @@
 .btn:hover {
   background: #B01030;
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(220, 20, 60, 0.4);
+  box-shadow: 0 10px 30px rgba(189, 24, 52, 0.4);
 }
 
 .btn:disabled {
@@ -169,8 +169,8 @@
 }
 
 .error {
-  background: rgba(220, 20, 60, 0.12);
-  border: 1px solid rgba(220, 20, 60, 0.35);
+  background: rgba(189, 24, 52, 0.12);
+  border: 1px solid rgba(189, 24, 52, 0.35);
   border-radius: 8px;
   padding: 0.7rem 1rem;
   color: #FF6B80;
@@ -213,7 +213,7 @@
 }
 
 .switchLink a {
-  color: #DC143C;
+  color: #bd1834;
   text-decoration: none;
   font-weight: 600;
 }

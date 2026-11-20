@@ -11,7 +11,7 @@
   box-shadow: 0 -25px 80px rgba(0, 0, 0, 0.35);
   background: #FFFFFF;
   color: #111827;
-  border-top: 1px solid #E5E7EB;
+  border-top: 1px solid #e8e4df;
   height: 100vh;
   max-height: 100vh;
   display: flex;
@@ -25,7 +25,7 @@
 .statsRow {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-bottom: 1px solid #E5E7EB;
+  border-bottom: 1px solid #e8e4df;
   background: #F9FAFB;
   flex-shrink: 0;
   position: relative;
@@ -34,7 +34,7 @@
 
 .statBox {
   padding: 0.65rem 0.75rem;
-  border-right: 1px solid #E5E7EB;
+  border-right: 1px solid #e8e4df;
   text-align: center;
   transition: background 0.3s;
 }
@@ -51,7 +51,7 @@
   font-family: var(--font-display, 'Cinzel', serif);
   font-size: clamp(1.2rem, 1.8vw, 1.65rem);
   font-weight: 900;
-  color: #DC143C;
+  color: #bd1834;
   line-height: 1.1;
   margin-bottom: 0.15rem;
 }
@@ -82,7 +82,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #DC143C;
+  color: #bd1834;
   border: 1px solid #FECDD3;
   padding: 0.22rem 0.85rem;
   border-radius: 9999px;
@@ -246,8 +246,8 @@
   --x: calc(var(--px, 0.5) - 0.5);
   --y: calc(var(--py, 0.5) - 0.5);
   opacity: 1;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25), 0 0 25px rgba(220, 20, 60, 0.2);
-  border-color: rgba(220, 20, 60, 0.6);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25), 0 0 25px rgba(189, 24, 52, 0.2);
+  border-color: rgba(189, 24, 52, 0.6);
   transform: perspective(1000px);
 }
 
@@ -310,8 +310,8 @@
 .slideBadge {
   display: inline-block;
   padding: 3px 10px;
-  background: rgba(220, 20, 60, 0.4);
-  border: 1px solid rgba(220, 20, 60, 0.6);
+  background: rgba(189, 24, 52, 0.4);
+  border: 1px solid rgba(189, 24, 52, 0.6);
   border-radius: 9999px;
   font-size: 0.64rem;
   font-weight: 700;
@@ -343,7 +343,7 @@
 .navBtn {
   appearance: none;
   background: #FFFFFF;
-  border: 1.5px solid #E5E7EB;
+  border: 1.5px solid #e8e4df;
   color: #1F2937;
   position: absolute;
   width: 3.25rem;
@@ -384,11 +384,11 @@
 }
 
 .navBtn:hover {
-  background: #DC143C;
+  background: #bd1834;
   color: #FFFFFF;
-  border-color: #DC143C;
+  border-color: #bd1834;
   transform: translateY(-50%) scale(1.08);
-  box-shadow: 0 8px 24px rgba(220, 20, 60, 0.35);
+  box-shadow: 0 8px 24px rgba(189, 24, 52, 0.35);
 }
 
 .navBtn:active {
@@ -444,10 +444,10 @@
 }
 
 .dotActive {
-  background: #DC143C;
+  background: #bd1834;
   width: 22px;
   border-radius: 9999px;
-  box-shadow: 0 0 10px rgba(220, 20, 60, 0.4);
+  box-shadow: 0 0 10px rgba(189, 24, 52, 0.4);
 }
 
 /* Explore Link Row */
@@ -466,7 +466,7 @@
   min-height: 42px;
   gap: 0.45rem;
   padding: 0.65rem 1.8rem;
-  background: #DC143C;
+  background: #bd1834;
   color: #FFFFFF;
   border-radius: 9999px;
   font-family: var(--btn-font, 'Poppins', sans-serif);
@@ -475,13 +475,13 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   text-decoration: none;
-  box-shadow: 0 4px 14px rgba(220, 20, 60, 0.28);
+  box-shadow: 0 4px 14px rgba(189, 24, 52, 0.28);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .exploreLink:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(220, 20, 60, 0.45);
+  box-shadow: 0 6px 20px rgba(189, 24, 52, 0.45);
   background: #B01030;
 }
 

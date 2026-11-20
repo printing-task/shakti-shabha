@@ -131,7 +131,7 @@
 .lightboxCaption {
   margin-top: 1rem;
   font-size: 0.95rem;
-  color: #E5E7EB;
+  color: #e8e4df;
   text-align: center;
   font-family: var(--font-display, 'Cinzel', serif);
 }
@@ -154,7 +154,7 @@
 }
 
 .closeBtn:hover {
-  background: rgba(220, 20, 60, 0.8);
+  background: rgba(189, 24, 52, 0.8);
 }
 
 @media (max-width: 1024px) {

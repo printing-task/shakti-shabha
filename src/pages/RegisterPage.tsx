@@ -43,7 +43,7 @@ export default function RegisterPage() {
       <div className={s.card}>
         <Link to="/" className={s.logo}>
           <div className={s.logoIcon}>
-            <GoogleIcon name="shield" size={26} style={{ color: '#DC143C' }} />
+            <GoogleIcon name="shield" size={26} style={{ color: '#bd1834' }} />
           </div>
           <div>
             <span className={s.logoText}>Shakti Sabha</span>

@@ -49,7 +49,7 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #FFFFFF;
-  background: rgba(220, 20, 60, 0.45);
+  background: rgba(189, 24, 52, 0.45);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 179, 186, 0.35);
   padding: 0.25rem 0.85rem;
@@ -98,7 +98,7 @@
 
 .articleCard {
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   border-radius: 14px;
   overflow: hidden;
   display: flex;
@@ -112,7 +112,7 @@
 .articleCard:hover {
   transform: translateY(-6px);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.09);
-  border-color: rgba(220, 20, 60, 0.35);
+  border-color: rgba(189, 24, 52, 0.35);
 }
 
 .cardImg {
@@ -172,7 +172,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #DC143C;
+  color: #bd1834;
 }
 
 .cardReadTime {
@@ -201,7 +201,7 @@
   font-family: var(--font-devanagari, 'Noto Sans Devanagari', sans-serif);
   font-size: 0.82rem;
   font-weight: 500;
-  color: #DC143C;
+  color: #bd1834;
   margin: 0 0 0.5rem;
   white-space: nowrap;
   overflow: hidden;
@@ -227,7 +227,7 @@
   margin-bottom: 0.25rem;
   background: none;
   border: none;
-  color: #DC143C;
+  color: #bd1834;
   font-family: var(--font-primary, 'Poppins', sans-serif);
   font-weight: 700;
   font-size: 0.82rem;
@@ -284,7 +284,7 @@
 .dispatchBox {
   margin-top: 5rem;
   background: linear-gradient(135deg, #111113 0%, #1A1215 50%, #0F0F10 100%);
-  border: 1px solid rgba(220, 20, 60, 0.3);
+  border: 1px solid rgba(189, 24, 52, 0.3);
   border-radius: 18px;
   padding: clamp(2.5rem, 5vw, 4rem);
   color: #FFFFFF;
@@ -321,7 +321,7 @@
   padding: clamp(1.75rem, 4vw, 3rem);
   position: relative;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   overscroll-behavior: contain;
   touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
@@ -337,7 +337,7 @@
 }
 
 .modalContent::-webkit-scrollbar-thumb {
-  background: #DC143C;
+  background: #bd1834;
   border-radius: 4px;
 }
 
@@ -361,7 +361,7 @@
 }
 
 .modalCloseBtn:hover {
-  background: #E5E7EB;
+  background: #e8e4df;
   transform: rotate(90deg);
 }
 
@@ -393,7 +393,7 @@
   margin: 1.5rem 0 2rem;
   padding: 0.4rem;
   background: #F9FAFB;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   border-radius: 9999px;
   width: fit-content;
   max-width: 100%;
@@ -421,9 +421,9 @@
 }
 
 .subCategoryTabActive {
-  background: #DC143C !important;
+  background: #bd1834 !important;
   color: #FFFFFF !important;
-  box-shadow: 0 4px 12px rgba(220, 20, 60, 0.25);
+  box-shadow: 0 4px 12px rgba(189, 24, 52, 0.25);
 }
 
 .tabCountBadge {
@@ -452,7 +452,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 1.25rem;
-  border: 1px solid rgba(220, 20, 60, 0.3);
+  border: 1px solid rgba(189, 24, 52, 0.3);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
@@ -479,7 +479,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: #DC143C;
+  background: #bd1834;
   color: #FFFFFF;
   font-size: 0.82rem;
   font-weight: 600;
@@ -505,7 +505,7 @@
 
 .caseCard {
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   border-radius: 14px;
   padding: 1.5rem;
   display: flex;
@@ -567,7 +567,7 @@
   gap: 0.3rem;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #DC143C;
+  color: #bd1834;
   background: none;
   border: none;
   cursor: pointer;
@@ -591,7 +591,7 @@
 
 .paperCard {
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   border-radius: 14px;
   padding: 1.5rem;
   display: flex;

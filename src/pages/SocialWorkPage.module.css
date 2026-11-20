@@ -50,7 +50,7 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #FFFFFF;
-  background: rgba(220, 20, 60, 0.45);
+  background: rgba(189, 24, 52, 0.45);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 179, 186, 0.35);
   padding: 0.25rem 0.85rem;
@@ -109,7 +109,7 @@
   left: 0;
   width: 3rem;
   height: 3px;
-  background: var(--theme-primary, #DC143C);
+  background: var(--theme-primary, #bd1834);
   border-radius: 9999px;
 }
 
@@ -147,7 +147,7 @@
 .regionCard:hover {
   transform: translateY(-6px);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
-  border-color: var(--theme-primary, #DC143C);
+  border-color: var(--theme-primary, #bd1834);
 }
 
 .regionIcon {
@@ -157,7 +157,7 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: rgba(220, 20, 60, 0.08);
+  background: rgba(189, 24, 52, 0.08);
   margin: 0 auto 0.75rem;
 }
 
@@ -173,7 +173,7 @@
   font-size: 0.92rem;
   font-weight: 700;
   font-weight: 600;
-  color: var(--theme-primary, #DC143C);
+  color: var(--theme-primary, #bd1834);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -289,7 +289,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  background: var(--theme-primary, #DC143C);
+  background: var(--theme-primary, #bd1834);
   color: #FFFFFF;
   padding: 0.3rem 0.7rem;
   border-radius: 9999px;
@@ -328,14 +328,14 @@
 .reportCard:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.07);
-  border-color: var(--theme-primary, #DC143C);
+  border-color: var(--theme-primary, #bd1834);
 }
 
 .reportIconWrap {
   flex-shrink: 0;
   width: 3.5rem;
   height: 3.5rem;
-  background: rgba(220, 20, 60, 0.07);
+  background: rgba(189, 24, 52, 0.07);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -362,7 +362,7 @@
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--theme-primary, #DC143C);
+  color: var(--theme-primary, #bd1834);
 }
 
 .reportPages,
@@ -390,11 +390,11 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: #FFFFFF;
-  background: #DC143C;
+  background: #bd1834;
   border-radius: 9999px;
   text-decoration: none;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 14px rgba(220, 20, 60, 0.25);
+  box-shadow: 0 4px 14px rgba(189, 24, 52, 0.25);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -403,14 +403,14 @@
 .reportBtn:hover {
   background: #B01030;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(220, 20, 60, 0.35);
+  box-shadow: 0 8px 20px rgba(189, 24, 52, 0.35);
 }
 
 /* ── Donate / Support CTA ──────────────────────────────────── */
 .ctaSection {
   margin: clamp(2rem, 4vw, 4rem) clamp(1.5rem, 4vw, 3rem);
   border-radius: 16px;
-  background: linear-gradient(135deg, #8B000D 0%, #DC143C 55%, #A80E2D 100%);
+  background: linear-gradient(135deg, #8B000D 0%, #bd1834 55%, #A80E2D 100%);
   overflow: hidden;
 }
 
@@ -454,7 +454,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  color: #DC143C;
+  color: #bd1834;
   background: #FFFFFF;
   border-radius: 9999px;
   text-decoration: none;
@@ -522,11 +522,11 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: #FFFFFF;
-  background: #DC143C;
+  background: #bd1834;
   border-radius: 9999px;
   text-decoration: none;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 14px rgba(220, 20, 60, 0.25);
+  box-shadow: 0 4px 14px rgba(189, 24, 52, 0.25);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -569,7 +569,7 @@
 .presenceCard:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
-  border-color: #DC143C;
+  border-color: #bd1834;
 }
 
 .presenceHeader {
@@ -585,11 +585,11 @@
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: rgba(220, 20, 60, 0.08);
+  background: rgba(189, 24, 52, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #DC143C;
+  color: #bd1834;
 }
 
 .presenceState {
@@ -608,14 +608,14 @@
 
 .presenceTagline {
   background: #FFFFFF;
-  border: 1px dashed rgba(220, 20, 60, 0.35);
+  border: 1px dashed rgba(189, 24, 52, 0.35);
   border-radius: 9999px;
   padding: 0.85rem 1.75rem;
   text-align: center;
   font-family: var(--font-display, 'Cinzel', serif);
   font-size: 0.95rem;
   font-weight: 700;
-  color: #DC143C;
+  color: #bd1834;
   letter-spacing: 0.06em;
   display: flex;
   align-items: center;
@@ -649,15 +649,15 @@
 
 .indicatorBox:hover {
   transform: translateY(-4px);
-  border-color: #DC143C;
-  box-shadow: 0 14px 32px rgba(220, 20, 60, 0.08);
+  border-color: #bd1834;
+  box-shadow: 0 14px 32px rgba(189, 24, 52, 0.08);
 }
 
 .indicatorNumber {
   font-family: var(--font-display, 'Cinzel', serif);
   font-size: clamp(2rem, 3.5vw, 2.75rem);
   font-weight: 800;
-  color: #DC143C;
+  color: #bd1834;
   line-height: 1.1;
   margin-bottom: 0.5rem;
 }
@@ -697,7 +697,7 @@
 .articleCard:hover {
   transform: translateY(-5px);
   box-shadow: 0 18px 42px rgba(0, 0, 0, 0.08);
-  border-color: #DC143C;
+  border-color: #bd1834;
 }
 
 .articleMeta {
@@ -714,8 +714,8 @@
 }
 
 .articleTopicTag {
-  background: rgba(220, 20, 60, 0.08);
-  color: #DC143C;
+  background: rgba(189, 24, 52, 0.08);
+  color: #bd1834;
   padding: 0.25rem 0.65rem;
   border-radius: 9999px;
 }
@@ -743,7 +743,7 @@
   gap: 0.4rem;
   font-size: 0.82rem;
   font-weight: 700;
-  color: #DC143C;
+  color: #bd1834;
   text-decoration: none;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -777,7 +777,7 @@
 
 .dialogueCard:hover {
   transform: translateY(-4px);
-  border-color: #DC143C;
+  border-color: #bd1834;
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.06);
 }
 
@@ -785,8 +785,8 @@
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  background: rgba(220, 20, 60, 0.08);
-  color: #DC143C;
+  background: rgba(189, 24, 52, 0.08);
+  color: #bd1834;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -811,7 +811,7 @@
 .founderSection {
   padding: clamp(3rem, 5vw, 4.5rem) 0;
   background: #F7F5F0;
-  border-top: 1px solid rgba(220, 20, 60, 0.15);
+  border-top: 1px solid rgba(189, 24, 52, 0.15);
 }
 
 .founderCardCompact {
@@ -833,8 +833,8 @@
   height: 120px;
   border-radius: 50%;
   overflow: hidden;
-  border: 3px solid #DC143C;
-  box-shadow: 0 6px 18px rgba(220, 20, 60, 0.2);
+  border: 3px solid #bd1834;
+  box-shadow: 0 6px 18px rgba(189, 24, 52, 0.2);
 }
 
 .founderImgCompact {
@@ -853,7 +853,7 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: #DC143C;
+  color: #bd1834;
   margin-bottom: 0.35rem;
 }
 
@@ -892,7 +892,7 @@
   font-size: 0.8rem;
   font-weight: 700;
   color: #FFFFFF;
-  background: #DC143C;
+  background: #bd1834;
   padding: 0.45rem 1.15rem;
   border-radius: 9999px;
   text-decoration: none;

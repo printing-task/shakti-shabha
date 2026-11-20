@@ -464,7 +464,7 @@ export default function HistoryPage() {
             : '२०१९ के प्रथम शिविरों से लेकर आज के २०२६ के अखिल भारतीय शक्ति आंदोलन तक ७ वर्षों की प्रेरक यात्रा। जैसे-जैसे आप स्क्रॉल करेंगे, वर्तमान वर्ष का चित्र, उपलब्धियाँ और पुरातात्विक अभिलेख स्वतः विस्तार लेंगे।'}
         </p>
         <div className={h.scrollProgressPill}>
-          <Compass size={14} color="#DC143C" />
+          <Compass size={14} color="#bd1834" />
           <span>{lang === 'en' ? 'Current Active Milestone:' : 'वर्तमान सक्रिय कालखंड:'}</span>
           <span className={h.scrollProgressVal}>
             {lang === 'en' ? currentMilestone.nameEn : currentMilestone.nameHi} ({lang === 'en' ? currentMilestone.dateDisplayEn : currentMilestone.dateDisplayHi})

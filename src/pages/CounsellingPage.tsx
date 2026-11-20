@@ -274,7 +274,7 @@ export default function CounsellingPage() {
                 <div className={cp.cardContent}>
                   <div className={cp.tags}>
                     <span className={`${cp.tag} ${cp.tagHighlight}`}>
-                      <GoogleIcon name={item.icon} size={14} style={{ color: '#DC143C' }} />
+                      <GoogleIcon name={item.icon} size={14} style={{ color: '#bd1834' }} />
                       {item.tags[0]}
                     </span>
                     {item.tags.slice(1).map((t, ti) => (
@@ -312,7 +312,7 @@ export default function CounsellingPage() {
         <div id="book-session" className={cp.bookingBox}>
           <div className={cp.bookingGrid}>
             <div>
-              <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#DC143C', fontWeight: 700, textTransform: 'uppercase' }}>
+              <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#bd1834', fontWeight: 700, textTransform: 'uppercase' }}>
                 Safe & Confidential
               </span>
               <h2 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.8rem', color: '#111827', margin: '0.5rem 0 1rem' }}>
@@ -534,7 +534,7 @@ export default function CounsellingPage() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    style={{ padding: '0.85rem', background: '#DC143C', color: '#FFFFFF', border: 'none', borderRadius: '9999px', fontWeight: 600, cursor: 'pointer', fontSize: '0.9rem', transition: 'background 0.2s', opacity: submitting ? 0.7 : 1 }}
+                    style={{ padding: '0.85rem', background: '#bd1834', color: '#FFFFFF', border: 'none', borderRadius: '9999px', fontWeight: 600, cursor: 'pointer', fontSize: '0.9rem', transition: 'background 0.2s', opacity: submitting ? 0.7 : 1 }}
                   >
                     {submitting ? 'Submitting...' : 'Request Safe Callback →'}
                   </button>

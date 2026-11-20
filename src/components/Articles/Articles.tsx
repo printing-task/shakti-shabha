@@ -118,7 +118,7 @@ export default function Articles() {
         {/* Featured Publication / Signature Insight Banner */}
         <div style={{
           background: '#1C1B18',
-          border: '1px solid rgba(220, 20, 60, 0.35)',
+          border: '1px solid rgba(189, 24, 52, 0.35)',
           borderRadius: 14,
           padding: '1.75rem 2rem',
           marginBottom: '2.5rem',
@@ -144,7 +144,7 @@ export default function Articles() {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '0.5rem',
-            background: '#DC143C',
+            background: '#bd1834',
             color: '#FFFFFF',
             padding: '0.75rem 1.4rem',
             borderRadius: 6,

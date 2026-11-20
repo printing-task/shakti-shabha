@@ -1,6 +1,6 @@
 /* ============================================================
    ThreeStreamsPage.module.css — The Union of Peace & Revolution
-   Clean White Theme · Crimson Red #DC143C Accents
+   Clean White Theme · Crimson Red #bd1834 Accents
    ============================================================ */
 
 .page {
@@ -18,7 +18,7 @@
   padding: calc(clamp(3.5rem, 6vw, 5.5rem) + 4.5rem) clamp(1.5rem, 4vw, 3rem) clamp(3.5rem, 6vw, 4.5rem);
   position: relative;
   overflow: hidden;
-  border-bottom: 1px solid #E5E7EB;
+  border-bottom: 1px solid #e8e4df;
 }
 
 .heroInner {
@@ -43,7 +43,7 @@
 }
 
 .backLink:hover {
-  color: #DC143C;
+  color: #bd1834;
 }
 
 .badge {
@@ -52,9 +52,9 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #DC143C;
-  background: rgba(220, 20, 60, 0.08);
-  border: 1px solid rgba(220, 20, 60, 0.2);
+  color: #bd1834;
+  background: rgba(189, 24, 52, 0.08);
+  border: 1px solid rgba(189, 24, 52, 0.2);
   padding: 0.35rem 1.1rem;
   border-radius: 9999px;
   margin-bottom: 1.25rem;
@@ -73,7 +73,7 @@
 .hindiSubtitle {
   font-family: var(--font-devanagari, 'Noto Sans Devanagari', sans-serif);
   font-size: 1.25rem;
-  color: #DC143C;
+  color: #bd1834;
   font-weight: 600;
   margin-bottom: 1rem;
 }
@@ -103,12 +103,12 @@
 }
 
 .tagMardini {
-  background: rgba(220, 20, 60, 0.08);
-  color: #DC143C;
-  border: 1px solid rgba(220, 20, 60, 0.25);
+  background: rgba(189, 24, 52, 0.08);
+  color: #bd1834;
+  border: 1px solid rgba(189, 24, 52, 0.25);
 }
 .tagMardini:hover {
-  background: #DC143C;
+  background: #bd1834;
   color: #FFFFFF;
 }
 
@@ -149,7 +149,7 @@
 
 .statCard {
   background: #F9FAFB;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   border-radius: 12px;
   padding: 1.5rem 1.25rem;
   text-align: left;
@@ -167,7 +167,7 @@
   font-family: var(--font-display, 'Cinzel', serif);
   font-size: clamp(1.4rem, 2.2vw, 1.85rem);
   font-weight: 700;
-  color: #DC143C;
+  color: #bd1834;
   line-height: 1.15;
   margin-bottom: 0.4rem;
   display: flex;
@@ -201,7 +201,7 @@
   display: block;
   font-size: 0.72rem;
   letter-spacing: 0.2em;
-  color: #DC143C;
+  color: #bd1834;
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
@@ -242,7 +242,7 @@
 
 .streamCard {
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   border-radius: 14px;
   padding: 2.25rem 2rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
@@ -339,7 +339,7 @@
 }
 
 .streamBtnMardini {
-  background: #DC143C;
+  background: #bd1834;
   color: #FFFFFF;
 }
 .streamBtnMardini:hover {
@@ -377,7 +377,7 @@
 /* ── CONVERGENCE SECTION ────────────────────────────────── */
 .convergenceSection {
   background: #F9FAFB;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   border-radius: 14px;
   padding: clamp(2rem, 5vw, 3.5rem);
   margin-bottom: 4rem;
@@ -392,7 +392,7 @@
 
 .convStep {
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   border-radius: 10px;
   padding: 1.5rem;
 }
@@ -404,8 +404,8 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(220, 20, 60, 0.1);
-  color: #DC143C;
+  background: rgba(189, 24, 52, 0.1);
+  color: #bd1834;
   font-weight: 700;
   font-size: 0.85rem;
   margin-bottom: 0.75rem;
@@ -442,7 +442,7 @@
 }
 
 .primaryBtn {
-  background: #DC143C;
+  background: #bd1834;
   color: #FFFFFF;
   font-size: 0.88rem;
   font-weight: 600;
@@ -458,7 +458,7 @@
 .primaryBtn:hover {
   background: #B01030;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(220, 20, 60, 0.3);
+  box-shadow: 0 8px 24px rgba(189, 24, 52, 0.3);
 }
 
 .secondaryBtn {
@@ -474,8 +474,8 @@
 }
 
 .secondaryBtn:hover {
-  border-color: #DC143C;
-  color: #DC143C;
+  border-color: #bd1834;
+  color: #bd1834;
 }
 
 /* ── RESPONSIVE ─────────────────────────────────────────── */

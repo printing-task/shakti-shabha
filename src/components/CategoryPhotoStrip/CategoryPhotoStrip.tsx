@@ -36,7 +36,7 @@ export default function CategoryPhotoStrip({
   categoryKeywords,
   title,
   subtitle,
-  accentColor = '#DC143C',
+  accentColor = '#bd1834',
   fallbackUrls = []
 }: CategoryPhotoStripProps) {
   // Determine standard fallbacks based on keyword

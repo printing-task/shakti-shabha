@@ -333,7 +333,7 @@ export default function CoursesPage() {
       <div className={s.section}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem' }}>
           <div>
-            <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#DC143C', fontWeight: 700, textTransform: 'uppercase' }}>
+            <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#bd1834', fontWeight: 700, textTransform: 'uppercase' }}>
               Structured Curriculum
             </span>
             <h2 className={s.sectionTitle} style={{ marginBottom: 0, marginTop: '0.35rem' }}>Available Institutional Programs &amp; Cohorts</h2>
@@ -375,11 +375,11 @@ export default function CoursesPage() {
 
                 <div className={cp.metaGrid}>
                   <div className={cp.metaItem}>
-                    <GoogleIcon name="schedule" size={16} style={{ color: '#DC143C' }} />
+                    <GoogleIcon name="schedule" size={16} style={{ color: '#bd1834' }} />
                     <span>{course.duration}</span>
                   </div>
                   <div className={cp.metaItem}>
-                    <GoogleIcon name="play_circle" size={16} style={{ color: '#DC143C' }} />
+                    <GoogleIcon name="play_circle" size={16} style={{ color: '#bd1834' }} />
                     <span>{course.modules}</span>
                   </div>
                 </div>
@@ -451,7 +451,7 @@ export default function CoursesPage() {
                 </div>
                 <div>
                   <div style={{ fontSize: '0.72rem', color: '#6B7280', textTransform: 'uppercase', fontWeight: 600 }}>Format</div>
-                  <div style={{ fontWeight: 700, color: '#DC143C', fontSize: '0.95rem' }}>Institutional Cohort</div>
+                  <div style={{ fontWeight: 700, color: '#bd1834', fontSize: '0.95rem' }}>Institutional Cohort</div>
                 </div>
                 <div>
                   <div style={{ fontSize: '0.72rem', color: '#6B7280', textTransform: 'uppercase', fontWeight: 600 }}>Certificate</div>
@@ -469,7 +469,7 @@ export default function CoursesPage() {
               {detailCourse.syllabus && detailCourse.syllabus.length > 0 && (
                 <div className={cp.syllabusBox}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.85rem' }}>
-                    <GoogleIcon name="menu_book" size={20} style={{ color: '#DC143C' }} />
+                    <GoogleIcon name="menu_book" size={20} style={{ color: '#bd1834' }} />
                     <h4 style={{ fontSize: '0.98rem', fontWeight: 700, color: '#111827', margin: 0 }}>
                       Complete Weekly Syllabus ({detailCourse.syllabus.length} Modules)
                     </h4>
@@ -531,7 +531,7 @@ export default function CoursesPage() {
               </button>
 
               <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-                <GoogleIcon name="school" size={48} style={{ color: '#DC143C', marginBottom: '0.5rem' }} />
+                <GoogleIcon name="school" size={48} style={{ color: '#bd1834', marginBottom: '0.5rem' }} />
                 <h3 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.4rem', color: '#111827' }}>Cohort Intake Application</h3>
                 <p style={{ fontSize: '0.88rem', color: '#4B5563', marginTop: '0.25rem' }}>{selectedCourse}</p>
               </div>
@@ -621,7 +621,7 @@ export default function CoursesPage() {
 
                 <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
                   <button type="button" onClick={() => setSelectedCourse(null)} style={{ flex: 1, padding: '0.7rem', background: '#F3F4F6', color: '#374151', border: 'none', borderRadius: '6px', fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
-                  <button type="submit" style={{ flex: 2, padding: '0.7rem', background: '#DC143C', color: '#FFFFFF', border: 'none', borderRadius: '6px', fontWeight: 600, cursor: 'pointer' }}>Submit Application →</button>
+                  <button type="submit" style={{ flex: 2, padding: '0.7rem', background: '#bd1834', color: '#FFFFFF', border: 'none', borderRadius: '6px', fontWeight: 600, cursor: 'pointer' }}>Submit Application →</button>
                 </div>
               </form>
             </div>
@@ -631,7 +631,7 @@ export default function CoursesPage() {
         {/* Technical Architecture Specs (SRS Section 11 Compliance) */}
         <div className={cp.techSpecsBox}>
           <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 2.5rem' }}>
-            <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#DC143C', fontWeight: 700, textTransform: 'uppercase' }}>
+            <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#bd1834', fontWeight: 700, textTransform: 'uppercase' }}>
               LMS Platform Architecture
             </span>
             <h2 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.6rem', color: '#111827', margin: '0.4rem 0 0' }}>
@@ -645,28 +645,28 @@ export default function CoursesPage() {
           <div className={cp.specsGrid}>
             <div className={cp.specCard}>
               <div className={cp.specIcon}>
-                <GoogleIcon name="shield" size={32} style={{ color: '#DC143C' }} />
+                <GoogleIcon name="shield" size={32} style={{ color: '#bd1834' }} />
               </div>
               <h4 className={cp.specTitle}>DRM CloudFront</h4>
               <p className={cp.specText}>Time-limited signed URLs and dynamic watermarking prevent unauthorized video downloading and recording.</p>
             </div>
             <div className={cp.specCard}>
               <div className={cp.specIcon}>
-                <GoogleIcon name="trending_up" size={32} style={{ color: '#DC143C' }} />
+                <GoogleIcon name="trending_up" size={32} style={{ color: '#bd1834' }} />
               </div>
               <h4 className={cp.specTitle}>Progress Tracking</h4>
               <p className={cp.specText}>Automatic module completion tracking, formative comprehension quizzes, and structured note-taking.</p>
             </div>
             <div className={cp.specCard}>
               <div className={cp.specIcon}>
-                <GoogleIcon name="stay_current_portrait" size={32} style={{ color: '#DC143C' }} />
+                <GoogleIcon name="stay_current_portrait" size={32} style={{ color: '#bd1834' }} />
               </div>
               <h4 className={cp.specTitle}>Responsive Player</h4>
               <p className={cp.specText}>0.5x to 2x speed adjustment, multi-language subtitle tracks (Hindi &amp; English), and mobile offline caching.</p>
             </div>
             <div className={cp.specCard}>
               <div className={cp.specIcon}>
-                <GoogleIcon name="verified" size={32} style={{ color: '#DC143C' }} />
+                <GoogleIcon name="verified" size={32} style={{ color: '#bd1834' }} />
               </div>
               <h4 className={cp.specTitle}>Digital Credential</h4>
               <p className={cp.specText}>Cryptographically tamper-proof PDF certificates with public verification hashes for academic credit.</p>
@@ -678,7 +678,7 @@ export default function CoursesPage() {
         <div className={cp.storeSection}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
-              <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#DC143C', fontWeight: 700, textTransform: 'uppercase' }}>
+              <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#bd1834', fontWeight: 700, textTransform: 'uppercase' }}>
                 SRS Section 11 · Value Store
               </span>
               <h2 className={s.sectionTitle} style={{ marginBottom: 0, marginTop: '0.35rem' }}>Aaryaveera Merchandise &amp; Books</h2>
@@ -692,14 +692,14 @@ export default function CoursesPage() {
             {MERCH_DATA.map((item, idx) => (
               <div key={idx} className={cp.storeCard}>
                 <div className={cp.storeImg}>
-                  <GoogleIcon name={item.icon} size={36} style={{ color: '#DC143C' }} />
+                  <GoogleIcon name={item.icon} size={36} style={{ color: '#bd1834' }} />
                 </div>
                 <div className={cp.storeInfo}>
                   <div style={{ fontSize: '0.72rem', color: '#6B7280', textTransform: 'uppercase', fontWeight: 600 }}>{item.tag}</div>
                   <h4 className={cp.storeTitle}>{item.title}</h4>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.75rem' }}>
                     <span className={cp.storePrice}>{item.price}</span>
-                    <button style={{ padding: '0.45rem 1.15rem', background: '#DC143C', color: '#FFFFFF', border: 'none', borderRadius: 9999, minHeight: '34px', fontSize: '0.78rem', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>Order Kit →</button>
+                    <button style={{ padding: '0.45rem 1.15rem', background: '#bd1834', color: '#FFFFFF', border: 'none', borderRadius: 9999, minHeight: '34px', fontSize: '0.78rem', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>Order Kit →</button>
                   </div>
                 </div>
               </div>
@@ -721,7 +721,7 @@ export default function CoursesPage() {
               <div className={cp.contactHighlights}>
                 <div className={cp.contactHighlightItem}>
                   <div className={cp.highlightIcon}>
-                    <GoogleIcon name="call" size={20} style={{ color: '#DC143C' }} />
+                    <GoogleIcon name="call" size={20} style={{ color: '#bd1834' }} />
                   </div>
                   <div>
                     <div className={cp.highlightTitle}>Helpline &amp; WhatsApp</div>
@@ -731,7 +731,7 @@ export default function CoursesPage() {
 
                 <div className={cp.contactHighlightItem}>
                   <div className={cp.highlightIcon}>
-                    <GoogleIcon name="mail" size={20} style={{ color: '#DC143C' }} />
+                    <GoogleIcon name="mail" size={20} style={{ color: '#bd1834' }} />
                   </div>
                   <div>
                     <div className={cp.highlightTitle}>Admissions Email</div>
@@ -741,7 +741,7 @@ export default function CoursesPage() {
 
                 <div className={cp.contactHighlightItem}>
                   <div className={cp.highlightIcon}>
-                    <GoogleIcon name="verified_user" size={20} style={{ color: '#DC143C' }} />
+                    <GoogleIcon name="verified_user" size={20} style={{ color: '#bd1834' }} />
                   </div>
                   <div>
                     <div className={cp.highlightTitle}>Confidential &amp; Verified</div>
@@ -771,7 +771,7 @@ export default function CoursesPage() {
                     style={{
                       marginTop: '1rem',
                       padding: '0.5rem 1.25rem',
-                      background: '#DC143C',
+                      background: '#bd1834',
                       color: '#FFFFFF',
                       border: 'none',
                       borderRadius: '9999px',

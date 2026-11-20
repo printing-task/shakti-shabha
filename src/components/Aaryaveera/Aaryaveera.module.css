@@ -327,7 +327,7 @@
 
 @keyframes breathe {
   0%, 100% { filter: drop-shadow(0 0 30px rgba(232, 201, 138, 0.14)); }
-  50%      { filter: drop-shadow(0 0 65px rgba(220, 20, 60, 0.35)); }
+  50%      { filter: drop-shadow(0 0 65px rgba(189, 24, 52, 0.35)); }
 }
 
 /* ============================================================

@@ -283,7 +283,7 @@ export default function Testimonials() {
               style={{
                 width: '100%',
                 padding: '0.75rem',
-                background: '#DC143C',
+                background: '#bd1834',
                 color: '#FFFFFF',
                 border: 'none',
                 borderRadius: '9999px',

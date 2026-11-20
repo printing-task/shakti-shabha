@@ -65,7 +65,7 @@ function ShaktiLoader({ title, status, percent, filename }: LoaderProps) {
 
         {filename && (
           <div className={s.loaderFilename}>
-            <GoogleIcon name="photo_camera" size={14} style={{ color: '#DC143C' }} />
+            <GoogleIcon name="photo_camera" size={14} style={{ color: '#bd1834' }} />
             <span>{filename}</span>
           </div>
         )}
@@ -128,7 +128,7 @@ export default function AdminDashboard() {
       <aside className={s.sidebar}>
         <Link to="/" className={s.sidebarLogo}>
           <div className={s.logoIcon}>
-            <GoogleIcon name="shield" size={24} style={{ color: '#DC143C' }} />
+            <GoogleIcon name="shield" size={24} style={{ color: '#bd1834' }} />
           </div>
           <div>
             <span className={s.logoText}>Shakti Sabha</span>
@@ -259,7 +259,7 @@ function OverviewSection() {
         ].map(item => (
           <div key={item.title} style={{ background: '#111115', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: '1.25rem' }}>
             <div style={{ marginBottom: '0.5rem' }}>
-              <GoogleIcon name={item.icon} size={28} style={{ color: '#DC143C' }} />
+              <GoogleIcon name={item.icon} size={28} style={{ color: '#bd1834' }} />
             </div>
             <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#F3F4F6', marginBottom: '0.35rem' }}>{item.title}</div>
             <div style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.6 }}>{item.desc}</div>
@@ -649,8 +649,8 @@ function ManualImageCropperModal({ imageSrc, onClose, onSaveCrop, defaultRatio =
                 padding: '0.2rem 0.55rem',
                 fontSize: '0.72rem',
                 borderRadius: 4,
-                background: 'rgba(220, 20, 60, 0.15)',
-                border: '1px solid rgba(220, 20, 60, 0.3)',
+                background: 'rgba(189, 24, 52, 0.15)',
+                border: '1px solid rgba(189, 24, 52, 0.3)',
                 color: '#FF8095',
                 cursor: 'pointer',
                 marginLeft: 'auto'
@@ -889,8 +889,8 @@ function ArticlesSection() {
                     padding: '0.35rem 0.85rem',
                     borderRadius: 20,
                     border: '1px solid',
-                    borderColor: previewLang === 'en' ? '#DC143C' : '#D1D5DB',
-                    background: previewLang === 'en' ? '#DC143C' : '#F3F4F6',
+                    borderColor: previewLang === 'en' ? '#bd1834' : '#D1D5DB',
+                    background: previewLang === 'en' ? '#bd1834' : '#F3F4F6',
                     color: previewLang === 'en' ? '#FFFFFF' : '#374151',
                     fontSize: '0.8rem',
                     fontWeight: 700,
@@ -906,8 +906,8 @@ function ArticlesSection() {
                     padding: '0.35rem 0.85rem',
                     borderRadius: 20,
                     border: '1px solid',
-                    borderColor: previewLang === 'hi' ? '#DC143C' : '#D1D5DB',
-                    background: previewLang === 'hi' ? '#DC143C' : '#F3F4F6',
+                    borderColor: previewLang === 'hi' ? '#bd1834' : '#D1D5DB',
+                    background: previewLang === 'hi' ? '#bd1834' : '#F3F4F6',
                     color: previewLang === 'hi' ? '#FFFFFF' : '#374151',
                     fontSize: '0.8rem',
                     fontWeight: 700,
@@ -928,7 +928,7 @@ function ArticlesSection() {
               </button>
             </div>
 
-            <div style={{ fontSize: '0.72rem', color: '#DC143C', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.4rem' }}>
+            <div style={{ fontSize: '0.72rem', color: '#bd1834', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.4rem' }}>
               ● {form.category.toUpperCase()} · {previewLang === 'hi' ? 'शक्ति सभा विशेष लेख' : 'Shakti Sabha Verified Article'}
             </div>
 
@@ -937,7 +937,7 @@ function ArticlesSection() {
             </h1>
 
             {previewLang === 'en' && form.title_hi && (
-              <div style={{ color: '#DC143C', fontSize: '1rem', marginBottom: '0.75rem', fontWeight: 600 }}>
+              <div style={{ color: '#bd1834', fontSize: '1rem', marginBottom: '0.75rem', fontWeight: 600 }}>
                 {form.title_hi}
               </div>
             )}
@@ -957,7 +957,7 @@ function ArticlesSection() {
             )}
 
             {(previewLang === 'hi' ? form.excerpt_hi : form.excerpt_en) && (
-              <div style={{ background: '#FFF5F5', borderLeft: '4px solid #DC143C', padding: '1rem 1.25rem', borderRadius: '0 8px 8px 0', fontSize: '0.92rem', color: '#374151', lineHeight: 1.7, marginBottom: '1.5rem', fontStyle: 'italic' }}>
+              <div style={{ background: '#FFF5F5', borderLeft: '4px solid #bd1834', padding: '1rem 1.25rem', borderRadius: '0 8px 8px 0', fontSize: '0.92rem', color: '#374151', lineHeight: 1.7, marginBottom: '1.5rem', fontStyle: 'italic' }}>
                 {previewLang === 'hi' ? form.excerpt_hi : form.excerpt_en}
               </div>
             )}
@@ -1615,7 +1615,7 @@ function GallerySection() {
           <>
             <span className={s.breadcrumbSeparator}>›</span>
             <span className={s.breadcrumbCurrent}>
-              <GoogleIcon name="folder" size={18} style={{ color: '#DC143C' }} />
+              <GoogleIcon name="folder" size={18} style={{ color: '#bd1834' }} />
               <span>{currentCatObj.name}</span>
               <span className={s.folderCountBadge}>
                 {allPhotosCount[currentCatObj.id] || 0} photos
@@ -1672,7 +1672,7 @@ function GallerySection() {
 
           {/* ── MULTI-FOLDER ACTION TOOLBAR ── */}
           {selectedFolderIds.length > 0 && (
-            <div style={{ background: '#1A1A22', border: '1px solid #DC143C', borderRadius: 12, padding: '0.85rem 1.25rem', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
+            <div style={{ background: '#1A1A22', border: '1px solid #bd1834', borderRadius: 12, padding: '0.85rem 1.25rem', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <span style={{ fontWeight: 700, color: '#F9FAFB', fontSize: '0.9rem' }}>
                   ✓ {selectedFolderIds.length} folder(s) selected
@@ -1752,8 +1752,8 @@ function GallerySection() {
                   className={s.folderCard}
                   style={{
                     position: 'relative',
-                    borderColor: isSelected ? '#DC143C' : undefined,
-                    boxShadow: isSelected ? '0 0 0 2px #DC143C' : undefined
+                    borderColor: isSelected ? '#bd1834' : undefined,
+                    boxShadow: isSelected ? '0 0 0 2px #bd1834' : undefined
                   }}
                   onClick={() => setSelectedCat(cat.id)}
                 >
@@ -1769,7 +1769,7 @@ function GallerySection() {
                         if (e.target.checked) setSelectedFolderIds(prev => [...prev, cat.id])
                         else setSelectedFolderIds(prev => prev.filter(fId => fId !== cat.id))
                       }}
-                      style={{ width: 18, height: 18, accentColor: '#DC143C', cursor: 'pointer' }}
+                      style={{ width: 18, height: 18, accentColor: '#bd1834', cursor: 'pointer' }}
                       title="Select folder for bulk actions"
                     />
                   </div>
@@ -1863,7 +1863,7 @@ function GallerySection() {
                   <GoogleIcon name="arrow_back" size={16} /> Back to Folders
                 </button>
                 <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#F9FAFB', fontFamily: "'Cinzel', serif", display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <GoogleIcon name="folder_open" size={24} style={{ color: '#DC143C' }} />
+                  <GoogleIcon name="folder_open" size={24} style={{ color: '#bd1834' }} />
                   {currentCatObj.name}
                 </h3>
               </div>
@@ -1895,7 +1895,7 @@ function GallerySection() {
             style={{ marginBottom: '1.5rem', cursor: 'pointer' }}
             onClick={() => fileRef.current?.click()}
           >
-            <div className={s.uploadIcon}><GoogleIcon name="cloud_upload" size={32} style={{ color: '#DC143C' }} /></div>
+            <div className={s.uploadIcon}><GoogleIcon name="cloud_upload" size={32} style={{ color: '#bd1834' }} /></div>
             <div className={s.uploadText}>{uploading ? 'Processing & Compressing...' : `Click to Select Photos for "${currentCatObj.name}"`}</div>
             <div className={s.uploadHint}>Select multiple files • Requires confirmation before saving to database</div>
             <div style={{ marginTop: '0.5rem', display: 'inline-block', fontSize: '0.75rem', color: '#C9A96E', background: 'rgba(201,169,110,0.12)', border: '1px solid rgba(201,169,110,0.3)', padding: '0.2rem 0.65rem', borderRadius: 6, fontWeight: 600 }}>
@@ -1968,8 +1968,8 @@ function GallerySection() {
                   className={s.photoCard}
                   style={{
                     position: 'relative',
-                    borderColor: isPhotoSelected ? '#DC143C' : undefined,
-                    boxShadow: isPhotoSelected ? '0 0 0 2px #DC143C' : undefined
+                    borderColor: isPhotoSelected ? '#bd1834' : undefined,
+                    boxShadow: isPhotoSelected ? '0 0 0 2px #bd1834' : undefined
                   }}
                 >
                   {/* Photo Checkbox */}
@@ -1984,7 +1984,7 @@ function GallerySection() {
                         if (e.target.checked) setSelectedPhotoIds(prev => [...prev, p.id])
                         else setSelectedPhotoIds(prev => prev.filter(pId => pId !== p.id))
                       }}
-                      style={{ width: 17, height: 17, accentColor: '#DC143C', cursor: 'pointer', display: 'block' }}
+                      style={{ width: 17, height: 17, accentColor: '#bd1834', cursor: 'pointer', display: 'block' }}
                       title="Select photo"
                     />
                   </div>
@@ -2063,7 +2063,7 @@ function GallerySection() {
               ))}
             </div>
 
-            <div style={{ background: 'rgba(220,20,60,0.08)', border: '1px solid rgba(220,20,60,0.25)', borderRadius: 8, padding: '0.75rem 1rem', fontSize: '0.82rem', color: '#FFB3BA', marginBottom: '1.5rem' }}>
+            <div style={{ background: 'rgba(189,24,52,0.08)', border: '1px solid rgba(189,24,52,0.25)', borderRadius: 8, padding: '0.75rem 1rem', fontSize: '0.82rem', color: '#FFB3BA', marginBottom: '1.5rem' }}>
               ✦ Photos will be automatically compressed to WebP and committed to the database upon confirmation.
             </div>
 
@@ -2781,7 +2781,7 @@ function CoursesSection() {
           <span>Student Applications &amp; Inquiries</span>
           <span style={{ opacity: 0.65, fontSize: '0.8rem' }}>({inquiries.length})</span>
           {pendingInquiriesCount > 0 && (
-            <span style={{ background: '#DC143C', color: '#FFFFFF', padding: '0.12rem 0.5rem', borderRadius: 9999, fontSize: '0.72rem', fontWeight: 700 }}>
+            <span style={{ background: '#bd1834', color: '#FFFFFF', padding: '0.12rem 0.5rem', borderRadius: 9999, fontSize: '0.72rem', fontWeight: 700 }}>
               {pendingInquiriesCount} New
             </span>
           )}
@@ -2876,9 +2876,9 @@ function CoursesSection() {
               <div style={{ fontSize: '0.78rem', color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Total Submissions</div>
               <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#F9FAFB', marginTop: '0.25rem' }}>{inquiries.length}</div>
             </div>
-            <div style={{ background: 'rgba(220,20,60,0.08)', border: '1px solid rgba(220,20,60,0.25)', borderRadius: 12, padding: '1rem 1.25rem' }}>
+            <div style={{ background: 'rgba(189,24,52,0.08)', border: '1px solid rgba(189,24,52,0.25)', borderRadius: 12, padding: '1rem 1.25rem' }}>
               <div style={{ fontSize: '0.78rem', color: '#FF8095', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Pending Review</div>
-              <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#DC143C', marginTop: '0.25rem' }}>
+              <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#bd1834', marginTop: '0.25rem' }}>
                 {inquiries.filter(i => i.status === 'pending').length}
               </div>
             </div>
@@ -3087,7 +3087,7 @@ function CoursesSection() {
         <div className={s.overlay} data-lenis-prevent="true" onClick={e => e.target === e.currentTarget && setViewInquiry(null)}>
           <div className={s.modal} style={{ maxWidth: 580 }} data-lenis-prevent="true">
             <h2 className={s.modalTitle} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <GoogleIcon name="school" size={22} style={{ color: '#DC143C' }} />
+              <GoogleIcon name="school" size={22} style={{ color: '#bd1834' }} />
               Course Application Dossier
             </h2>
             <button className={s.modalClose} onClick={() => setViewInquiry(null)}>
@@ -3779,7 +3779,7 @@ function CounsellingSection() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
           <div>
             <h3 style={{ margin: 0, fontSize: '1.15rem', color: '#F9FAFB', display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: "'Cinzel', serif" }}>
-              <GoogleIcon name="public" size={22} style={{ color: '#DC143C' }} />
+              <GoogleIcon name="public" size={22} style={{ color: '#bd1834' }} />
               Geographic Intake Analytics — Requests by Country
             </h3>
             <p style={{ margin: '0.25rem 0 0', fontSize: '0.82rem', color: '#888' }}>
@@ -3801,8 +3801,8 @@ function CounsellingSection() {
                 key={cName}
                 onClick={() => setCountryFilter(isSelected ? 'all' : cName)}
                 style={{
-                  background: isSelected ? 'rgba(220,20,60,0.12)' : 'rgba(255,255,255,0.02)',
-                  border: isSelected ? '1px solid #DC143C' : '1px solid rgba(255,255,255,0.08)',
+                  background: isSelected ? 'rgba(189,24,52,0.12)' : 'rgba(255,255,255,0.02)',
+                  border: isSelected ? '1px solid #bd1834' : '1px solid rgba(255,255,255,0.08)',
                   borderRadius: 12,
                   padding: '1rem',
                   cursor: 'pointer',
@@ -3811,10 +3811,10 @@ function CounsellingSection() {
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
                   <span style={{ fontWeight: 700, color: '#F3F4F6', fontSize: '0.92rem' }}>{cName}</span>
-                  <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#DC143C' }}>{count}</span>
+                  <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#bd1834' }}>{count}</span>
                 </div>
                 <div style={{ width: '100%', height: 6, background: 'rgba(255,255,255,0.08)', borderRadius: 999, overflow: 'hidden', marginBottom: '0.4rem' }}>
-                  <div style={{ width: `${pct}%`, height: '100%', background: '#DC143C', borderRadius: 999 }} />
+                  <div style={{ width: `${pct}%`, height: '100%', background: '#bd1834', borderRadius: 999 }} />
                 </div>
                 <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)' }}>
                   {pct}% of total intake
@@ -3919,7 +3919,7 @@ function CounsellingSection() {
                   </td>
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600, color: '#F3F4F6' }}>
-                      <GoogleIcon name="place" size={14} style={{ color: '#DC143C' }} />
+                      <GoogleIcon name="place" size={14} style={{ color: '#bd1834' }} />
                       <span>{r.country}</span>
                     </div>
                     <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.45)', marginLeft: 18 }}>
@@ -3928,7 +3928,7 @@ function CounsellingSection() {
                   </td>
                   <td>
                     {r.concern && (r.concern.includes('[Course') || r.concern.includes('[Cohort')) && (
-                      <span style={{ background: 'rgba(220, 20, 60, 0.2)', color: '#FF8A9E', border: '1px solid rgba(220, 20, 60, 0.5)', padding: '0.12rem 0.45rem', borderRadius: '4px', fontSize: '0.68rem', fontWeight: 800, marginRight: '0.35rem', letterSpacing: '0.04em' }}>
+                      <span style={{ background: 'rgba(189, 24, 52, 0.2)', color: '#FF8A9E', border: '1px solid rgba(189, 24, 52, 0.5)', padding: '0.12rem 0.45rem', borderRadius: '4px', fontSize: '0.68rem', fontWeight: 800, marginRight: '0.35rem', letterSpacing: '0.04em' }}>
                         COURSE
                       </span>
                     )}
@@ -4373,7 +4373,7 @@ function TestimonialsSection() {
                         {t.image_url ? (
                           <img src={t.image_url} alt={t.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         ) : (
-                          <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#DC143C' }}>{t.name.charAt(0)}</span>
+                          <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#bd1834' }}>{t.name.charAt(0)}</span>
                         )}
                       </div>
                       <span style={{ fontWeight: 600, color: '#F9FAFB' }}>{t.name}</span>
@@ -4462,7 +4462,7 @@ function TestimonialsSection() {
                 {/* Live Preview & Adjust */}
                 {form.image_url ? (
                   <div style={{ marginTop: '0.85rem', display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-                    <div style={{ width: 64, height: 64, borderRadius: '50%', overflow: 'hidden', border: '2px solid #DC143C' }}>
+                    <div style={{ width: 64, height: 64, borderRadius: '50%', overflow: 'hidden', border: '2px solid #bd1834' }}>
                       <img src={form.image_url} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
@@ -4544,7 +4544,7 @@ function TestimonialsSection() {
                     type="checkbox"
                     checked={form.published}
                     onChange={e => setForm(f => ({ ...f, published: e.target.checked }))}
-                    style={{ accentColor: '#DC143C', width: 16, height: 16 }}
+                    style={{ accentColor: '#bd1834', width: 16, height: 16 }}
                   />
                   Publish this testimonial to the website immediately
                 </label>
@@ -4665,7 +4665,7 @@ function FounderSection() {
         {/* Basic Identity & Hero Card */}
         <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 14, padding: '1.75rem' }}>
           <h3 style={{ color: '#F9FAFB', fontSize: '1.15rem', margin: '0 0 1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <GoogleIcon name="badge" size={20} style={{ color: '#DC143C' }} />
+            <GoogleIcon name="badge" size={20} style={{ color: '#bd1834' }} />
             Primary Identity &amp; Titles
           </h3>
 
@@ -4804,7 +4804,7 @@ function FounderSection() {
         {/* The Genesis & Kshatra-Dharma */}
         <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 14, padding: '1.75rem' }}>
           <h3 style={{ color: '#F9FAFB', fontSize: '1.15rem', margin: '0 0 1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <GoogleIcon name="history_edu" size={20} style={{ color: '#DC143C' }} />
+            <GoogleIcon name="history_edu" size={20} style={{ color: '#bd1834' }} />
             The Genesis &amp; Civilizational Sovereignty
           </h3>
 
@@ -4835,7 +4835,7 @@ function FounderSection() {
         {/* Frontline Interventions & Statutory Disclaimer */}
         <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 14, padding: '1.75rem' }}>
           <h3 style={{ color: '#F9FAFB', fontSize: '1.15rem', margin: '0 0 1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <GoogleIcon name="gavel" size={20} style={{ color: '#DC143C' }} />
+            <GoogleIcon name="gavel" size={20} style={{ color: '#bd1834' }} />
             Statutory Safeguarding &amp; Confidentiality Compliance
           </h3>
 
@@ -4870,8 +4870,8 @@ function FounderSection() {
       {popupModal && (
         <div className={s.overlay} data-lenis-prevent="true" onClick={() => setPopupModal(null)}>
           <div className={s.modal} data-lenis-prevent="true" style={{ maxWidth: 440, textAlign: 'center', padding: '2rem' }} onClick={e => e.stopPropagation()}>
-            <div style={{ width: 56, height: 56, borderRadius: '50%', background: popupModal.type === 'success' ? 'rgba(16,185,129,0.15)' : 'rgba(220,20,60,0.15)', border: popupModal.type === 'success' ? '2px solid #10B981' : '2px solid #DC143C', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem' }}>
-              <GoogleIcon name={popupModal.type === 'success' ? 'check_circle' : 'error'} size={32} style={{ color: popupModal.type === 'success' ? '#10B981' : '#DC143C' }} />
+            <div style={{ width: 56, height: 56, borderRadius: '50%', background: popupModal.type === 'success' ? 'rgba(16,185,129,0.15)' : 'rgba(189,24,52,0.15)', border: popupModal.type === 'success' ? '2px solid #10B981' : '2px solid #bd1834', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem' }}>
+              <GoogleIcon name={popupModal.type === 'success' ? 'check_circle' : 'error'} size={32} style={{ color: popupModal.type === 'success' ? '#10B981' : '#bd1834' }} />
             </div>
             <h3 style={{ margin: '0 0 0.5rem', color: '#F9FAFB', fontSize: '1.2rem', fontFamily: "'Cinzel', serif" }}>{popupModal.title}</h3>
             <p style={{ margin: '0 0 1.5rem', color: 'rgba(255,255,255,0.7)', fontSize: '0.88rem', lineHeight: 1.6 }}>{popupModal.msg}</p>
@@ -5212,7 +5212,7 @@ function EventsSection() {
             <div key={ev.id} style={{ background: '#111115', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 14, padding: '1.25rem 1.5rem', display: 'grid', gridTemplateColumns: '1fr auto', gap: '1rem', alignItems: 'center' }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem', flexWrap: 'wrap' }}>
-                  <span style={{ padding: '0.15rem 0.55rem', borderRadius: 12, fontSize: '0.7rem', background: ev.status === 'upcoming' ? 'rgba(61,90,69,0.4)' : ev.status === 'completed' ? 'rgba(201,169,110,0.2)' : 'rgba(220,20,60,0.2)', color: ev.status === 'upcoming' ? '#3D8B5A' : ev.status === 'completed' ? '#C9A96E' : '#DC143C' }}>
+                  <span style={{ padding: '0.15rem 0.55rem', borderRadius: 12, fontSize: '0.7rem', background: ev.status === 'upcoming' ? 'rgba(61,90,69,0.4)' : ev.status === 'completed' ? 'rgba(201,169,110,0.2)' : 'rgba(189,24,52,0.2)', color: ev.status === 'upcoming' ? '#3D8B5A' : ev.status === 'completed' ? '#C9A96E' : '#bd1834' }}>
                     {ev.status}
                   </span>
                   <span style={{ fontSize: '0.75rem', color: '#555' }}>{ev.stream} · {ev.format}</span>
@@ -5243,7 +5243,7 @@ function EventsSection() {
                   <GoogleIcon name="edit" size={16} />
                 </button>
                 <button onClick={() => handleDelete(ev.id)} title="Delete"
-                  style={{ background: 'transparent', border: '1px solid rgba(220,20,60,0.2)', borderRadius: 8, padding: '0.4rem 0.6rem', cursor: 'pointer', color: '#DC143C' }}>
+                  style={{ background: 'transparent', border: '1px solid rgba(189,24,52,0.2)', borderRadius: 8, padding: '0.4rem 0.6rem', cursor: 'pointer', color: '#bd1834' }}>
                   <GoogleIcon name="delete" size={16} />
                 </button>
               </div>
@@ -5737,7 +5737,7 @@ function DispatchSection() {
       {alert && <div className={`${s.alert} ${alert.type === 'error' ? s.alertError : s.alertSuccess}`}>{alert.msg}</div>}
 
       {/* ── HEADER BANNER ── */}
-      <div style={{ background: 'linear-gradient(135deg, rgba(220,20,60,0.15) 0%, rgba(201,169,110,0.1) 100%)', border: '1px solid rgba(220,20,60,0.3)', borderRadius: 16, padding: '1.75rem', marginBottom: '2rem' }}>
+      <div style={{ background: 'linear-gradient(135deg, rgba(189,24,52,0.15) 0%, rgba(201,169,110,0.1) 100%)', border: '1px solid rgba(189,24,52,0.3)', borderRadius: 16, padding: '1.75rem', marginBottom: '2rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
           <div>
             <span style={{ fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C9A96E', fontWeight: 700 }}>
@@ -5776,7 +5776,7 @@ function DispatchSection() {
             <div style={{ fontSize: '0.76rem', color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Weekly Issues Published</div>
           </div>
           <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 10, padding: '0.85rem 1.1rem' }}>
-            <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#DC143C', marginTop: 4 }}>Upcoming Friday</div>
+            <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#bd1834', marginTop: 4 }}>Upcoming Friday</div>
             <div style={{ fontSize: '0.76rem', color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Next Issue Schedule</div>
           </div>
         </div>
@@ -5866,7 +5866,7 @@ function DispatchSection() {
         {DEFAULT_ISSUES.map(iss => (
           <div key={iss.id} style={{ background: '#111115', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 14, padding: '1.25rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-              <span style={{ fontSize: '0.74rem', fontWeight: 800, color: '#DC143C', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              <span style={{ fontSize: '0.74rem', fontWeight: 800, color: '#bd1834', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 Issue #{iss.issueNo}
               </span>
               <span className={`${s.badge} ${s.badgeGreen}`} style={{ fontSize: '0.7rem' }}>{iss.status}</span>

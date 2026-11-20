@@ -117,7 +117,7 @@ export default function HistoryGirls() {
       {/* Dual panels */}
       <div className={s.dual}>
         <div data-hg="panel" className={s.panel}>
-          <span className={s.panelBar} style={{ background:'linear-gradient(to right,#DC143C,#9A3520)' }} />
+          <span className={s.panelBar} style={{ background:'linear-gradient(to right,#bd1834,#9A3520)' }} />
           <span className={s.panelLabel}>Historical Women Warriors</span>
           <div className={s.panelTitle}>They Led the Way</div>
           <div className={s.cards}>

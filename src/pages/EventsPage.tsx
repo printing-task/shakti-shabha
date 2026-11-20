@@ -221,13 +221,13 @@ const HISTORICAL_EVENTS: EventItem[] = [
 
 const THEME_CATEGORIES: Record<string, { label: string; color: string }> = {
   'national-symposia':    { label: 'National Symposia & Policy Forums',        color: '#C9A96E' },
-  'tactical-camps':       { label: 'Tactical & Somatic Camps / Mission Mardini', color: '#DC143C' },
+  'tactical-camps':       { label: 'Tactical & Somatic Camps / Mission Mardini', color: '#bd1834' },
   'academic-deployments': { label: 'Academic & Institutional Deployments',     color: '#3D8B5A' },
   'community-assemblies': { label: 'Community Stabilisation & Civil Assemblies', color: '#6B7FD4' },
 }
 
 const STREAM_LABELS: Record<string, { label: string; color: string }> = {
-  mardini:      { label: 'Mission Mardini', color: '#DC143C' },
+  mardini:      { label: 'Mission Mardini', color: '#bd1834' },
   'shakti-bhava': { label: 'Shakti Bhava',  color: '#3D5A45' },
   'shakti-varta': { label: 'Shakti Varta',  color: '#C9A96E' },
   general:      { label: 'General',         color: '#555' },

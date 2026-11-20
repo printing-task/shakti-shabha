@@ -37,7 +37,7 @@ export const CASE_STUDIES: CaseItem[] = [
     date: 'Oct 2026',
     excerpt: 'Facing repeated harassment on her commute from textile factory shifts, Kamla enrolled in our 3-day Mission Mardini self-defense camp. Two weeks later, she disarmed an aggressor using wrist leverage.',
     fullStory: 'Rather than resigning from her livelihood, Kamla applied the Mission Mardini pivot-and-strike protocol (guided by the Aaryaveera warrior philosophy) when cornered at a bus depot. The aggressor fled, and her factory floor organized mandatory safety workshops for all 180 female shift workers.',
-    badgeColor: '#DC143C',
+    badgeColor: '#bd1834',
   },
   {
     id: 'cs-3',
@@ -121,7 +121,7 @@ export default function CaseStudyPage() {
             <Link to="/articles" style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 600, textDecoration: 'none', background: 'rgba(255,255,255,0.15)', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.25)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
               <GoogleIcon name="article" size={14} /> Articles
             </Link>
-            <span style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 600, background: '#DC143C', color: '#FFFFFF', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+            <span style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 600, background: '#bd1834', color: '#FFFFFF', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
               <GoogleIcon name="folder_open" size={14} /> Case Studies (Active)
             </span>
             <Link to="/research" style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 600, textDecoration: 'none', background: 'rgba(255,255,255,0.15)', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.25)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
@@ -258,7 +258,7 @@ export default function CaseStudyPage() {
                 <GoogleIcon name="close" size={18} />
               </button>
 
-              <div style={{ fontSize: '0.75rem', color: '#DC143C', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.25rem' }}>
+              <div style={{ fontSize: '0.75rem', color: '#bd1834', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.25rem' }}>
                 {activeModal.category} · {activeModal.alias}
               </div>
               <h2 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.6rem', color: '#111827', margin: '0.5rem 0 1rem', lineHeight: 1.3 }}>
@@ -318,7 +318,7 @@ export default function CaseStudyPage() {
         {/* Submit Your Story Confidential Form */}
         <div style={{ marginTop: '5rem', background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '16px', padding: 'clamp(2rem, 4vw, 3.5rem)', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
           <div style={{ maxWidth: '640px', margin: '0 auto', textAlign: 'center' }}>
-            <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#DC143C', fontWeight: 700, textTransform: 'uppercase' }}>
+            <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#bd1834', fontWeight: 700, textTransform: 'uppercase' }}>
               Confidential Intake
             </span>
             <h2 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.75rem', color: '#111827', margin: '0.5rem 0 0.75rem' }}>
@@ -363,7 +363,7 @@ export default function CaseStudyPage() {
                     I understand this will be reviewed under strict confidentiality and never published without my affirmative consent.
                   </label>
                 </div>
-                <button type="submit" style={{ padding: '0.85rem', background: '#DC143C', color: '#FFFFFF', border: 'none', borderRadius: '9999px', fontWeight: 600, cursor: 'pointer', fontSize: '0.9rem' }}>
+                <button type="submit" style={{ padding: '0.85rem', background: '#bd1834', color: '#FFFFFF', border: 'none', borderRadius: '9999px', fontWeight: 600, cursor: 'pointer', fontSize: '0.9rem' }}>
                   Submit Confidentially →
                 </button>
               </form>

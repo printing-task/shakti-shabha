@@ -42,7 +42,7 @@
 .logoIcon {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #DC143C, #9C0E28);
+  background: linear-gradient(135deg, #bd1834, #9C0E28);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -103,9 +103,9 @@
 }
 
 .navItemActive {
-  background: rgba(220,20,60,0.15) !important;
+  background: rgba(189,24,52,0.15) !important;
   color: #FF6B80 !important;
-  border: 1px solid rgba(220,20,60,0.25) !important;
+  border: 1px solid rgba(189,24,52,0.25) !important;
 }
 
 .navIcon {
@@ -134,7 +134,7 @@
 .userAvatar {
   width: 36px;
   height: 36px;
-  background: linear-gradient(135deg, #DC143C, #9C0E28);
+  background: linear-gradient(135deg, #bd1834, #9C0E28);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -179,7 +179,7 @@
 }
 
 .logoutBtn:hover {
-  background: rgba(220,20,60,0.12);
+  background: rgba(189,24,52,0.12);
   color: #FF6B80;
 }
 
@@ -213,8 +213,8 @@
   font-size: 0.72rem;
   font-weight: 700;
   color: #FF6B80;
-  background: rgba(220,20,60,0.12);
-  border: 1px solid rgba(220,20,60,0.25);
+  background: rgba(189,24,52,0.12);
+  border: 1px solid rgba(189,24,52,0.25);
   border-radius: 9999px;
   padding: 0.2rem 0.65rem;
   letter-spacing: 0.06em;
@@ -244,7 +244,7 @@
 .statValue {
   font-size: 1.9rem;
   font-weight: 800;
-  color: #DC143C;
+  color: #bd1834;
   line-height: 1;
   margin-bottom: 0.35rem;
 }
@@ -276,7 +276,7 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.6rem 1.25rem;
-  background: #DC143C;
+  background: #bd1834;
   color: #FFFFFF;
   border: none;
   border-radius: 8px;
@@ -318,9 +318,9 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.45rem 0.85rem;
-  background: rgba(220,20,60,0.12);
+  background: rgba(189,24,52,0.12);
   color: #FF6B80;
-  border: 1px solid rgba(220,20,60,0.25);
+  border: 1px solid rgba(189,24,52,0.25);
   border-radius: 6px;
   font-family: 'Poppins', sans-serif;
   font-size: 0.8rem;
@@ -330,7 +330,7 @@
 }
 
 .btnDanger:hover {
-  background: rgba(220,20,60,0.22);
+  background: rgba(189,24,52,0.22);
 }
 
 .btnEdit {
@@ -451,8 +451,8 @@ select.input,
 .select:focus,
 .textarea:focus,
 .statusSelect:focus {
-  border-color: #DC143C !important;
-  box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.2);
+  border-color: #bd1834 !important;
+  box-shadow: 0 0 0 3px rgba(189, 24, 52, 0.2);
 }
 
 .input::placeholder,
@@ -475,7 +475,7 @@ optgroup {
 select option:checked,
 .select option:checked,
 .input option:checked {
-  background-color: #DC143C !important;
+  background-color: #bd1834 !important;
   color: #FFFFFF !important;
 }
 
@@ -527,7 +527,7 @@ select option:checked,
 }
 
 .tabActive {
-  background: #DC143C !important;
+  background: #bd1834 !important;
   color: #FFFFFF !important;
 }
 
@@ -561,7 +561,7 @@ select option:checked,
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
-  scrollbar-color: #DC143C rgba(255, 255, 255, 0.08);
+  scrollbar-color: #bd1834 rgba(255, 255, 255, 0.08);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
 }
 
@@ -575,7 +575,7 @@ select option:checked,
 }
 
 .modal::-webkit-scrollbar-thumb {
-  background: #DC143C;
+  background: #bd1834;
   border-radius: 8px;
 }
 
@@ -606,7 +606,7 @@ select option:checked,
 }
 
 .modalClose:hover {
-  background: rgba(220,20,60,0.2);
+  background: rgba(189,24,52,0.2);
   color: #FF6B80;
 }
 
@@ -641,7 +641,7 @@ select option:checked,
 .badgeGreen { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.25); }
 .badgeGray  { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.1); }
 .badgeYellow { background: rgba(234,179,8,0.15); color: #fde047; border: 1px solid rgba(234,179,8,0.25); }
-.badgeRed   { background: rgba(220,20,60,0.12); color: #FF6B80; border: 1px solid rgba(220,20,60,0.25); }
+.badgeRed   { background: rgba(189,24,52,0.12); color: #FF6B80; border: 1px solid rgba(189,24,52,0.25); }
 
 /* ── Image Grid (Gallery) ── */
 .photoGrid {
@@ -705,7 +705,7 @@ select option:checked,
 .breadcrumbLink {
   background: transparent;
   border: none;
-  color: #DC143C;
+  color: #bd1834;
   font-weight: 600;
   cursor: pointer;
   display: inline-flex;
@@ -719,7 +719,7 @@ select option:checked,
 }
 
 .breadcrumbLink:hover {
-  background: rgba(220, 20, 60, 0.12);
+  background: rgba(189, 24, 52, 0.12);
   color: #FF6B80;
 }
 
@@ -758,9 +758,9 @@ select option:checked,
 }
 
 .folderCard:hover {
-  border-color: rgba(220, 20, 60, 0.45);
+  border-color: rgba(189, 24, 52, 0.45);
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45), 0 0 20px rgba(220, 20, 60, 0.1);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45), 0 0 20px rgba(189, 24, 52, 0.1);
 }
 
 .folderCardHeader {
@@ -775,18 +775,18 @@ select option:checked,
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  background: rgba(220, 20, 60, 0.12);
-  border: 1px solid rgba(220, 20, 60, 0.25);
+  background: rgba(189, 24, 52, 0.12);
+  border: 1px solid rgba(189, 24, 52, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #DC143C;
+  color: #bd1834;
   flex-shrink: 0;
   transition: all 0.2s;
 }
 
 .folderCard:hover .folderIconBadge {
-  background: #DC143C;
+  background: #bd1834;
   color: #FFFFFF;
   transform: scale(1.05);
 }
@@ -863,7 +863,7 @@ select option:checked,
 .folderOpenBtn {
   font-size: 0.8rem;
   font-weight: 600;
-  color: #DC143C;
+  color: #bd1834;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -889,7 +889,7 @@ select option:checked,
 }
 
 .folderDeleteBtn:hover {
-  background: rgba(220, 20, 60, 0.15);
+  background: rgba(189, 24, 52, 0.15);
   color: #FF6B80;
 }
 
@@ -909,8 +909,8 @@ select option:checked,
 }
 
 .newFolderCard:hover {
-  border-color: #DC143C;
-  background: rgba(220, 20, 60, 0.04);
+  border-color: #bd1834;
+  background: rgba(189, 24, 52, 0.04);
   transform: translateY(-4px);
 }
 
@@ -923,13 +923,13 @@ select option:checked,
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #DC143C;
+  color: #bd1834;
   margin-bottom: 0.85rem;
   transition: all 0.2s;
 }
 
 .newFolderCard:hover .newFolderIcon {
-  background: #DC143C;
+  background: #bd1834;
   color: #FFFFFF;
   border-style: solid;
   transform: scale(1.08);
@@ -959,8 +959,8 @@ select option:checked,
 }
 
 .uploadZone:hover, .uploadZoneActive {
-  border-color: #DC143C;
-  background: rgba(220,20,60,0.04);
+  border-color: #bd1834;
+  background: rgba(189,24,52,0.04);
 }
 
 .uploadIcon {
@@ -1008,7 +1008,7 @@ select option:checked,
   font-size: 0.88rem;
   margin-bottom: 1rem;
 }
-.alertError   { background: rgba(220,20,60,0.12); border: 1px solid rgba(220,20,60,0.3); color: #FF6B80; }
+.alertError   { background: rgba(189,24,52,0.12); border: 1px solid rgba(189,24,52,0.3); color: #FF6B80; }
 .alertSuccess { background: rgba(34,197,94,0.1);  border: 1px solid rgba(34,197,94,0.25); color: #4ade80; }
 
 /* ── Counselling Status ── */
@@ -1102,7 +1102,7 @@ select option:checked,
 
 /* 5 Arcs styled with Shakti Sabha Brand Palette */
 .loaderLineWrap:nth-child(1) .loaderLine {
-  border-color: #DC143C; /* Website Signature Crimson Red */
+  border-color: #bd1834; /* Website Signature Crimson Red */
   height: 90px;
   width: 90px;
   top: 7px;
@@ -1156,7 +1156,7 @@ select option:checked,
 
 .loaderStatus {
   font-size: 0.95rem;
-  color: #E5E7EB;
+  color: #e8e4df;
   font-weight: 600;
   margin-bottom: 1.25rem;
   letter-spacing: 0.02em;
@@ -1175,10 +1175,10 @@ select option:checked,
 
 .loaderProgressFill {
   height: 100%;
-  background: linear-gradient(90deg, #DC143C 0%, #FA9417 100%);
+  background: linear-gradient(90deg, #bd1834 0%, #FA9417 100%);
   border-radius: 9999px;
   transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 14px rgba(220, 20, 60, 0.6);
+  box-shadow: 0 0 14px rgba(189, 24, 52, 0.6);
 }
 
 .loaderFilename {

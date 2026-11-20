@@ -121,7 +121,7 @@ export default function Events() {
             <p style={{ fontSize: '0.85rem', color: '#6B7280', maxWidth: '520px', margin: '0 auto 1.25rem' }}>
               Institutional training camps, seminars, and assemblies are scheduled through direct partnerships and field drives. Follow Shakti Sabha or reach out via Collaboration.
             </p>
-            <Link to="/sahyog" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem', fontWeight: 600, color: '#DC143C', textDecoration: 'none' }}>
+            <Link to="/sahyog" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem', fontWeight: 600, color: '#bd1834', textDecoration: 'none' }}>
               Invite / Partner With Us →
             </Link>
           </div>

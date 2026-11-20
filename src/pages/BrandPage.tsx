@@ -9,7 +9,7 @@ import p from './BrandPage.module.css'
 gsap.registerPlugin(ScrollTrigger)
 
 const PALETTE = [
-  { hex: '#DC143C', alt: '#D9381E', name: 'Crimson Red', role: 'Revolution', textColor: '#FFFFFF' },
+  { hex: '#bd1834', alt: '#D9381E', name: 'Crimson Red', role: 'Revolution', textColor: '#FFFFFF' },
   { hex: '#C9A96E', name: 'Matte Brass Gold', role: 'Aaryaveera', textColor: '#1A1209' },
   { hex: '#3D5A45', name: 'Sage Green', role: 'Peace / Healing', textColor: '#FFFFFF' },
   { hex: '#1E293B', name: 'Dark Neutral', role: 'Depth', textColor: '#FFFFFF' },
@@ -186,7 +186,7 @@ export default function BrandPage() {
             <div className={p.typeBlock}>
               <div className={p.typeLabel}>Devanagari — Noto Sans Devanagari</div>
               <div className={p.typeUsage}>Hindi text, Sanskrit terms, cultural touchpoints</div>
-              <div className={p.typeSample} style={{ fontFamily: 'Noto Sans Devanagari, sans-serif', fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, color: '#DC143C' }}>
+              <div className={p.typeSample} style={{ fontFamily: 'Noto Sans Devanagari, sans-serif', fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, color: '#bd1834' }}>
                 शक्ति सभा
               </div>
               <div className={p.typeMeta}>
@@ -277,7 +277,7 @@ export default function BrandPage() {
                 <div className={p.logoPlaceholderInner}>
                   <div className={p.placeholderFlame}><GoogleIcon name="local_fire_department" size={48} /></div>
                   <div className={p.placeholderText}>
-                    <span style={{ fontFamily: 'Cinzel, serif', fontWeight: 900, fontSize: '1.2rem', color: '#DC143C', letterSpacing: '0.1em' }}>SHAKTI SABHA</span>
+                    <span style={{ fontFamily: 'Cinzel, serif', fontWeight: 900, fontSize: '1.2rem', color: '#bd1834', letterSpacing: '0.1em' }}>SHAKTI SABHA</span>
                     <span style={{ fontFamily: 'Noto Sans, sans-serif', fontSize: '0.75rem', color: '#777777' }}>Official Brandmark</span>
                   </div>
                 </div>

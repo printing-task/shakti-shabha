@@ -32,9 +32,9 @@ const PRACTICE_AREAS = [
     name: 'SHAKTI MARDINI',
     sub: 'Safeguarding • Preparedness • Field Training',
     desc: 'Practical self-defence, situational awareness, and confidence-building programmes designed for girls and women across schools, colleges, and rural communities.',
-    accent: '#DC143C',
-    bg: 'rgba(220, 20, 60, 0.05)',
-    border: 'rgba(220, 20, 60, 0.22)',
+    accent: '#bd1834',
+    bg: 'rgba(189, 24, 52, 0.05)',
+    border: 'rgba(189, 24, 52, 0.22)',
     link: '/mardini',
   },
   {
@@ -460,13 +460,13 @@ export default function SocialWorkPage() {
                 alignItems: 'center',
                 gap: '0.5rem',
                 padding: '0.8rem 2.25rem',
-                background: '#DC143C',
+                background: '#bd1834',
                 color: '#FFFFFF',
                 borderRadius: '9999px',
                 fontWeight: 600,
                 fontSize: '0.85rem',
                 textDecoration: 'none',
-                boxShadow: '0 4px 15px rgba(220, 20, 60, 0.3)',
+                boxShadow: '0 4px 15px rgba(189, 24, 52, 0.3)',
               }}
             >
               Open Full Media Gallery &rarr;
@@ -486,7 +486,7 @@ export default function SocialWorkPage() {
             {FIELD_REPORTS.map((r) => (
               <div key={r.title} className={sw.reportCard} data-report>
                 <div className={sw.reportIconWrap}>
-                  <GoogleIcon name="description" size={26} style={{ color: '#DC143C' }} />
+                  <GoogleIcon name="description" size={26} style={{ color: '#bd1834' }} />
                 </div>
                 <div className={sw.reportBody}>
                   <div className={sw.reportMeta}>

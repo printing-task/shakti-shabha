@@ -1,159 +1,66 @@
 /* ============================================================
-   Footer — Dark 4-Column Layout
+   Footer — Prototype Editorial Standard
    ============================================================ */
 
 .footer {
-  position: relative;
-  z-index: 18;
-  border-radius: 0;
-  box-shadow: 0 -25px 80px rgba(0, 0, 0, 0.45);
-  background: #0A0A0B;
-  color: rgba(255, 255, 255, 0.75);
-  padding: 5rem clamp(1.5rem, 4vw, 3rem) 2rem;
-  border-top: 1px solid rgba(189, 24, 52, 0.4);
-  min-height: 380px;
-  contain: style;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1fr;
-  gap: clamp(2rem, 4vw, 4rem);
-  max-width: 1280px;
-  margin: 0 auto 3.5rem;
-}
-
-/* Brand Column */
-.brand {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.logoName {
-  font-family: var(--font-display, 'Cinzel', serif);
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: var(--theme-primary, #bd1834);
-  letter-spacing: 0.08em;
-}
-
-.logoHindi {
-  font-family: var(--font-devanagari, 'Noto Sans Devanagari', sans-serif);
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 0.5rem;
-}
-
-.tagline {
-  font-family: var(--font-body, var(--sans));
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.55);
-  line-height: 1.5;
-  max-width: 22ch;
-  margin-top: 0.5rem;
-  font-style: italic;
-}
-
-.badge {
-  margin-top: 1rem;
-  display: inline-block;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--theme-primary, #bd1834);
-  background: rgba(189, 24, 52, 0.1);
-  border: 1px solid rgba(189, 24, 52, 0.35);
-  padding: 0.35rem 0.85rem;
-  border-radius: 9999px;
-  align-self: flex-start;
-}
-
-/* Generic Column */
-.col {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.colTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.links {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-}
-
-.link {
-  font-family: var(--font-body, 'Poppins', sans-serif);
-  font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.6);
-  text-decoration: none;
-  transition: color 0.2s;
-  display: inline-block;
-}
-
-.link:hover {
-  color: var(--theme-primary, #bd1834);
-}
-
-.infoLine {
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.5);
-  font-family: var(--font-body, var(--sans));
-}
-
-.built {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.3);
-  margin-top: 1rem;
-  font-style: italic;
-}
-
-/* Bottom bar */
-.bottom {
-  max-width: 1280px;
-  margin: 0 auto;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
-  padding-top: 1.75rem;
+  padding: 32px clamp(25px, 7vw, 100px);
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  color: #817b75;
+  font-size: 9px;
+  background: var(--paper, #ffffff);
+  border-top: 1px solid var(--line, #e8e4df);
+  position: relative;
+  z-index: 10;
+}
+
+.footerBrand {
+  font: 600 13px var(--display, 'Cinzel', Georgia, serif);
+  letter-spacing: 0.14em;
+  color: #3c3733;
+}
+
+.footerNote {
+  margin-top: 5px;
+  color: #a49e97;
+  font-size: 8.5px;
+  letter-spacing: 0.05em;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 18px;
   flex-wrap: wrap;
-  gap: 0.75rem;
 }
 
-.copy {
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.3);
-  font-family: var(--font-body, var(--sans));
+.footerLinks a {
+  color: #817b75;
+  text-decoration: none;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-  }
+.footerLinks a:hover {
+  color: var(--red, #bd1834);
 }
 
-@media (max-width: 560px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
+.footerCopy {
+  font-size: 8.5px;
+  color: #a49e97;
+  white-space: nowrap;
+}
 
-  .bottom {
+@media (max-width: 768px) {
+  .footer {
+    align-items: flex-start;
     flex-direction: column;
-    gap: 0.4rem;
+    padding: 27px 23px;
+    gap: 16px;
+  }
+  .footerLinks {
+    gap: 13px;
   }
 }

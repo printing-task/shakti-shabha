@@ -169,7 +169,7 @@ export default function Profile() {
               </span>
             </h2>
 
-            <p style={{ fontSize: '0.86rem', color: '#DC143C', fontWeight: 600, letterSpacing: '0.04em', margin: '0.4rem 0 0.85rem' }}>
+            <p style={{ fontSize: '0.86rem', color: '#bd1834', fontWeight: 600, letterSpacing: '0.04em', margin: '0.4rem 0 0.85rem' }}>
               Founder &amp; Civilizational Field Strategist
             </p>
 

@@ -1,128 +1,69 @@
-import { useEffect, useRef } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import GoogleIcon from '../GoogleIcon/GoogleIcon'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Link } from 'react-router-dom'
 import s from './About.module.css'
 
-const PILLARS = [
-  { 
-    num: '01', 
-    tag: 'Preparedness & Safety', 
-    tagColor: '#DC143C', 
-    tagBg: 'rgba(220, 20, 60, 0.08)',
-    accent: '#DC143C', 
-    name: 'Mission Mardini', 
-    dev: 'Physical & Tactical Sovereignty', 
-    text: 'Self-defense. Lathi-Kaushal. Sword training. Village camps across Maharashtra and beyond. Tactical preparedness and bodily deterrence for women.', 
-    link: '/mardini', 
-    linkLabel: 'Explore Mission Mardini' 
+interface StreamItem {
+  roman: string
+  name: string
+  subtitle: string
+  desc: string
+  link: string
+  linkLabel: string
+}
+
+const STREAMS: StreamItem[] = [
+  {
+    roman: 'Ⅰ',
+    name: 'Mission Mardini',
+    subtitle: 'Physical & Tactical Preparedness',
+    desc: 'Self-defence foundations, Lathi-Kaushal, practical awareness and training designed to build confidence and readiness.',
+    link: '/mardini',
+    linkLabel: 'Discover Mardini →',
   },
-  { 
-    num: '02', 
-    tag: 'Behaviour & Well-being',    
-    tagColor: '#166534', 
-    tagBg: 'rgba(22, 101, 52, 0.08)',
-    accent: '#166534', 
-    name: 'Shakti Bhava', 
-    dev: 'Consciousness & Somatic Healing', 
-    text: 'Counseling. Trauma recovery. Confidential healing pods for domestic coercion, PTSD, and depression. Cultivating psychological resilience.', 
-    link: '/shakti-bhava', 
-    linkLabel: 'Explore Shakti Bhava' 
+  {
+    roman: 'Ⅱ',
+    name: 'Shakti Bhava',
+    subtitle: 'Consciousness & Emotional Resilience',
+    desc: 'Supportive spaces, counselling pathways, awareness and trauma-informed conversations that respect individual dignity.',
+    link: '/counselling',
+    linkLabel: 'Discover Bhava →',
   },
-  { 
-    num: '03', 
-    tag: 'Research & Dialogue',  
-    tagColor: '#4338CA', 
-    tagBg: 'rgba(67, 56, 202, 0.08)',
-    accent: '#4338CA', 
-    name: 'Shakti Varta', 
-    dev: 'Epistemic & Intellectual Inquiry', 
-    text: 'White papers. Archival research. Modi-script translations, national symposia and podcasts. The intellectual engine backing ground action.', 
-    link: '/shakti-varta', 
-    linkLabel: 'Explore Shakti Varta' 
+  {
+    roman: 'Ⅲ',
+    name: 'Shakti Varta',
+    subtitle: 'Research, Dialogue & Critical Inquiry',
+    desc: 'Research, seminars, reading and dialogue that encourage independent thought and careful examination of sources.',
+    link: '/research',
+    linkLabel: 'Discover Varta →',
   },
 ]
 
 export default function About() {
-  const navigate = useNavigate()
-  const secRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('[data-ab="header"]', {
-        opacity: 0, 
-        y: 24, 
-        duration: 0.7, 
-        ease: 'power3.out',
-        clearProps: 'transform,opacity', scrollTrigger: { trigger: secRef.current, start: 'top 80%', toggleActions: 'play none none none' }
-      })
-      gsap.from('[data-ab="pillar"]', {
-        opacity: 0, 
-        y: 32, 
-        stagger: 0.14, 
-        duration: 0.7, 
-        ease: 'power3.out',
-        clearProps: 'transform,opacity', scrollTrigger: { trigger: secRef.current, start: 'top 80%', toggleActions: 'play none none none' }
-      })
-    }, secRef)
-    return () => ctx.revert()
-  }, [])
-
   return (
-    <section ref={secRef} className={s.section}>
-      <div className={s.inner}>
-        <div data-ab="header" className={s.header}>
-          <div className={s.headerTopRow}>
-            <span className={s.eyebrow}>Our Three Streams</span>
-            <Link to="/three-streams" className={s.dedicatedPillLink}>
-              <span>Explore Dedicated Page</span>
-              <GoogleIcon name="arrow_forward" size={13} />
-            </Link>
-          </div>
-          <h2>
-            <Link to="/three-streams" className={s.headerTitleLink} title="Explore The Union of Peace & Revolution">
-            The Union of Peace &amp; Revolution
-            </Link>
-          </h2>
-          <p>
-          Everything Shakti Sabha builds lives within one of three streams — each distinct in method, unified in purpose: dignity, safety, and awakening for every woman who stands with us.{' '}
-            <Link to="/three-streams" className={s.inlineLearnMore}>
-            View Tri-Stream Doctrine →
-            </Link>
-          </p>
+    <section className={s.section} id="streams">
+      <div className={s.sectionHead}>
+        <div>
+          <div className={s.sectionLabel}>The Union of Peace &amp; Revolution</div>
+          <h2 className={s.sectionTitle}>Three streams. One shared purpose.</h2>
         </div>
-        <div data-ab="pillars" className={s.pillars}>
-          {PILLARS.map(p => (
-            <Link
-              key={p.num}
-              to={p.link}
-              data-ab="pillar"
-              className={s.pillar}
-              style={{ '--pl-accent': p.accent, '--pl-tag-bg': p.tagBg } as React.CSSProperties}
-            >
-              <span className={s.accent} style={{ background: p.accent }} />
-              <div className={s.pillarHead}>
-                <span 
-                  className={s.pillarTag} 
-                  style={{ 
-                    color: p.tagColor,
-                    background: p.tagBg,
-                    border: `1px solid ${p.tagColor}33`
-                  }}
-                >
-                  {p.tag}
-                </span>
-              </div>
-              <div className={s.pillarName}>{p.name}</div>
-              <div className={s.pillarDev}>{p.dev}</div>
-              <p className={s.pillarText}>{p.text}</p>
-              <span className={s.pillarLink}>
-                {p.linkLabel} →
-              </span>
-            </Link>
-          ))}
-        </div>
+        <p className={s.sectionIntro}>
+          Each stream has a distinct role. Together, they connect personal safety, emotional strength and the freedom to think, learn and participate.
+        </p>
+      </div>
+
+      <div className={s.streams}>
+        {STREAMS.map((st) => (
+          <article key={st.roman} className={s.stream}>
+            <div className={s.streamIcon}>{st.roman}</div>
+            <div className={s.streamBody}>
+              <h3 className={s.streamTitle}>{st.name}</h3>
+              <div className={s.subtitle}>{st.subtitle}</div>
+              <p className={s.streamText}>{st.desc}</p>
+              <Link to={st.link} className={s.streamLink}>
+                {st.linkLabel}
+              </Link>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   )

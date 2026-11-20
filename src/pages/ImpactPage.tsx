@@ -408,7 +408,7 @@ export default function ImpactPage() {
         {/* ── THE CRUCIBLE OF EXPERIENCE CALLOUT ───────────────────────── */}
         <div className={s.crucibleBox}>
           <div className={s.crucibleTitle}>
-            <GoogleIcon name="local_fire_department" size={22} style={{ color: '#DC143C' }} />
+            <GoogleIcon name="local_fire_department" size={22} style={{ color: '#bd1834' }} />
             The Crucible of Experience: Forged in Truth, Free from Dogma
           </div>
           <p className={s.crucibleText}>
@@ -475,7 +475,7 @@ export default function ImpactPage() {
                   <div>
                     <span className={s.phaseBadge}>{currentPhase.phaseNum}</span>
                     <h3 className={s.phaseTitle}>{currentPhase.title}</h3>
-                    <div style={{ fontSize: '0.92rem', color: '#DC143C', fontWeight: 600, marginTop: '0.35rem' }}>
+                    <div style={{ fontSize: '0.92rem', color: '#bd1834', fontWeight: 600, marginTop: '0.35rem' }}>
                       {currentPhase.subtitle}
                     </div>
                   </div>
@@ -493,7 +493,7 @@ export default function ImpactPage() {
 
                 <div className={s.phaseSubBlock}>
                   <div className={s.phaseSubTitle}>
-                    <GoogleIcon name="check_circle" size={17} style={{ color: '#DC143C', verticalAlign: 'middle', marginRight: 6 }} />
+                    <GoogleIcon name="check_circle" size={17} style={{ color: '#bd1834', verticalAlign: 'middle', marginRight: 6 }} />
                     Key Areas of Engagement &amp; Operational Milestones
                   </div>
                   <ul className={s.phaseList}>
@@ -542,7 +542,7 @@ export default function ImpactPage() {
                     <td className={s.periodCell}>{row.dimension}</td>
                     <td>{row.p1}</td>
                     <td>{row.p2}</td>
-                    <td><strong style={{ color: '#DC143C' }}>{row.p3}</strong></td>
+                    <td><strong style={{ color: '#bd1834' }}>{row.p3}</strong></td>
                     <td><strong style={{ color: '#111827' }}>{row.p4}</strong></td>
                   </tr>
                 ))}
@@ -564,7 +564,7 @@ export default function ImpactPage() {
           <div className={s.collabGrid}>
             <div className={s.collabCard}>
               <div className={s.collabCardTitle}>
-                <GoogleIcon name="handshake" size={20} style={{ color: '#DC143C' }} />
+                <GoogleIcon name="handshake" size={20} style={{ color: '#bd1834' }} />
                 Principles of Collaboration
               </div>
               <ul className={s.phaseList} style={{ margin: 0 }}>
@@ -627,7 +627,7 @@ export default function ImpactPage() {
           <div className={s.closingQuote}>
             "A genuine path in social work is rarely linear. It is shaped by what you embrace, but equally by what you choose to walk away from. Shakti Sabha exists because independent thought and principled action are worth the journey."
           </div>
-          <div style={{ fontWeight: 700, color: '#DC143C', fontSize: '0.95rem', letterSpacing: '0.05em' }}>
+          <div style={{ fontWeight: 700, color: '#bd1834', fontSize: '0.95rem', letterSpacing: '0.05em' }}>
             — HARSHITA MANKAR
           </div>
         </div>
@@ -648,7 +648,7 @@ export default function ImpactPage() {
 
         {/* ── 1. HIGH-LEVEL IMPACT GRID (4 TOP CARDS) ────────────────── */}
         <div className={s.metricsGrid}>
-          <div className={s.metricCard} style={{ '--card-accent': '#DC143C' } as React.CSSProperties}>
+          <div className={s.metricCard} style={{ '--card-accent': '#bd1834' } as React.CSSProperties}>
             <div className={s.metricVal}>2,800+</div>
             <div className={s.metricLabel}>Direct Somatic &amp; Tactical Cadets</div>
             <p className={s.metricDesc}>
@@ -698,7 +698,7 @@ export default function ImpactPage() {
 
           <div className={s.depthGrid}>
             {/* Level 1 */}
-            <div className={s.depthCard} style={{ '--depth-color': '#DC143C' } as React.CSSProperties}>
+            <div className={s.depthCard} style={{ '--depth-color': '#bd1834' } as React.CSSProperties}>
               <span className={s.depthLevel}>Level 1: Tactical Immersion</span>
               <h3 className={s.depthTitle}>Somatic &amp; Physical Transformation</h3>
               <div className={s.depthMetaRow}>

@@ -1,6 +1,6 @@
 /* ============================================================
    Shakti Sabha — 3D Dome Gallery
-   Theme: Crimson (#DC143C), Matte Gold (#C9A96E), Deep Obsidian (#0A0A0B)
+   Theme: Crimson (#bd1834), Matte Gold (#C9A96E), Deep Obsidian (#0A0A0B)
    ============================================================ */
 
 .sphere-root {
@@ -86,13 +86,13 @@ main.sphere-main {
   pointer-events: auto;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(220, 20, 60, 0.1);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(189, 24, 52, 0.1);
 }
 
 .item__image:hover {
   transform: scale(1.06) translateZ(12px);
-  border-color: #DC143C;
-  box-shadow: 0 16px 35px rgba(220, 20, 60, 0.3), 0 0 25px rgba(201, 169, 110, 0.25);
+  border-color: #bd1834;
+  box-shadow: 0 16px 35px rgba(189, 24, 52, 0.3), 0 0 25px rgba(201, 169, 110, 0.25);
 }
 
 .item__image:focus {
@@ -154,7 +154,7 @@ main.sphere-main {
   border: 1px solid rgba(201, 169, 110, 0.35);
   border-radius: 20px;
   padding: 1.25rem;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(220, 20, 60, 0.15);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(189, 24, 52, 0.15);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -179,8 +179,8 @@ main.sphere-main {
 }
 
 .gallery-modal-close:hover {
-  background: #DC143C;
-  border-color: #DC143C;
+  background: #bd1834;
+  border-color: #bd1834;
   transform: rotate(90deg);
 }
 

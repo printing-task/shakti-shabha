@@ -46,7 +46,7 @@
   right: 0;
   min-width: 190px;
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   border-radius: 12px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.06);
   padding: 0.5rem;
@@ -105,7 +105,7 @@
 
 .activeOption {
   background: #FFF1F2 !important;
-  color: #DC143C !important;
+  color: #bd1834 !important;
 }
 
 .optionLeft {
@@ -118,8 +118,8 @@
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.05em;
-  color: #DC143C;
-  background: rgba(220, 20, 60, 0.1);
+  color: #bd1834;
+  background: rgba(189, 24, 52, 0.1);
   padding: 0.15rem 0.4rem;
   border-radius: 4px;
 }
@@ -131,12 +131,12 @@
 }
 
 .activeOption .optionName {
-  color: #DC143C;
+  color: #bd1834;
   font-weight: 700;
 }
 
 .checkIcon {
-  color: #DC143C;
+  color: #bd1834;
 }
 
 /* Floating Language Switcher (Fixed Bottom Right) */
@@ -152,7 +152,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--theme-primary, #DC143C);
+  background: var(--theme-primary, #bd1834);
   color: #FFFFFF;
   border: 1.5px solid rgba(255, 255, 255, 0.6);
   border-radius: 9999px;
@@ -161,14 +161,14 @@
   font-family: var(--btn-font, 'Poppins', sans-serif);
   font-size: 0.8rem;
   font-weight: 700;
-  box-shadow: 0 8px 24px rgba(220, 20, 60, 0.4), 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(189, 24, 52, 0.4), 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .floatingBtn:hover {
   background: var(--theme-primary-dark, #B01030);
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(220, 20, 60, 0.5);
+  box-shadow: 0 12px 28px rgba(189, 24, 52, 0.5);
 }
 
 .currentLangBadge {
@@ -185,7 +185,7 @@
   right: 0;
   min-width: 190px;
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   border-radius: 12px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.06);
   padding: 0.5rem;
@@ -235,15 +235,15 @@
 
 .activeItem {
   background: #FFF1F2 !important;
-  color: #DC143C !important;
+  color: #bd1834 !important;
 }
 
 .langCode {
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.05em;
-  color: #DC143C;
-  background: rgba(220, 20, 60, 0.1);
+  color: #bd1834;
+  background: rgba(189, 24, 52, 0.1);
   padding: 0.15rem 0.4rem;
   border-radius: 4px;
 }
@@ -256,7 +256,7 @@
 }
 
 .activeItem .langLabel {
-  color: #DC143C;
+  color: #bd1834;
   font-weight: 700;
 }
 

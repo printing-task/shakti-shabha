@@ -60,34 +60,34 @@ export default function SahyogPage() {
           
           {/* Corporate Column */}
           <div className={sh.pillarCol}>
-            <div className={sh.colTopStrip} style={{ background: '#DC143C' }} />
+            <div className={sh.colTopStrip} style={{ background: '#bd1834' }} />
             <div className={sh.colHeader}>
               <div className={sh.colIcon}>
-                <GoogleIcon name="domain" size={32} style={{ color: '#DC143C' }} />
+                <GoogleIcon name="domain" size={32} style={{ color: '#bd1834' }} />
               </div>
               <div className={sh.colTarget}>For Enterprises & Agencies</div>
               <h3 className={sh.colTitle}>Corporates & CSR</h3>
             </div>
             <div className={sh.colBody}>
               <div className={sh.featureItem}>
-                <div className={sh.featureDot} style={{ background: '#DC143C' }} />
+                <div className={sh.featureDot} style={{ background: '#bd1834' }} />
                 <div><strong>Fund Village Camps:</strong> Directly sponsor 3-day, 5-day, or 7-day Mission Mardini self-defense camps (guided by Aaryaveera philosophy) for rural schools.</div>
               </div>
               <div className={sh.featureItem}>
-                <div className={sh.featureDot} style={{ background: '#DC143C' }} />
+                <div className={sh.featureDot} style={{ background: '#bd1834' }} />
                 <div><strong>Employee Volunteering:</strong> On-ground or digital pro-bono contribution tracks for corporate staff teams.</div>
               </div>
               <div className={sh.featureItem}>
-                <div className={sh.featureDot} style={{ background: '#DC143C' }} />
+                <div className={sh.featureDot} style={{ background: '#bd1834' }} />
                 <div><strong>CSR Compliance Reports:</strong> Rigorous third-party audited impact metrics, participant surveys, and video summaries.</div>
               </div>
               <div className={sh.featureItem}>
-                <div className={sh.featureDot} style={{ background: '#DC143C' }} />
+                <div className={sh.featureDot} style={{ background: '#bd1834' }} />
                 <div><strong>Corporate Women's Safety:</strong> Tailored executive situational awareness workshops for internal employees.</div>
               </div>
             </div>
             <div className={sh.colFooter}>
-              <a href="#partner-form" onClick={() => setPartnerType('CORPORATE')} className={sh.actionBtn} style={{ background: '#DC143C', color: '#FFFFFF' }}>
+              <a href="#partner-form" onClick={() => setPartnerType('CORPORATE')} className={sh.actionBtn} style={{ background: '#bd1834', color: '#FFFFFF' }}>
                 Start Corporate Partnership →
               </a>
             </div>

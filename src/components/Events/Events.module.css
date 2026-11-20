@@ -52,7 +52,7 @@
 }
 
 .item:hover { 
-  background: rgba(220, 20, 60, 0.02); 
+  background: rgba(189, 24, 52, 0.02); 
 }
 
 .dateBlock { 
@@ -63,7 +63,7 @@
   font-family: var(--font-display, 'Cinzel', serif); 
   font-size: 1.85rem; 
   font-weight: 700; 
-  color: var(--theme-primary, #DC143C); 
+  color: var(--theme-primary, #bd1834); 
   line-height: 1; 
 }
 
@@ -92,9 +92,9 @@
   font-size: 0.6rem; 
   letter-spacing: 0.1em; 
   text-transform: uppercase; 
-  border: 1px solid rgba(220, 20, 60, 0.4); 
-  color: var(--theme-primary, #DC143C); 
-  background: rgba(220, 20, 60, 0.05); 
+  border: 1px solid rgba(189, 24, 52, 0.4); 
+  color: var(--theme-primary, #bd1834); 
+  background: rgba(189, 24, 52, 0.05); 
   padding: 0.28rem 0.85rem; 
   border-radius: 9999px; 
   white-space: nowrap; 

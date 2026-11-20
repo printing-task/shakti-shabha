@@ -25,7 +25,7 @@
   z-index: 50;
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid #E5E7EB;
+  border-bottom: 1px solid #e8e4df;
   padding: 0.85rem clamp(1.25rem, 4vw, 3rem);
 }
 
@@ -51,7 +51,7 @@
 }
 
 .backHomeLink:hover {
-  color: #DC143C;
+  color: #bd1834;
 }
 
 .brandPill {
@@ -59,7 +59,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #DC143C;
+  color: #bd1834;
   background: #FFF1F2;
   border: 1px solid #FECDD3;
   padding: 0.2rem 0.65rem;
@@ -75,7 +75,7 @@
 }
 
 .crimsonAccent {
-  color: #DC143C;
+  color: #bd1834;
 }
 
 /* Strict Bilingual Switcher */
@@ -83,7 +83,7 @@
   display: inline-flex;
   align-items: center;
   background: #F3F4F6;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   padding: 0.2rem;
 }
 
@@ -126,7 +126,7 @@
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #DC143C;
+  color: #bd1834;
   background: #FFF1F2;
   border: 1px solid #FECDD3;
   padding: 0.25rem 0.75rem;
@@ -153,7 +153,7 @@
   align-items: center;
   gap: 0.5rem;
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   padding: 0.35rem 1rem;
   font-size: 0.78rem;
   font-weight: 600;
@@ -162,7 +162,7 @@
 }
 
 .scrollProgressVal {
-  color: #DC143C;
+  color: #bd1834;
   font-weight: 800;
 }
 
@@ -194,7 +194,7 @@
 .timelineControlsBar {
   padding: 0.65rem clamp(1.25rem, 4vw, 3rem);
   background: rgba(255, 255, 255, 0.96);
-  border-bottom: 1px solid #E5E7EB;
+  border-bottom: 1px solid #e8e4df;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -479,7 +479,7 @@
   text-align: center;
   color: rgb(50,50,50);
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   transition: all 0.25s ease;
 }
 
@@ -558,7 +558,7 @@
   background: #FFFFFF;
   border-radius: 8px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
-  border: 1.5px solid #E5E7EB;
+  border: 1.5px solid #e8e4df;
   z-index: 15;
   font-size: 0.76rem;
   line-height: 1.45;
@@ -722,7 +722,7 @@
   margin: 4rem auto 2rem;
   padding: 2.5rem 1.5rem;
   background: #FAFAFB;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   position: relative;
   z-index: 20;
 }
@@ -737,7 +737,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #DC143C;
+  color: #bd1834;
   background: #FFF1F2;
   border: 1px solid #FECDD3;
   padding: 0.2rem 0.65rem;
@@ -763,7 +763,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 0.35rem;
   background: #FFF5F6;
-  border: 1px solid rgba(220, 20, 60, 0.18);
+  border: 1px solid rgba(189, 24, 52, 0.18);
   border-radius: 8px;
   padding: 0.5rem 0.35rem;
   margin-top: 0.45rem;
@@ -780,7 +780,7 @@
 .cardStatVal {
   font-size: 0.85rem;
   font-weight: 800;
-  color: #DC143C;
+  color: #bd1834;
   line-height: 1.1;
   font-family: var(--font-display, 'Cinzel', serif);
 }
@@ -808,7 +808,7 @@
   font-size: 0.72rem;
   background: #FFF1F2;
   border: 1px solid #FECDD3;
-  color: #DC143C;
+  color: #bd1834;
   padding: 0.2rem 0.55rem;
   border-radius: 6px;
   font-weight: 500;
@@ -828,7 +828,7 @@
 
 .chartCard {
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   padding: 1rem;
   cursor: pointer;
   position: relative;
@@ -839,13 +839,13 @@
 }
 
 .chartCard:hover {
-  border-color: #DC143C;
+  border-color: #bd1834;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   transform: translateY(-2px);
 }
 
 .chartCardActive {
-  border-color: #DC143C !important;
+  border-color: #bd1834 !important;
   background: #FFFDFD;
 }
 
@@ -858,7 +858,7 @@
 .chartDateBadge {
   font-size: 0.72rem;
   font-weight: 800;
-  color: #DC143C;
+  color: #bd1834;
   background: #FFF1F2;
   padding: 0.15rem 0.5rem;
 }
@@ -868,12 +868,12 @@
   height: 44px;
   border-radius: 50% !important;
   overflow: hidden;
-  border: 2px solid #E5E7EB;
+  border: 2px solid #e8e4df;
   transition: border-color 0.2s ease;
 }
 
 .chartCard:hover .chartThumbnail {
-  border-color: #DC143C;
+  border-color: #bd1834;
 }
 
 .chartThumbnail img {
@@ -898,7 +898,7 @@
 .chartHoverDetails {
   margin-top: 0.4rem;
   padding-top: 0.5rem;
-  border-top: 1px dashed #E5E7EB;
+  border-top: 1px dashed #e8e4df;
   font-size: 0.78rem;
   color: #374151;
   line-height: 1.5;
@@ -946,7 +946,7 @@
   width: 32px;
   height: 32px;
   background: #F3F4F6;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   color: #4B5563;
   cursor: pointer;
   display: flex;
@@ -966,7 +966,7 @@
   height: 220px;
   overflow: hidden;
   margin-bottom: 1.25rem;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   background: #F3F4F6;
 }
 
@@ -978,7 +978,7 @@
 
 .modalBadgeRow {
   font-size: 0.72rem;
-  color: #DC143C;
+  color: #bd1834;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -996,7 +996,7 @@
 .modalEraYears {
   font-size: 0.85rem;
   color: #6B7280;
-  border-bottom: 1px solid #E5E7EB;
+  border-bottom: 1px solid #e8e4df;
   padding-bottom: 0.75rem;
   margin-bottom: 1rem;
 }
@@ -1006,7 +1006,7 @@
   font-size: 0.92rem;
   color: #111827;
   background: #F9FAFB;
-  border-left: 3px solid #DC143C;
+  border-left: 3px solid #bd1834;
   padding: 0.75rem 1rem;
   margin-bottom: 1.25rem;
   line-height: 1.6;
@@ -1031,13 +1031,13 @@
 
 .modalCitationBox {
   background: #F9FAFB;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   padding: 0.85rem 1rem;
   margin-top: 0.5rem;
 }
 
 .modalCitationLabel {
-  color: #DC143C;
+  color: #bd1834;
   font-size: 0.72rem;
   display: block;
   text-transform: uppercase;

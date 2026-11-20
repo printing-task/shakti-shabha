@@ -4,7 +4,7 @@
   color: #FFFFFF;
   position: relative;
   overflow: hidden;
-  border-bottom: 1px solid rgba(220, 20, 60, 0.3);
+  border-bottom: 1px solid rgba(189, 24, 52, 0.3);
 }
 
 .hero::after {
@@ -14,7 +14,7 @@
   right: -10%;
   width: 550px;
   height: 500px;
-  background: radial-gradient(circle, rgba(220, 20, 60, 0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(189, 24, 52, 0.2) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -115,7 +115,7 @@
   border-radius: 9999px;
   font-size: 0.82rem;
   font-weight: 600;
-  border: 1px solid var(--border, #E5E7EB);
+  border: 1px solid var(--border, #e8e4df);
   background: #FFFFFF;
   color: #4B5563;
   cursor: pointer;
@@ -123,15 +123,15 @@
 }
 
 .filterTab:hover {
-  border-color: #DC143C;
-  color: #DC143C;
+  border-color: #bd1834;
+  color: #bd1834;
 }
 
 .filterTabActive {
-  background: #DC143C;
+  background: #bd1834;
   color: #FFFFFF;
-  border-color: #DC143C;
-  box-shadow: 0 4px 12px rgba(220, 20, 60, 0.25);
+  border-color: #bd1834;
+  box-shadow: 0 4px 12px rgba(189, 24, 52, 0.25);
 }
 
 /* Articles Grid */
@@ -142,7 +142,7 @@
 }
 
 .articleCard {
-  border: 1px solid var(--border, #E5E7EB);
+  border: 1px solid var(--border, #e8e4df);
   border-radius: 14px;
   overflow: hidden;
   background: #FFFFFF;
@@ -215,7 +215,7 @@
 .readMoreBtn {
   font-size: 0.82rem;
   font-weight: 600;
-  color: #DC143C;
+  color: #bd1834;
   background: none;
   border: none;
   cursor: pointer;

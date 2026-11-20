@@ -74,7 +74,7 @@ export default function ThreeStreamsPage() {
           <p className={s.manifestoText}>
             Our work seeks to bring these dimensions together: We encourage women to recognize their strength without developing hostility towards men. We encourage young people to question ideas without becoming prisoners of cynicism. We promote cultural awareness without blind glorification and modern thinking without blind imitation.
           </p>
-          <p className={s.manifestoText} style={{ fontWeight: 600, color: '#DC143C' }}>
+          <p className={s.manifestoText} style={{ fontWeight: 600, color: '#bd1834' }}>
             "We do not seek to create followers. We seek to cultivate independent minds, responsible leaders, and conscious individuals."
           </p>
         </div>
@@ -89,8 +89,8 @@ export default function ThreeStreamsPage() {
           {/* Stream 01 */}
           <div className={s.streamCard}>
             <div className={s.streamCardHead}>
-              <span className={s.streamNum} style={{ color: '#DC143C' }}>01</span>
-              <span className={s.streamBadge} style={{ background: 'rgba(220, 20, 60, 0.1)', color: '#DC143C' }}>
+              <span className={s.streamNum} style={{ color: '#bd1834' }}>01</span>
+              <span className={s.streamBadge} style={{ background: 'rgba(189, 24, 52, 0.1)', color: '#bd1834' }}>
                 Revolution
               </span>
             </div>
@@ -101,15 +101,15 @@ export default function ThreeStreamsPage() {
             </p>
             <ul className={s.streamHighlights}>
               <li className={s.streamHighlightItem}>
-                <GoogleIcon name="sports_kabaddi" size={18} style={{ color: '#DC143C', flexShrink: 0 }} />
+                <GoogleIcon name="sports_kabaddi" size={18} style={{ color: '#bd1834', flexShrink: 0 }} />
                 <span>Dual-Shield Doctrine (Cognitive De-escalation &amp; Physical Defense)</span>
               </li>
               <li className={s.streamHighlightItem}>
-                <GoogleIcon name="shield" size={18} style={{ color: '#DC143C', flexShrink: 0 }} />
+                <GoogleIcon name="shield" size={18} style={{ color: '#bd1834', flexShrink: 0 }} />
                 <span>Karate-based empty hand strikes, balance, and Lathi-Kaushal staff</span>
               </li>
               <li className={s.streamHighlightItem}>
-                <GoogleIcon name="holiday_village" size={18} style={{ color: '#DC143C', flexShrink: 0 }} />
+                <GoogleIcon name="holiday_village" size={18} style={{ color: '#bd1834', flexShrink: 0 }} />
                 <span>Intensive 7–10 day camps and tribal/rural grassroots outreach</span>
               </li>
             </ul>
@@ -195,7 +195,7 @@ export default function ThreeStreamsPage() {
           marginTop: '3.5rem'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem', color: '#111827', fontWeight: 700, fontSize: '0.88rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-            <GoogleIcon name="gavel" size={20} style={{ color: '#DC143C' }} />
+            <GoogleIcon name="gavel" size={20} style={{ color: '#bd1834' }} />
             Institutional Note on Confidentiality &amp; Statutory Compliance
           </div>
           <p style={{ margin: 0, fontSize: '0.85rem', color: '#6B7280', lineHeight: 1.65 }}>

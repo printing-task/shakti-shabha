@@ -12,7 +12,7 @@ const PILLARS = [
     stat: '7+ Years',
     label: 'Years of Fieldwork (2019–2026)',
     desc: 'Uninterrupted grassroots operations, research documentation, and field mobilization since inception in 2019.',
-    accent: '#DC143C'
+    accent: '#bd1834'
   },
   {
     icon: 'military_tech',
@@ -87,7 +87,7 @@ export default function ImpactGrid() {
               fontSize: '0.75rem',
               textTransform: 'uppercase',
               letterSpacing: '0.22em',
-              color: '#DC143C',
+              color: '#bd1834',
               fontWeight: 700,
               fontFamily: "'Cinzel', serif",
               marginBottom: '0.5rem',
@@ -95,11 +95,11 @@ export default function ImpactGrid() {
               alignItems: 'center',
               gap: '0.4rem',
               padding: '0.25rem 0.75rem',
-              background: 'rgba(220, 20, 60, 0.06)',
-              border: '1px solid rgba(220, 20, 60, 0.2)',
+              background: 'rgba(189, 24, 52, 0.06)',
+              border: '1px solid rgba(189, 24, 52, 0.2)',
               borderRadius: 9999
             }}>
-              <GoogleIcon name="verified" size={14} style={{ color: '#DC143C' }} />
+              <GoogleIcon name="verified" size={14} style={{ color: '#bd1834' }} />
               Institutional Credibility · Audited Record
             </div>
             <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 'clamp(1.75rem, 3.5vw, 2.4rem)', color: '#111827', margin: 0, fontWeight: 700, lineHeight: 1.2 }}>
@@ -109,7 +109,7 @@ export default function ImpactGrid() {
           <Link
             to="/impact"
             style={{
-              color: '#DC143C',
+              color: '#bd1834',
               textDecoration: 'none',
               fontFamily: "var(--btn-font, 'Poppins', sans-serif)",
               fontSize: '0.82rem',
@@ -121,7 +121,7 @@ export default function ImpactGrid() {
               minHeight: 40,
               borderRadius: 9999,
               background: '#FFFFFF',
-              border: '1px solid rgba(220, 20, 60, 0.4)',
+              border: '1px solid rgba(189, 24, 52, 0.4)',
               boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
               transition: 'all 0.2s ease'
             }}

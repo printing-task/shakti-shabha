@@ -136,7 +136,7 @@
 
 .statCard {
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   border-radius: 16px;
   padding: 1.6rem 1.5rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
@@ -213,7 +213,7 @@
 
 .modalityCard {
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e8e4df;
   border-radius: 20px;
   padding: 2.25rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);

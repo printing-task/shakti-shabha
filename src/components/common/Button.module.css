@@ -55,9 +55,9 @@
 /* Primary — Brand Crimson */
 .primary {
   color: #FFFFFF !important;
-  background: var(--theme-primary, #DC143C);
-  border: 1.5px solid var(--theme-primary, #DC143C);
-  box-shadow: 0 4px 14px rgba(220, 20, 60, 0.25);
+  background: var(--theme-primary, #bd1834);
+  border: 1.5px solid var(--theme-primary, #bd1834);
+  box-shadow: 0 4px 14px rgba(189, 24, 52, 0.25);
 }
 
 .primary:hover {
@@ -65,7 +65,7 @@
   border-color: var(--theme-primary-dark, #B01030);
   color: #FFFFFF !important;
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px var(--theme-primary-shadow, rgba(220, 20, 60, 0.35));
+  box-shadow: 0 10px 25px var(--theme-primary-shadow, rgba(189, 24, 52, 0.35));
 }
 
 /* Secondary / Outline */
@@ -88,17 +88,17 @@
 
 /* Ghost / Translucent */
 .ghost {
-  color: var(--theme-primary, #DC143C) !important;
-  background: rgba(220, 20, 60, 0.06);
-  border: 1.5px solid rgba(220, 20, 60, 0.35);
+  color: var(--theme-primary, #bd1834) !important;
+  background: rgba(189, 24, 52, 0.06);
+  border: 1.5px solid rgba(189, 24, 52, 0.35);
 }
 
 .ghost:hover {
-  background: var(--theme-primary, #DC143C);
+  background: var(--theme-primary, #bd1834);
   color: #FFFFFF !important;
-  border-color: var(--theme-primary, #DC143C);
+  border-color: var(--theme-primary, #bd1834);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(220, 20, 60, 0.25);
+  box-shadow: 0 8px 20px rgba(189, 24, 52, 0.25);
 }
 
 /* Danger */

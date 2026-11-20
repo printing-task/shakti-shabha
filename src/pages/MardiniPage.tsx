@@ -83,7 +83,7 @@ export default function MardiniPage() {
         <div className={m.tiersGrid}>
           {/* Shield One */}
           <div className={m.tierCard}>
-            <span className={m.tierBadge} style={{ background: 'rgba(220,20,60,0.1)', color: '#DC143C' }}>
+            <span className={m.tierBadge} style={{ background: 'rgba(189,24,52,0.1)', color: '#bd1834' }}>
               Shield One · Cognitive De-escalation &amp; Situational Awareness
             </span>
             <h3 className={m.tierTitle}>Mental Radar &amp; Threat De-escalation</h3>
@@ -138,7 +138,7 @@ export default function MardiniPage() {
         <div className={m.campScheduleGrid}>
           <div className={m.scheduleCol}>
             <h4>
-              <GoogleIcon name="holiday_village" size={22} style={{ color: '#DC143C' }} />
+              <GoogleIcon name="holiday_village" size={22} style={{ color: '#bd1834' }} />
               Intensive 7–10 Day Mardini Camps
             </h4>
             <p style={{ fontSize: '0.88rem', color: '#6B7280', lineHeight: 1.6, marginBottom: '1.25rem' }}>
@@ -170,7 +170,7 @@ export default function MardiniPage() {
 
           <div className={m.scheduleCol}>
             <h4>
-              <GoogleIcon name="public" size={22} style={{ color: '#DC143C' }} />
+              <GoogleIcon name="public" size={22} style={{ color: '#bd1834' }} />
               Institutional Collaborations &amp; Tribal Outreach
             </h4>
             <p style={{ fontSize: '0.88rem', color: '#6B7280', lineHeight: 1.6, marginBottom: '1.25rem' }}>
@@ -199,7 +199,7 @@ export default function MardiniPage() {
           categoryKeywords={['mardini', 'lathi', 'combat', 'martial']}
           title="Mission Mardini Field & Training Visuals"
           subtitle="Randomized authentic documentation of lathi-kaushal staff drills, biomechanical combat, and residential warrior camps fetched directly from the database."
-          accentColor="#DC143C"
+          accentColor="#bd1834"
         />
 
         {/* ── BOTTOM CTA ────────────────────────────────────────────── */}
