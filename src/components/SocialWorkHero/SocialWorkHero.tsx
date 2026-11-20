@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import s from './SocialWorkHero.module.css'
 
 const WORDS = [
-  'SURVIVORS.',
-  'WARRIORS.',
-  'DAUGHTERS.',
-  'RURAL GIRLS.',
-  'COMMUNITIES.',
+  'CRITICAL VULNERABILITIES.',
+  'INFORMED ACTION.',
+  'COMMUNITY RESILIENCE.',
+  'GROUND REALITIES.',
+  'CIVILIZATIONAL STRENGTH.',
 ]
 
 export default function SocialWorkHero() {
@@ -53,17 +53,17 @@ export default function SocialWorkHero() {
       <div className={s.leftPart}>
         <div className={s.topNav}>
           <span className={s.badge}>
-            NGO Archive · 7 Years on the Ground (Starting from 2019)
+            FIELD OBSERVATIONS · 2019–PRESENT
           </span>
         </div>
 
-        <h1 className={s.heroTitle}>
-          <span className={s.headingPrefix}>WE WORK</span>
-          <span className={s.crimsonLine}>FOR YOUTH</span>
-        </h1>
+        <h2 className={s.heroTitle}>
+          <span className={s.headingPrefix}>WHAT THE FIELD</span>
+          <span className={s.crimsonLine}>REVEALS</span>
+        </h2>
 
         <div className={s.missionRotator}>
-          <span className={s.rotatorLabel}>EMPOWERING:</span>
+          <span className={s.rotatorLabel}>UNCOVERING:</span>
           <span className={s.rotatorWord}>
             {displayedText}
             <span className={s.cursor}>|</span>
@@ -71,12 +71,13 @@ export default function SocialWorkHero() {
         </div>
 
         <p className={s.desc}>
-          Seven years of fearless grassroots empowerment (2019–2026) — organizing martial self-defense
-          camps, survivor healing pods, legal literacy circles, and rural leadership across 200+ villages.
+          Over seven years of continuous direct engagement across rural settlements, educational institutions,
+          and urban communities, field observation reveals the essential need to combine physical preparedness,
+          psychosocial awareness, and critical inquiry to foster lasting social resilience.
         </p>
 
         <Link to="/events" className={s.bookLink}>
-          <span className={s.linktext}>Join Our Mission</span>
+          <span className={s.linktext}>Explore Field Initiatives</span>
           <span className={s.arrow}>
             <span></span>
           </span>

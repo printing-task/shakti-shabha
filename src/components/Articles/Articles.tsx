@@ -100,10 +100,10 @@ export default function Articles() {
         {/* Section Header */}
         <div data-art="header" className={s.header}>
           <div className={s.headerLeft}>
-            <span className={s.eyebrow}>Thought Leadership · Dispatches &amp; Research</span>
-            <h2 className={s.title}>Latest Articles &amp; Perspectives</h2>
+            <span className={s.eyebrow}>Latest Research &amp; Insights · Empirical Inquiry</span>
+            <h2 className={s.title}>Latest Research, Case Studies &amp; Insights</h2>
             <p className={s.sub}>
-              Investigative journalism, clinical trauma recovery frameworks, and epigraphical civilizational research from the Shakti Sabha think tank.
+              Rigorous fieldwork converted into verified knowledge. Date, author, and subject attribution across legal frameworks, trauma recovery, and civilizational archives.
             </p>
           </div>
           <Link to="/articles" className={s.headerLink}>
@@ -112,6 +112,48 @@ export default function Articles() {
               <path d="M5 12h14" />
               <path d="M12 5l7 7-7 7" />
             </svg>
+          </Link>
+        </div>
+
+        {/* Featured Publication / Signature Insight Banner */}
+        <div style={{
+          background: '#1C1B18',
+          border: '1px solid rgba(220, 20, 60, 0.35)',
+          borderRadius: 14,
+          padding: '1.75rem 2rem',
+          marginBottom: '2.5rem',
+          color: '#FAF7F0',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '1.25rem'
+        }}>
+          <div style={{ maxWidth: 760 }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.72rem', letterSpacing: '0.12em', color: '#F59E0B', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+              <span>★ SIGNATURE INTELLECTUAL ANCHOR · FLAGSHIP WORKING ESSAY</span>
+            </div>
+            <h3 style={{ fontFamily: "'Cinzel', serif", fontSize: '1.35rem', color: '#FAF7F0', margin: '0 0 0.5rem', fontWeight: 700 }}>
+              De-escalation, Somatic Fortitude &amp; Non-Victimhood: A Field-Tested Framework
+            </h3>
+            <p style={{ fontSize: '0.86rem', color: '#D6D3D1', margin: '0 0 0.5rem', lineHeight: 1.5 }}>
+              Lead Authors: Shakti Sabha Research Cell &amp; Senior Legal Advisory Wing · Published: January 2026 · Subject: Rural Deterrence &amp; Somatic Fortitude
+            </p>
+          </div>
+          <Link to="/research" style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            background: '#DC143C',
+            color: '#FFFFFF',
+            padding: '0.75rem 1.4rem',
+            borderRadius: 6,
+            fontSize: '0.85rem',
+            fontWeight: 700,
+            textDecoration: 'none'
+          }}>
+            <span>Read Signature Essay</span>
+            <span>→</span>
           </Link>
         </div>
 
@@ -139,7 +181,12 @@ export default function Articles() {
 
               <div className={s.cardBody}>
                 <div className={s.metaRow}>
-                  <span className={s.author}>{item.author}</span>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                    <span className={s.author}>{item.author}</span>
+                    <span style={{ fontSize: '0.72rem', color: '#78716C', fontWeight: 500 }}>
+                      Subject: {item.tag} · {idx % 2 === 0 ? 'Jan 2026' : 'Late 2025'}
+                    </span>
+                  </div>
                   <span className={s.ratingBadge}>★ {item.rating}</span>
                 </div>
 

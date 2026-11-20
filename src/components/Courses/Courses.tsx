@@ -239,9 +239,11 @@ export default function Courses() {
       <section ref={secRef} className={s.section} data-courses-section>
         <div className={s.header}>
           <div className={s.headerLeft}>
-            <span className={s.eyebrow}>Accredited Capacity Building</span>
-            <h2 className={s.title}>Institutional Programs / Cohorts</h2>
-            <p className={s.subtitle}>Tactical self-defense, psychological resilience, and civilizational character formation — delivered through accredited institutional cohorts.</p>
+            <span className={s.eyebrow}>What We Study · Core Disciplines &amp; Cohorts</span>
+            <h2 className={s.title}>What We Study</h2>
+            <p className={s.subtitle}>
+              Youth • Safeguarding • Human Behaviour • Indian Civilizational Thought • Social Resilience • Kshatra Dharma
+            </p>
           </div>
 
           <div className={s.headerRight}>

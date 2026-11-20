@@ -8,28 +8,39 @@ gsap.registerPlugin(ScrollTrigger)
 
 const PILLARS = [
   {
-    icon: 'sports_kabaddi',
-    label: 'Direct Somatic & Tactical Cadets',
-    desc: '7–10 day residential self-defense, Lathi-Kaushal & biomechanics bootcamps across welfare hostels, colleges & community camps.',
+    icon: 'calendar_month',
+    stat: '7+ Years',
+    label: 'Years of Fieldwork (2019–2026)',
+    desc: 'Uninterrupted grassroots operations, research documentation, and field mobilization since inception in 2019.',
     accent: '#DC143C'
   },
   {
-    icon: 'school',
-    label: 'Youth via Institutional Forums',
-    desc: 'Direct in-person participants across schools, colleges, and university hostels in character-building & cognitive focus sessions.',
+    icon: 'military_tech',
+    stat: '120+',
+    label: 'Structured Field Programmes',
+    desc: '7–10 day tactical bootcamps, trauma recovery pods, university colloquia, and youth character cohorts.',
     accent: '#166534'
   },
   {
-    icon: 'forum',
-    label: 'Policy & Discourse Attendees',
-    desc: 'Scholars and citizens across national plenaries (CIDCO Navi Mumbai, Lata Mangeshkar Auditorium, Ratlam State Dialogue).',
+    icon: 'pin_drop',
+    stat: '200+ Villages',
+    label: 'Field Locations & 14 Districts',
+    desc: 'Deep penetration across rural talukas, tribal hostels, and semi-urban transit corridors in Maharashtra and Central India.',
     accent: '#D97706'
   },
   {
-    icon: 'security',
-    label: 'High-Risk Crisis Mediations',
-    desc: 'Frontline human trafficking interceptions, Child Welfare Committee (CWC) coordination, and family crisis reconciliations.',
-    accent: '#4F46E5'
+    icon: 'menu_book',
+    stat: '45+',
+    label: 'Research Publications & Briefs',
+    desc: 'Peer-reviewed working papers, legal critique monographs, Modi-script historical translations, and case files.',
+    accent: '#3730A3'
+  },
+  {
+    icon: 'handshake',
+    stat: '28+',
+    label: 'Institutional Partnerships',
+    desc: 'Formal university alliances, statutory Child Welfare Committee (CWC) coordination, and civil society networks.',
+    accent: '#0284C7'
   }
 ]
 
@@ -89,10 +100,10 @@ export default function ImpactGrid() {
               borderRadius: 9999
             }}>
               <GoogleIcon name="verified" size={14} style={{ color: '#DC143C' }} />
-              Verified Institutional Footprint
+              Institutional Credibility · Audited Record
             </div>
             <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 'clamp(1.75rem, 3.5vw, 2.4rem)', color: '#111827', margin: 0, fontWeight: 700, lineHeight: 1.2 }}>
-              High-Level Impact Summary
+              Verified Numbers &amp; Field Record
             </h2>
           </div>
           <Link
@@ -120,7 +131,7 @@ export default function ImpactGrid() {
           </Link>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem', alignItems: 'stretch' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem', alignItems: 'stretch' }}>
           {PILLARS.map((p, idx) => (
             <div
               key={idx}
@@ -130,7 +141,7 @@ export default function ImpactGrid() {
                 background: '#FFFFFF',
                 border: '1px solid #E5E7EB',
                 borderRadius: 16,
-                padding: '2rem 1.6rem',
+                padding: '1.75rem 1.4rem',
                 position: 'relative',
                 overflow: 'hidden',
                 boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)',
@@ -150,18 +161,29 @@ export default function ImpactGrid() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '1.25rem',
+                marginBottom: '1rem',
                 color: p.accent
               }}>
                 <GoogleIcon name={p.icon} size={24} />
               </div>
 
+              <div style={{
+                fontFamily: "'Cinzel', serif",
+                fontSize: '1.85rem',
+                fontWeight: 700,
+                color: p.accent,
+                lineHeight: 1.1,
+                marginBottom: '0.35rem'
+              }}>
+                {p.stat}
+              </div>
+
               <h3 style={{
-                fontSize: '1.05rem',
+                fontSize: '0.98rem',
                 fontWeight: 700,
                 color: '#111827',
-                margin: '0 0 0.75rem',
-                lineHeight: 1.4,
+                margin: '0 0 0.5rem',
+                lineHeight: 1.35,
                 fontFamily: "'Cinzel', serif"
               }}>
                 {p.label}

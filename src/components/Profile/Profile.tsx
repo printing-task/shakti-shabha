@@ -158,69 +158,49 @@ export default function Profile() {
           {/* Top Right: Heading & Button */}
           <div className={s.rightTop}>
             <span data-p="eyebrow" className={s.eyebrow}>
-              FOUNDER &amp; DIRECTOR · <span className={s.aaryaveeraHighlight}>AARYAVEERA</span>
+              FOUNDER &amp; FIELD RESEARCHER · <span className={s.aaryaveeraHighlight}>HARSHITA MANKAR</span>
             </span>
             
             <h2 data-p="heading" className={s.heading}>
               <span className={s.nameBold}>Harshita</span>{' '}
               <span className={s.nameLight}>Mankar</span>
               <span className={s.title}>
-                {profile.honorific_hi}
+                संस्थापक व क्षेत्रीय रणनीतिकार
               </span>
             </h2>
 
-            <p style={{ fontSize: '0.86rem', color: '#DC143C', fontWeight: 600, letterSpacing: '0.04em', margin: '0.4rem 0 1rem' }}>
-              {profile.subTitle}
+            <p style={{ fontSize: '0.86rem', color: '#DC143C', fontWeight: 600, letterSpacing: '0.04em', margin: '0.4rem 0 0.85rem' }}>
+              Founder &amp; Civilizational Field Strategist
             </p>
 
-            {/* Hero Quote */}
-            <div data-p="badge-row" style={{
-              background: 'rgba(220, 20, 60, 0.04)',
-              borderLeft: '3px solid #DC143C',
-              padding: '0.9rem 1.1rem',
-              borderRadius: '0 8px 8px 0',
-              marginBottom: '1.25rem',
-              fontStyle: 'italic',
-              color: '#374151',
-              fontSize: '0.92rem',
-              lineHeight: 1.6
-            }}>
-              "{profile.heroQuote}"
-            </div>
+            {/* Professional Concise Intro */}
+            <p style={{ fontSize: '0.92rem', lineHeight: '1.6', color: '#4B5563', marginBottom: '1rem' }}>
+              Harshita Mankar has directed frontline fieldwork across 200+ villages, establishing Shakti Sabha as an applied research think-tank and tactical training institution. Her work bridges primary archival historiography, somatic martial deterrence, and rural crisis arbitration.
+            </p>
 
-            {/* Quick Metrics Grid */}
+            {/* Note clarifying that the institution stands primary */}
             <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-              gap: '0.65rem',
-              width: '100%',
-              marginBottom: '1.5rem'
+              background: '#F9FAFB',
+              border: '1px solid #E5E7EB',
+              borderLeft: '3px solid #3730A3',
+              padding: '0.75rem 1rem',
+              borderRadius: '0 6px 6px 0',
+              marginBottom: '1.25rem',
+              fontSize: '0.82rem',
+              color: '#4B5563',
+              lineHeight: '1.5'
             }}>
-              <div style={{ background: '#F9FAFB', border: '1px solid #E5E7EB', borderRadius: 8, padding: '0.65rem 0.85rem' }}>
-                <div style={{ color: '#DC143C', fontWeight: 800, fontSize: '1.1rem' }}>Black Belt</div>
-                <div style={{ color: '#6B7280', fontSize: '0.74rem' }}>Karate &amp; Combat</div>
-              </div>
-              <div style={{ background: '#F9FAFB', border: '1px solid #E5E7EB', borderRadius: 8, padding: '0.65rem 0.85rem' }}>
-                <div style={{ color: '#DC143C', fontWeight: 800, fontSize: '1.1rem' }}>2,000+</div>
-                <div style={{ color: '#6B7280', fontSize: '0.74rem' }}>Girls Weaponized</div>
-              </div>
-              <div style={{ background: '#F9FAFB', border: '1px solid #E5E7EB', borderRadius: 8, padding: '0.65rem 0.85rem' }}>
-                <div style={{ color: '#DC143C', fontWeight: 800, fontSize: '1.1rem' }}>500+</div>
-                <div style={{ color: '#6B7280', fontSize: '0.74rem' }}>Seminars Convened</div>
-              </div>
-              <div style={{ background: '#F9FAFB', border: '1px solid #E5E7EB', borderRadius: 8, padding: '0.65rem 0.85rem' }}>
-                <div style={{ color: '#DC143C', fontWeight: 800, fontSize: '1.1rem' }}>25,000+</div>
-                <div style={{ color: '#6B7280', fontSize: '0.74rem' }}>Students Reached</div>
-              </div>
+              <strong style={{ color: '#1F2937' }}>Institutional Principle: </strong>
+              The institution, its empirical research, and the sovereign safety of women remain primary over any individual. The complete philosophical worldview and youth leadership code is documented in the dedicated Aaryaveera section.
             </div>
 
             {/* CTA BUTTONS */}
             <div className={s.ctaGroup}>
-              <Link to="/about" data-p="btn" className={s.ctaBtn}>
-                Full Biography &amp; Genesis →
+              <Link to="/aaryaveera" data-p="btn" className={s.ctaBtn}>
+                Explore Aaryaveera Ideology →
               </Link>
-              <Link to="/three-streams" data-p="btn" className={s.ctaBtnGhost}>
-                The Three Streams →
+              <Link to="/about" data-p="btn" className={s.ctaBtnGhost}>
+                Professional Biography →
               </Link>
             </div>
           </div>

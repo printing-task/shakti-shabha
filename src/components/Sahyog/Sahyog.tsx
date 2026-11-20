@@ -83,25 +83,24 @@ export default function Sahyog() {
       {/* TOP HALF: Content centered & responsive */}
       <div className={s.top}>
         <div className={s.textCol}>
-          <div data-sy="text" className={s.eyebrow}>Partnerships &amp; Support</div>
+          <div data-sy="text" className={s.eyebrow}>Dialogue &amp; Collaboration · Multi-Sectoral Engagement</div>
 
           <div data-sy="text" className={s.titleBlock}>
-            <h2 className={s.title}>Our Sahyog</h2>
-            <span className={s.hindi}>Institutional Alliance &amp; Collective Action</span>
+            <h2 className={s.title}>Dialogue &amp; Collaboration</h2>
+            <span className={s.hindi}>संवाद एवं संस्थागत सहकार्य</span>
           </div>
 
           <p data-sy="text" className={s.desc}>
-            Shakti Sabha stands with organizations, institutions, and individuals
-            who believe in the same truth — that every woman deserves safety,
-            dignity, and opportunity. Our Sahyog program builds bridges across
-            sectors for collective action.
+            Rigorous knowledge demands multi-sectoral engagement and open civic discourse. Shakti Sabha actively collaborates across universities, independent scholars, civil society, statutory public institutions, and civic assemblies to translate field observations into systemic action.
           </p>
 
           <div data-sy="text" className={s.pillars}>
             {[
-              { tag: 'Corporates', title: 'CSR & Sponsorship', icon: 'domain' },
-              { tag: 'NGOs',       title: 'Partner Network',   icon: 'eco' },
-              { tag: 'Students',   title: 'Internships',       icon: 'school' },
+              { tag: 'Universities',   title: 'Joint Field Studies & Archival Research', icon: 'school' },
+              { tag: 'Researchers',    title: 'Independent Fellows & Monograph Panels',  icon: 'psychology' },
+              { tag: 'Civil Society',  title: 'Grassroots Crisis Networks & Shelters',   icon: 'diversity_1' },
+              { tag: 'Institutions',   title: 'Statutory Panels & Women Welfare Boards', icon: 'account_balance' },
+              { tag: 'Public Forums',  title: 'Open Symposia, Plenaries & Townhalls',    icon: 'forum' },
             ].map(p => (
               <div key={p.title} className={s.pillItem}>
                 <span className={s.pillIcon}><GoogleIcon name={p.icon} size={22} /></span>
@@ -114,7 +113,7 @@ export default function Sahyog() {
           </div>
 
           <Link data-sy="text" to="/sahyog" className={s.ctaBtn}>
-            Become a Partner →
+            Propose Institutional Partnership →
           </Link>
         </div>
       </div>

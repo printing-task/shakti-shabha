@@ -6,13 +6,13 @@
   min-height: 100vh;
   padding-top: 0;
   background: var(--theme-bg, #FFFFFF);
-  color: var(--theme-text-heading, #111111);
-  font-family: var(--font-body, 'Poppins', sans-serif);
+  color: var(--theme-text-heading, #191817);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
 }
 
 /* Banner */
 .banner {
-  padding: calc(clamp(3rem, 6vw, 5rem) + 4.5rem) clamp(1.5rem, 4vw, 3rem) clamp(3rem, 6vw, 5rem);
+  padding: calc(clamp(3rem, 6vw, 5rem) + 6.5rem) clamp(1.5rem, 4vw, 3rem) clamp(3rem, 6vw, 5rem);
   color: #FFFFFF;
 }
 
@@ -29,7 +29,7 @@
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   margin-bottom: 1.75rem;
-  font-family: var(--btn-font, 'Poppins', sans-serif);
+  font-family: var(--btn-font, 'DM Sans', sans-serif);
   font-weight: 500;
   letter-spacing: 0.05em;
   text-transform: uppercase;

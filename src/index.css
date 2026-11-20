@@ -1,136 +1,157 @@
 /* ==========================================================================
    SHAKTI SABHA — CENTRAL DESIGN SYSTEM & THEME TOKENS
-   Edit this single file to change the entire website's UI, colors & styles!
+   Adapted to match the official theme & typography:
+   Playfair Display (Serif), Cinzel (Display), DM Sans (Body)
+   Palette: Red (#bd1834), Ink (#191817), Muted (#716d68), Line (#e8e4df),
+            Soft (#f7f5f2), Paper (#ffffff), Green (#246345), Blue (#48458f)
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
 
 :root {
   /* --------------------------------------------------------------------------
-     1. PRIMARY BRAND COLORS (Navbar, Hero Accents, Buttons, Profile Highlights)
+     1. OFFICIAL CORE TOKENS (From Theme Specification)
      -------------------------------------------------------------------------- */
-  --theme-primary: #DC143C;                      /* Primary Brand Crimson */
-  --theme-primary-dark: #B01030;                 /* Deep Crimson (Navbar scrolled) */
-  --theme-primary-light: rgba(220, 20, 60, 0.06);/* Translucent pill background */
-  --theme-primary-border: rgba(220, 20, 60, 0.45);/* Crimson outline border */
-  --theme-primary-shadow: rgba(220, 20, 60, 0.35);/* Button hover glow */
-  --theme-primary-subtle: rgba(220, 20, 60, 0.03);
+  --red: #bd1834;
+  --red-dark: #94132a;
+  --ink: #191817;
+  --muted: #716d68;
+  --paper: #ffffff;
+  --soft: #f7f5f2;
+  --line: #e8e4df;
+  --green: #246345;
+  --blue: #48458f;
+  --gold: #b28b50;
+
+  --serif: 'Playfair Display', Georgia, serif;
+  --display: 'Cinzel', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
 
   /* --------------------------------------------------------------------------
-     2. BACKGROUNDS & SURFACES (Clean, Editorial Light Palette matching Hero/Profile)
+     2. PRIMARY BRAND COLORS (Navbar, Hero Accents, Buttons, Profile Highlights)
      -------------------------------------------------------------------------- */
-  --theme-bg: #FFFFFF;                           /* Clean white main surface */
-  --theme-bg-alt: #F8F8F9;                       /* Soft neutral section surface */
-  --theme-surface-card: #FFFFFF;                 /* Card surfaces */
-  --theme-surface-subtle: #EFE9E4;               /* Frame/photo background */
-  --theme-border-light: rgba(0, 0, 0, 0.08);     /* Clean subtle dividers */
+  --theme-primary: var(--red);                      /* #bd1834 */
+  --theme-primary-dark: var(--red-dark);            /* #94132a */
+  --theme-primary-light: rgba(189, 24, 52, 0.08);  /* Translucent pill background */
+  --theme-primary-border: rgba(189, 24, 52, 0.35); /* Red outline border */
+  --theme-primary-shadow: rgba(189, 24, 52, 0.25); /* Button hover glow */
+  --theme-primary-subtle: rgba(189, 24, 52, 0.04);
 
   /* --------------------------------------------------------------------------
-     3. TEXT COLOR HIERARCHY
+     3. BACKGROUNDS & SURFACES (Clean, Editorial Light Palette)
      -------------------------------------------------------------------------- */
-  --theme-text-heading: #111111;                 /* Primary Headings */
-  --theme-text-body: #333333;                    /* Body Copy */
-  --theme-text-muted: #555555;                   /* Subtitles & Descriptions */
-  --theme-text-subtle: #777777;                  /* Eyebrows, Meta & Tags */
-  --theme-text-on-primary: #FFFFFF;              /* Text on Crimson */
+  --theme-bg: var(--paper);                         /* Clean white main surface */
+  --theme-bg-alt: var(--soft);                      /* Soft neutral section surface */
+  --theme-surface-card: var(--paper);               /* Card surfaces */
+  --theme-surface-subtle: var(--soft);              /* Frame/photo background */
+  --theme-border-light: var(--line);                /* Clean subtle dividers #e8e4df */
 
   /* --------------------------------------------------------------------------
-     4. TYPOGRAPHY FONT FAMILIES
+     4. TEXT COLOR HIERARCHY
      -------------------------------------------------------------------------- */
-  --font-primary: 'Poppins', sans-serif;
-  --font-serif: 'Cinzel', serif;
-  --font-cursive: 'Cinzel', serif;
-  --font-display: 'Cinzel', serif;
-  --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --theme-text-heading: var(--ink);                 /* Primary Headings #191817 */
+  --theme-text-body: #2b2825;                       /* Body Copy */
+  --theme-text-muted: var(--muted);                 /* Subtitles & Descriptions #716d68 */
+  --theme-text-subtle: #89827c;                    /* Eyebrows, Meta & Tags */
+  --theme-text-on-primary: #ffffff;                 /* Text on Red */
+
+  /* --------------------------------------------------------------------------
+     5. TYPOGRAPHY FONT FAMILIES
+     -------------------------------------------------------------------------- */
+  --font-primary: var(--sans);
+  --font-serif: var(--serif);
+  --font-cursive: var(--serif);
+  --font-display: var(--display);
+  --font-body: var(--sans);
   --font-devanagari: 'Noto Sans Devanagari', sans-serif;
 
   /* --------------------------------------------------------------------------
-     5. HERO & PROFILE BUTTON PRESETS (Identical pill style across the entire site)
+     6. HERO & PROFILE BUTTON PRESETS (Pill style across the site)
      -------------------------------------------------------------------------- */
-  --btn-font: 'Poppins', sans-serif;
-  --btn-font-size: 0.76rem;
+  --btn-font: var(--sans);
+  --btn-font-size: 0.78rem;
   --btn-font-weight: 600;
-  --btn-letter-spacing: 0.05em;
-  --btn-radius: 9999px;                          /* Pill rounded shape */
-  --btn-padding: 0.62rem 1.85rem;
+  --btn-letter-spacing: 0.08em;
+  --btn-radius: 9999px;                             /* Pill rounded shape */
+  --btn-padding: 0.65rem 1.85rem;
   --btn-transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1),
                     background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease,
                     color 0.2s ease;
 
   /* --------------------------------------------------------------------------
-     6. UNIFIED HERITAGE & COMPATIBILITY TOKENS
+     7. UNIFIED HERITAGE & COMPATIBILITY TOKENS
      -------------------------------------------------------------------------- */
-  --night: #FFFFFF;                              /* Page Background */
-  --ash: #F8F8F9;                                /* Subtle Section Alternation */
-  --panel: #FFFFFF;                              /* Clean Card Surface */
-  --border: rgba(0, 0, 0, 0.08);                 /* Clean Editorial Border */
-  --border-gold: rgba(220, 20, 60, 0.28);        /* Brand Crimson Border */
-  --fire: #DC143C;
-  --ember: #B01030;
-  --flame: #EA580C;
-  --forest: #14532D;
-  --sage: #15803D;
-  --mist: #A7C4B5;
-  --gold: #DC143C;                               /* Brand Crimson as primary accent */
-  --gold-bright: #E6224B;
-  --gold-deep: #B01030;
-  --indigo: #4F46E5;
-  --indigo-pale: #818CF8;
-  --text: #111111;                               /* Dark Heading Text */
-  --text-dim: #444444;                           /* Readable Editorial Body */
-  --text-mute: #777777;                          /* Subtitles & Meta */
-  --ff-display: 'Cinzel', serif;
-  --ff-body: 'Poppins', sans-serif;
+  --night: var(--paper);
+  --ash: var(--soft);
+  --panel: var(--paper);
+  --border: var(--line);
+  --border-gold: rgba(189, 24, 52, 0.28);
+  --fire: var(--red);
+  --ember: var(--red-dark);
+  --flame: #ea580c;
+  --forest: var(--green);
+  --sage: #2d7a55;
+  --mist: #c6d8ce;
+  --gold: var(--gold);
+  --gold-bright: #c9a96e;
+  --gold-deep: #8c6832;
+  --indigo: var(--blue);
+  --indigo-pale: #7c79b8;
+  --text: var(--ink);
+  --text-dim: #35312e;
+  --text-mute: var(--muted);
+  --ff-display: var(--display);
+  --ff-body: var(--sans);
   --ff-dev: 'Noto Sans Devanagari', sans-serif;
 }
 
 /* ==========================================================================
-   GLOBAL STANDARDIZED TYPOGRAPHY (Task 9)
-   Consistent Cinzel for headings, Poppins for copy, consistent line heights
+   GLOBAL STANDARDIZED TYPOGRAPHY
+   Playfair Display for headings, Cinzel for display/emblems, DM Sans for body
    ========================================================================== */
 
 h1, h2 {
-  font-family: var(--font-display, 'Cinzel', serif);
-  font-weight: 700;
-  line-height: 1.18;
-  color: var(--theme-text-heading, #111111);
-  letter-spacing: -0.01em;
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--theme-text-heading, #191817);
+  letter-spacing: -0.02em;
 }
 
 h3, h4 {
-  font-family: var(--font-display, 'Cinzel', serif);
-  font-weight: 700;
-  line-height: 1.25;
-  color: var(--theme-text-heading, #111111);
+  font-family: var(--serif);
+  font-weight: 500;
+  line-height: 1.28;
+  color: var(--theme-text-heading, #191817);
 }
 
 p {
-  font-family: var(--font-body, 'Poppins', sans-serif);
-  font-size: 0.92rem;
-  line-height: 1.68;
-  color: var(--theme-text-body, #333333);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.94rem;
+  line-height: 1.75;
+  color: var(--theme-text-body, #2b2825);
 }
 
 /* Standard Eyebrow / Badges across all sections */
 .theme-eyebrow,
 .eyebrow,
 [class*="eyebrow"] {
-  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-family: var(--font-primary, 'DM Sans', sans-serif);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-/* Crimson Accent Text */
+/* Red Accent Text */
 .theme-crimson {
-  color: var(--theme-primary, #DC143C);
+  color: var(--theme-primary, #bd1834);
 }
 
 /* Highlight Aaryaveera */
 .aaryaveera-highlight,
 [class*="aaryaveeraHighlight"] {
-  color: var(--theme-primary, #DC143C) !important;
+  color: var(--theme-primary, #bd1834) !important;
   font-weight: 800 !important;
 }
 
@@ -147,14 +168,14 @@ p {
   align-items: center !important;
   justify-content: center !important;
   padding: var(--btn-padding) !important;
-  font-family: var(--btn-font, 'Poppins', sans-serif) !important;
-  font-size: var(--btn-font-size, 0.76rem) !important;
+  font-family: var(--btn-font, var(--sans)) !important;
+  font-size: var(--btn-font-size, 0.78rem) !important;
   font-weight: var(--btn-font-weight, 600) !important;
   text-transform: uppercase !important;
-  letter-spacing: var(--btn-letter-spacing, 0.05em) !important;
+  letter-spacing: var(--btn-letter-spacing, 0.08em) !important;
   color: #FFFFFF !important;
-  background: var(--theme-primary, #DC143C) !important;
-  border: 1px solid var(--theme-primary, #DC143C) !important;
+  background: var(--theme-primary, #bd1834) !important;
+  border: 1px solid var(--theme-primary, #bd1834) !important;
   border-radius: var(--btn-radius, 9999px) !important;
   cursor: pointer !important;
   text-decoration: none !important;
@@ -163,18 +184,18 @@ p {
   user-select: none !important;
   white-space: nowrap !important;
   min-height: 40px !important;
-  box-shadow: 0 4px 14px rgba(220, 20, 60, 0.25) !important;
+  box-shadow: 0 4px 14px rgba(189, 24, 52, 0.22) !important;
 }
 
 .btn-hero:hover,
 .btn-theme-pill:hover,
 [class*="ctaBtn"]:not([class*="Ghost"]):not([class*="Outline"]):hover,
 [class*="btnWarriorGold"]:hover {
-  background: var(--theme-primary-dark, #B01030) !important;
-  border-color: var(--theme-primary-dark, #B01030) !important;
+  background: var(--theme-primary-dark, #94132a) !important;
+  border-color: var(--theme-primary-dark, #94132a) !important;
   color: #FFFFFF !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 10px 25px var(--theme-primary-shadow, rgba(220, 20, 60, 0.35)) !important;
+  box-shadow: 0 10px 25px var(--theme-primary-shadow, rgba(189, 24, 52, 0.32)) !important;
 }
 
 /* Ghost / Outline Button Variant */
@@ -185,14 +206,14 @@ p {
   align-items: center !important;
   justify-content: center !important;
   padding: var(--btn-padding) !important;
-  font-family: var(--btn-font, 'Poppins', sans-serif) !important;
-  font-size: var(--btn-font-size, 0.76rem) !important;
+  font-family: var(--btn-font, var(--sans)) !important;
+  font-size: var(--btn-font-size, 0.78rem) !important;
   font-weight: var(--btn-font-weight, 600) !important;
   text-transform: uppercase !important;
-  letter-spacing: var(--btn-letter-spacing, 0.05em) !important;
-  color: #222222 !important;
+  letter-spacing: var(--btn-letter-spacing, 0.08em) !important;
+  color: var(--ink, #191817) !important;
   background: transparent !important;
-  border: 1.5px solid rgba(0, 0, 0, 0.25) !important;
+  border: 1px solid var(--line, #e8e4df) !important;
   border-radius: var(--btn-radius, 9999px) !important;
   cursor: pointer !important;
   text-decoration: none !important;
@@ -205,9 +226,9 @@ p {
 [class*="btnGhost"]:hover,
 [class*="ctaBtnGhost"]:hover,
 [class*="btnWarriorOutline"]:hover {
-  background: rgba(0, 0, 0, 0.06) !important;
-  border-color: #111111 !important;
-  color: #111111 !important;
+  background: var(--soft, #f7f5f2) !important;
+  border-color: var(--ink, #191817) !important;
+  color: var(--ink, #191817) !important;
   transform: translateY(-2px) !important;
 }
 
@@ -218,21 +239,23 @@ p {
 .theme-card,
 .card-standard {
   background: var(--theme-surface-card, #FFFFFF);
-  border: 1px solid var(--theme-border-light, #E5E7EB);
-  border-radius: 16px;
+  border: 1px solid var(--theme-border-light, #e8e4df);
+  border-radius: 14px;
   padding: 1.85rem 1.6rem;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 16px rgba(25, 24, 23, 0.04);
   display: flex;
   flex-direction: column;
   transition: transform var(--motion-dur-md, 0.45s) var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1)),
-              box-shadow var(--motion-dur-md, 0.45s) var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
+              box-shadow var(--motion-dur-md, 0.45s) var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1)),
+              border-color 0.3s ease;
 }
 .theme-card:hover,
 .card-standard:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.11), 0 4px 16px rgba(220, 20, 60, 0.07);
+  transform: translateY(-5px);
+  border-color: rgba(189, 24, 52, 0.35);
+  box-shadow: 0 18px 42px rgba(25, 24, 23, 0.08), 0 4px 14px rgba(189, 24, 52, 0.06);
 }
 
 /* ==========================================================================

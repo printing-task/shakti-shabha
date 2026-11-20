@@ -12,7 +12,7 @@
   min-height: clamp(400px, 50vh, 550px);
   display: flex;
   align-items: center;
-  padding: calc(clamp(4rem, 7vw, 6rem) + 4.5rem) clamp(1.5rem, 4vw, 3rem) clamp(4rem, 7vw, 5.5rem);
+  padding: calc(clamp(4rem, 7vw, 6rem) + 6.5rem) clamp(1.5rem, 4vw, 3rem) clamp(4rem, 7vw, 5.5rem);
   color: #FFFFFF;
 }
 
@@ -547,3 +547,410 @@
     border-radius: 12px;
   }
 }
+
+/* ── Field Presence Redesign ────────────────────────────────── */
+.presenceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.presenceCard {
+  background: #FFFFFF;
+  border: 1px solid var(--border, #E8E8E8);
+  border-radius: 14px;
+  padding: 1.5rem 1.6rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.presenceCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+  border-color: #DC143C;
+}
+
+.presenceHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.presenceIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(220, 20, 60, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #DC143C;
+}
+
+.presenceState {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--theme-text-heading, #111111);
+}
+
+.presenceLocations {
+  font-size: 0.88rem;
+  color: var(--theme-text-muted, #555555);
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
+.presenceTagline {
+  background: #FFFFFF;
+  border: 1px dashed rgba(220, 20, 60, 0.35);
+  border-radius: 9999px;
+  padding: 0.85rem 1.75rem;
+  text-align: center;
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #DC143C;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-top: 1.5rem;
+}
+
+/* ── Selected Field Indicators ──────────────────────────────── */
+.indicatorsSection {
+  padding: clamp(3rem, 5vw, 5rem) 0;
+  background: #FFFFFF;
+  border-top: 1px solid var(--border, #E8E8E8);
+  border-bottom: 1px solid var(--border, #E8E8E8);
+}
+
+.indicatorsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.indicatorBox {
+  background: #FAFAFA;
+  border: 1px solid var(--border, #E8E8E8);
+  border-radius: 14px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.indicatorBox:hover {
+  transform: translateY(-4px);
+  border-color: #DC143C;
+  box-shadow: 0 14px 32px rgba(220, 20, 60, 0.08);
+}
+
+.indicatorNumber {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  color: #DC143C;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+
+.indicatorLabel {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--theme-text-heading, #222222);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+/* ── Articles & Insights ────────────────────────────────────── */
+.articlesSection {
+  padding: clamp(3.5rem, 6vw, 6rem) 0;
+  background: #FAFAFA;
+  border-top: 1px solid var(--border, #E8E8E8);
+}
+
+.articlesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
+}
+
+.articleCard {
+  background: #FFFFFF;
+  border: 1px solid var(--border, #E8E8E8);
+  border-radius: 14px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.articleCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.08);
+  border-color: #DC143C;
+}
+
+.articleMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #888888;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.articleTopicTag {
+  background: rgba(220, 20, 60, 0.08);
+  color: #DC143C;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+}
+
+.articleTitle {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--theme-text-heading, #111111);
+  line-height: 1.35;
+  margin-bottom: 0.75rem;
+}
+
+.articleExcerpt {
+  font-size: 0.88rem;
+  color: var(--theme-text-muted, #555555);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.articleLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #DC143C;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: gap 0.2s ease;
+}
+
+.articleLink:hover {
+  gap: 0.7rem;
+}
+
+/* ── Policy & Institutional Dialogue ────────────────────────── */
+.dialogueSection {
+  padding: clamp(3.5rem, 6vw, 6rem) 0;
+  background: #FFFFFF;
+  border-top: 1px solid var(--border, #E8E8E8);
+}
+
+.dialogueGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.dialogueCard {
+  background: #FAFAFA;
+  border: 1px solid var(--border, #E8E8E8);
+  border-radius: 14px;
+  padding: 2rem 1.6rem;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dialogueCard:hover {
+  transform: translateY(-4px);
+  border-color: #DC143C;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.06);
+}
+
+.dialogueIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(220, 20, 60, 0.08);
+  color: #DC143C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.dialogueTitle {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--theme-text-heading, #111111);
+  margin-bottom: 0.6rem;
+}
+
+.dialogueDesc {
+  font-size: 0.86rem;
+  color: var(--theme-text-muted, #555555);
+  line-height: 1.7;
+}
+
+/* ── Founder & Director (Compact) ───────────────────────────── */
+.founderSection {
+  padding: clamp(3rem, 5vw, 4.5rem) 0;
+  background: #F7F5F0;
+  border-top: 1px solid rgba(220, 20, 60, 0.15);
+}
+
+.founderCardCompact {
+  max-width: 920px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.founderAvatarWrap {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #DC143C;
+  box-shadow: 0 6px 18px rgba(220, 20, 60, 0.2);
+}
+
+.founderImgCompact {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.founderInfoCompact {
+  flex: 1;
+}
+
+.founderLabelCompact {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #DC143C;
+  margin-bottom: 0.35rem;
+}
+
+.founderNameCompact {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 0.2rem;
+}
+
+.founderRoleCompact {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #666666;
+  margin-bottom: 0.6rem;
+}
+
+.founderBioCompact {
+  font-size: 0.86rem;
+  color: #555555;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.founderLinksCompact {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.founderLinkPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: #DC143C;
+  padding: 0.45rem 1.15rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.founderLinkPrimary:hover {
+  background: #B01030;
+  transform: translateY(-2px);
+}
+
+.founderLinkSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #111111;
+  background: #F0EDE6;
+  padding: 0.45rem 1.15rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.founderLinkSecondary:hover {
+  background: #E2DDD3;
+}
+
+@media (max-width: 900px) {
+  .indicatorsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .articlesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .founderCardCompact {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
+
+  .founderLinksCompact {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 540px) {
+  .indicatorsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .presenceTagline {
+    border-radius: 12px;
+    font-size: 0.85rem;
+    padding: 0.75rem 1rem;
+  }
+}
+

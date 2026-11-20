@@ -194,20 +194,37 @@ export default function Navigation() {
   }
 
   return (
-    <nav className={`${s.nav} ${scrolled ? s.navScrolled : ''}`}>
-      {/* ---------- logo: flip image + writing text ---------- */}
-      <Link to="/" className={s.logo} aria-label="Shakti Sabha home">
-        <img
-          ref={logoImgRef}
-          src="/logo.jpeg"
-          alt="Shakti Sabha logo"
-          className={s.logoImg}
-        />
-        <div className={s.logoText}>
-          <span ref={logoMainRef} className={s.logoMain}>Shakti Sabha</span>
-          <span ref={logoDevRef} className={s.logoDev}>Union of Peace &amp; Revolution</span>
+    <header className={s.navWrapper}>
+      {/* ---------- Utility Top Strip ---------- */}
+      <div className={s.utility}>
+        <div className={s.utilityLeft}>
+          <span className={s.utilityItem}>
+            <i className={s.utilityDot} /> Union of Peace &amp; Revolution
+          </span>
+          <span className={s.utilityItem}>● Institutional &amp; Community Initiatives</span>
         </div>
-      </Link>
+        <div className={s.utilityRight}>
+          <span>INDIA</span>
+          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className={s.socialMini} aria-label="LinkedIn">in</a>
+          <a href="https://youtube.com" target="_blank" rel="noreferrer" className={s.socialMini} aria-label="YouTube">▶</a>
+          <a href="https://instagram.com" target="_blank" rel="noreferrer" className={s.socialMini} aria-label="Instagram">◎</a>
+        </div>
+      </div>
+
+      <nav className={`${s.nav} ${scrolled ? s.navScrolled : ''}`}>
+        {/* ---------- logo: flip image + writing text ---------- */}
+        <Link to="/" className={s.logo} aria-label="Shakti Sabha home">
+          <img
+            ref={logoImgRef}
+            src="/logo.jpeg"
+            alt="Shakti Sabha logo"
+            className={s.logoImg}
+          />
+          <div className={s.logoText}>
+            <span ref={logoMainRef} className={s.logoMain}>Shakti Sabha</span>
+            <span ref={logoDevRef} className={s.logoDev}>Union of Peace &amp; Revolution</span>
+          </div>
+        </Link>
 
       {/* ---------- DESKTOP NAVIGATION (Visible on screens > 900px) ---------- */}
       <div className={s.desktopLinksBox}>
@@ -354,6 +371,9 @@ export default function Navigation() {
       {/* ---------- DESKTOP ACTIONS ---------- */}
       <div className={s.navActions}>
         <LanguageSwitcher className={s.navLangDesktop} />
+        <Link to="/sahyog" className={s.navCta}>
+          Connect With Us
+        </Link>
       </div>
 
       {/* ---------- MOBILE HAMBURGER BUTTON ---------- */}
@@ -482,5 +502,6 @@ export default function Navigation() {
         </div>
       </div>
     </nav>
+  </header>
   )
 }

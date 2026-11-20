@@ -10,7 +10,7 @@
   background: #0A0A0B;
   color: rgba(255, 255, 255, 0.75);
   padding: 5rem clamp(1.5rem, 4vw, 3rem) 2rem;
-  border-top: 1px solid rgba(220, 20, 60, 0.4);
+  border-top: 1px solid rgba(189, 24, 52, 0.4);
   min-height: 380px;
   contain: style;
 }
@@ -34,7 +34,7 @@
   font-family: var(--font-display, 'Cinzel', serif);
   font-size: 1.5rem;
   font-weight: 900;
-  color: #DC143C;
+  color: var(--theme-primary, #bd1834);
   letter-spacing: 0.08em;
 }
 
@@ -46,7 +46,7 @@
 }
 
 .tagline {
-  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-family: var(--font-body, var(--sans));
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.55);
   line-height: 1.5;
@@ -62,9 +62,9 @@
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #DC143C;
-  background: rgba(220, 20, 60, 0.1);
-  border: 1px solid rgba(220, 20, 60, 0.35);
+  color: var(--theme-primary, #bd1834);
+  background: rgba(189, 24, 52, 0.1);
+  border: 1px solid rgba(189, 24, 52, 0.35);
   padding: 0.35rem 0.85rem;
   border-radius: 9999px;
   align-self: flex-start;
@@ -105,13 +105,13 @@
 }
 
 .link:hover {
-  color: #DC143C;
+  color: var(--theme-primary, #bd1834);
 }
 
 .infoLine {
   font-size: 0.82rem;
   color: rgba(255, 255, 255, 0.5);
-  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-family: var(--font-body, var(--sans));
 }
 
 .built {
@@ -136,7 +136,7 @@
 .copy {
   font-size: 0.78rem;
   color: rgba(255, 255, 255, 0.3);
-  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-family: var(--font-body, var(--sans));
 }
 
 /* Responsive */
