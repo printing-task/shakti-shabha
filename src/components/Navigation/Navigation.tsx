@@ -371,9 +371,6 @@ export default function Navigation() {
       {/* ---------- HEADER ACTIONS & HAMBURGER ---------- */}
       <div className={s.headerRight}>
         <LanguageSwitcher className={s.navLang} />
-        <Link to="/sahyog" className={s.navCta}>
-          Connect With Us
-        </Link>
         <button
           className={`${s.hamburger} ${open ? s.hamburgerOpen : ''}`}
           aria-label="Menu"

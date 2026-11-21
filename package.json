@@ -2,6 +2,7 @@
   "name": "shakti-sabha",
   "version": "1.0.0",
   "type": "module",
+  "main": "server.js",
   "bin": {
     "dev": "./bin/dev.cjs"
   },
@@ -9,13 +10,17 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start": "node server/index.js",
-    "server": "node server/index.js",
-    "seed": "node server/seed.js"
+    "start": "node server.js",
+    "server": "node server.js",
+    "seed": "node server/seed.js",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "@emailjs/browser": "^5.0.3",
     "@supabase/supabase-js": "^2.118.0",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
@@ -29,12 +34,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.0",
-    "swiper": "^14.3.0"
-  },
-  "devDependencies": {
-    "@types/react": "^18.3.5",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
+    "swiper": "^14.3.0",
     "typescript": "^5.5.3",
     "vite": "^5.4.0"
   }
