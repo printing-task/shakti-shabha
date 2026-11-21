@@ -490,54 +490,7 @@ export default function AboutPage() {
   }, [])
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      if (timelineRef.current) {
-        const items = timelineRef.current.querySelectorAll(`.${p.timelineItem}`)
-        gsap.fromTo(
-          items,
-          { opacity: 0, x: -20 },
-          {
-            opacity: 1,
-            x: 0,
-            stagger: 0.1,
-            duration: 0.5,
-            ease: 'power2.out',
-            scrollTrigger: { trigger: timelineRef.current, start: 'top 85%', once: true },
-            onComplete: () => {
-              gsap.set(items, { clearProps: 'opacity,transform' })
-            }
-          }
-        )
-      }
-
-      if (valuesRef.current) {
-        const cards = valuesRef.current.querySelectorAll(`.${p.valueCard}`)
-        gsap.fromTo(
-          cards,
-          { opacity: 0, y: 20 },
-          {
-            opacity: 1,
-            y: 0,
-            stagger: 0.08,
-            duration: 0.5,
-            ease: 'power2.out',
-            scrollTrigger: { trigger: valuesRef.current, start: 'top 85%', once: true },
-            onComplete: () => {
-              gsap.set(cards, { clearProps: 'opacity,transform' })
-            }
-          }
-        )
-      }
-    }, pageRef)
-
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh()
-    }, 350)
-
-    return () => {
-      clearTimeout(timer)
-      ctx.revert()
-    }
+    // Immediate visibility on load with zero scroll lag
   }, [])
 
   const confidentialityText =

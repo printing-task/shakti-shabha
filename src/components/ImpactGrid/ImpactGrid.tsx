@@ -47,35 +47,10 @@ const PILLARS = [
 export default function ImpactGrid() {
   const secRef = useRef<HTMLElement>(null)
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Header reveal
-      gsap.from('[data-ig="header"]', {
-        opacity: 0,
-        y: 24,
-        duration: 0.65,
-        ease: 'power3.out',
-        clearProps: 'transform,opacity', scrollTrigger: { trigger: secRef.current, start: 'top 85%', toggleActions: 'play none none none' }
-      })
-
-      // Cards stagger entrance
-      gsap.from('[data-ig="card"]', {
-        opacity: 0,
-        y: 40,
-        stagger: 0.1,
-        duration: 0.65,
-        ease: 'power3.out',
-        clearProps: 'transform,opacity', scrollTrigger: { trigger: secRef.current, start: 'top 85%', toggleActions: 'play none none none' }
-      })
-    }, secRef)
-
-    return () => ctx.revert()
-  }, [])
-
   return (
     <section
       ref={secRef}
-      style={{ background: '#FFFFFF', padding: '4rem 1.5rem', borderTop: '1px solid #E5E7EB', borderBottom: '1px solid #E5E7EB' }}
+      style={{ background: '#FFFFFF', padding: 'clamp(2.5rem, 5vw, 4rem) clamp(1rem, 4vw, 1.5rem)', borderTop: '1px solid #e8e4df', borderBottom: '1px solid #e8e4df' }}
     >
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div

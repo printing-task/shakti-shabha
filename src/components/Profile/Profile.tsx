@@ -92,29 +92,9 @@ export default function Profile() {
     }
   }, [])
 
+  // Immediate visibility on load with zero scroll blocking
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: { 
-          trigger: secRef.current, 
-          start: 'top 90%',
-          toggleActions: 'play none none none' 
-        }
-      })
-      
-      // Animate main photo revealing
-      tl.to(photoRef.current, { clipPath: 'inset(0% 0 0 0)', duration: 1.1, ease: 'power4.inOut' })
-        // Animate right side heading and button
-        .from('[data-p="eyebrow"]', { opacity: 0, y: 10, duration: 0.4 }, '-=0.6')
-        .from('[data-p="heading"]', { opacity: 0, y: 20, duration: 0.6 }, '-=0.4')
-        .from('[data-p="badge-row"]', { opacity: 0, y: 15, duration: 0.5 }, '-=0.3')
-        .from('[data-p="btn"]',     { opacity: 0, y: 10, duration: 0.4 }, '-=0.3')
-        // Animate sub images
-        .from('[data-p="subimg"]',  { opacity: 0, y: 30, stagger: 0.2, duration: 0.6 }, '-=0.2')
-        // Animate left bottom text
-        .from('[data-p="bio"]',     { opacity: 0, y: 15, duration: 0.5 }, '-=0.4')
-    }, secRef)
-    return () => ctx.revert()
+    // Ensures all founder elements are immediately accessible and visible
   }, [])
 
   const mainHeroImageSrc = profile.heroImage

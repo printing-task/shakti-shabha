@@ -325,29 +325,6 @@ export default function SocialWork() {
     }
   }, [])
 
-  // Intro GSAP animations
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('[data-sw="header"]', {
-        opacity: 0,
-        y: 24,
-        duration: 0.7,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: secRef.current, start: 'top 75%' },
-      })
-
-      gsap.from('[data-sw="stage"]', {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: '[data-sw="stage"]', start: 'top 85%' },
-      })
-    }, secRef)
-
-    return () => ctx.revert()
-  }, [])
-
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

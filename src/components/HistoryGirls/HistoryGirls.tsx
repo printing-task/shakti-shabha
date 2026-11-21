@@ -35,74 +35,7 @@ export default function HistoryGirls() {
   const lineRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-
-      // Panels fade in
-      gsap.from('[data-hg="panel"]', {
-        opacity: 0, y: 28, stagger: 0.14, duration: 0.65, ease: 'power3.out',
-        scrollTrigger: { trigger: secRef.current, start: 'top 72%' }
-      })
-
-      // Figure cards
-      gsap.from('[data-hg="card"]', {
-        opacity: 0, scale: 0.93, stagger: 0.06, duration: 0.45, ease: 'back.out(1.4)',
-        scrollTrigger: { trigger: '[data-hg="panel"]', start: 'top 80%' }
-      })
-
-      // Spine line grows down
-      if (lineRef.current) {
-        gsap.fromTo(lineRef.current,
-          { scaleY: 0 },
-          {
-            scaleY: 1,
-            transformOrigin: 'top center',
-            duration: 1.6,
-            ease: 'power2.inOut',
-            scrollTrigger: { trigger: tlRef.current, start: 'top 75%' }
-          }
-        )
-      }
-
-      // Each entry slides in alternately
-      const entries = tlRef.current?.querySelectorAll('[data-hg="tl-entry"]')
-      entries?.forEach((el, i) => {
-        const fromLeft = i % 2 === 0
-        gsap.fromTo(el,
-          { opacity: 0, x: fromLeft ? -40 : 40 },
-          {
-            opacity: 1, x: 0,
-            duration: 0.65,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 85%',
-              toggleActions: 'play none none reverse'
-            }
-          }
-        )
-      })
-
-      // Dots pulse in
-      const dots = tlRef.current?.querySelectorAll('[data-hg="tl-dot"]')
-      dots?.forEach((dot, i) => {
-        gsap.fromTo(dot,
-          { scale: 0, opacity: 0 },
-          {
-            scale: 1, opacity: 1,
-            duration: 0.4,
-            ease: 'back.out(2)',
-            delay: i * 0.15,
-            scrollTrigger: {
-              trigger: dot,
-              start: 'top 88%',
-              toggleActions: 'play none none reverse'
-            }
-          }
-        )
-      })
-
-    }, secRef)
-    return () => ctx.revert()
+    // Non-blocking entrance: timeline is immediately visible on scroll
   }, [])
 
   return (

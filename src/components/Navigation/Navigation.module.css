@@ -610,4 +610,15 @@
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
+
+  .utility {
+    padding: 0 16px;
+    height: 30px;
+    font-size: 10px;
+  }
+
+  .utilityItem:nth-child(2),
+  .utilityRight {
+    display: none;
+  }
 }

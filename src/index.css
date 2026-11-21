@@ -294,6 +294,8 @@ p {
 html {
   scroll-behavior: smooth;
   background-color: #ecebe8;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -307,6 +309,7 @@ body {
   font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 #root {
@@ -320,6 +323,7 @@ body {
   box-shadow: 0 20px 70px rgba(21, 21, 21, 0.12);
   flex: 1 0 auto;
   position: relative;
+  overflow-x: hidden;
 }
 
 a, button, [role="button"], input[type="submit"], input[type="button"], select {

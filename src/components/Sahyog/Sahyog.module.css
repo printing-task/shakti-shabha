@@ -140,16 +140,34 @@
 
 @media (max-width: 680px) {
   .section {
-    padding: 42px 23px;
+    padding: 36px 18px;
   }
   .field {
     grid-template-columns: 1fr;
-    gap: 22px;
+    gap: 20px;
   }
   .fieldPhoto {
-    height: 240px;
+    height: 220px;
   }
   .stats {
-    gap: 22px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 30px 14px;
+  }
+  .fieldPhoto {
+    height: 180px;
+  }
+  .stats {
+    gap: 16px;
+  }
+  .actionRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 }

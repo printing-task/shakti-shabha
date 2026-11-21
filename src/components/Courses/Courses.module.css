@@ -104,16 +104,26 @@
 
 @media (max-width: 680px) {
   .servicesBand {
-    padding: 42px 23px;
+    padding: 38px 18px;
   }
   .sectionHead {
     display: block;
   }
   .sectionIntro {
-    margin-top: 12px;
+    margin-top: 10px;
   }
   .serviceGrid {
     grid-template-columns: 1fr 1fr;
-    gap: 24px 16px;
+    gap: 20px 14px;
+  }
+}
+
+@media (max-width: 520px) {
+  .servicesBand {
+    padding: 32px 14px;
+  }
+  .serviceGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }

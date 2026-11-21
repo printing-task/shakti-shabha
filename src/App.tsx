@@ -57,25 +57,10 @@ function ScrollTriggerSync() {
   return null
 }
 
-/** Page wrapper — fades in on every route change with guaranteed min-height */
+/** Page wrapper — guaranteed min-height, instant render */
 function PageTransition({ children }: { children: React.ReactNode }) {
-  const { pathname } = useLocation()
-  const ref = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    if (!ref.current) return
-    // skip admin routes — they manage their own layout
-    if (pathname.startsWith('/admin')) return
-    gsap.fromTo(
-      ref.current,
-      { opacity: 0.92 },
-      { opacity: 1, duration: 0.25, ease: 'power2.out', clearProps: 'opacity,transform' }
-    )
-  }, [pathname])
-
   return (
     <main
-      ref={ref}
       style={{
         flex: '1 0 auto',
         minHeight: '85vh',
@@ -140,14 +125,14 @@ export default function App() {
         <ReactLenis
       root
       options={{
-        duration: 1.0,
+        duration: 0.5,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         orientation: 'vertical',
         gestureOrientation: 'vertical',
         smoothWheel: true,
-        wheelMultiplier: 1,
-        touchMultiplier: 1,
-        syncTouch: false,
+        wheelMultiplier: 1.1,
+        touchMultiplier: 1.5,
+        syncTouch: true,
         infinite: false,
       }}
     >

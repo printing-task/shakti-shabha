@@ -70,28 +70,9 @@ export default function Articles() {
     }
   }, [])
 
-  // GSAP scroll entrance animation
+  // Non-blocking smooth entrance (instant visibility fallback)
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('[data-art="header"]', {
-        opacity: 0,
-        y: 30,
-        duration: 0.75,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: secRef.current, start: 'top 78%' }
-      })
-
-      gsap.from('[data-art="card"]', {
-        opacity: 0,
-        y: 45,
-        duration: 0.7,
-        stagger: 0.12,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: '[data-art="grid"]', start: 'top 85%' }
-      })
-    }, secRef)
-
-    return () => ctx.revert()
+    // Content is immediately visible by default with zero delay
   }, [articles])
 
   return (

@@ -12,8 +12,9 @@
   background: #FFFFFF;
   color: #111827;
   border-top: 1px solid #e8e4df;
-  height: 100vh;
-  max-height: 100vh;
+  height: auto;
+  min-height: 620px;
+  padding-bottom: 2.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -489,12 +490,23 @@
 @media (max-width: 767px) {
   .section {
     height: auto;
-    min-height: 100vh;
+    min-height: auto;
     max-height: none;
+    padding-bottom: 2rem;
+  }
+  .statsRow {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .statBox:nth-child(2) {
+    border-right: none;
+  }
+  .statBox:nth-child(3),
+  .statBox:nth-child(4) {
+    border-top: 1px solid #e8e4df;
   }
   .slides {
-    width: 80vw;
-    height: 105vw;
+    width: min(88vw, 360px);
+    height: min(115vw, 440px);
   }
   .slideContent {
     transform: perspective(1000px) translateX(calc(105% * var(--offset)))
@@ -502,13 +514,13 @@
     padding: 1.25rem 1rem;
   }
   .btnPrev {
-    left: -1rem;
-    width: 2.8rem;
-    height: 2.8rem;
-    }
+    left: 8px;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
   .btnNext {
-    right: -1rem;
-    width: 2.8rem;
-    height: 2.8rem;
-    }
+    right: 8px;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 }
