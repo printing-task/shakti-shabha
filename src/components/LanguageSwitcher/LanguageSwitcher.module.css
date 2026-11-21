@@ -10,33 +10,44 @@
   user-select: none;
 }
 
-/* Translator Icon Button: Clean circular button, NO rectangle border */
+/* Translator Icon Button: Clean button matching editorial theme */
 .headerIconBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: none !important;
+  gap: 5px;
+  background: #f7f5f2;
+  border: 1px solid var(--line, #e8e4df) !important;
   outline: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  color: #FFFFFF;
+  border-radius: 20px;
+  padding: 0 9px;
+  height: 34px;
+  color: var(--ink, #191817);
   cursor: pointer;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 0;
+  font-family: var(--sans, 'DM Sans', sans-serif);
   margin: 0;
 }
 
 .headerIconBtn:hover,
 .headerIconBtnActive {
-  background: rgba(255, 255, 255, 0.18) !important;
+  background: var(--red, #bd1834) !important;
   color: #FFFFFF !important;
-  transform: scale(1.08);
+  border-color: var(--red, #bd1834) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(189, 24, 52, 0.2);
 }
 
 .headerIconBtn:active {
-  transform: scale(0.94);
+  transform: scale(0.96);
+}
+
+.langCodeBadge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1;
 }
 
 /* Header Dropdown Menu */

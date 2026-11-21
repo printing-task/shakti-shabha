@@ -365,9 +365,9 @@
   margin-top: 1px;
 }
 
-/* ---------- Actions ---------- */
+/* ---------- Header Right: Actions & Hamburger ---------- */
 
-.navActions {
+.headerRight {
   display: flex;
   align-items: center;
   gap: 0.85rem;
@@ -394,7 +394,9 @@
   box-shadow: 0 4px 14px rgba(189, 24, 52, 0.22);
 }
 
-.navLangDesktop {
+.navLang {
+  display: inline-flex;
+  align-items: center;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -459,8 +461,17 @@
     display: none;
   }
 
-  .navLangDesktop {
-    display: none;
+  /* On mobile header, replace Connect With Us button with Translator icon */
+  .navCta {
+    display: none !important;
+  }
+
+  .navLang {
+    display: inline-flex !important;
+  }
+
+  .headerRight {
+    gap: 0.55rem;
   }
 
   .hamburger {

@@ -71,7 +71,7 @@ export default function LanguageSwitcher({ floating = false, className = '' }: L
     )
   }
 
-  // Header / Navbar style: Clean ONLY translator icon button (no rectangle border, no extra text)
+  // Header / Navbar style: Clean translator icon button with language code badge
   return (
     <div ref={menuRef} className={`${s.headerSwitcherWrap} ${className}`}>
       <button
@@ -81,7 +81,8 @@ export default function LanguageSwitcher({ floating = false, className = '' }: L
         aria-label="Translate Website - Language Menu"
         title="Translate Website / भाषा बदलें"
       >
-        <GoogleIcon name="translate" size={20} />
+        <GoogleIcon name="translate" size={19} />
+        <span className={s.langCodeBadge}>{language === 'en' ? 'EN' : 'HI'}</span>
       </button>
 
       {isOpen && (

@@ -368,23 +368,21 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* ---------- DESKTOP ACTIONS ---------- */}
-      <div className={s.navActions}>
-        <LanguageSwitcher className={s.navLangDesktop} />
+      {/* ---------- HEADER ACTIONS & HAMBURGER ---------- */}
+      <div className={s.headerRight}>
+        <LanguageSwitcher className={s.navLang} />
         <Link to="/sahyog" className={s.navCta}>
           Connect With Us
         </Link>
+        <button
+          className={`${s.hamburger} ${open ? s.hamburgerOpen : ''}`}
+          aria-label="Menu"
+          aria-expanded={open}
+          onClick={() => setOpen(o => !o)}
+        >
+          <span className={s.bar} /><span className={s.bar} /><span className={s.bar} />
+        </button>
       </div>
-
-      {/* ---------- MOBILE HAMBURGER BUTTON ---------- */}
-      <button
-        className={`${s.hamburger} ${open ? s.hamburgerOpen : ''}`}
-        aria-label="Menu"
-        aria-expanded={open}
-        onClick={() => setOpen(o => !o)}
-      >
-        <span className={s.bar} /><span className={s.bar} /><span className={s.bar} />
-      </button>
 
       {/* ---------- MOBILE DRAWER (Dedicated separate layout for <= 900px) ---------- */}
       <div className={`${s.mobileDrawer} ${open ? s.mobileDrawerOpen : ''}`}>

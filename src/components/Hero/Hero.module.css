@@ -10,14 +10,27 @@
   background: #211b19;
 }
 
-/* ── Hero Container ─────────────────────────────────────────── */
+/* ── Hero Container (STRICT FIXED HEIGHT: Prevents jumping on slide change) ── */
 .hero {
-  min-height: 520px;
+  height: 600px;
+  min-height: 600px;
+  max-height: 600px;
   position: relative;
   display: flex;
   align-items: center;
   overflow: hidden;
   background: #211b19;
+}
+
+@keyframes heroImgFade {
+  from {
+    opacity: 0.35;
+    transform: scale(1.02);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .heroImage {
@@ -26,7 +39,7 @@
   background-size: cover;
   background-position: center 38%;
   filter: saturate(0.78);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  animation: heroImgFade 0.6s ease-out forwards;
 }
 
 .heroImageOverlay {
@@ -122,9 +135,10 @@
 .heroCopy {
   max-width: 590px;
   font-size: 13px;
-  line-height: 1.88;
+  line-height: 1.82;
   color: #eee7e3;
-  margin: 0 0 28px;
+  margin: 0 0 24px;
+  min-height: 92px;
 }
 
 /* ── Actions ─────────────────────────────────────────────────── */
@@ -368,6 +382,16 @@
     padding-top: 90px;
   }
 
+  .hero {
+    height: 580px;
+    min-height: 580px;
+    max-height: 580px;
+  }
+
+  .heroCopy {
+    min-height: 80px;
+  }
+
   .intro {
     grid-template-columns: 1fr 1fr;
     gap: 24px;
@@ -384,20 +408,25 @@
   }
 
   .hero {
-    min-height: 480px;
+    height: 590px;
+    min-height: 590px;
+    max-height: 590px;
   }
 
   .heroContent {
-    padding: 48px 20px 75px;
+    padding: 36px 20px 75px;
   }
 
   .heroTitle {
-    font-size: clamp(34px, 8vw, 44px);
+    font-size: clamp(32px, 8vw, 42px);
     word-break: break-word;
   }
 
   .heroCopy {
     font-size: 12px;
+    line-height: 1.65;
+    min-height: 72px;
+    margin-bottom: 20px;
   }
 
   .intro {
@@ -427,23 +456,48 @@
 }
 
 @media (max-width: 520px) {
+  .hero {
+    height: 640px;
+    min-height: 640px;
+    max-height: 640px;
+  }
+
   .heroContent {
-    padding: 40px 16px 75px;
+    padding: 30px 16px 72px;
   }
 
   .heroTitle {
-    font-size: clamp(30px, 9vw, 38px);
+    font-size: clamp(28px, 8.5vw, 36px);
+    margin: 10px 0 6px;
+  }
+
+  .heroKicker {
+    font-size: 16px;
+    margin: 6px 0 10px;
+  }
+
+  .heroTagline {
+    font-size: 11px;
+    margin-bottom: 10px;
+  }
+
+  .heroCopy {
+    font-size: 11.5px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+    min-height: 65px;
   }
 
   .actions {
     flex-direction: column;
     align-items: stretch;
-    gap: 10px;
+    gap: 8px;
   }
 
   .button {
     width: 100%;
     text-align: center;
+    padding: 11px 18px;
   }
 
   .intro {
