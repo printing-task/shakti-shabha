@@ -114,7 +114,7 @@ export default function Articles() {
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.72rem', letterSpacing: '0.12em', color: '#F59E0B', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.5rem' }}>
               <span>★ SIGNATURE INTELLECTUAL ANCHOR · FLAGSHIP WORKING ESSAY</span>
             </div>
-            <h3 style={{ fontFamily: "'Cinzel', serif", fontSize: '1.35rem', color: '#FAF7F0', margin: '0 0 0.5rem', fontWeight: 700 }}>
+            <h3 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: '1.35rem', color: '#FAF7F0', margin: '0 0 0.5rem', fontWeight: 600 }}>
               De-escalation, Somatic Fortitude &amp; Non-Victimhood: A Field-Tested Framework
             </h3>
             <p style={{ fontSize: '0.86rem', color: '#D6D3D1', margin: '0 0 0.5rem', lineHeight: 1.5 }}>

@@ -28,7 +28,7 @@
 }
 
 .sectionTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.6rem, 3vw, 2.5rem);
   font-weight: 700;
   color: #111827;
@@ -83,7 +83,7 @@
 }
 
 .heroTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(3.2rem, 7.5vw, 6.2rem);
   font-weight: 900;
   letter-spacing: 0.06em;
@@ -215,7 +215,7 @@
   border-left: 4px solid #C2410C;
   padding: 1.75rem 2.25rem;
   margin: 0 0 0.85rem;
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.05rem, 1.8vw, 1.3rem);
   color: #111827;
   line-height: 1.65;
@@ -394,7 +394,7 @@
 }
 
 .principleTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 0.95rem;
   color: #C2410C;
   letter-spacing: 0.06em;
@@ -560,7 +560,7 @@
 }
 
 .closingTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.8rem, 4vw, 3.2rem);
   font-weight: 700;
   color: #111827;

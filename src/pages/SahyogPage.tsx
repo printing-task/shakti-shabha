@@ -199,7 +199,7 @@ export default function SahyogPage() {
               {formSubmitted ? (
                 <div style={{ padding: '2.5rem', background: '#ECFDF5', border: '1px solid #A7F3D0', borderRadius: '12px', textAlign: 'center' }}>
                   <GoogleIcon name="check_circle" size={44} style={{ color: '#059669', marginBottom: '0.5rem' }} />
-                  <h3 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', color: '#065F46', marginBottom: '0.5rem' }}>Proposal Received!</h3>
+                  <h3 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", color: '#065F46', marginBottom: '0.5rem' }}>Proposal Received!</h3>
                   <p style={{ fontSize: '0.9rem', color: '#047857' }}>
                     Thank you for stepping forward. Our partnership director will get in touch with you shortly.
                   </p>

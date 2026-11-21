@@ -1146,7 +1146,7 @@ select option:checked,
 }
 
 .loaderTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.35rem;
   font-weight: 700;
   color: #FFFFFF;

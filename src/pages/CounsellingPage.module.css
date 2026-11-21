@@ -69,7 +69,7 @@
 }
 
 .title {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.75rem, 3.2vw, 2.5rem);
   font-weight: 700;
   color: #FFFFFF;
@@ -138,10 +138,10 @@
   max-width: 980px;
   height: 68vh;
   max-height: 560px;
-  background: #FFFFFF;
-  border-radius: 36px;
+  background: var(--paper, #FFFFFF);
+  border-radius: 12px;
   padding: clamp(24px, 3.5vw, 42px);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 20px 60px rgba(21, 21, 21, 0.08);
   display: flex;
   flex-direction: column;
   left: 50%;
@@ -151,7 +151,7 @@
   transform-origin: left center;
   will-change: transform, opacity;
   backface-visibility: hidden;
-  border: 1px solid #F0F0F0;
+  border: 1px solid var(--line, #e8e4df);
 }
 
 @media (min-width: 1360px) {
@@ -218,18 +218,20 @@
 }
 
 .cardContent h2 {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.4rem, 2.2vw, 2.1rem);
+  font-weight: 500;
   margin-bottom: 12px;
   letter-spacing: -0.5px;
-  color: #111827;
+  color: var(--ink, #191817);
   line-height: 1.25;
 }
 
 .cardContent p {
+  font-family: var(--sans, 'DM Sans', Arial, sans-serif);
   font-size: clamp(0.88rem, 1.05vw, 0.98rem);
-  color: #4B5563;
-  line-height: 1.65;
+  color: var(--muted, #716d68);
+  line-height: 1.7;
   margin-bottom: 18px;
 }
 

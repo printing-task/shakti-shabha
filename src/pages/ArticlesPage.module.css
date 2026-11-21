@@ -58,7 +58,7 @@
 }
 
 .title {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.75rem, 3.2vw, 2.5rem);
   font-weight: 700;
   color: #FFFFFF;
@@ -368,7 +368,7 @@
 
 /* Clean heading for All Articles & White Papers without red underline */
 .articlesSectionTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.5rem, 2.5vw, 2rem);
   font-weight: 700;
   color: var(--theme-text-heading, #111111);
@@ -461,7 +461,7 @@
 }
 
 .hubBannerTitle {
-  font-family: var(--font-display, "Cinzel", serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 0.35rem;
@@ -544,7 +544,7 @@
 }
 
 .caseTitle {
-  font-family: var(--font-display, "Cinzel", serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.05rem;
   font-weight: 700;
   color: #111827;
@@ -624,7 +624,7 @@
 }
 
 .paperTitle {
-  font-family: var(--font-display, "Cinzel", serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.05rem;
   font-weight: 700;
   color: #111827;

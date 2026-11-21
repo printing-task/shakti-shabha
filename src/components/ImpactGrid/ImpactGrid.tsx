@@ -64,7 +64,7 @@ export default function ImpactGrid() {
               letterSpacing: '0.22em',
               color: '#bd1834',
               fontWeight: 700,
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--sans, 'DM Sans', Arial, sans-serif)",
               marginBottom: '0.5rem',
               display: 'inline-flex',
               alignItems: 'center',
@@ -77,7 +77,7 @@ export default function ImpactGrid() {
               <GoogleIcon name="verified" size={14} style={{ color: '#bd1834' }} />
               Institutional Credibility · Audited Record
             </div>
-            <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 'clamp(1.75rem, 3.5vw, 2.4rem)', color: '#111827', margin: 0, fontWeight: 700, lineHeight: 1.2 }}>
+            <h2 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: 'clamp(1.75rem, 3.5vw, 2.4rem)', color: '#111827', margin: 0, fontWeight: 500, lineHeight: 1.2 }}>
               Verified Numbers &amp; Field Record
             </h2>
           </div>
@@ -143,9 +143,9 @@ export default function ImpactGrid() {
               </div>
 
               <div style={{
-                fontFamily: "'Cinzel', serif",
+                fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)",
                 fontSize: '1.85rem',
-                fontWeight: 700,
+                fontWeight: 600,
                 color: p.accent,
                 lineHeight: 1.1,
                 marginBottom: '0.35rem'
@@ -154,12 +154,12 @@ export default function ImpactGrid() {
               </div>
 
               <h3 style={{
-                fontSize: '0.98rem',
-                fontWeight: 700,
+                fontSize: '1.05rem',
+                fontWeight: 600,
                 color: '#111827',
                 margin: '0 0 0.5rem',
                 lineHeight: 1.35,
-                fontFamily: "'Cinzel', serif"
+                fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)"
               }}>
                 {p.label}
               </h3>

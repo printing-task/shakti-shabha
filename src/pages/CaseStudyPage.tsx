@@ -261,7 +261,7 @@ export default function CaseStudyPage() {
               <div style={{ fontSize: '0.75rem', color: '#bd1834', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.25rem' }}>
                 {activeModal.category} · {activeModal.alias}
               </div>
-              <h2 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.6rem', color: '#111827', margin: '0.5rem 0 1rem', lineHeight: 1.3 }}>
+              <h2 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: '1.6rem', color: '#111827', margin: '0.5rem 0 1rem', lineHeight: 1.3 }}>
                 {activeModal.title}
               </h2>
               <div style={{ fontSize: '0.82rem', color: '#6B7280', marginBottom: '1.5rem', borderBottom: '1px solid #E5E7EB', paddingBottom: '0.75rem' }}>
@@ -289,7 +289,7 @@ export default function CaseStudyPage() {
           <span style={{ fontSize: '0.72rem', letterSpacing: '0.2em', color: '#F43F5E', fontWeight: 700, textTransform: 'uppercase' }}>
             SRS Section 14 · Security Engineering
           </span>
-          <h2 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.85rem', color: '#FFFFFF', marginTop: '0.35rem' }}>
+          <h2 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: '1.85rem', color: '#FFFFFF', marginTop: '0.35rem' }}>
             Zero-Knowledge Privacy Architecture
           </h2>
           <p style={{ fontSize: '0.9rem', color: '#94A3B8', marginTop: '0.5rem', maxWidth: '700px' }}>
@@ -321,7 +321,7 @@ export default function CaseStudyPage() {
             <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#bd1834', fontWeight: 700, textTransform: 'uppercase' }}>
               Confidential Intake
             </span>
-            <h2 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.75rem', color: '#111827', margin: '0.5rem 0 0.75rem' }}>
+            <h2 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: '1.75rem', color: '#111827', margin: '0.5rem 0 0.75rem' }}>
               Share Your Story Confidentially
             </h2>
             <p style={{ fontSize: '0.88rem', color: '#6B7280', lineHeight: 1.6, marginBottom: '2rem' }}>
@@ -331,7 +331,7 @@ export default function CaseStudyPage() {
             {submittedStory ? (
               <div style={{ padding: '2rem', background: '#F0FDF4', border: '1px solid #86EFAC', borderRadius: '12px', color: '#166534' }}>
                 <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}><GoogleIcon name="mail" size={32} /></div>
-                <h3 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', marginBottom: '0.5rem' }}>Encrypted Submission Received</h3>
+                <h3 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", marginBottom: '0.5rem' }}>Encrypted Submission Received</h3>
                 <p style={{ fontSize: '0.88rem' }}>Thank you for your courage. Your words have been placed into confidential care.</p>
                 <button onClick={() => setSubmittedStory(false)} style={{ marginTop: '1rem', padding: '0.4rem 1.25rem', background: '#16a34a', color: '#FFFFFF', border: 'none', borderRadius: '9999px', fontSize: '0.8rem', cursor: 'pointer' }}>
                   Submit Another

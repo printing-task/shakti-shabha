@@ -220,7 +220,7 @@ export default function ResearchPage() {
           <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#0284C7', fontWeight: 700, textTransform: 'uppercase' }}>
             Academic Citation Tool
           </span>
-          <h2 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.75rem', color: '#0F172A', marginTop: '0.35rem' }}>
+          <h2 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: '1.75rem', color: '#0F172A', marginTop: '0.35rem' }}>
             Cite Our Research Papers
           </h2>
           <p style={{ fontSize: '0.88rem', color: '#64748B', marginTop: '0.25rem' }}>
@@ -252,7 +252,7 @@ export default function ResearchPage() {
           <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#bd1834', fontWeight: 700, textTransform: 'uppercase' }}>
             Archival Verification
           </span>
-          <h2 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.75rem', color: '#0F172A', marginTop: '0.35rem' }}>
+          <h2 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: '1.75rem', color: '#0F172A', marginTop: '0.35rem' }}>
             Interactive Footnotes & Primary Source References
           </h2>
           <p style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.7, marginTop: '0.5rem', maxWidth: '750px' }}>

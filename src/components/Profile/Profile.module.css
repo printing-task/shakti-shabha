@@ -128,7 +128,7 @@
 }
 
 .heading { 
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.6rem, 3.5vw, 3rem); 
   color: var(--theme-text-heading, #111111); 
   line-height: 1.1; 
@@ -137,7 +137,7 @@
 }
 
 .nameBold {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-weight: 700;
   color: var(--theme-text-heading, #111111);
 }

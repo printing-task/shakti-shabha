@@ -315,7 +315,7 @@ export default function CounsellingPage() {
               <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#bd1834', fontWeight: 700, textTransform: 'uppercase' }}>
                 Safe & Confidential
               </span>
-              <h2 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.8rem', color: '#111827', margin: '0.5rem 0 1rem' }}>
+              <h2 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: '1.8rem', color: '#111827', margin: '0.5rem 0 1rem' }}>
                 Book a Confidential Counselling Session
               </h2>
               <p style={{ fontSize: '0.92rem', color: '#4B5563', lineHeight: 1.7, marginBottom: '1.5rem' }}>
@@ -342,7 +342,7 @@ export default function CounsellingPage() {
               {formDone ? (
                 <div style={{ padding: '2.5rem', background: '#ECFDF5', border: '1px solid #A7F3D0', borderRadius: '12px', textAlign: 'center' }}>
                   <GoogleIcon name="verified" size={44} style={{ color: '#059669', marginBottom: '0.5rem' }} />
-                  <h3 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', color: '#065F46', marginBottom: '0.5rem' }}>Intake Request Received</h3>
+                  <h3 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", color: '#065F46', marginBottom: '0.5rem' }}>Intake Request Received</h3>
                   <p style={{ fontSize: '0.88rem', color: '#047857' }}>
                     A counselor coordinator will reach out to you discreetly via your preferred contact mode within 24 hours.
                   </p>

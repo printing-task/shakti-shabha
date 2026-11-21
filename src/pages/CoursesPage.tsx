@@ -430,7 +430,7 @@ export default function CoursesPage() {
                 </span>
               </div>
 
-              <h2 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: 'clamp(1.4rem, 2.5vw, 1.85rem)', color: '#111827', lineHeight: 1.25, marginBottom: '1rem' }}>
+              <h2 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: 'clamp(1.4rem, 2.5vw, 1.85rem)', color: '#111827', lineHeight: 1.25, marginBottom: '1rem' }}>
                 {detailCourse.title}
               </h2>
 
@@ -532,7 +532,7 @@ export default function CoursesPage() {
 
               <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
                 <GoogleIcon name="school" size={48} style={{ color: '#bd1834', marginBottom: '0.5rem' }} />
-                <h3 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.4rem', color: '#111827' }}>Cohort Intake Application</h3>
+                <h3 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: '1.4rem', color: '#111827' }}>Cohort Intake Application</h3>
                 <p style={{ fontSize: '0.88rem', color: '#4B5563', marginTop: '0.25rem' }}>{selectedCourse}</p>
               </div>
 
@@ -634,7 +634,7 @@ export default function CoursesPage() {
             <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', color: '#bd1834', fontWeight: 700, textTransform: 'uppercase' }}>
               LMS Platform Architecture
             </span>
-            <h2 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.6rem', color: '#111827', margin: '0.4rem 0 0' }}>
+            <h2 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: '1.6rem', color: '#111827', margin: '0.4rem 0 0' }}>
               Built for Security, Speed &amp; Retention
             </h2>
             <p style={{ fontSize: '0.88rem', color: '#6B7280', marginTop: '0.5rem' }}>

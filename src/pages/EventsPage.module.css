@@ -33,7 +33,7 @@
 }
 
 .heroTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(2.2rem, 5vw, 4rem);
   font-weight: 700;
   color: #111827;
@@ -167,7 +167,7 @@
 }
 
 .cardTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.05rem;
   font-weight: 700;
   color: #111827;
@@ -392,7 +392,7 @@
 .historyContent {}
 
 .historyTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1rem;
   font-weight: 700;
   color: #111827;

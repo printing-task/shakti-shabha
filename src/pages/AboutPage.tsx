@@ -820,7 +820,7 @@ export default function AboutPage() {
                   {/* Camps & Outreach Banner */}
                   <div className={p.campsOutreachBanner}>
                     <div>
-                      <h5 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.15rem', color: '#111827', margin: '0 0 0.5rem', fontWeight: 700 }}>
+                      <h5 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: '1.15rem', color: '#111827', margin: '0 0 0.5rem', fontWeight: 600 }}>
                         Structured Self-Defence &amp; Awareness Camps
                       </h5>
                       <p style={{ margin: 0, fontSize: '0.88rem', color: '#4B5563', lineHeight: 1.6 }}>
@@ -888,7 +888,7 @@ export default function AboutPage() {
 
           {/* Heading in three lines */}
           <h3 className={p.animatedHeading} style={{
-            fontFamily: 'var(--font-display, "Cinzel", serif)',
+            fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)",
             fontSize: 'clamp(1.5rem, 2.8vw, 2.2rem)',
             color: '#881337',
             marginBottom: '1.5rem',
@@ -912,7 +912,7 @@ export default function AboutPage() {
             We encourage women and young people to recognise their capabilities without cultivating hostility, to question ideas without losing intellectual discipline, and to engage with tradition without abandoning inquiry.
           </p>
 
-          <blockquote style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.15rem', lineHeight: 1.6, color: '#bd1834', fontStyle: 'italic', margin: '0 0 1rem' }}>
+          <blockquote style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: '1.15rem', lineHeight: 1.6, color: '#bd1834', fontStyle: 'italic', margin: '0 0 1rem' }}>
             “We believe in strength without hostility, knowledge without dogma, and freedom with responsibility.”
           </blockquote>
         </div>
@@ -976,7 +976,7 @@ export default function AboutPage() {
           <span style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#bd1834', display: 'block', marginBottom: '0.75rem' }}>
             FORWARD HORIZON
           </span>
-          <h3 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', color: '#111827', marginBottom: '1rem', fontWeight: 700 }}>
+          <h3 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', color: '#111827', marginBottom: '1rem', fontWeight: 600 }}>
             What We Are Building
           </h3>
           <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4B5563', margin: 0 }}>

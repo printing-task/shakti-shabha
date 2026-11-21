@@ -59,7 +59,7 @@
 }
 
 .title {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.75rem, 3.2vw, 2.5rem);
   font-weight: 700;
   color: #FFFFFF;
@@ -93,7 +93,7 @@
 }
 
 .sectionTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.6rem, 2.8vw, 2.2rem);
   font-weight: 700;
   color: var(--theme-text-heading, #111111);
@@ -216,7 +216,7 @@
 }
 
 .pillarTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 0.3rem;
@@ -373,7 +373,7 @@
 }
 
 .reportTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1rem;
   font-weight: 700;
   color: var(--theme-text-heading, #111111);
@@ -422,7 +422,7 @@
 }
 
 .ctaTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.8rem, 3.5vw, 3rem);
   font-weight: 700;
   color: #FFFFFF;
@@ -721,7 +721,7 @@
 }
 
 .articleTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--theme-text-heading, #111111);
@@ -794,7 +794,7 @@
 }
 
 .dialogueTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--theme-text-heading, #111111);

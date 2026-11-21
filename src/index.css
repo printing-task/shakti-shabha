@@ -61,7 +61,8 @@
   --font-primary: var(--sans);
   --font-serif: var(--serif);
   --font-cursive: var(--serif);
-  --font-display: var(--display);
+  --font-display: var(--serif);                     /* Editorial serif for titles & headings */
+  --font-brand: var(--display);                     /* Strictly for brand insignia (Cinzel) */
   --font-body: var(--sans);
   --font-devanagari: 'Noto Sans Devanagari', sans-serif;
 
@@ -110,19 +111,37 @@
    Playfair Display for headings, Cinzel for display/emblems, DM Sans for body
    ========================================================================== */
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
+  color: var(--theme-text-heading, #191817);
+}
+
 h1, h2 {
-  font-family: var(--serif);
   font-weight: 400;
   line-height: 1.15;
-  color: var(--theme-text-heading, #191817);
   letter-spacing: -0.02em;
 }
 
 h3, h4 {
-  font-family: var(--serif);
   font-weight: 500;
   line-height: 1.28;
-  color: var(--theme-text-heading, #191817);
+}
+
+/* All headings, titles, card headers inherit Playfair Display unless explicitly branded */
+[class*="title"]:not([class*="brand"]):not([class*="sub"]):not([class*="tag"]):not([class*="meta"]),
+[class*="Title"]:not([class*="Brand"]):not([class*="Sub"]):not([class*="Tag"]):not([class*="Meta"]),
+[class*="heading"],
+[class*="Heading"] {
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
+}
+
+/* Brand name and roman numerals strictly use Cinzel */
+.brand-name,
+[class*="brandName"],
+[class*="brandMark"],
+[class*="streamRoman"],
+[class*="roman"] {
+  font-family: var(--display, 'Cinzel', Georgia, serif) !important;
 }
 
 p, span, li, a, button, input, textarea, select {

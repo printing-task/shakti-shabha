@@ -629,7 +629,7 @@ export default function ArticlesPage() {
             </span>
             <h2
               style={{
-                fontFamily: 'var(--font-display, "Cinzel", serif)',
+                fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)",
                 fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)',
                 color: '#FFFFFF',
                 margin: '0.5rem 0 1rem',
@@ -718,7 +718,7 @@ export default function ArticlesPage() {
 
             <h2
               style={{
-                fontFamily: 'var(--font-display, "Cinzel", serif)',
+                fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)",
                 fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
                 color: '#111827',
                 marginBottom: '0.5rem',
@@ -828,7 +828,7 @@ export default function ArticlesPage() {
             </span>
 
             <div style={{ fontSize: '0.8rem', color: '#6B7280', fontWeight: 600 }}>{activeModalCase.alias}</div>
-            <h2 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.4rem', color: '#111827', margin: '0.5rem 0 1rem' }}>
+            <h2 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: '1.4rem', color: '#111827', margin: '0.5rem 0 1rem' }}>
               {activeModalCase.title}
             </h2>
 
@@ -874,7 +874,7 @@ export default function ArticlesPage() {
               {activeModalPaper.access} ACCESS · {activeModalPaper.year}
             </span>
 
-            <h2 style={{ fontFamily: 'var(--font-display, "Cinzel", serif)', fontSize: '1.35rem', color: '#111827', margin: '0.25rem 0 0.5rem' }}>
+            <h2 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: '1.35rem', color: '#111827', margin: '0.25rem 0 0.5rem' }}>
               {activeModalPaper.title}
             </h2>
 

@@ -59,7 +59,7 @@
 }
 
 .heroTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(2.2rem, 4.5vw, 3.8rem);
   font-weight: 700;
   color: #111827;
@@ -102,7 +102,7 @@
 }
 
 .sectionTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.5rem, 2.5vw, 2.1rem);
   font-weight: 700;
   color: #111111;
@@ -246,7 +246,7 @@
 }
 
 .quoteDecor {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(4rem, 8vw, 7rem);
   color: rgba(189, 24, 52, 0.25);
   line-height: 0.7;
@@ -255,7 +255,7 @@
 }
 
 .quoteText {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.3rem, 2.5vw, 1.9rem);
   font-weight: 700;
   color: #111827;
@@ -333,7 +333,7 @@
 }
 
 .timelineTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1rem;
   font-weight: 700;
   color: #111111;
@@ -472,7 +472,7 @@
 }
 
 .ctaTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.8rem, 3.5vw, 3rem);
   font-weight: 700;
   color: #FFFFFF;
@@ -721,7 +721,7 @@
 }
 
 .heroQuoteText {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(0.95rem, 1.4vw, 1.15rem);
   color: #111827;
   font-style: italic;
@@ -815,7 +815,7 @@
 }
 
 .blueprintMainTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.8rem, 3.2vw, 2.4rem);
   font-weight: 700;
   color: #111827;
@@ -921,7 +921,7 @@
 }
 
 .genesisTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.35rem, 2.4vw, 1.75rem);
   color: #166534;
   margin: 0 0 0.5rem;
@@ -955,7 +955,7 @@
 }
 
 .parchmentTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.12rem;
   font-weight: 700;
   color: #14532D;
@@ -1042,7 +1042,7 @@
 }
 
 .interventionCardTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 0.95rem;
   font-weight: 700;
   color: #111827;
@@ -1090,7 +1090,7 @@
 }
 
 .interventionDetailTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.2rem;
   font-weight: 700;
   color: #111827;
@@ -1446,7 +1446,7 @@
 }
 
 .showcaseTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.8rem, 3.4vw, 2.7rem);
   font-weight: 700;
   margin-bottom: 0.45rem;
@@ -1978,7 +1978,7 @@
 }
 
 .socialTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.8rem, 3.5vw, 2.6rem);
   font-weight: 700;
   color: #111827;

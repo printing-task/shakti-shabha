@@ -92,7 +92,7 @@
 }
 
 .carouselTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.35rem, 2.4vw, 1.95rem);
   font-weight: 700;
   color: #111827;
@@ -275,7 +275,7 @@
 }
 
 .slideTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.15rem, 1.6vw, 1.55rem);
   font-weight: 700;
   letter-spacing: 0.06ch;

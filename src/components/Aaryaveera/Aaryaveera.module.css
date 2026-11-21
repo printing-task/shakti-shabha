@@ -81,7 +81,7 @@
 
 .title {
   display: block;
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-weight: 900;
   font-size: clamp(2rem, 6.5vw, 3.2rem);
   letter-spacing: 0.08em;

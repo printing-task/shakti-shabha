@@ -44,7 +44,7 @@
 }
 
 .heroTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(2.4rem, 5.5vw, 4.4rem);
   font-weight: 800;
   color: #111827;
@@ -180,7 +180,7 @@
 }
 
 .sectionTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 2rem;
   font-weight: 700;
   color: #111827;
@@ -220,7 +220,7 @@
 }
 
 .depthTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.25rem;
   font-weight: 700;
   color: #111827;
@@ -306,7 +306,7 @@
 }
 
 .clusterTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.15rem;
   color: #111827;
   margin: 0 0 0.5rem;
@@ -428,7 +428,7 @@
 }
 
 .verticalTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.35rem;
   color: #111827;
   margin: 0;
@@ -584,7 +584,7 @@
 }
 
 .cardTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.2rem;
   color: #111827;
   margin: 0 0 0.5rem;
@@ -680,7 +680,7 @@
 }
 
 .disclaimerTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -738,7 +738,7 @@
 }
 
 .crucibleTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.25rem;
   font-weight: 700;
   color: #bd1834;
@@ -768,7 +768,7 @@
 }
 
 .journeyIntroHeading {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.35rem;
   font-weight: 700;
   color: #111827;
@@ -869,14 +869,14 @@
 }
 
 .phaseYears {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.1rem;
   font-weight: 700;
   color: #111827;
 }
 
 .phaseTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.3rem, 2.2vw, 1.7rem);
   color: #111827;
   font-weight: 700;
@@ -936,7 +936,7 @@
 }
 
 .significanceTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -1032,7 +1032,7 @@
 }
 
 .collabCardTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1.1rem;
   font-weight: 700;
   color: #111827;
@@ -1053,7 +1053,7 @@
 }
 
 .closingQuote {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.2rem, 2.2vw, 1.6rem);
   font-weight: 700;
   color: #111827;

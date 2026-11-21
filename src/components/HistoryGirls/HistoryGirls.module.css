@@ -77,7 +77,7 @@
 }
 
 .panelTitle {
-  font-family: var(--font-display, 'Cinzel', serif);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
   font-size: 1rem;
   font-weight: 600;
   color: var(--theme-text-heading, #111111);
