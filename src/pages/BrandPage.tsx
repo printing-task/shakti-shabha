@@ -72,44 +72,6 @@ export default function BrandPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    const ctx = gsap.context(() => {
-      // Color swatches
-      gsap.from(`.${p.swatch}`, {
-        opacity: 0, y: 40, scale: 0.95, duration: 0.6, stagger: 0.1, ease: 'power2.out',
-        scrollTrigger: { trigger: paletteRef.current, start: 'top 80%' },
-      })
-
-      // Typography blocks
-      gsap.from(`.${p.typeBlock}`, {
-        opacity: 0, x: -30, duration: 0.7, stagger: 0.15, ease: 'power2.out',
-        scrollTrigger: { trigger: typographyRef.current, start: 'top 80%' },
-      })
-
-      // Tokens
-      gsap.from(`.${p.tokenCard}`, {
-        opacity: 0, y: 25, duration: 0.5, stagger: 0.1, ease: 'power2.out',
-        scrollTrigger: { trigger: tokensRef.current, start: 'top 80%' },
-      })
-
-      // Logo rows
-      gsap.from(`.${p.logoRow}`, {
-        opacity: 0, x: -20, duration: 0.5, stagger: 0.08, ease: 'power2.out',
-        scrollTrigger: { trigger: logoRef.current, start: 'top 80%' },
-      })
-
-      // Interaction cards
-      gsap.from(`.${p.interactCard}`, {
-        opacity: 0, y: 30, duration: 0.6, stagger: 0.12, ease: 'power2.out',
-        scrollTrigger: { trigger: interactRef.current, start: 'top 78%' },
-      })
-
-      // Aaryaveera sub-brand
-      gsap.from(aaryaveeraRef.current, {
-        opacity: 0, y: 20, duration: 0.8, ease: 'power2.out',
-        scrollTrigger: { trigger: aaryaveeraRef.current, start: 'top 82%' },
-      })
-    })
-    return () => ctx.revert()
   }, [])
 
   return (

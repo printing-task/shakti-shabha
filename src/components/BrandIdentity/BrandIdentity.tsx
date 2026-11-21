@@ -6,15 +6,6 @@ import s from './BrandIdentity.module.css'
 
 export default function BrandIdentity() {
   const secRef = useRef<HTMLElement>(null)
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('[data-br]', {
-        opacity: 0, y: 20, stagger: 0.07, duration: 0.6, ease: 'power3.out',
-        scrollTrigger: { trigger: secRef.current, start: 'top 75%' }
-      })
-    }, secRef)
-    return () => ctx.revert()
-  }, [])
 
   return (
     <section ref={secRef} className={s.section}>

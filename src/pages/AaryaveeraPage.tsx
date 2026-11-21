@@ -81,34 +81,6 @@ export default function AaryaveeraPage() {
     document.title = 'Aaryaveera | The Philosophy & Ideology of Harshita Mankar'
   }, [])
 
-  /* hero fade-in */
-  useEffect(() => {
-    if (!heroRef.current) return
-    const ctx = gsap.context(() => {
-      gsap.from('.avHeroIn', {
-        opacity: 0, y: 40, duration: 1.2, stagger: 0.18,
-        ease: 'power3.out', delay: 0.2,
-      })
-    }, heroRef)
-    return () => ctx.revert()
-  }, [])
-
-  /* principles stagger */
-  useEffect(() => {
-    if (!principlesRef.current) return
-    const ctx = gsap.context(() => {
-      gsap.from('.avPCard', {
-        opacity: 0, y: 30, duration: 0.8, stagger: 0.1,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: principlesRef.current,
-          start: 'top 80%',
-        },
-      })
-    }, principlesRef)
-    return () => ctx.revert()
-  }, [])
-
   return (
     <div className={p.page}>
 

@@ -98,16 +98,6 @@ export default function Events() {
     }
   }, [])
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('[data-ev="item"]', {
-        opacity: 0, y: 24, rotateX: 4, stagger: 0.08, duration: 0.6, ease: 'power3.out',
-        scrollTrigger: { trigger: secRef.current, start: 'top 75%' }
-      })
-    }, secRef)
-    return () => ctx.revert()
-  }, [eventsList])
-
   return (
     <section ref={secRef} className={s.section}>
       <div className={s.header}>
