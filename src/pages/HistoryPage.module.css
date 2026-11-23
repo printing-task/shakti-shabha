@@ -1119,3 +1119,78 @@
     display: none;
   }
 }
+
+
+
+
+/* =========================================
+   SHAKTI SABHA — TIMELINE HEIGHT FIX
+   ========================================= */
+
+/* Main timeline section */
+.timeline-section {
+    position: relative !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding-top: 40px !important;
+    padding-bottom: 60px !important;
+    overflow: visible !important;
+    box-sizing: border-box;
+}
+
+/* Timeline wrapper */
+.timeline-container {
+    position: relative !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding-top: 20px !important;
+    padding-bottom: 30px !important;
+    overflow: visible !important;
+    box-sizing: border-box;
+}
+
+/* Timeline track */
+.timeline-track {
+    position: relative;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+}
+
+/* Timeline cards */
+.timeline-card {
+    box-sizing: border-box;
+    max-height: none !important;
+}
+
+/* Prevent unwanted viewport height */
+.timeline-section,
+.timeline-container,
+.timeline-track {
+    min-height: unset !important;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .timeline-section {
+        padding: 25px 16px !important;
+        height: auto !important;
+        min-height: 0 !important;
+    }
+
+    .timeline-container {
+        height: auto !important;
+        min-height: 0 !important;
+        padding: 10px 0 25px !important;
+    }
+
+    .timeline-track {
+        height: auto !important;
+    }
+
+    .timeline-card {
+        max-width: 100%;
+    }
+}
