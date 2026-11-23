@@ -118,13 +118,18 @@ export default function CounsellingPage() {
   })
   const [submitting, setSubmitting] = useState(false)
   const [activeDot, setActiveDot] = useState(0)
+  const checkIsMobileOrPortrait = () => {
+    if (typeof window === 'undefined') return false
+    return window.innerWidth <= 768 || (window.innerWidth <= 1024 && window.innerHeight > window.innerWidth)
+  }
+
   const [isMobile, setIsMobile] = useState(
-    typeof window !== 'undefined' ? window.innerWidth <= 768 : false
+    typeof window !== 'undefined' ? checkIsMobileOrPortrait() : false
   )
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768)
+      setIsMobile(checkIsMobileOrPortrait())
     }
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
@@ -142,11 +147,11 @@ export default function CounsellingPage() {
     const totalCards = WHEEL_SERVICES.length
     if (!section || !wrapper || totalCards === 0) return
 
-    const SPREAD_X = isMobile ? 0.04 : 0.16
-    const SPREAD_Y = isMobile ? 0.03 : 0.28
-    const ROTATE = isMobile ? 1.5 : 4
-    const SKEW = isMobile ? -0.5 : -2
-    const SCALE_MIN = 0.8
+    const SPREAD_X = isMobile ? 0.04 : 0.14
+    const SPREAD_Y = isMobile ? 0.03 : 0.22
+    const ROTATE = isMobile ? 1.5 : 3.5
+    const SKEW = isMobile ? -0.5 : -1.5
+    const SCALE_MIN = 0.82
 
     function updateCards(progress: number) {
       const current = progress * (totalCards - 1)
@@ -158,7 +163,7 @@ export default function CounsellingPage() {
         const offset = index - current
         const absOffset = Math.abs(offset)
         const spreadX = -offset * Math.min(window.innerWidth, 400) * SPREAD_X
-        const spreadY = offset * (isMobile ? 140 : window.innerHeight) * SPREAD_Y
+        const spreadY = offset * (isMobile ? 120 : Math.min(window.innerHeight, 700)) * SPREAD_Y
         const rotateZ = offset * ROTATE
         const skewY = offset * SKEW
         const scale = Math.max(SCALE_MIN, 1 - absOffset * 0.08)
@@ -172,7 +177,7 @@ export default function CounsellingPage() {
         const opacity = absOffset > 1.4 ? 0 : Math.max(0, 1 - absOffset * 0.45)
         card.style.pointerEvents = absOffset < 0.4 ? 'auto' : 'none'
         card.style.transform = `
-          translate3d(${spreadX}px, ${spreadY}px, 0)
+          translate3d(calc(-50% + ${spreadX}px), calc(-50% + ${spreadY}px), 0)
           rotate(${rotateZ}deg)
           skewY(${skewY}deg)
           scale(${scale})
@@ -185,10 +190,11 @@ export default function CounsellingPage() {
     // Set initial card states
     updateCards(0)
 
-    // Pinning distance: smooth, compact cycle on mobile
+    // Pinning distance: smooth, capped cycle so mobile desktop view doesn't balloon
+    const effectiveHeight = Math.min(window.innerHeight, 750)
     const pinDistance = isMobile
-      ? (totalCards - 1) * 130
-      : window.innerHeight * (totalCards - 1) * 0.75
+      ? (totalCards - 1) * 150
+      : effectiveHeight * (totalCards - 1) * 0.55
 
     const ctx = gsap.context(() => {
       const st = ScrollTrigger.create({

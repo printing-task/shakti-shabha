@@ -73,13 +73,18 @@ export default function GalleryPage() {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [imageLimit, setImageLimit] = useState(INITIAL_IMAGE_LIMIT)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const checkIsMobileOrPortrait = () => {
+    if (typeof window === 'undefined') return false
+    return window.innerWidth <= 768 || (window.innerWidth <= 1024 && window.innerHeight > window.innerWidth)
+  }
+
   const [isMobile, setIsMobile] = useState(
-    typeof window !== 'undefined' ? window.innerWidth <= 768 : false
+    typeof window !== 'undefined' ? checkIsMobileOrPortrait() : false
   )
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768)
+      setIsMobile(checkIsMobileOrPortrait())
     }
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
@@ -308,16 +313,16 @@ export default function GalleryPage() {
       <div className={gp.sphereWrapper}>
         <DomeGallery
           images={displayedImages}
-          fit={isMobile ? 0.65 : 0.46}
+          fit={isMobile ? 0.62 : 0.48}
           fitBasis="auto"
-          minRadius={isMobile ? 240 : 460}
-          maxRadius={isMobile ? 360 : 1150}
-          padFactor={isMobile ? 0.08 : 0.2}
+          minRadius={isMobile ? 260 : 420}
+          maxRadius={isMobile ? 420 : 880}
+          padFactor={isMobile ? 0.08 : 0.16}
           overlayBlurColor="#FFFFFF"
           maxVerticalRotationDeg={10}
           dragSensitivity={18}
           enlargeTransitionMs={320}
-          segments={isMobile ? 18 : 35}
+          segments={isMobile ? 20 : 32}
           dragDampening={2}
           imageBorderRadius={isMobile ? "12px" : "18px"}
           openedImageBorderRadius="20px"
