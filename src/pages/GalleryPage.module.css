@@ -243,8 +243,8 @@
 
 @media (max-width: 768px) {
   .sphereWrapper {
-    height: 440px;
-    min-height: 400px;
+    height: 380px;
+    min-height: 350px;
   }
 
   .interactiveHint {

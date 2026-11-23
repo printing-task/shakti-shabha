@@ -269,6 +269,7 @@ export default function HistoryPage() {
 
   const sectionRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLUListElement>(null)
+  const viewportRef = useRef<HTMLDivElement>(null)
   const itemRefs = useRef<(HTMLLIElement | null)[]>([])
   const triggerRef = useRef<ScrollTrigger | null>(null)
 
@@ -357,14 +358,20 @@ export default function HistoryPage() {
 
   const scrollToMilestone = (index: number) => {
     const st = triggerRef.current
-    if (!st) return
-    const totalMilestones = TIMELINE_MILESTONES.length
-    const targetScroll = st.start + (index / (totalMilestones - 1)) * (st.end - st.start)
     setMaxReachedIndex((prev) => Math.max(prev, index))
-    window.scrollTo({
-      top: targetScroll,
-      behavior: 'smooth',
-    })
+    if (st) {
+      const totalMilestones = TIMELINE_MILESTONES.length
+      const targetScroll = st.start + (index / (totalMilestones - 1)) * (st.end - st.start)
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth',
+      })
+    } else {
+      const item = itemRefs.current[index]
+      if (item && viewportRef.current) {
+        item.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
+      }
+    }
   }
 
   const activeMilestoneIndex = TIMELINE_MILESTONES.findIndex((m) => m.id === activeMilestoneId)
@@ -502,7 +509,7 @@ export default function HistoryPage() {
           </div>
 
           {/* Horizontal Track Viewport */}
-          <div className={h.horizontalTrackViewport}>
+          <div className={h.horizontalTrackViewport} ref={viewportRef}>
             <ul className={h.timeline} ref={trackRef}>
               {/* Dynamic Animated Active Progress Line: Starts at Dot 0 and precisely tracks each milestone */}
               <div

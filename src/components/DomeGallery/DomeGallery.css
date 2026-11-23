@@ -123,6 +123,12 @@ main.sphere-main {
   pointer-events: none;
 }
 
+@media (max-width: 768px) {
+  .edge-fade {
+    height: 36px;
+  }
+}
+
 .edge-fade--top {
   top: 0;
   background: linear-gradient(to bottom, var(--overlay-blur-color, #0A0A0B), transparent);

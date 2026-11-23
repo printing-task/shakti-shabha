@@ -1057,9 +1057,30 @@
    ============================================================ */
 
 @media screen and (max-width: 768px) {
+  .introSection {
+    margin: 1.5rem auto 0.75rem;
+    padding: 0 1rem;
+  }
+
+  .introTitle {
+    font-size: 1.65rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .introDesc {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 0.85rem;
+  }
+
+  .scrollProgressPill {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.72rem;
+  }
+
   .stickyViewport {
-    height: 520px;
-    min-height: 500px;
+    height: 480px;
+    min-height: 440px;
   }
 
   .horizontalTrackViewport {
@@ -1076,22 +1097,22 @@
 
   .timeline {
     height: 100%;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
   }
 
   .timelineItem {
-    width: 280px;
+    width: 270px;
     scroll-snap-align: center;
   }
 
   .directionL {
     bottom: calc(50% + 12px);
-    width: 250px;
+    width: 245px;
   }
 
   .directionR {
     top: calc(50% + 12px);
-    width: 250px;
+    width: 245px;
   }
 
   .headerCenterTitle {

@@ -131,10 +131,11 @@ export default function CounsellingPage() {
     const totalCards = WHEEL_SERVICES.length
     if (!section || !wrapper || totalCards === 0) return
 
-    const SPREAD_X = 0.16
-    const SPREAD_Y = 0.28
-    const ROTATE = 4
-    const SKEW = -2
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
+    const SPREAD_X = isMobile ? 0.08 : 0.16
+    const SPREAD_Y = isMobile ? 0.06 : 0.28
+    const ROTATE = isMobile ? 2 : 4
+    const SKEW = isMobile ? -1 : -2
     const SCALE_MIN = 0.7
 
     function updateCards(progress: number) {
@@ -147,7 +148,7 @@ export default function CounsellingPage() {
         const offset = index - current
         const absOffset = Math.abs(offset)
         const spreadX = -offset * window.innerWidth * SPREAD_X
-        const spreadY = offset * window.innerHeight * SPREAD_Y
+        const spreadY = offset * (isMobile ? 320 : window.innerHeight) * SPREAD_Y
         const rotateZ = offset * ROTATE
         const skewY = offset * SKEW
         const scale = Math.max(SCALE_MIN, 1 - absOffset * 0.08)
@@ -175,7 +176,9 @@ export default function CounsellingPage() {
     updateCards(0)
 
     // Pinning distance: smooth, perfectly paced card cycle without flying away
-    const pinDistance = window.innerHeight * (totalCards - 1) * 0.85
+    const pinDistance = isMobile
+      ? (totalCards - 1) * 320
+      : window.innerHeight * (totalCards - 1) * 0.85
 
     const ctx = gsap.context(() => {
       const st = ScrollTrigger.create({
