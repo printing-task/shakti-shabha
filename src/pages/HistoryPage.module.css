@@ -8,8 +8,8 @@
 
 .pageContainer {
   position: relative;
-  width: 100%;
-  min-height: 100vh;
+  width: %;
+  min-height: 50vh;
   background: #FFFFFF;
   color: #111827;
   font-family: var(--font-body, var(--sans, 'DM Sans', Arial, sans-serif));
