@@ -8,7 +8,7 @@
   position: relative;
   width: 100%;
   padding-top: 104px; /* Space for the 34px utility bar + 70px fixed nav */
-  background: #050506;
+  background: #0c0c0d;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,17 +17,18 @@
   user-select: none;
 }
 
-/* ── WebGL App Frame ────────────────────────────────────────── */
+/* ── Full-Bleed WebGL Stage (Outer rectangle frame removed) ─── */
 .appFrame {
   position: relative;
-  width: min(94vw, 1360px);
-  height: clamp(560px, 75vh, 720px);
-  border-radius: 22px;
+  width: 100%;
+  height: calc(100vh - 104px);
+  height: calc(100dvh - 104px);
+  min-height: 580px;
+  border-radius: 0;
+  border: none;
+  margin: 0;
   overflow: hidden;
   background: #0c0c0d;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.85);
-  margin: 1.5rem auto 2.5rem;
   color: #f4f1ea;
   font-family: var(--sans, 'DM Sans', Arial, sans-serif);
 }
@@ -70,11 +71,11 @@
 /* Left Editorial Typography Block */
 .slideLeft {
   position: absolute;
-  left: 7.5%;
+  left: 6.5%;
   top: 50%;
   transform: translateY(-50%);
   max-width: 360px;
-  z-index: 4;
+  z-index: 6;
 }
 
 .romanNum {
@@ -95,7 +96,7 @@
   letter-spacing: -0.015em;
   color: #f6f4ef;
   margin-bottom: 0.7rem;
-  text-shadow: 0 6px 24px rgba(0, 0, 0, 0.55);
+  text-shadow: 0 6px 24px rgba(0, 0, 0, 0.65);
 }
 
 .slideSubtitle {
@@ -123,7 +124,7 @@
   padding: 0.62rem 1.35rem;
   border-radius: 999px;
   border: 1px solid var(--slide-accent);
-  background: rgba(12, 12, 14, 0.52);
+  background: rgba(12, 12, 14, 0.58);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   color: #f6f4ef;
@@ -142,17 +143,17 @@
   box-shadow: 0 0 24px var(--slide-glow);
 }
 
-/* Clean, Floating Subject Image Slot (Merged with WebGL Scene) */
+/* Right-Side Subject Image (Scaled up + black JPG background keyed out) */
 .subjectWrap {
   position: absolute;
-  left: 56%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  right: 2%;
+  top: 53%;
+  transform: translateY(-50%);
   z-index: 3;
-  width: clamp(340px, 45vw, 640px);
-  height: clamp(300px, 55vh, 520px);
+  width: clamp(400px, 48vw, 680px);
+  height: clamp(340px, 76vh, 640px);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-start;
   pointer-events: none;
 }
@@ -161,7 +162,7 @@
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-start;
   animation: gentleFloat 6s ease-in-out infinite;
 }
@@ -170,10 +171,11 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  object-position: left center;
-  mix-blend-mode: screen;
+  object-position: left bottom;
   display: block;
-  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.8));
+  filter: url(#remove-black);
+  -webkit-mask-image: linear-gradient(to bottom, #000 84%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 84%, transparent 100%);
 }
 
 @keyframes gentleFloat {
@@ -181,17 +183,17 @@
   50% { transform: translateY(-7px); }
 }
 
-/* Right Pillar Highlights & Stacked Counter (All Left-Aligned) */
+/* Right Pillar Highlights & Stacked Counter (Left-Aligned) */
 .slideRight {
   position: absolute;
-  right: 6.5%;
+  right: 4.5%;
   top: 51%;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
   gap: 1.5rem;
   text-align: left;
-  z-index: 4;
+  z-index: 7;
 }
 
 .pillarList {
@@ -206,12 +208,13 @@
   font-size: 0.65rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(244, 241, 234, 0.75);
+  color: rgba(244, 241, 234, 0.82);
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 0.5rem;
   text-align: left;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.92);
 }
 
 .pillarList li::before {
@@ -220,7 +223,7 @@
   height: 5px;
   border-radius: 50%;
   background: var(--slide-accent);
-  opacity: 0.85;
+  opacity: 0.9;
   flex-shrink: 0;
 }
 
@@ -627,11 +630,13 @@
   }
 
   .appFrame {
-    width: 100vw;
-    height: clamp(540px, 86vh, 660px);
+    width: 100%;
+    height: calc(100vh - 84px);
+    height: calc(100dvh - 84px);
+    min-height: 560px;
     border-radius: 0;
     border: none;
-    margin: 0 auto;
+    margin: 0;
   }
 
   .topBar, .bottomBar {
@@ -640,22 +645,23 @@
 
   .slideLeft {
     left: 6%;
-    top: 15%;
+    top: 14%;
     transform: none;
     max-width: 88%;
     text-align: left;
   }
 
   .subjectWrap {
-    left: 50%;
-    top: 58%;
-    transform: translate(-50%, -50%);
-    width: 290px;
-    height: 240px;
+    right: 0;
+    left: auto;
+    top: 64%;
+    transform: translateY(-50%);
+    width: 92vw;
+    height: 46vh;
   }
 
   .mediaSlot img {
-    object-position: center;
+    object-position: center bottom;
   }
 
   .slideRight {
