@@ -259,7 +259,6 @@ export default function Hero() {
 
   const [activeIdx, setActiveIdx] = useState(0)
 
-  // Internal state refs for 60fps WebGL loop without React re-render lag
   const stateRef = useRef({
     currentIdx: 0,
     nextIdx: 0,
@@ -273,13 +272,6 @@ export default function Hero() {
 
   const autoLoopTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const scheduleAutoLoop = useCallback(() => {
-    if (autoLoopTimerRef.current) clearTimeout(autoLoopTimerRef.current)
-    autoLoopTimerRef.current = setTimeout(() => {
-      triggerNext()
-    }, 4500)
-  }, [])
-
   const startTransition = useCallback((targetIdx: number) => {
     const sState = stateRef.current
     if (sState.isTransitioning || targetIdx === sState.currentIdx) return
@@ -292,7 +284,7 @@ export default function Hero() {
     const cyl = cylinderRef.current
     if (cyl) {
       cyl.classList.remove(s.cylinderMoving)
-      void cyl.offsetWidth // force reflow
+      void cyl.offsetWidth
       cyl.classList.add(s.cylinderMoving)
     }
 
@@ -320,7 +312,13 @@ export default function Hero() {
     startTransition((sState.currentIdx - 1 + SLIDES_DATA.length) % SLIDES_DATA.length)
   }, [startTransition])
 
-  // WebGL & Animation Loop
+  const scheduleAutoLoop = useCallback(() => {
+    if (autoLoopTimerRef.current) clearTimeout(autoLoopTimerRef.current)
+    autoLoopTimerRef.current = setTimeout(() => {
+      triggerNext()
+    }, 4500)
+  }, [triggerNext])
+
   useEffect(() => {
     const canvas = canvasRef.current
     const frame = frameRef.current
@@ -507,7 +505,29 @@ export default function Hero() {
 
   return (
     <div className={s.heroPinWrapper}>
-      {/* ── WebGL App Frame ────────────────────────────────────── */}
+      {/* Hidden SVG Filter: Keys out solid black JPEG backgrounds in the GPU compositor */}
+      <svg
+        width="0"
+        height="0"
+        style={{ position: 'absolute', pointerEvents: 'none' }}
+        aria-hidden="true"
+      >
+        <defs>
+          <filter id="remove-black" colorInterpolationFilters="sRGB">
+            <feColorMatrix
+              type="matrix"
+              values="
+                1  0  0  0  0
+                0  1  0  0  0
+                0  0  1  0  0
+                20 20 20 0 -0.60
+              "
+            />
+          </filter>
+        </defs>
+      </svg>
+
+      {/* ── Full-Bleed WebGL Hero Stage ────────────────────────── */}
       <div className={s.appFrame} ref={frameRef} id="app_frame">
         {/* WebGL Canvas: Sun + Ocean Waves + Portal Ring */}
         <canvas className={s.webglCanvas} ref={canvasRef} id="webgl_canvas" />
@@ -551,7 +571,7 @@ export default function Hero() {
                     <img
                       src={slide.image}
                       alt={`${slide.title} ${slide.titleBreak}`}
-                      loading={idx === 0 ? "eager" : "lazy"}
+                      loading={idx === 0 ? 'eager' : 'lazy'}
                     />
                   </div>
                 </div>
