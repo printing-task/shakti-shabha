@@ -312,7 +312,7 @@ export default function HistoryPage() {
           scrollTrigger: {
             trigger: section,
             start: 'top top',
-            end: () => `+=${Math.max(window.innerHeight * 2.2, totalScroll * 1.2)}`,
+            end: () => `+=${Math.max(Math.min(window.innerHeight, 720) * 1.8, totalScroll * 1.05)}`,
             pin: true,
             anticipatePin: 1,
             scrub: 0.3,
