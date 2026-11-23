@@ -416,6 +416,7 @@ export default function ShaktiHero() {
             <section
               key={s.roman}
               className={styles.slide}
+              
               ref={(el) => { slideRefs.current[i] = el; }}
               style={{ '--slide-accent': s.accent, '--slide-glow': s.glow } as React.CSSProperties}
             >
@@ -453,29 +454,6 @@ export default function ShaktiHero() {
           ))}
         </div>
 
-        <header className={styles.topBar}>
-          <button className={styles.menuBtn} onClick={() => api.current.next?.()} aria-label="Next pillar">
-            <span /><span /><span />
-          </button>
-          <div className={styles.brandTitle}>Shakti Sabha</div>
-          <div className={styles.topRight}>
-            <div className={styles.pillarNav}>
-              {SCENES.map((s, i) => (
-                <button
-                  key={s.roman}
-                  aria-label={s.title.join(' ')}
-                  title={s.title.join(' ')}
-                  className={`${styles.pillarDot} ${active === i ? styles.pillarDotActive : ''}`}
-                  onClick={() => api.current.go?.(i)}
-                >
-                  {s.roman}
-                </button>
-              ))}
-            </div>
-            <button className={styles.navPill} onClick={() => api.current.next?.()}>ALL PILLARS</button>
-          </div>
-        </header>
-
         <button className={styles.playBtn} onClick={() => api.current.next?.()} aria-label="Next pillar">
           <svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20" /></svg>
         </button>
@@ -484,7 +462,17 @@ export default function ShaktiHero() {
         <footer className={styles.bottomBar}>
           <div className={styles.tagline}>Strength · Consciousness · Inquiry</div>
           <div className={styles.scrollPill} />
-          <div className={styles.footerRight}><span>MARDINI</span><span>BHAVA</span><span>VARTA</span></div>
+          <div className={styles.footerRight}>
+            {SCENES.map((s, i) => (
+              <span
+                key={s.roman}
+                className={`${styles.footerPill} ${active === i ? styles.footerPillActive : ''}`}
+                onClick={() => api.current.go?.(i)}
+              >
+                {s.roman} · {s.title[1].toUpperCase()}
+              </span>
+            ))}
+          </div>
         </footer>
       </div>
     </div>
