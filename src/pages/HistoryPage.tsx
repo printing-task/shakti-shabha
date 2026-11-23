@@ -395,21 +395,22 @@ export default function HistoryPage() {
 
   // Prevent background scroll and pause Lenis while Inspect Dossier modal is open
   useEffect(() => {
+    const lenis = typeof window !== 'undefined' ? (window as any).lenis : null
     if (activeDossier) {
       document.body.style.overflow = 'hidden'
-      if (typeof window !== 'undefined') {
-        ;(window as any).lenis?.stop()
+      if (lenis && typeof lenis.stop === 'function') {
+        lenis.stop()
       }
     } else {
       document.body.style.overflow = ''
-      if (typeof window !== 'undefined') {
-        ;(window as any).lenis?.start()
+      if (lenis && typeof lenis.start === 'function') {
+        lenis.start()
       }
     }
     return () => {
       document.body.style.overflow = ''
-      if (typeof window !== 'undefined') {
-        ;(window as any).lenis?.start()
+      if (lenis && typeof lenis.start === 'function') {
+        lenis.start()
       }
     }
   }, [activeDossier])

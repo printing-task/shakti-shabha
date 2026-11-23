@@ -118,6 +118,17 @@ export default function CounsellingPage() {
   })
   const [submitting, setSubmitting] = useState(false)
   const [activeDot, setActiveDot] = useState(0)
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth <= 768 : false
+  )
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const sectionRef = useRef<HTMLElement>(null)
   const wheelWrapperRef = useRef<HTMLDivElement>(null)
@@ -131,12 +142,11 @@ export default function CounsellingPage() {
     const totalCards = WHEEL_SERVICES.length
     if (!section || !wrapper || totalCards === 0) return
 
-    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
-    const SPREAD_X = isMobile ? 0.08 : 0.16
-    const SPREAD_Y = isMobile ? 0.06 : 0.28
-    const ROTATE = isMobile ? 2 : 4
-    const SKEW = isMobile ? -1 : -2
-    const SCALE_MIN = 0.7
+    const SPREAD_X = isMobile ? 0.04 : 0.16
+    const SPREAD_Y = isMobile ? 0.03 : 0.28
+    const ROTATE = isMobile ? 1.5 : 4
+    const SKEW = isMobile ? -0.5 : -2
+    const SCALE_MIN = 0.8
 
     function updateCards(progress: number) {
       const current = progress * (totalCards - 1)
@@ -147,19 +157,19 @@ export default function CounsellingPage() {
         if (!card) return
         const offset = index - current
         const absOffset = Math.abs(offset)
-        const spreadX = -offset * window.innerWidth * SPREAD_X
-        const spreadY = offset * (isMobile ? 320 : window.innerHeight) * SPREAD_Y
+        const spreadX = -offset * Math.min(window.innerWidth, 400) * SPREAD_X
+        const spreadY = offset * (isMobile ? 140 : window.innerHeight) * SPREAD_Y
         const rotateZ = offset * ROTATE
         const skewY = offset * SKEW
         const scale = Math.max(SCALE_MIN, 1 - absOffset * 0.08)
 
-        if (absOffset > 2.2) {
+        if (absOffset > 1.8) {
           card.style.opacity = '0'
           card.style.pointerEvents = 'none'
           return
         }
 
-        const opacity = absOffset > 1.8 ? 0 : Math.max(0, 1 - absOffset * 0.45)
+        const opacity = absOffset > 1.4 ? 0 : Math.max(0, 1 - absOffset * 0.45)
         card.style.pointerEvents = absOffset < 0.4 ? 'auto' : 'none'
         card.style.transform = `
           translate3d(${spreadX}px, ${spreadY}px, 0)
@@ -175,10 +185,10 @@ export default function CounsellingPage() {
     // Set initial card states
     updateCards(0)
 
-    // Pinning distance: smooth, perfectly paced card cycle without flying away
+    // Pinning distance: smooth, compact cycle on mobile
     const pinDistance = isMobile
-      ? (totalCards - 1) * 320
-      : window.innerHeight * (totalCards - 1) * 0.85
+      ? (totalCards - 1) * 130
+      : window.innerHeight * (totalCards - 1) * 0.75
 
     const ctx = gsap.context(() => {
       const st = ScrollTrigger.create({
@@ -206,7 +216,7 @@ export default function CounsellingPage() {
       ctx.revert()
       triggerRef.current = null
     }
-  }, [])
+  }, [isMobile])
 
   const scrollToCard = (index: number) => {
     const st = triggerRef.current
@@ -216,6 +226,18 @@ export default function CounsellingPage() {
       top: targetScroll,
       behavior: 'smooth'
     })
+  }
+
+  const nextCard = () => {
+    if (activeDot < WHEEL_SERVICES.length - 1) {
+      scrollToCard(activeDot + 1)
+    }
+  }
+
+  const prevCard = () => {
+    if (activeDot > 0) {
+      scrollToCard(activeDot - 1)
+    }
   }
 
   return (
@@ -307,11 +329,40 @@ export default function CounsellingPage() {
               </div>
             </div>
           ))}
+
+          {/* Mobile Bottom Navigation Controls */}
+          {isMobile && (
+            <div className={cp.mobileWheelNav}>
+              <button
+                type="button"
+                onClick={prevCard}
+                disabled={activeDot === 0}
+                className={cp.mobileNavBtn}
+                aria-label="Previous Service"
+              >
+                <GoogleIcon name="arrow_back" size={15} />
+                <span>Prev</span>
+              </button>
+              <span className={cp.mobileNavCounter}>
+                {activeDot + 1} / {WHEEL_SERVICES.length}
+              </span>
+              <button
+                type="button"
+                onClick={nextCard}
+                disabled={activeDot === WHEEL_SERVICES.length - 1}
+                className={cp.mobileNavBtn}
+                aria-label="Next Service"
+              >
+                <span>Next</span>
+                <GoogleIcon name="arrow_forward" size={15} />
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
       {/* ── Confidential Intake Booking Box ── */}
-      <div className={s.section} style={{ background: '#FFFFFF' }}>
+      <div className={`${s.section} ${cp.bookingSection}`} style={{ background: '#FFFFFF' }}>
         <div id="book-session" className={cp.bookingBox}>
           <div className={cp.bookingGrid}>
             <div>

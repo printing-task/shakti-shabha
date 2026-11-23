@@ -6,7 +6,9 @@
 .sphere-root {
   position: relative;
   width: 100%;
+  max-width: 100vw;
   height: 100%;
+  overflow: hidden;
   --radius: 520px;
   --viewer-pad: 72px;
   --circ: calc(var(--radius) * 3.14159);
@@ -29,6 +31,8 @@
 main.sphere-main {
   position: absolute;
   inset: 0;
+  width: 100%;
+  max-width: 100vw;
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -40,12 +44,14 @@ main.sphere-main {
 
 .stage {
   width: 100%;
+  max-width: 100vw;
   height: 100%;
   display: grid;
   place-items: center;
   perspective: calc(var(--radius) * 2.2);
   perspective-origin: 50% 50%;
   contain: layout paint size;
+  overflow: hidden;
 }
 
 .sphere {
@@ -124,8 +130,17 @@ main.sphere-main {
 }
 
 @media (max-width: 768px) {
+  .item__image {
+    inset: 4px;
+    border-radius: 12px;
+  }
+
   .edge-fade {
-    height: 36px;
+    height: 20px;
+  }
+
+  .stage {
+    perspective-origin: 50% 50%;
   }
 }
 
