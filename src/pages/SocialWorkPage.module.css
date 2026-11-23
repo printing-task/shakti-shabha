@@ -9,10 +9,10 @@
   background: 
     linear-gradient(to right, rgba(26, 5, 11, 0.92) 0%, rgba(26, 5, 11, 0.65) 30%, rgba(26, 5, 11, 0.22) 55%, transparent 75%),
     url('/socialworkk.jpg') center 28% / cover no-repeat;
-  min-height: 420px;
+  min-height: clamp(400px, 50vh, 550px);
   display: flex;
   align-items: center;
-  padding: calc(3.5rem + 5rem) clamp(1.5rem, 4vw, 3rem) 3.5rem;
+  padding: calc(clamp(4rem, 7vw, 6rem) + 6.5rem) clamp(1.5rem, 4vw, 3rem) clamp(4rem, 7vw, 5.5rem);
   color: #FFFFFF;
 }
 

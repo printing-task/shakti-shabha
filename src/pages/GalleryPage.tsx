@@ -308,18 +308,18 @@ export default function GalleryPage() {
       <div className={gp.sphereWrapper}>
         <DomeGallery
           images={displayedImages}
-          fit={isMobile ? 0.56 : 0.52}
-          fitBasis="height"
-          minRadius={isMobile ? 200 : 260}
-          maxRadius={isMobile ? 320 : 420}
-          padFactor={isMobile ? 0.08 : 0.15}
+          fit={isMobile ? 0.65 : 0.46}
+          fitBasis="auto"
+          minRadius={isMobile ? 240 : 460}
+          maxRadius={isMobile ? 360 : 1150}
+          padFactor={isMobile ? 0.08 : 0.2}
           overlayBlurColor="#FFFFFF"
           maxVerticalRotationDeg={10}
           dragSensitivity={18}
           enlargeTransitionMs={320}
-          segments={isMobile ? 18 : 28}
+          segments={isMobile ? 18 : 35}
           dragDampening={2}
-          imageBorderRadius={isMobile ? "10px" : "16px"}
+          imageBorderRadius={isMobile ? "12px" : "18px"}
           openedImageBorderRadius="20px"
           grayscale={false}
           autoRotateSpeed={0.12}
