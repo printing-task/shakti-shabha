@@ -8,14 +8,13 @@
 
 .pageContainer {
   position: relative;
-  width: 100%;
-  max-width: 100vw;
+  width: %;
   min-height: 50vh;
   background: #FFFFFF;
   color: #111827;
   font-family: var(--font-body, var(--sans, 'DM Sans', Arial, sans-serif));
   overflow-x: hidden;
-  padding-bottom: 3rem;
+  padding-bottom: 5rem;
 }
 
 
@@ -184,20 +183,11 @@
 .stickyViewport {
   position: relative;
   width: 100%;
-  height: clamp(520px, 72vh, 660px);
-  max-height: 660px;
-  min-height: 480px;
+  height: 100vh;
+  min-height: 640px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-}
-
-@media (max-aspect-ratio: 1/1) {
-  .stickyViewport {
-    height: clamp(460px, 64vh, 580px);
-    max-height: 580px;
-    min-height: 420px;
-  }
 }
 
 /* ── Top Controls & Quick Year Bar ── */
