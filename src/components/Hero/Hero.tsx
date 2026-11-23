@@ -86,6 +86,7 @@ const fs = `
   precision highp float;
 
   uniform vec2  uR;
+  uniform float uScale;
   uniform float uT;
   uniform float uPortalPx;
   uniform float uFromScene;
@@ -145,7 +146,7 @@ const fs = `
   }
 
   vec3 renderScene(vec2 fragPos, vec2 center, float zoom, int sc) {
-    vec2 uv = (fragPos - center) / (uR.y * zoom);
+    vec2 uv = (fragPos - center) / (uScale * zoom);
 
     float horizonY = -0.048;
     float dy = uv.y - horizonY;
@@ -228,12 +229,12 @@ const fs = `
 
       col = mix(outCol, inCol, mask);
 
-      float ringWidth = uR.y * SUN_RADIUS;
+      float ringWidth = uScale * SUN_RADIUS;
       float innerEdge = smoothstep(uPortalPx - 2.0, uPortalPx + 2.0, distPx);
       float outerEdge = smoothstep(uPortalPx + ringWidth + 2.0, uPortalPx + ringWidth - 2.0, distPx);
       float ringMask = innerEdge * outerEdge;
 
-      float ringIn = smoothstep(0.0, uR.y * 0.035, uPortalPx);
+      float ringIn = smoothstep(0.0, uScale * 0.035, uPortalPx);
       float ringT = clamp((distPx - uPortalPx) / ringWidth, 0.0, 1.0);
       vec3 ringColor = mix(getSunTop(int(uFromScene)), getSunColor(int(uFromScene)), ringT);
 
@@ -364,6 +365,7 @@ export default function Hero() {
     gl.vertexAttribPointer(ap, 2, gl.FLOAT, false, 0, 0)
 
     const uR = gl.getUniformLocation(prog, 'uR')
+    const uScale = gl.getUniformLocation(prog, 'uScale')
     const uT = gl.getUniformLocation(prog, 'uT')
     const uPortalPx = gl.getUniformLocation(prog, 'uPortalPx')
     const uFromScene = gl.getUniformLocation(prog, 'uFromScene')
@@ -382,6 +384,8 @@ export default function Hero() {
       canvas.height = Math.round(rect.height * stateRef.current.dpr)
       gl.viewport(0, 0, canvas.width, canvas.height)
       gl.uniform2f(uR, canvas.width, canvas.height)
+      // Keeps sun circle proportional on narrow portrait phones while preserving desktop scale
+      gl.uniform1f(uScale, Math.min(canvas.height, canvas.width * 1.15))
     }
 
     resize()
@@ -477,6 +481,23 @@ export default function Hero() {
       }
     }
 
+    let touchStartX = 0
+    let touchStartY = 0
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX
+      touchStartY = e.touches[0].clientY
+    }
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (stateRef.current.isTransitioning) return
+      const dx = touchStartX - e.changedTouches[0].clientX
+      const dy = touchStartY - e.changedTouches[0].clientY
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx > 0) triggerNext()
+        else triggerPrev()
+      }
+    }
+
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
         e.preventDefault()
@@ -488,6 +509,8 @@ export default function Hero() {
     }
 
     frame.addEventListener('wheel', onWheel, { passive: true })
+    frame.addEventListener('touchstart', onTouchStart, { passive: true })
+    frame.addEventListener('touchend', onTouchEnd, { passive: true })
     window.addEventListener('keydown', onKeyDown)
 
     return () => {
@@ -495,6 +518,8 @@ export default function Hero() {
       if (autoLoopTimerRef.current) clearTimeout(autoLoopTimerRef.current)
       ro.disconnect()
       frame.removeEventListener('wheel', onWheel)
+      frame.removeEventListener('touchstart', onTouchStart)
+      frame.removeEventListener('touchend', onTouchEnd)
       window.removeEventListener('keydown', onKeyDown)
       gl.deleteProgram(prog)
       gl.deleteShader(vShader)
@@ -565,7 +590,7 @@ export default function Hero() {
                   </Link>
                 </div>
 
-                {/* Subject Slot (Uploaded Warrior / Consciousness / Research Image) */}
+                {/* Subject Slot (Warrior / Consciousness / Research Portrait) */}
                 <div className={s.subjectWrap}>
                   <div className={s.mediaSlot}>
                     <img
