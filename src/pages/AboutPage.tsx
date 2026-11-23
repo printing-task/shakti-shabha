@@ -633,33 +633,41 @@ export default function AboutPage() {
                   type="button"
                   className={`${p.blueprintTabBtn} ${activeBlueprintTab === 'genesis' ? p.blueprintTabBtnActive : ''}`}
                   onClick={() => setActiveBlueprintTab('genesis')}
+                  title="01 · Genesis & Field Thought"
+                  aria-label="01 · Genesis & Field Thought"
                 >
-                  <GoogleIcon name="eco" size={16} />
-                  <span>01 · Genesis &amp; Field Thought</span>
+                  <GoogleIcon name="eco" size={18} />
+                  <span className={p.blueprintTabLabel}>01 · Genesis &amp; Field Thought</span>
                 </button>
                 <button
                   type="button"
                   className={`${p.blueprintTabBtn} ${activeBlueprintTab === 'interventions' ? p.blueprintTabBtnActive : ''}`}
                   onClick={() => setActiveBlueprintTab('interventions')}
+                  title="02 · Counselling & Awareness"
+                  aria-label="02 · Counselling & Awareness"
                 >
-                  <GoogleIcon name="psychology" size={16} />
-                  <span>02 · Counselling &amp; Awareness</span>
+                  <GoogleIcon name="psychology" size={18} />
+                  <span className={p.blueprintTabLabel}>02 · Counselling &amp; Awareness</span>
                 </button>
                 <button
                   type="button"
                   className={`${p.blueprintTabBtn} ${activeBlueprintTab === 'doctrine' ? p.blueprintTabBtnActive : ''}`}
                   onClick={() => setActiveBlueprintTab('doctrine')}
+                  title="03 · Mission Mardini"
+                  aria-label="03 · Mission Mardini"
                 >
-                  <GoogleIcon name="swords" size={16} />
-                  <span>03 · Mission Mardini</span>
+                  <GoogleIcon name="swords" size={18} />
+                  <span className={p.blueprintTabLabel}>03 · Mission Mardini</span>
                 </button>
                 <button
                   type="button"
                   className={`${p.blueprintTabBtn} ${activeBlueprintTab === 'pillars' ? p.blueprintTabBtnActive : ''}`}
                   onClick={() => setActiveBlueprintTab('pillars')}
+                  title="04 · The Three Streams"
+                  aria-label="04 · The Three Streams"
                 >
-                  <GoogleIcon name="hub" size={16} />
-                  <span>04 · The Three Streams</span>
+                  <GoogleIcon name="hub" size={18} />
+                  <span className={p.blueprintTabLabel}>04 · The Three Streams</span>
                 </button>
               </div>
             </div>

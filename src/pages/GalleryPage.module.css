@@ -241,6 +241,22 @@
   background: #FFFFFF;
 }
 
+@media (max-width: 768px) {
+  .sphereWrapper {
+    height: 440px;
+    min-height: 400px;
+  }
+
+  .interactiveHint {
+    font-size: 0.68rem;
+    padding: 0.35rem 0.85rem;
+    bottom: 0.75rem;
+    width: max-content;
+    max-width: 90%;
+    text-align: center;
+  }
+}
+
 .interactiveHint {
   position: absolute;
   bottom: 1.25rem;

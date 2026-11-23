@@ -1058,25 +1058,40 @@
 
 @media screen and (max-width: 768px) {
   .stickyViewport {
-    height: auto;
-    min-height: 100vh;
+    height: 520px;
+    min-height: 500px;
   }
 
   .horizontalTrackViewport {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    padding-bottom: 1.5rem;
+    height: 100%;
+    scrollbar-width: none;
   }
 
-  .horizontalTrack {
-    padding: 1.5rem 1rem;
-    gap: 1.5rem;
+  .horizontalTrackViewport::-webkit-scrollbar {
+    display: none;
   }
 
-  .horizontalCard {
-    width: 82vw;
+  .timeline {
+    height: 100%;
+    padding: 0 2rem;
+  }
+
+  .timelineItem {
+    width: 280px;
     scroll-snap-align: center;
+  }
+
+  .directionL {
+    bottom: calc(50% + 12px);
+    width: 250px;
+  }
+
+  .directionR {
+    top: calc(50% + 12px);
+    width: 250px;
   }
 
   .headerCenterTitle {

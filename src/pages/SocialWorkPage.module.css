@@ -508,29 +508,46 @@
   }
 
   .reportCard {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "icon body"
+      "btn btn";
+    gap: 0.85rem 1rem;
+    padding: 1.25rem 1.15rem;
+    align-items: center;
+  }
+
+  .reportIconWrap {
+    grid-area: icon;
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .reportBody {
+    grid-area: body;
+    min-width: 0;
+  }
+
+  .reportMeta {
+    gap: 0.5rem;
     flex-wrap: wrap;
-    gap: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .reportTitle {
+    font-size: 0.95rem;
+    line-height: 1.35;
   }
 
   .reportBtn {
-  flex-shrink: 0;
-  padding: 0.65rem 1.6rem;
-  min-height: 40px;
-  font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #FFFFFF;
-  background: #bd1834;
-  border-radius: 9999px;
-  text-decoration: none;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 14px rgba(189, 24, 52, 0.25);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
+    grid-area: btn;
+    width: 100%;
+    margin-top: 0.25rem;
+    padding: 0.65rem 1.4rem;
+    min-height: 38px;
+    font-size: 0.76rem;
+  }
 }
 
 @media (max-width: 480px) {

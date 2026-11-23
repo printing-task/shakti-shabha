@@ -321,6 +321,17 @@
   cursor: pointer;
 }
 
+@media (max-width: 768px) {
+  .citationSnippet {
+    padding-top: 3.5rem;
+    font-size: 0.82rem;
+  }
+  .copyBtn {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
 .copyBtn:hover {
   background: #E2E8F0;
 }

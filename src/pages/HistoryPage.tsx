@@ -302,35 +302,39 @@ export default function HistoryPage() {
     if (totalScroll <= 0) return
 
     const ctx = gsap.context(() => {
-      const tween = gsap.to(track, {
-        x: () => -totalScroll,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: () => `+=${Math.max(window.innerHeight * 2.2, totalScroll * 1.2)}`,
-          pin: true,
-          anticipatePin: 1,
-          scrub: 0.3,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            setScrollProgress(self.progress)
+      const mm = gsap.matchMedia()
 
-            // Red line smoothly glides from dot 0 to active milestone dot and beyond
-            const currentLineWidth = totalDist * self.progress
-            setLineWidth(currentLineWidth)
+      mm.add('(min-width: 769px)', () => {
+        const tween = gsap.to(track, {
+          x: () => -totalScroll,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: () => `+=${Math.max(window.innerHeight * 2.2, totalScroll * 1.2)}`,
+            pin: true,
+            anticipatePin: 1,
+            scrub: 0.3,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              setScrollProgress(self.progress)
 
-            // Determine active milestone based on scroll progress
-            const activeIdx = Math.min(
-              totalMilestones - 1,
-              Math.max(0, Math.floor(self.progress * totalMilestones * 0.999))
-            )
-            setActiveMilestoneId(TIMELINE_MILESTONES[activeIdx].id)
-            setMaxReachedIndex((prev) => Math.max(prev, activeIdx))
+              // Red line smoothly glides from dot 0 to active milestone dot and beyond
+              const currentLineWidth = totalDist * self.progress
+              setLineWidth(currentLineWidth)
+
+              // Determine active milestone based on scroll progress
+              const activeIdx = Math.min(
+                totalMilestones - 1,
+                Math.max(0, Math.floor(self.progress * totalMilestones * 0.999))
+              )
+              setActiveMilestoneId(TIMELINE_MILESTONES[activeIdx].id)
+              setMaxReachedIndex((prev) => Math.max(prev, activeIdx))
+            },
           },
-        },
+        })
+        triggerRef.current = tween.scrollTrigger ?? null
       })
-      triggerRef.current = tween.scrollTrigger ?? null
     }, section)
 
     const timer = setTimeout(() => {
