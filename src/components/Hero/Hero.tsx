@@ -9,8 +9,8 @@ const SCENES = [
     sub: 'Physical & Tactical Preparedness',
     desc: 'Self-defence foundations, Lathi-Kaushal, practical awareness and training designed to build confidence and readiness.',
     cta: 'Discover Mardini',
-    img: '/hero/hero-mardini.jpg',
-    fallback: '/missionmirdani.jpg',
+    img: '/hero/hero-mardini.jpg',      // black-bg cutout — works with SVG remove-black filter on desktop
+    mobilePic: '/missionmirdani.jpg',   // full-colour photo — used as background on mobile banner
     accent: '#f06529',
     glow: 'rgba(232,85,30,0.35)',
     pillars: ['Self-Defence Training', 'Lathi-Kaushal', 'Safety Awareness', 'Tactical Readiness'],
@@ -22,7 +22,7 @@ const SCENES = [
     desc: 'Supportive spaces, counselling pathways, awareness and trauma-informed conversations that respect individual dignity.',
     cta: 'Discover Bhava',
     img: '/hero/hero-bhava.jpg',
-    fallback: '/shaktibhava.jpg',
+    mobilePic: '/shaktibhava.jpg',
     accent: '#e391b4',
     glow: 'rgba(212,114,158,0.35)',
     pillars: ['Emotional Well-being', 'Supportive Counselling', 'Self-Awareness', 'Safe & Inclusive Spaces'],
@@ -34,7 +34,7 @@ const SCENES = [
     desc: 'Research, seminars, reading and dialogue that encourage independent thought and careful examination of sources.',
     cta: 'Discover Varta',
     img: '/hero/hero-varta.jpg',
-    fallback: '/shaktivarta.jpg',
+    mobilePic: '/shaktivarta.jpg',
     accent: '#f4be42',
     glow: 'rgba(240,175,40,0.35)',
     pillars: ['Research & Study', 'Dialogue & Discussion', 'Critical Thinking', 'Heritage & Society'],
@@ -420,7 +420,7 @@ export default function ShaktiHero() {
               key={s.roman}
               className={styles.slide}
               ref={(el) => { slideRefs.current[i] = el; }}
-              style={{ '--slide-accent': s.accent, '--slide-glow': s.glow } as React.CSSProperties}
+              style={{ '--slide-accent': s.accent, '--slide-glow': s.glow, '--mobile-pic': `url(${s.mobilePic})` } as React.CSSProperties}
             >
               <div className={styles.slideLeft}>
                 <div className={styles.romanNum}>{s.roman}</div>
@@ -436,21 +436,19 @@ export default function ShaktiHero() {
                 </a>
               </div>
 
+              {/* Desktop: black-background cutout image with SVG remove-black filter */}
               <div className={styles.subjectWrap}>
                 <div className={styles.mediaSlot}>
                   <img
                     src={s.img}
                     alt={s.title.join(' ')}
                     draggable={false}
-                    onError={(e) => {
-                      const target = e.currentTarget;
-                      if (s.fallback && target.src !== s.fallback) {
-                        target.src = s.fallback;
-                      }
-                    }}
                   />
                 </div>
               </div>
+
+              {/* Mobile: full-colour photo shown as banner right-panel via CSS background */}
+              <div className={styles.mobilePicPanel} aria-hidden="true" />
 
               <div className={styles.slideRight}>
                 <ul className={styles.pillarList}>
