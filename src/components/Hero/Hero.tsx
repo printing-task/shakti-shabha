@@ -1,6 +1,6 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
-import styles from './ShaktiHero.module.css';
+import React, { useEffect, useRef, useState } from 'react';
+import styles from './Hero.module.css';
 
 const SCENES = [
   {
@@ -144,21 +144,29 @@ void main(){
 }`;
 
 const TRANS_DURATION = 1100;
-const easeInOutQuart = (t) => (t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2);
+const easeInOutQuart = (t: number) => (t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2);
+
+interface HeroApi {
+  go?: (target: number) => void;
+  next?: () => void;
+  prev?: () => void;
+}
 
 export default function ShaktiHero() {
-  const frameRef = useRef(null);
-  const canvasRef = useRef(null);
-  const cylRef = useRef(null);
-  const slideRefs = useRef([]);
-  const api = useRef({});
+  const frameRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const cylRef = useRef<HTMLDivElement>(null);
+  const slideRefs = useRef<(HTMLElement | null)[]>([]);
+  const api = useRef<HeroApi>({});
   const [active, setActive] = useState(0);
 
   useEffect(() => {
     const frame = frameRef.current;
     const canvas = canvasRef.current;
-    const slides = slideRefs.current;
     const cyl = cylRef.current;
+    if (!frame || !canvas || !cyl) return;
+
+    const slides = slideRefs.current;
     const gl = canvas.getContext('webgl', {
       alpha: false,
       antialias: false,
@@ -169,16 +177,21 @@ export default function ShaktiHero() {
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const mk = (type, src) => {
+    const mk = (type: number, src: string): WebGLShader | null => {
       const s = gl.createShader(type);
+      if (!s) return null;
       gl.shaderSource(s, src);
       gl.compileShader(s);
       if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(s));
       return s;
     };
     const prog = gl.createProgram();
-    gl.attachShader(prog, mk(gl.VERTEX_SHADER, VS));
-    gl.attachShader(prog, mk(gl.FRAGMENT_SHADER, FS));
+    if (!prog) return;
+    const vs = mk(gl.VERTEX_SHADER, VS);
+    const fs = mk(gl.FRAGMENT_SHADER, FS);
+    if (!vs || !fs) return;
+    gl.attachShader(prog, vs);
+    gl.attachShader(prog, fs);
     gl.linkProgram(prog);
     if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
     gl.useProgram(prog);
@@ -190,7 +203,7 @@ export default function ShaktiHero() {
     gl.enableVertexAttribArray(ap);
     gl.vertexAttribPointer(ap, 2, gl.FLOAT, false, 0, 0);
 
-    const U = {};
+    const U: Record<string, WebGLUniformLocation | null> = {};
     ['uR', 'uS', 'uT', 'uPortalPx', 'uFromScene', 'uToScene', 'uOutZoom', 'uInZoom', 'uOutFade', 'uInFade'].forEach(
       (n) => (U[n] = gl.getUniformLocation(prog, n))
     );
@@ -222,34 +235,45 @@ export default function ShaktiHero() {
     ro.observe(canvas);
 
     slides.forEach((s, i) => {
+      if (!s) return;
       s.classList.toggle(styles.slideVisible, i === 0);
       s.classList.toggle(styles.slideIsCurrent, i === 0);
     });
 
     let currentIdx = 0, nextIdx = 0, isTransitioning = false, transStart = 0;
-    let autoTimer = null, swapTimer = null, raf = 0;
+    let autoTimer: ReturnType<typeof setTimeout> | null = null;
+    let swapTimer: ReturnType<typeof setTimeout> | null = null;
+    let raf = 0;
 
     const scheduleAuto = () => {
-      clearTimeout(autoTimer);
+      if (autoTimer) clearTimeout(autoTimer);
       if (reduceMotion) return;
       autoTimer = setTimeout(() => !document.hidden && triggerNext(), 4500);
     };
 
-    function start(target) {
+    function start(target: number) {
       if (isTransitioning || target === currentIdx) return;
       isTransitioning = true;
       nextIdx = target;
-      clearTimeout(autoTimer);
+      if (autoTimer) clearTimeout(autoTimer);
       setActive(target);
-      cyl.classList.remove(styles.cylinderMoving);
-      void cyl.offsetWidth;
-      cyl.classList.add(styles.cylinderMoving);
+      if (cyl) {
+        cyl.classList.remove(styles.cylinderMoving);
+        void cyl.offsetWidth;
+        cyl.classList.add(styles.cylinderMoving);
+      }
       swapTimer = setTimeout(() => {
-        slides[currentIdx].classList.remove(styles.slideIsCurrent);
-        slides[nextIdx].classList.add(styles.slideVisible);
-        slides[nextIdx].style.zIndex = 2;
-        slides[nextIdx].style.opacity = 0;
-        slides[currentIdx].style.zIndex = 1;
+        slides[currentIdx]?.classList.remove(styles.slideIsCurrent);
+        slides[nextIdx]?.classList.add(styles.slideVisible);
+        const nextSlide = slides[nextIdx];
+        const currSlide = slides[currentIdx];
+        if (nextSlide) {
+          nextSlide.style.zIndex = '2';
+          nextSlide.style.opacity = '0';
+        }
+        if (currSlide) {
+          currSlide.style.zIndex = '1';
+        }
         transStart = performance.now();
       }, 280);
     }
@@ -258,22 +282,38 @@ export default function ShaktiHero() {
     api.current = { go: start, next: triggerNext, prev: triggerPrev };
 
     let wheelLock = 0;
-    const onWheel = (e) => {
+    const onWheel = (e: WheelEvent) => {
       const now = performance.now();
       if (isTransitioning || now - wheelLock < 600 || Math.abs(e.deltaY) < 15) return;
       wheelLock = now;
-      e.deltaY > 0 ? triggerNext() : triggerPrev();
+      if (e.deltaY > 0) {
+        triggerNext();
+      } else {
+        triggerPrev();
+      }
     };
-    const onKey = (e) => {
+    const onKey = (e: KeyboardEvent) => {
       if (['ArrowDown', 'ArrowRight', ' '].includes(e.key)) { e.preventDefault(); triggerNext(); }
       else if (['ArrowUp', 'ArrowLeft'].includes(e.key)) { e.preventDefault(); triggerPrev(); }
     };
     let tx = 0, ty = 0;
-    const onTS = (e) => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; };
-    const onTE = (e) => {
+    const onTS = (e: TouchEvent) => {
+      if (e.touches[0]) {
+        tx = e.touches[0].clientX;
+        ty = e.touches[0].clientY;
+      }
+    };
+    const onTE = (e: TouchEvent) => {
+      if (!e.changedTouches[0]) return;
       const dx = e.changedTouches[0].clientX - tx;
       const dy = e.changedTouches[0].clientY - ty;
-      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) dx < 0 ? triggerNext() : triggerPrev();
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) {
+          triggerNext();
+        } else {
+          triggerPrev();
+        }
+      }
     };
     frame.addEventListener('wheel', onWheel, { passive: true });
     frame.addEventListener('touchstart', onTS, { passive: true });
@@ -282,7 +322,7 @@ export default function ShaktiHero() {
     scheduleAuto();
 
     const t0 = performance.now();
-    const tick = (now) => {
+    const tick = (now: number) => {
       raf = requestAnimationFrame(tick);
       let portal = 0, outZoom = 1, inZoom = 1, outFade = 1, inFade = 1;
 
@@ -297,22 +337,31 @@ export default function ShaktiHero() {
         inZoom = 0.68 + p * 0.32;
         inFade = Math.min(1, Math.pow(rawP, 0.75) * 1.15);
 
-        const o = slides[currentIdx], n = slides[nextIdx];
-        o.style.transform = `scale(${outZoom})`;
-        o.style.opacity = outFade;
-        n.style.transform = `scale(${inZoom})`;
-        n.style.opacity = inFade;
-        n.style.clipPath = `circle(${portal}px at ${cx}px ${cy}px)`;
+        const o = slides[currentIdx];
+        const n = slides[nextIdx];
+        if (o) {
+          o.style.transform = `scale(${outZoom})`;
+          o.style.opacity = `${outFade}`;
+        }
+        if (n) {
+          n.style.transform = `scale(${inZoom})`;
+          n.style.opacity = `${inFade}`;
+          n.style.clipPath = `circle(${portal}px at ${cx}px ${cy}px)`;
+        }
 
         if (rawP >= 1) {
-          o.classList.remove(styles.slideVisible);
-          o.style.transform = 'scale(1)';
-          o.style.opacity = 1;
-          n.classList.add(styles.slideIsCurrent);
-          n.style.transform = 'scale(1)';
-          n.style.opacity = 1;
-          n.style.clipPath = 'none';
-          n.style.zIndex = 1;
+          if (o) {
+            o.classList.remove(styles.slideVisible);
+            o.style.transform = 'scale(1)';
+            o.style.opacity = '1';
+          }
+          if (n) {
+            n.classList.add(styles.slideIsCurrent);
+            n.style.transform = 'scale(1)';
+            n.style.opacity = '1';
+            n.style.clipPath = 'none';
+            n.style.zIndex = '1';
+          }
           currentIdx = nextIdx;
           isTransitioning = false;
           transStart = 0;
@@ -338,8 +387,8 @@ export default function ShaktiHero() {
 
     return () => {
       cancelAnimationFrame(raf);
-      clearTimeout(autoTimer);
-      clearTimeout(swapTimer);
+      if (autoTimer) clearTimeout(autoTimer);
+      if (swapTimer) clearTimeout(swapTimer);
       ro.disconnect();
       frame.removeEventListener('wheel', onWheel);
       frame.removeEventListener('touchstart', onTS);
@@ -367,8 +416,8 @@ export default function ShaktiHero() {
             <section
               key={s.roman}
               className={styles.slide}
-              ref={(el) => (slideRefs.current[i] = el)}
-              style={{ '--slide-accent': s.accent, '--slide-glow': s.glow }}
+              ref={(el) => { slideRefs.current[i] = el; }}
+              style={{ '--slide-accent': s.accent, '--slide-glow': s.glow } as React.CSSProperties}
             >
               <div className={styles.slideLeft}>
                 <div className={styles.romanNum}>{s.roman}</div>
