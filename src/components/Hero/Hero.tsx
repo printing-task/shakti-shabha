@@ -9,7 +9,8 @@ const SCENES = [
     sub: 'Physical & Tactical Preparedness',
     desc: 'Self-defence foundations, Lathi-Kaushal, practical awareness and training designed to build confidence and readiness.',
     cta: 'Discover Mardini',
-    img: '/missionmirdini.jpeg',
+    img: '/hero/hero-mardini.jpg',
+    fallback: '/missionmirdani.jpg',
     accent: '#f06529',
     glow: 'rgba(232,85,30,0.35)',
     pillars: ['Self-Defence Training', 'Lathi-Kaushal', 'Safety Awareness', 'Tactical Readiness'],
@@ -20,7 +21,8 @@ const SCENES = [
     sub: 'Consciousness & Emotional Resilience',
     desc: 'Supportive spaces, counselling pathways, awareness and trauma-informed conversations that respect individual dignity.',
     cta: 'Discover Bhava',
-    img: '/shaktibhava.jpeg',
+    img: '/hero/hero-bhava.jpg',
+    fallback: '/shaktibhava.jpg',
     accent: '#e391b4',
     glow: 'rgba(212,114,158,0.35)',
     pillars: ['Emotional Well-being', 'Supportive Counselling', 'Self-Awareness', 'Safe & Inclusive Spaces'],
@@ -31,7 +33,8 @@ const SCENES = [
     sub: 'Research, Dialogue & Critical Inquiry',
     desc: 'Research, seminars, reading and dialogue that encourage independent thought and careful examination of sources.',
     cta: 'Discover Varta',
-    img: '/shaktivarta.jpeg',
+    img: '/hero/hero-varta.jpg',
+    fallback: '/shaktivarta.jpg',
     accent: '#f4be42',
     glow: 'rgba(240,175,40,0.35)',
     pillars: ['Research & Study', 'Dialogue & Discussion', 'Critical Thinking', 'Heritage & Society'],
@@ -435,7 +438,17 @@ export default function ShaktiHero() {
 
               <div className={styles.subjectWrap}>
                 <div className={styles.mediaSlot}>
-                  <img src={s.img} alt={s.title.join(' ')} draggable={false} />
+                  <img
+                    src={s.img}
+                    alt={s.title.join(' ')}
+                    draggable={false}
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (s.fallback && target.src !== s.fallback) {
+                        target.src = s.fallback;
+                      }
+                    }}
+                  />
                 </div>
               </div>
 
