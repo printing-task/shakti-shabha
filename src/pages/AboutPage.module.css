@@ -1401,7 +1401,7 @@
 .showcaseSection {
   position: relative;
   width: 100%;
-  min-height: 88vh;
+  min-height: 520px;
   display: flex;
   flex-direction: column;
   justify-content: center;

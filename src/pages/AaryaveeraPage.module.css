@@ -46,7 +46,7 @@
 
 /* ── 1. HERO ──────────────────────────────────────────────────────── */
 .hero {
-  min-height: 90vh;
+  min-height: 480px;
   background: #FFFFFF;
   display: flex;
   flex-direction: column;
