@@ -195,23 +195,31 @@ export default function ShaktiHero() {
       (n) => (U[n] = gl.getUniformLocation(prog, n))
     );
 
-    let dpr = 1, frameW = 1, frameH = 1;
+    // frameW/H = whole hero frame, stageW/H = the WebGL canvas area
+    // (on mobile the canvas is only the 16:9 thumbnail at the top of the frame)
+    let dpr = 1, frameW = 1, frameH = 1, stageW = 1, stageH = 1, cx = 0, cy = 0;
     const resize = () => {
-      const r = frame.getBoundingClientRect();
-      frameW = Math.max(1, r.width);
-      frameH = Math.max(1, r.height);
-      const cap = frameW < 700 ? 1.25 : 1.5;
+      const fr = frame.getBoundingClientRect();
+      const cr = canvas.getBoundingClientRect();
+      frameW = Math.max(1, fr.width);
+      frameH = Math.max(1, fr.height);
+      stageW = Math.max(1, cr.width);
+      stageH = Math.max(1, cr.height);
+      cx = stageW / 2;
+      cy = stageH * 0.515; // portal centre (matches shader centre at 0.485 from bottom)
+      const cap = stageW < 700 ? 1.5 : 1.5;
       dpr = Math.min(window.devicePixelRatio || 1, cap);
-      canvas.width = Math.round(frameW * dpr);
-      canvas.height = Math.round(frameH * dpr);
+      canvas.width = Math.round(stageW * dpr);
+      canvas.height = Math.round(stageH * dpr);
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.uniform2f(U.uR, canvas.width, canvas.height);
-      // Scale unit keeps the sun proportional on portrait phones and wide desktops
       gl.uniform1f(U.uS, Math.min(canvas.height, canvas.width * 1.15));
+      slides.forEach((s) => { if (s) s.style.transformOrigin = `${cx}px ${cy}px`; });
     };
     resize();
     const ro = new ResizeObserver(resize);
     ro.observe(frame);
+    ro.observe(canvas);
 
     slides.forEach((s, i) => {
       s.classList.toggle(styles.slideVisible, i === 0);
@@ -281,7 +289,8 @@ export default function ShaktiHero() {
       if (isTransitioning && transStart > 0) {
         const rawP = Math.min(1, (now - transStart) / TRANS_DURATION);
         const p = easeInOutQuart(rawP);
-        const maxR = Math.hypot(frameW * 0.5, frameH * 0.52) + 20;
+        // radius that reaches the farthest corner of the whole frame (stage + content below)
+        const maxR = Math.hypot(Math.max(cx, frameW - cx), Math.max(cy, frameH - cy)) + 20;
         portal = p * maxR;
         outZoom = 1 + p * 0.95;
         outFade = Math.max(0, 1 - Math.pow(rawP, 1.4));
@@ -293,7 +302,7 @@ export default function ShaktiHero() {
         o.style.opacity = outFade;
         n.style.transform = `scale(${inZoom})`;
         n.style.opacity = inFade;
-        n.style.clipPath = `circle(${portal}px at 50% 51.5%)`;
+        n.style.clipPath = `circle(${portal}px at ${cx}px ${cy}px)`;
 
         if (rawP >= 1) {
           o.classList.remove(styles.slideVisible);
