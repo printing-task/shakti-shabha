@@ -421,7 +421,6 @@ export default function ShaktiHero() {
               style={{ '--slide-accent': s.accent, '--slide-glow': s.glow } as React.CSSProperties}
             >
               <div className={styles.slideLeft}>
-                <div className={styles.romanNum}>{s.roman}</div>
                 <h1 className={styles.slideTitle}>{s.title[0]}<br />{s.title[1]}</h1>
                 <div className={styles.slideSubtitle}>{s.sub}</div>
                 <p className={styles.slideDesc}>{s.desc}</p>
@@ -444,11 +443,6 @@ export default function ShaktiHero() {
                 <ul className={styles.pillarList}>
                   {s.pillars.map((p) => <li key={p}>{p}</li>)}
                 </ul>
-                <div className={styles.stackedCounter}>
-                  <span>{s.roman}</span>
-                  <div className={styles.counterLine} />
-                  <span className={styles.counterTotal}>Ⅲ</span>
-                </div>
               </div>
             </section>
           ))}
@@ -469,7 +463,7 @@ export default function ShaktiHero() {
                 className={`${styles.footerPill} ${active === i ? styles.footerPillActive : ''}`}
                 onClick={() => api.current.go?.(i)}
               >
-                {s.roman} · {s.title[1].toUpperCase()}
+                {s.title[1].toUpperCase()}
               </span>
             ))}
           </div>
