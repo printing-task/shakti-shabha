@@ -109,7 +109,9 @@
 .wheelWrapper {
   position: relative;
   top: 0;
-  height: 100vh;
+  /* Same as 100vh on desktop, but capped by width on tall phones (desktop mode) */
+  height: min(100vh, 900px, 72vw);
+  min-height: 620px;
   width: 100%;
   overflow: hidden;
   perspective: 1800px;
@@ -126,7 +128,7 @@
   top: 20%;
   left: 20%;
   width: 60vw;
-  height: 60vh;
+  height: 60%;
   background: radial-gradient(circle, rgba(189, 24, 52, 0.04) 0%, transparent 70%);
   pointer-events: none;
   filter: blur(80px);
@@ -136,8 +138,7 @@
   position: absolute;
   width: 72vw;
   max-width: 980px;
-  height: 68vh;
-  max-height: 560px;
+  height: min(68vh, 560px);
   background: var(--paper, #FFFFFF);
   border-radius: 12px;
   padding: clamp(24px, 3.5vw, 42px);
@@ -147,7 +148,7 @@
   left: 50%;
   top: 50%;
   margin-left: -36vw;
-  margin-top: -34vh;
+  margin-top: calc(min(68vh, 560px) / -2);
   transform-origin: left center;
   will-change: transform, opacity;
   backface-visibility: hidden;

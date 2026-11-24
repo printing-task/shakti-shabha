@@ -183,7 +183,8 @@
 .stickyViewport {
   position: relative;
   width: 100%;
-  height: 100vh;
+  /* Same as 100vh on desktop, but capped by width on tall phones (desktop mode) */
+  height: min(100vh, 900px, 72vw);
   min-height: 640px;
   overflow: hidden;
   display: flex;

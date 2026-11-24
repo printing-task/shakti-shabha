@@ -288,8 +288,9 @@
   position: relative;
   width: 100%;
   max-width: 100vw;
-  height: clamp(520px, 62vh, 750px);
-  min-height: 500px;
+  /* Bounded by width too, so tall phones in desktop mode don't stretch it */
+  height: clamp(480px, min(62vh, 58vw), 750px);
+  min-height: 480px;
   overflow: hidden;
   background: #FFFFFF;
 }
