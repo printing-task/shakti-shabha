@@ -8,6 +8,7 @@ import {
   GalleryCategoryItem
 } from '../data/galleryStore'
 import DomeGallery, { DEFAULT_SHAKTI_IMAGES, type DomeGalleryImage } from '../components/DomeGallery/DomeGallery'
+import { PUBLIC_GALLERY_CATEGORIES, PUBLIC_GALLERY_IMAGES } from 'virtual:public-gallery'
 import GoogleIcon from '../components/GoogleIcon/GoogleIcon'
 import gp from './GalleryPage.module.css'
 
@@ -62,13 +63,13 @@ const EXTRA_GALLERY_IMAGES: DomeGalleryImage[] = [
   },
 ]
 
-const ALL_IMAGES = [...DEFAULT_SHAKTI_IMAGES, ...EXTRA_GALLERY_IMAGES]
-const INITIAL_IMAGE_LIMIT = 10
+const ALL_IMAGES = [...PUBLIC_GALLERY_IMAGES, ...DEFAULT_SHAKTI_IMAGES, ...EXTRA_GALLERY_IMAGES]
+const INITIAL_IMAGE_LIMIT = 20
 const VISIBLE_CATEGORY_COUNT = 3
 
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState<string>('ALL')
-  const [categories, setCategories] = useState<GalleryCategoryItem[]>([])
+  const [categories, setCategories] = useState<GalleryCategoryItem[]>(PUBLIC_GALLERY_CATEGORIES)
   const [dbImages, setDbImages] = useState<DomeGalleryImage[]>([])
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [imageLimit, setImageLimit] = useState(INITIAL_IMAGE_LIMIT)
@@ -90,9 +91,18 @@ export default function GalleryPage() {
       fetchAllPhotos(),
       fetchCategories()
     ]).then(([photos, cats]) => {
-      setCategories(cats)
+      const seen = new Set<string>()
+      const mergedCats: GalleryCategoryItem[] = []
+      for (const c of [...PUBLIC_GALLERY_CATEGORIES, ...cats]) {
+        const key = c.name.trim().toLowerCase()
+        if (!seen.has(key)) {
+          seen.add(key)
+          mergedCats.push(c)
+        }
+      }
+      setCategories(mergedCats)
       const catMap = new Map<string, string>()
-      cats.forEach(c => catMap.set(c.id, c.name.trim().toUpperCase()))
+      mergedCats.forEach(c => catMap.set(c.id, c.name.trim().toUpperCase()))
 
       if (photos.length > 0) {
         // Shuffle photos slightly so each visit is dynamic and fresh
