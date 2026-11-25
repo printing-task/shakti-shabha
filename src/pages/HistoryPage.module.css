@@ -1054,6 +1054,33 @@
 }
 
 /* ============================================================
+   Timeline Media Queries (Portrait / Mobile Desktop View)
+   Disables GSAP pin void and enables native horizontal swipe
+   ============================================================ */
+
+@media (orientation: portrait) {
+  .horizontalTrackViewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .horizontalTrackViewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .timeline {
+    padding: 0 3rem;
+  }
+
+  .timelineItem {
+    scroll-snap-align: center;
+  }
+}
+
+/* ============================================================
    Timeline Media Queries (Responsive Mobile View)
    ============================================================ */
 

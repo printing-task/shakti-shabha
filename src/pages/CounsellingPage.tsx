@@ -118,11 +118,14 @@ export default function CounsellingPage() {
   })
   const [submitting, setSubmitting] = useState(false)
   const [activeDot, setActiveDot] = useState(0)
+  const [isPortraitMode, setIsPortraitMode] = useState(false)
 
   const sectionRef = useRef<HTMLElement>(null)
   const wheelWrapperRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const triggerRef = useRef<ScrollTrigger | null>(null)
+  const progressRef = useRef({ value: 0 })
+  const updateCardsRef = useRef<(progress: number) => void>(() => {})
 
   /* ── 3D Card Wheel (Accordéon Asymétrique) Animation Logic ── */
   useEffect(() => {
@@ -139,6 +142,7 @@ export default function CounsellingPage() {
     const SCALE_MIN = 0.7
 
     function updateCards(progress: number) {
+      progressRef.current.value = progress
       const current = progress * (totalCards - 1)
       const activeIdx = Math.min(totalCards - 1, Math.max(0, Math.round(current)))
       setActiveDot(activeIdx)
@@ -172,29 +176,71 @@ export default function CounsellingPage() {
       })
     }
 
+    updateCardsRef.current = updateCards
+
     // Set initial card states
     updateCards(0)
 
-    // Pinning distance: smooth, perfectly paced card cycle without flying away
-    const pinDistance = isMobile
-      ? (totalCards - 1) * 320
-      : wrapper.offsetHeight * (totalCards - 1) * 0.85
-
     const ctx = gsap.context(() => {
-      const st = ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: () => `+=${pinDistance}`,
-        pin: wrapper,
-        pinSpacing: true,
-        anticipatePin: 1,
-        scrub: 0.2,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          updateCards(self.progress)
-        },
+      const mm = gsap.matchMedia()
+
+      // Landscape desktop: pinned vertical scroll through the 3D card wheel
+      mm.add('(min-width: 769px) and (orientation: landscape)', () => {
+        setIsPortraitMode(false)
+        const pinDistance = wrapper.offsetHeight * (totalCards - 1) * 0.85
+        const st = ScrollTrigger.create({
+          trigger: section,
+          start: 'top top',
+          end: () => `+=${pinDistance}`,
+          pin: wrapper,
+          pinSpacing: true,
+          anticipatePin: 1,
+          scrub: 0.2,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            updateCards(self.progress)
+          },
+        })
+        triggerRef.current = st
       })
-      triggerRef.current = st
+
+      // Mobile & Portrait (including mobile Desktop-site mode): no pin gap, swipe/tap through cards
+      mm.add('(max-width: 768px), (orientation: portrait)', () => {
+        setIsPortraitMode(true)
+        triggerRef.current = null
+        updateCards(progressRef.current.value)
+
+        let touchStartX = 0
+        let touchStartY = 0
+        const onTouchStart = (e: TouchEvent) => {
+          touchStartX = e.touches[0].clientX
+          touchStartY = e.touches[0].clientY
+        }
+        const onTouchEnd = (e: TouchEvent) => {
+          const dx = e.changedTouches[0].clientX - touchStartX
+          const dy = e.changedTouches[0].clientY - touchStartY
+          if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+            const currentIdx = Math.round(progressRef.current.value * (totalCards - 1))
+            const nextIdx = dx < 0
+              ? Math.min(totalCards - 1, currentIdx + 1)
+              : Math.max(0, currentIdx - 1)
+            const targetProgress = nextIdx / (totalCards - 1)
+            gsap.to(progressRef.current, {
+              value: targetProgress,
+              duration: 0.45,
+              ease: 'power2.out',
+              onUpdate: () => updateCards(progressRef.current.value),
+            })
+          }
+        }
+
+        wrapper.addEventListener('touchstart', onTouchStart, { passive: true })
+        wrapper.addEventListener('touchend', onTouchEnd, { passive: true })
+        return () => {
+          wrapper.removeEventListener('touchstart', onTouchStart)
+          wrapper.removeEventListener('touchend', onTouchEnd)
+        }
+      })
     }, section)
 
     const timer = setTimeout(() => {
@@ -209,13 +255,23 @@ export default function CounsellingPage() {
   }, [])
 
   const scrollToCard = (index: number) => {
+    const clamped = Math.min(WHEEL_SERVICES.length - 1, Math.max(0, index))
     const st = triggerRef.current
-    if (!st) return
-    const targetScroll = st.start + (index / (WHEEL_SERVICES.length - 1)) * (st.end - st.start)
-    window.scrollTo({
-      top: targetScroll,
-      behavior: 'smooth'
-    })
+    if (st) {
+      const targetScroll = st.start + (clamped / (WHEEL_SERVICES.length - 1)) * (st.end - st.start)
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth'
+      })
+    } else {
+      const targetProgress = clamped / (WHEEL_SERVICES.length - 1)
+      gsap.to(progressRef.current, {
+        value: targetProgress,
+        duration: 0.45,
+        ease: 'power2.out',
+        onUpdate: () => updateCardsRef.current(progressRef.current.value),
+      })
+    }
   }
 
   return (
@@ -307,6 +363,33 @@ export default function CounsellingPage() {
               </div>
             </div>
           ))}
+
+          {/* Compact Prev / Next controls for portrait / mobile desktop view */}
+          {isPortraitMode && (
+            <div className={cp.portraitNav}>
+              <button
+                type="button"
+                className={cp.portraitNavBtn}
+                onClick={() => scrollToCard(activeDot - 1)}
+                disabled={activeDot === 0}
+                aria-label="Previous counselling service"
+              >
+                ← Prev
+              </button>
+              <span className={cp.portraitNavCounter}>
+                {activeDot + 1} / {WHEEL_SERVICES.length}
+              </span>
+              <button
+                type="button"
+                className={cp.portraitNavBtn}
+                onClick={() => scrollToCard(activeDot + 1)}
+                disabled={activeDot === WHEEL_SERVICES.length - 1}
+                aria-label="Next counselling service"
+              >
+                Next →
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

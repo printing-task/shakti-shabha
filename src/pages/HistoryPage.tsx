@@ -305,7 +305,8 @@ export default function HistoryPage() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia()
 
-      mm.add('(min-width: 769px)', () => {
+      // Landscape desktop: pinned vertical-to-horizontal scroll
+      mm.add('(min-width: 769px) and (orientation: landscape)', () => {
         const tween = gsap.to(track, {
           x: () => -totalScroll,
           ease: 'none',
@@ -335,6 +336,34 @@ export default function HistoryPage() {
           },
         })
         triggerRef.current = tween.scrollTrigger ?? null
+      })
+
+      // Mobile & Portrait (including mobile Desktop-site mode): native horizontal scroll, zero pin gap
+      mm.add('(max-width: 768px), (orientation: portrait)', () => {
+        triggerRef.current = null
+        gsap.set(track, { clearProps: 'x,transform' })
+        setMaxReachedIndex(totalMilestones - 1)
+        const m = updateMeasurements()
+        setLineWidth(m.totalDist)
+
+        const vp = viewportRef.current
+        if (!vp) return
+
+        const onTrackScroll = () => {
+          const maxScroll = Math.max(1, vp.scrollWidth - vp.clientWidth)
+          const p = Math.min(1, Math.max(0, vp.scrollLeft / maxScroll))
+          setScrollProgress(p)
+          const activeIdx = Math.min(
+            totalMilestones - 1,
+            Math.max(0, Math.round(p * (totalMilestones - 1)))
+          )
+          setActiveMilestoneId(TIMELINE_MILESTONES[activeIdx].id)
+        }
+
+        vp.addEventListener('scroll', onTrackScroll, { passive: true })
+        return () => {
+          vp.removeEventListener('scroll', onTrackScroll)
+        }
       })
     }, section)
 
@@ -368,8 +397,11 @@ export default function HistoryPage() {
       })
     } else {
       const item = itemRefs.current[index]
-      if (item && viewportRef.current) {
-        item.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
+      const vp = viewportRef.current
+      if (item && vp) {
+        const targetLeft = item.offsetLeft - (vp.clientWidth - item.offsetWidth) / 2
+        vp.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' })
+        setActiveMilestoneId(TIMELINE_MILESTONES[index].id)
       }
     }
   }
