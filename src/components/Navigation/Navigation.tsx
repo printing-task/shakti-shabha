@@ -199,7 +199,7 @@ export default function Navigation() {
       <div className={s.utility}>
         <div className={s.utilityLeft}>
           <span className={s.utilityItem}>
-            <i className={s.utilityDot} /> Independent Research • Policy • Safeguarding
+            <i className={s.utilityDot} /> Union of Peace & amp; Revolution
           </span>
           <span className={s.utilityItem}>● Institutional &amp; Community Initiatives</span>
         </div>
@@ -222,7 +222,7 @@ export default function Navigation() {
           />
           <div className={s.logoText}>
             <span ref={logoMainRef} className={s.logoMain}>Shakti Sabha</span>
-            <span ref={logoDevRef} className={s.logoDev}>Union of Peace &amp; Revolution</span>
+            <span ref={logoDevRef} className={s.logoDev}>Independent Research • Policy • Safeguarding</span>
           </div>
         </Link>
 
