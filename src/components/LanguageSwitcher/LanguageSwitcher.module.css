@@ -15,13 +15,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
   background: #f7f5f2;
   border: 1px solid var(--line, #e8e4df) !important;
   outline: none;
-  border-radius: 20px;
-  padding: 0 9px;
-  height: 34px;
+  border-radius: 50%;
+  padding: 0;
+  width: 36px;
+  height: 36px;
   color: var(--ink, #191817);
   cursor: pointer;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);

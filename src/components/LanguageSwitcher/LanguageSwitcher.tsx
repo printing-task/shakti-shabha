@@ -97,7 +97,6 @@ export default function LanguageSwitcher({ floating = false, className = '' }: L
         title="Translate Website / भाषा बदलें"
       >
         <TranslateGlyph size={18} />
-        <span className={s.langCodeBadge}>{language === 'en' ? 'EN' : 'HI'}</span>
       </button>
 
       {isOpen && (
