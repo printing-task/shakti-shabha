@@ -459,14 +459,8 @@ export default function ShaktiHero() {
           ))}
         </div>
 
-        <button className={styles.playBtn} onClick={() => api.current.next?.()} aria-label="Next pillar">
-          <svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20" /></svg>
-        </button>
-        <div className={styles.cylinderBtn} ref={cylRef} />
-
         <footer className={styles.bottomBar}>
           <div className={styles.tagline}>Strength · Consciousness · Inquiry</div>
-          <div className={styles.scrollPill} />
           <div className={styles.footerRight}>
             {SCENES.map((s, i) => (
               <span
