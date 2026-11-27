@@ -8,7 +8,7 @@
 
 .pageContainer {
   position: relative;
-  width: %;
+  width: 100%;
   min-height: 50vh;
   background: #FFFFFF;
   color: #111827;
@@ -1107,15 +1107,19 @@
   }
 
   .stickyViewport {
-    height: 480px;
-    min-height: 440px;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
   }
 
   .horizontalTrackViewport {
     overflow-x: auto;
+    overflow-y: visible;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    height: 100%;
+    height: auto;
+    align-items: flex-start;
+    padding-bottom: 1.5rem;
     scrollbar-width: none;
   }
 
@@ -1124,23 +1128,65 @@
   }
 
   .timeline {
-    height: 100%;
-    padding: 0 1.5rem;
+    height: auto;
+    align-items: flex-start;
+    padding: 0 1.25rem;
+  }
+
+  .timeline:before,
+  .timelineActiveSpine {
+    top: 28px;
+    margin-top: -3px;
   }
 
   .timelineItem {
-    width: 270px;
+    width: min(82vw, 310px);
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 0.5rem;
     scroll-snap-align: center;
   }
 
-  .directionL {
-    bottom: calc(50% + 12px);
-    width: 245px;
+  .spineDot {
+    top: 28px;
   }
 
+  .stemTop,
+  .stemBottom {
+    top: 28px;
+    bottom: auto;
+    height: 18px;
+  }
+
+  .directionL,
   .directionR {
-    top: calc(50% + 12px);
-    width: 245px;
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    margin-top: 46px;
+    width: 100%;
+  }
+
+  .milestoneBoxRevealed {
+    animation: none;
+  }
+
+  .directionL .flag:after,
+  .directionR .flag:after {
+    top: auto;
+    bottom: 100%;
+    border-top-color: transparent;
+    border-bottom-color: rgb(248,248,248);
+  }
+
+  .itemActive .directionL .flag:after,
+  .itemActive .directionR .flag:after {
+    border-top-color: transparent;
+    border-bottom-color: rgb(255,80,80);
   }
 
   .headerCenterTitle {

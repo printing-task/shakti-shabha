@@ -184,7 +184,7 @@ p {
 
 .btn-hero,
 .btn-theme-pill,
-[class*="ctaBtn"]:not([class*="Ghost"]):not([class*="Outline"]),
+[class*="ctaBtn"]:not([class*="Ghost"]):not([class*="Outline"]):not([class*="Row"]):not([class*="Wrap"]):not([class*="Group"]),
 [class*="btnWarriorGold"] {
   display: inline-flex !important;
   align-items: center !important;
@@ -211,7 +211,7 @@ p {
 
 .btn-hero:hover,
 .btn-theme-pill:hover,
-[class*="ctaBtn"]:not([class*="Ghost"]):not([class*="Outline"]):hover,
+[class*="ctaBtn"]:not([class*="Ghost"]):not([class*="Outline"]):not([class*="Row"]):not([class*="Wrap"]):not([class*="Group"]):hover,
 [class*="btnWarriorGold"]:hover {
   background: var(--theme-primary-dark, #94132a) !important;
   border-color: var(--theme-primary-dark, #94132a) !important;
