@@ -205,6 +205,9 @@ p {
   -webkit-tap-highlight-color: transparent !important;
   user-select: none !important;
   white-space: nowrap !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
   min-height: 40px !important;
   box-shadow: 0 4px 14px rgba(189, 24, 52, 0.22) !important;
 }
@@ -241,6 +244,9 @@ p {
   text-decoration: none !important;
   transition: var(--btn-transition) !important;
   white-space: nowrap !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
   min-height: 40px !important;
 }
 
@@ -252,6 +258,21 @@ p {
   border-color: var(--ink, #191817) !important;
   color: var(--ink, #191817) !important;
   transform: translateY(-2px) !important;
+}
+
+@media (max-width: 640px) {
+  .btn-hero,
+  .btn-theme-pill,
+  [class*="ctaBtn"]:not([class*="Ghost"]):not([class*="Outline"]):not([class*="Row"]):not([class*="Wrap"]):not([class*="Group"]),
+  [class*="btnWarriorGold"],
+  .btn-ghost,
+  [class*="btnGhost"],
+  [class*="ctaBtnGhost"] {
+    white-space: normal !important;
+    line-height: 1.35 !important;
+    padding: 0.7rem 1.25rem !important;
+    font-size: 0.74rem !important;
+  }
 }
 
 
