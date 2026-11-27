@@ -164,7 +164,7 @@ export default function ShaktiHero() {
     const frame = frameRef.current;
     const canvas = canvasRef.current;
     const cyl = cylRef.current;
-    if (!frame || !canvas || !cyl) return;
+    if (!frame || !canvas) return;
 
     const slides = slideRefs.current;
     const gl = canvas.getContext('webgl', {
