@@ -58,7 +58,18 @@ app.use('/api/upload', require('./routes/upload'));
 const distPath = path.join(__dirname, '../dist');
 if (fs.existsSync(distPath)) {
   console.log(`📦 Serving static frontend website from: ${distPath}`);
-  app.use(express.static(distPath));
+  app.use('/assets', express.static(path.join(distPath, 'assets'), {
+    maxAge: '1y',
+    immutable: true,
+  }));
+  app.use(express.static(distPath, {
+    maxAge: '1d',
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith('index.html')) {
+        res.setHeader('Cache-Control', 'no-cache');
+      }
+    }
+  }));
 
   // SPA fallback for React Router
   app.get('*', (req, res, next) => {

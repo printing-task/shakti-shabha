@@ -421,7 +421,11 @@ export default function ShaktiHero() {
               style={{ '--slide-accent': s.accent, '--slide-glow': s.glow } as React.CSSProperties}
             >
               <div className={styles.slideLeft}>
-                <h1 className={styles.slideTitle}>{s.title[0]}<br />{s.title[1]}</h1>
+                {i === 0 ? (
+                  <h1 className={styles.slideTitle}>{s.title[0]}<br />{s.title[1]}</h1>
+                ) : (
+                  <h2 className={styles.slideTitle}>{s.title[0]}<br />{s.title[1]}</h2>
+                )}
                 <div className={styles.slideSubtitle}>{s.sub}</div>
                 <p className={styles.slideDesc}>{s.desc}</p>
                 <a
@@ -435,7 +439,14 @@ export default function ShaktiHero() {
 
               <div className={styles.subjectWrap}>
                 <div className={styles.mediaSlot}>
-                  <img src={s.img} alt={s.title.join(' ')} draggable={false} />
+                  <img
+                    src={s.img}
+                    alt={s.title.join(' ')}
+                    draggable={false}
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    fetchPriority={i === 0 ? 'high' : 'low'}
+                    decoding="async"
+                  />
                 </div>
               </div>
 

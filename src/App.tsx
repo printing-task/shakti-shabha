@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { ReactLenis, useLenis } from 'lenis/react'
 import gsap from 'gsap'
@@ -7,28 +7,29 @@ import Navigation from './components/Navigation/Navigation'
 import { AuthProvider } from './lib/AuthContext'
 import { LanguageProvider } from './lib/LanguageContext'
 import HomePage from './pages/HomePage'
-import AaryaveeraPage from './pages/AaryaveeraPage'
-import SocialWorkPage from './pages/SocialWorkPage'
-import EventsPage from './pages/EventsPage'
-import ImpactPage from './pages/ImpactPage'
-import SahyogPage from './pages/SahyogPage'
-import CoursesPage from './pages/CoursesPage'
-import HistoryPage from './pages/HistoryPage'
-import BrandPage from './pages/BrandPage'
-import AboutPage from './pages/AboutPage'
-import CaseStudyPage from './pages/CaseStudyPage'
-import ResearchPage from './pages/ResearchPage'
-import GalleryPage from './pages/GalleryPage'
-import ArticlesPage from './pages/ArticlesPage'
-import CounsellingPage from './pages/CounsellingPage'
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
-import AdminDashboard from './pages/AdminDashboard'
-import MardiniPage from './pages/MardiniPage'
-import ShaktiBhavaPage from './pages/ShaktiBhavaPage'
-import ShaktiVartaPage from './pages/ShaktiVartaPage'
-import ThreeStreamsPage from './pages/ThreeStreamsPage'
 import Footer from './components/Footer/Footer'
+
+const AaryaveeraPage = lazy(() => import('./pages/AaryaveeraPage'))
+const SocialWorkPage = lazy(() => import('./pages/SocialWorkPage'))
+const EventsPage = lazy(() => import('./pages/EventsPage'))
+const ImpactPage = lazy(() => import('./pages/ImpactPage'))
+const SahyogPage = lazy(() => import('./pages/SahyogPage'))
+const CoursesPage = lazy(() => import('./pages/CoursesPage'))
+const HistoryPage = lazy(() => import('./pages/HistoryPage'))
+const BrandPage = lazy(() => import('./pages/BrandPage'))
+const AboutPage = lazy(() => import('./pages/AboutPage'))
+const CaseStudyPage = lazy(() => import('./pages/CaseStudyPage'))
+const ResearchPage = lazy(() => import('./pages/ResearchPage'))
+const GalleryPage = lazy(() => import('./pages/GalleryPage'))
+const ArticlesPage = lazy(() => import('./pages/ArticlesPage'))
+const CounsellingPage = lazy(() => import('./pages/CounsellingPage'))
+const LoginPage = lazy(() => import('./pages/LoginPage'))
+const RegisterPage = lazy(() => import('./pages/RegisterPage'))
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'))
+const MardiniPage = lazy(() => import('./pages/MardiniPage'))
+const ShaktiBhavaPage = lazy(() => import('./pages/ShaktiBhavaPage'))
+const ShaktiVartaPage = lazy(() => import('./pages/ShaktiVartaPage'))
+const ThreeStreamsPage = lazy(() => import('./pages/ThreeStreamsPage'))
 
 gsap.registerPlugin(ScrollTrigger)
 if (typeof window !== 'undefined') {
@@ -60,7 +61,7 @@ function ScrollTriggerSync() {
 /** Page wrapper — guaranteed min-height, instant render */
 function PageTransition({ children }: { children: React.ReactNode }) {
   return (
-    <main
+    <div
       style={{
         flex: '1 0 auto',
         minHeight: '85vh',
@@ -69,8 +70,10 @@ function PageTransition({ children }: { children: React.ReactNode }) {
         flexDirection: 'column',
       }}
     >
-      {children}
-    </main>
+      <Suspense fallback={<div style={{ minHeight: '60vh' }} />}>
+        {children}
+      </Suspense>
+    </div>
   )
 }
 
