@@ -81,14 +81,26 @@
   display: inline-block;
   font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #bd1834;
   border: 1px solid #FECDD3;
-  padding: 0.22rem 0.85rem;
+  padding: 0.28rem 0.9rem;
   border-radius: 9999px;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.65rem;
   background: #FFF1F2;
+  max-width: 100%;
+  box-sizing: border-box;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .eyebrow {
+    font-size: 0.56rem;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.85rem;
+    margin-bottom: 0.75rem;
+  }
 }
 
 .carouselTitle {

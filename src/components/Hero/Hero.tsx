@@ -468,7 +468,7 @@ export default function ShaktiHero() {
                 className={`${styles.footerPill} ${active === i ? styles.footerPillActive : ''}`}
                 onClick={() => api.current.go?.(i)}
               >
-                {s.title[1].toUpperCase()}
+                {s.title[1] === 'Bhava' ? 'SHAKTI' : s.title[1].toUpperCase()}
               </span>
             ))}
           </div>
