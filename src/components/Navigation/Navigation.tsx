@@ -199,7 +199,7 @@ export default function Navigation() {
       <div className={s.utility}>
         <div className={s.utilityLeft}>
           <span className={s.utilityItem}>
-            <i className={s.utilityDot} /> Union of Peace &amp; Revolution
+            <i className={s.utilityDot} /> Independent Research • Policy • Safeguarding
           </span>
           <span className={s.utilityItem}>● Institutional &amp; Community Initiatives</span>
         </div>
