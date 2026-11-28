@@ -394,7 +394,7 @@ export default function CounsellingPage() {
       </section>
 
       {/* ── Confidential Intake Booking Box ── */}
-      <div className={s.section} style={{ background: '#FFFFFF' }}>
+      <div className={s.section} style={{ background: '#FFFFFF', paddingTop: 'clamp(1rem, 2.5vw, 2rem)' }}>
         <div id="book-session" className={cp.bookingBox}>
           <div className={cp.bookingGrid}>
             <div>

@@ -518,28 +518,6 @@ export default function AboutPage() {
             <br /><br />
             Its work brings together physical preparedness, psychological awareness, critical inquiry, cultural understanding, and responsible citizenship - with the aim of developing individuals who are stronger in action, clearer in thought, and grounded in responsibility.
           </p>
-
-          {/* Revolution Progression Strip */}
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.65rem',
-            background: 'rgba(255, 255, 255, 0.06)',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
-            padding: '0.45rem 1rem',
-            borderRadius: 9999,
-            fontSize: '0.78rem',
-            fontWeight: 600,
-            color: '#FAF7F0',
-            marginTop: '1.25rem',
-            flexWrap: 'wrap'
-          }}>
-            <span>Revolution of thought</span>
-            <span style={{ color: '#F87171' }}>→</span>
-            <span>Revolution of confidence</span>
-            <span style={{ color: '#F87171' }}>→</span>
-            <span style={{ color: '#FCA5A5', fontWeight: 700 }}>Revolution of social participation</span>
-          </div>
         </div>
       </div>
 

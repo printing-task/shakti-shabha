@@ -110,8 +110,8 @@
   position: relative;
   top: 0;
   /* Same as 100vh on desktop, but capped by width on tall phones (desktop mode) */
-  height: min(100vh, 900px, 72vw);
-  min-height: 620px;
+  height: min(82vh, 720px, 66vw);
+  min-height: 560px;
   width: 100%;
   overflow: hidden;
   perspective: 1800px;
@@ -479,7 +479,7 @@
   border-radius: 20px;
   padding: clamp(2rem, 4vw, 3.5rem);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  margin-top: 3rem;
+  margin-top: 0;
   margin-bottom: 4rem;
 }
 
