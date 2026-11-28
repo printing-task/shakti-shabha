@@ -762,17 +762,7 @@
   }
 
   .heroTitle {
-    font-size: clamp(24px, 6.8vw, 34px);
-    word-spacing: 0.14em;
-    letter-spacing: 0.03em;
-  }
-
-  .headingPrefix,
-  .crimsonLine,
-  .crimsonWord {
-    word-spacing: 0.14em;
-    letter-spacing: 0.03em;
-    white-space: normal;
+    font-size: 42px;
   }
 
   .desc {
@@ -780,8 +770,8 @@
   }
 
   .bookLink {
-    font-size: 24px;
-    gap: 14px;
+    font-size: 30px;
+    gap: 16px;
   }
 
   .bgDashCircle {
