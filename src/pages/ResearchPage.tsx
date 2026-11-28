@@ -130,14 +130,15 @@ export default function ResearchPage() {
               <span className={rp.paperTag}>Peer Reviewed</span>
             </div>
 
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <div className={rp.heroBtnRow}>
               <button
                 onClick={() => alert('Downloading official encrypted research whitepaper (PDF)...')}
+                className={rp.heroBtnPrimary}
                 style={{ padding: '0.8rem 2rem', background: '#38BDF8', color: '#0F172A', fontWeight: 700, borderRadius: '9999px', border: 'none', cursor: 'pointer', fontSize: '0.85rem' }}
               >
                 Download PDF (Public DOI) →
               </button>
-              <a href="#cite-tool" style={{ padding: '0.8rem 2rem', background: 'rgba(255,255,255,0.08)', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '9999px', textDecoration: 'none', fontSize: '0.85rem' }}>
+              <a href="#cite-tool" className={rp.heroBtnSecondary} style={{ padding: '0.8rem 2rem', background: 'rgba(255,255,255,0.08)', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '9999px', textDecoration: 'none', fontSize: '0.85rem' }}>
                 Generate Citation
               </a>
             </div>

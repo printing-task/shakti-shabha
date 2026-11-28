@@ -498,7 +498,9 @@
 .ctaPrimary {
   display: inline-flex;
   align-items: center;
-  padding: 0.9rem 2.5rem;
+  justify-content: center;
+  min-width: 240px;
+  padding: 0.9rem 2.75rem;
   font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.85rem;
   font-weight: 700;
@@ -522,7 +524,9 @@
 .ctaOutline {
   display: inline-flex;
   align-items: center;
-  padding: 0.9rem 2.5rem;
+  justify-content: center;
+  min-width: 240px;
+  padding: 0.9rem 2.75rem;
   font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
   font-size: 0.85rem;
   font-weight: 700;
@@ -541,6 +545,21 @@
   border-color: #FFFFFF;
   transform: translateY(-2px);
   color: #FFFFFF;
+}
+
+@media (max-width: 640px) {
+  .ctaBtns {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .ctaPrimary,
+  .ctaOutline {
+    width: 100%;
+    min-width: 0;
+    padding: 0.95rem 1.25rem;
+    box-sizing: border-box;
+  }
 }
 
 /* ── RESPONSIVE ───────────────────────────────────────────── */

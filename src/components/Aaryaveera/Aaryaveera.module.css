@@ -260,8 +260,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 20rem;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
   min-height: 42px;
   padding: 0.65rem 1.4rem;
   font-family: var(--btn-font, var(--sans, 'DM Sans', Arial, sans-serif));
@@ -451,8 +452,8 @@
 
   .btnWarriorGold,
   .btnWarriorOutline {
-    width: auto;
-    max-width: none;
+    width: auto !important;
+    max-width: none !important;
     min-height: 40px;
     padding: 0.62rem 1.45rem;
     font-size: 0.75rem;

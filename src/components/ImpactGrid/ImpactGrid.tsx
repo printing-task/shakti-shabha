@@ -67,15 +67,16 @@ export default function ImpactGrid() {
               fontFamily: "var(--sans, 'DM Sans', Arial, sans-serif)",
               marginBottom: '0.5rem',
               display: 'inline-flex',
-              alignItems: 'center',
+              alignItems: 'flex-start',
+              textAlign: 'left',
               gap: '0.4rem',
               padding: '0.25rem 0.75rem',
               background: 'rgba(189, 24, 52, 0.06)',
               border: '1px solid rgba(189, 24, 52, 0.2)',
               borderRadius: 9999
             }}>
-              <GoogleIcon name="verified" size={14} style={{ color: '#bd1834' }} />
-              Institutional Credibility · Audited Record
+              <GoogleIcon name="verified" size={14} style={{ color: '#bd1834', flexShrink: 0, marginTop: '2px' }} />
+              <span>Institutional Credibility · Audited Record</span>
             </div>
             <h2 style={{ fontFamily: "var(--serif, 'Playfair Display', Georgia, serif)", fontSize: 'clamp(1.75rem, 3.5vw, 2.4rem)', color: '#111827', margin: 0, fontWeight: 500, lineHeight: 1.2 }}>
               Verified Numbers &amp; Field Record

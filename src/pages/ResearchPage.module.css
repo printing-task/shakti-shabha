@@ -379,3 +379,30 @@
     grid-template-columns: 1fr;
   }
 }
+
+.heroBtnRow {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.heroBtnPrimary,
+.heroBtnSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .heroBtnRow {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .heroBtnPrimary,
+  .heroBtnSecondary {
+    width: 100%;
+  }
+}
