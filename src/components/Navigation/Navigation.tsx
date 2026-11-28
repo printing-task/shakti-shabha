@@ -198,9 +198,7 @@ export default function Navigation() {
       {/* ---------- Utility Top Strip ---------- */}
       <div className={s.utility}>
         <div className={s.utilityLeft}>
-          <span className={s.utilityItem}>
-            <i className={s.utilityDot} /> Union of Peace & amp; Revolution
-          </span>
+         
           <span className={s.utilityItem}>● Institutional &amp; Community Initiatives</span>
         </div>
         <div className={s.utilityRight}>
